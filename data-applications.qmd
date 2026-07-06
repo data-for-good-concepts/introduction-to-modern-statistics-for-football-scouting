@@ -17,7 +17,7 @@ We also provide some "foreshadowing" of concepts and techniques we'll introduce 
 Last, we introduce **Simpson's paradox** and discuss the importance of understanding the impact of multiple variables in an analysis.
 
 ::: {.callout-note title="Data"}
-The `wc2022_shots` and `weuro2025_shots` data are stored as CSV files in `data/derived/`, built from StatsBomb open data.
+The `wc2022_shots` and `weuro2025_shots` data are stored as CSV files in `data/derived/`, built from [StatsBomb open data](https://github.com/statsbomb/open-data) via `scripts/derive_statsbomb_tables.py`.
 Each file contains one row per shot taken in the corresponding tournament.
 :::
 

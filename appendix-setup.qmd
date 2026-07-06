@@ -170,4 +170,4 @@ The workshop is built; the statistics can now begin.
 
 ------------------------------------------------------------------------
 
-This appendix is original to this adaptation, licensed CC BY-SA 4.0. Match data: StatsBomb open data.
+This appendix is original to this adaptation, licensed CC BY-SA 4.0. Match data: [StatsBomb open data](https://github.com/statsbomb/open-data) (CC BY-NC-SA 4.0).
