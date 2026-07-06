@@ -7,8 +7,7 @@ book:
   author: "Adapted from Çetinkaya-Rundel & Hardin's IMS for the recruitment analyst"
   chapters:
     - index.qmd
-    # Parts mirror IMS exactly; chapters are added here as they are written.
-    # Writing order: Part IV (foundations) -> Part V (inference) -> I, II -> III, VI, VII.
+    # Parts and chapters mirror IMS exactly.
     - part: "Introduction to data"
       chapters:
         - data-hello.qmd
