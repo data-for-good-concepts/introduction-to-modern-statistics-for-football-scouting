@@ -135,7 +135,7 @@ This is important for two reasons.
 First, it is contrary to what the coaches expected, which was that the program would *reduce* the rate of substandard finishing.
 Second, it leads to a statistical question: do the data show a "real" difference between the groups?
 
-This second question is subtle, and it is worth building the intuition with a striker rather than a coin.
+This second question is subtle, and it is worth building the intuition with a single striker.
 Suppose a forward's true, long-run conversion rate is exactly 10%: over a career, one shot in ten becomes a goal.
 Now give her a 100-shot season.
 While her chance of scoring on any given shot is 10%, we probably won't observe exactly 10 goals.
