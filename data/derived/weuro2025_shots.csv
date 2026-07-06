@@ -1,0 +1,914 @@
+competition,match_id,match_date,stage,team,opponent,player,position,period,minute,second,play_pattern,shot_type,body_part,technique,first_time,under_pressure,one_on_one,statsbomb_xg,outcome,goal
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Alexandra Jóhannsdóttir,Right Defensive Midfield,1,0,42,From Throw In,Open Play,Right Foot,Half Volley,True,True,False,0.013147669,Off T,False
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Katla Tryggvadóttir,Left Wing,1,5,7,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.24875748,Saved,False
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Sveindís Jane Jónsdóttir,Right Wing,1,5,9,From Counter,Open Play,Right Foot,Half Volley,True,True,False,0.13006437,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Alexandra Jóhannsdóttir,Right Defensive Midfield,1,5,54,From Corner,Open Play,Head,Normal,False,False,False,0.034556407,Saved to Post,False
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Sveindís Jane Jónsdóttir,Right Wing,1,5,56,From Corner,Open Play,Left Foot,Half Volley,True,True,False,0.47674507,Goal,True
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Signe Gaupset,Left Wing,1,13,20,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.046329156,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Signe Gaupset,Left Wing,1,14,5,From Corner,Open Play,Right Foot,Volley,True,True,False,0.057025556,Goal,True
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Elisabeth Terland,Center Forward,1,22,46,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.036546215,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Elisabeth Terland,Center Forward,1,23,48,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.10500978,Saved,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Frida Maanum,Center Attacking Midfield,1,25,6,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.032065924,Off T,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Signe Gaupset,Left Wing,1,25,37,From Counter,Open Play,Left Foot,Normal,False,True,False,0.030959195,Goal,True
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Sveindís Jane Jónsdóttir,Right Wing,1,29,19,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.010127992,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Elisabeth Terland,Center Forward,1,31,54,From Counter,Open Play,Right Foot,Normal,False,True,False,0.030938651,Off T,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Frida Maanum,Center Attacking Midfield,2,48,45,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.3819168,Goal,True
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Sveindís Jane Jónsdóttir,Right Wing,2,53,17,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.03830135,Off T,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Justine Kvaleng Kielland,Left Defensive Midfield,2,57,51,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.038265567,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Frida Maanum,Center Attacking Midfield,2,67,2,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.07279213,Saved,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Frida Maanum,Center Attacking Midfield,2,67,43,From Corner,Open Play,Left Foot,Backheel,True,False,False,0.085155696,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Sandra María Jessen,Center Forward,2,70,30,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.023828445,Off T,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Frida Maanum,Center Attacking Midfield,2,75,3,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.07051889,Goal,True
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Synne Jensen,Left Wing,2,76,51,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.03071077,Saved,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Frida Maanum,Center Attacking Midfield,2,79,37,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.15232103,Off T,False
+weuro2025,3998853,2025-07-10,Group Stage,Norway Women's,Iceland Women's,Synne Jensen,Left Wing,2,80,54,From Counter,Open Play,Left Foot,Normal,False,False,False,0.102851585,Blocked,False
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Hlín Eiríksdóttir,Center Forward,2,83,55,From Counter,Open Play,Right Foot,Normal,True,False,False,0.4171032,Goal,True
+weuro2025,3998853,2025-07-10,Group Stage,Iceland Women's,Norway Women's,Glódís Perla Viggósdóttir,Right Center Back,2,94,46,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Tessa Wullaert,Right Center Forward,1,1,45,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.017415643,Saved Off Target,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Cecilia Salvai,Center Back,1,5,1,From Free Kick,Open Play,Other,Normal,False,False,False,0.097843766,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Tessa Wullaert,Right Center Forward,1,6,30,From Keeper,Open Play,Left Foot,Normal,False,False,False,0.041355614,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Manuela Giugliano,Center Defensive Midfield,1,8,30,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.021615006,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Arianna Caruso,Right Center Midfield,1,17,0,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.009236298,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Arianna Caruso,Right Center Midfield,1,21,23,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.080548346,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Mariam Abdulai Toloba,Left Center Midfield,1,25,13,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.03744926,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Amber Tysiak,Right Center Back,1,28,46,From Corner,Open Play,Right Foot,Volley,True,True,False,0.055492304,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Emma Severini,Left Center Midfield,1,29,41,Regular Play,Open Play,Head,Normal,False,True,False,0.16095492,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Lucia Di Guglielmo,Right Wing Back,1,35,43,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.02690925,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Sofia Cantore,Right Center Forward,1,35,46,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.06338528,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Hannah Eurlings,Left Center Forward,1,36,54,From Keeper,Open Play,Head,Normal,False,False,False,0.056822307,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Tessa Wullaert,Right Center Forward,1,39,52,From Keeper,Open Play,Left Foot,Normal,True,True,False,0.07903574,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Tessa Wullaert,Right Center Forward,1,39,54,From Keeper,Open Play,Right Foot,Normal,True,False,False,0.0768985,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Jill Janssens,Right Wing Back,1,41,13,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.033051893,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Arianna Caruso,Right Center Midfield,1,43,48,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.08256552,Goal,True
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Justine Vanhaevermaet,Center Defensive Midfield,1,45,52,From Kick Off,Open Play,Right Foot,Normal,True,False,False,0.034303434,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Belgium Women's,Italy Women's,Tessa Wullaert,Right Center Forward,2,57,42,From Throw In,Open Play,Head,Normal,False,False,False,0.069237985,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Cristiana Girelli,Left Center Forward,2,63,2,From Throw In,Open Play,Right Foot,Backheel,True,True,False,0.27325326,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Arianna Caruso,Center Defensive Midfield,2,63,7,From Throw In,Open Play,Right Foot,Half Volley,False,False,False,0.043495327,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Michela Cambiaghi,Right Center Forward,2,78,36,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.19728729,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Michela Cambiaghi,Right Center Forward,2,80,58,From Free Kick,Open Play,Left Foot,Normal,False,True,False,0.03672684,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Lisa Boattin,Left Wing Back,2,86,54,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.062211376,Blocked,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Arianna Caruso,Center Defensive Midfield,2,87,12,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.03819632,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Michela Cambiaghi,Right Center Forward,2,88,22,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.03982579,Saved,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Cecilia Salvai,Center Back,2,89,30,From Corner,Open Play,Head,Normal,False,True,False,0.05896974,Off T,False
+weuro2025,3998838,2025-07-03,Group Stage,Italy Women's,Belgium Women's,Michela Cambiaghi,Right Center Forward,2,91,35,From Corner,Open Play,Head,Normal,False,True,False,0.07186699,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,1,1,34,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.09106817,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Janni Thomsen,Right Center Midfield,1,2,31,From Counter,Open Play,Right Foot,Normal,False,False,False,0.041428506,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Pernille Mosegaard Harder,Left Center Forward,1,3,15,From Corner,Open Play,Left Foot,Half Volley,True,True,False,0.066260226,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Emma Stina Blackstenius,Center Forward,1,16,31,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.09335751,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,1,24,53,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.04317301,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Gun Nathalie Björn,Right Center Back,1,33,39,From Corner,Open Play,Right Foot,Half Volley,True,True,False,0.03620591,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Gun Nathalie Björn,Right Center Back,1,33,41,From Corner,Open Play,Left Foot,Normal,True,True,False,0.052808322,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Pernille Mosegaard Harder,Left Center Forward,1,35,6,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.033985645,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,1,43,2,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.059390347,Saved,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Johanna Rytting-Kaneryd,Right Wing,2,48,46,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.02216647,Saved,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,2,50,56,From Free Kick,Open Play,Right Foot,Normal,True,False,False,0.10202185,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,2,54,6,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.11920694,Goal,True
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Emma Snerle,Left Center Midfield,2,55,38,From Kick Off,Open Play,Right Foot,Normal,True,True,False,0.101631254,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Emma Stina Blackstenius,Center Forward,2,61,10,From Corner,Open Play,Right Foot,Volley,True,False,False,0.23515692,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Madelen Fatimma Maria Janogy,Left Wing,2,64,30,Regular Play,Open Play,Head,Normal,False,False,False,0.16125217,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Emma Stina Blackstenius,Center Forward,2,65,42,Regular Play,Open Play,Head,Normal,False,True,False,0.049302388,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Jonna Ann-Charlotte Andersson,Left Back,2,66,57,From Throw In,Open Play,Left Foot,Normal,True,True,False,0.050823987,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,2,71,48,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.010950809,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Linda Brigitta Sembrant,Left Center Back,2,76,52,From Free Kick,Open Play,Head,Normal,False,True,False,0.024528107,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Rebecka Blomqvist,Left Wing,2,78,34,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.15059072,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Pernille Mosegaard Harder,Left Center Forward,2,80,12,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.035404637,Post,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Janni Thomsen,Left Wing Back,2,80,20,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.02012733,Saved,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Pernille Mosegaard Harder,Center Attacking Midfield,2,85,17,From Corner,Open Play,Head,Normal,False,True,False,0.07513231,Blocked,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Nadia Nadim,Right Center Forward,2,85,20,From Corner,Open Play,Right Foot,Overhead Kick,False,True,False,0.028353827,Saved,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Janni Thomsen,Left Wing Back,2,93,52,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.033323374,Saved,False
+weuro2025,3998841,2025-07-04,Group Stage,Sweden Women's,Denmark Women's,Emma Stina Blackstenius,Center Forward,2,94,21,From Keeper,Open Play,Head,Normal,False,True,False,0.09189379,Off T,False
+weuro2025,3998841,2025-07-04,Group Stage,Denmark Women's,Sweden Women's,Pernille Mosegaard Harder,Center Attacking Midfield,2,96,9,Regular Play,Open Play,Head,Normal,False,False,False,0.16018999,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Vilde Bøe Risa,Right Defensive Midfield,1,6,49,From Throw In,Open Play,Left Foot,Normal,True,True,False,0.05792796,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Noemi Ivelj,Right Center Midfield,1,7,7,Regular Play,Open Play,Head,Normal,False,True,False,0.033980425,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Riola Xhemaili,Left Center Forward,1,8,30,From Goal Kick,Open Play,Right Foot,Normal,False,True,False,0.038103238,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Lia Wälti,Center Defensive Midfield,1,14,17,From Corner,Open Play,Left Foot,Normal,False,True,False,0.019465752,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Géraldine Reuteler,Right Center Forward,1,15,58,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.006515347,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Guro Reiten,Left Wing,1,16,55,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.03175325,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Géraldine Reuteler,Right Center Forward,1,23,35,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.050078258,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Géraldine Reuteler,Right Center Forward,1,23,48,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.02372027,Saved to Post,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Nadine Riesen,Left Wing Back,1,27,9,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.050353747,Goal,True
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Géraldine Reuteler,Right Center Forward,1,34,45,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.096806146,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Nadine Riesen,Left Wing Back,2,51,45,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.010939159,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Ada Stolsmo Hegerberg,Center Forward,2,53,11,From Corner,Open Play,Head,Normal,False,False,False,0.22650062,Goal,True
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Iman Beney,Right Wing Back,2,55,45,From Free Kick,Open Play,Left Foot,Volley,True,False,False,0.1289347,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Ada Stolsmo Hegerberg,Center Forward,2,62,14,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.42325512,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Vilde Bøe Risa,Right Defensive Midfield,2,62,17,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.011762335,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Géraldine Reuteler,Right Center Midfield,2,65,36,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.04242853,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Nadine Riesen,Left Wing Back,2,65,39,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.0117282355,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Ada Stolsmo Hegerberg,Center Forward,2,69,3,Other,Penalty,Right Foot,Normal,False,False,True,0.7835,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Géraldine Reuteler,Right Center Midfield,2,82,14,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.156412,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Celin Bizet Ildhusøy,Right Wing,2,87,2,From Throw In,Open Play,Right Foot,Lob,True,False,False,0.14764006,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Alayah Pilgrim,Left Wing,2,89,2,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.0062254625,Saved,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Iman Beney,Right Wing,2,89,4,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.20493905,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Alayah Pilgrim,Left Wing,2,89,7,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.0418535,Blocked,False
+weuro2025,3998837,2025-07-02,Group Stage,Switzerland Women's,Norway Women's,Alayah Pilgrim,Left Wing,2,94,7,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.023059597,Off T,False
+weuro2025,3998837,2025-07-02,Group Stage,Norway Women's,Switzerland Women's,Synne Jensen,Left Wing,2,96,5,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.12420881,Off T,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Alessia Russo,Center Forward,1,2,52,From Keeper,Open Play,Right Foot,Normal,False,False,True,0.064152695,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Esther Gonzalez Rodríguez,Center Forward,1,8,48,Regular Play,Open Play,Left Foot,Half Volley,False,False,True,0.13043691,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Esther Gonzalez Rodríguez,Center Forward,1,10,4,From Corner,Open Play,Left Foot,Normal,True,True,False,0.102304906,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Athenea del Castillo Belvide,Right Wing,1,12,24,From Free Kick,Open Play,Left Foot,Normal,False,True,False,0.06726146,Blocked,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Georgia Stanway,Left Defensive Midfield,1,13,33,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.059948444,Saved,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Lauren Hemp,Right Wing,1,18,51,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.33025032,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,María Francesca Caldentey Oliver,Left Wing,1,20,39,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05230889,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,María Francesca Caldentey Oliver,Left Wing,1,24,11,Regular Play,Open Play,Head,Normal,False,False,False,0.39565173,Goal,True
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Keira Walsh,Right Defensive Midfield,1,25,30,From Kick Off,Open Play,Right Foot,Half Volley,True,False,False,0.05250558,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Athenea del Castillo Belvide,Right Wing,1,38,32,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.028371284,Blocked,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Esther Gonzalez Rodríguez,Center Forward,1,40,44,Regular Play,Open Play,Head,Normal,False,False,False,0.071709156,Off T,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Ella Toone,Center Attacking Midfield,1,42,24,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.053554766,Blocked,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Chloe Kelly,Left Wing,1,42,50,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.035818726,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Aitana Bonmati Conca,Right Center Midfield,2,49,30,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.06397601,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,María Francesca Caldentey Oliver,Left Wing,2,51,37,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.09936041,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Alexia Putellas Segura,Left Center Midfield,2,54,21,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.069629654,Off T,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Alessia Russo,Center Forward,2,56,4,From Throw In,Open Play,Head,Normal,False,False,False,0.21345341,Goal,True
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Irene Paredes Hernandez,Right Center Back,2,59,28,From Free Kick,Open Play,Head,Normal,False,False,False,0.053009905,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Aitana Bonmati Conca,Right Center Midfield,2,60,14,Regular Play,Open Play,Left Foot,Half Volley,False,False,False,0.04057705,Blocked,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Athenea del Castillo Belvide,Right Wing,2,66,16,From Counter,Open Play,Right Foot,Normal,True,False,False,0.019895604,Off T,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Chloe Kelly,Left Wing,2,68,5,From Goal Kick,Open Play,Left Foot,Normal,False,True,False,0.07282392,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Claudia Pina Medina,Left Wing,2,73,30,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.08416592,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Salma Paralluelo Ayingono,Center Forward,2,89,35,From Counter,Open Play,Left Foot,Normal,True,False,False,0.028666293,Blocked,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Aitana Bonmati Conca,Right Center Midfield,2,90,10,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.056714322,Blocked,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Salma Paralluelo Ayingono,Center Forward,2,90,48,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.0127668,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Victoria López,Right Wing,2,92,48,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.063361704,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Aitana Bonmati Conca,Right Center Midfield,3,96,31,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.05549369,Blocked,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Claudia Pina Medina,Left Wing,3,100,20,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.05386765,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Salma Paralluelo Ayingono,Center Forward,3,106,45,From Free Kick,Open Play,Right Foot,Backheel,True,False,False,0.4002116,Wayward,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Victoria López,Right Wing,4,112,24,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.08461461,Off T,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Victoria López,Right Wing,4,116,43,From Free Kick,Open Play,Head,Normal,False,False,False,0.10162451,Wayward,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Bethany Mead,Center Attacking Midfield,5,120,52,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,5,121,43,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Alex Greenwood,Left Back,5,122,34,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,María Francesca Caldentey Oliver,Left Center Midfield,5,123,17,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Niamh Charles,Right Back,5,124,2,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Aitana Bonmati Conca,Right Center Midfield,5,124,47,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Leah Williamson,Right Center Back,5,125,36,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4020846,2025-07-27,Final,Spain Women's,England Women's,Salma Paralluelo Ayingono,Center Forward,5,126,19,Other,Penalty,Left Foot,Normal,False,False,True,0.7835,Off T,False
+weuro2025,4020846,2025-07-27,Final,England Women's,Spain Women's,Chloe Kelly,Left Wing,5,127,17,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Klara Bühl,Left Midfield,1,7,22,From Free Kick,Open Play,Left Foot,Normal,False,False,True,0.20976903,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,1,10,22,From Throw In,Open Play,Right Foot,Lob,False,False,False,0.005040969,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Klara Bühl,Left Midfield,1,15,3,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.043281805,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Esther Gonzalez Rodríguez,Center Forward,1,20,17,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.08233168,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Irene Paredes Hernandez,Right Center Back,1,21,39,From Corner,Open Play,Head,Normal,False,False,False,0.04988868,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,1,25,40,Regular Play,Open Play,Left Foot,Half Volley,False,True,False,0.03658376,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Alexia Putellas Segura,Left Center Midfield,1,39,20,From Free Kick,Open Play,Head,Normal,False,True,False,0.17278403,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Esther Gonzalez Rodríguez,Center Forward,1,40,14,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.084796146,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Irene Paredes Hernandez,Right Center Back,1,40,53,From Corner,Open Play,Head,Normal,False,False,False,0.04396061,Post,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Esther Gonzalez Rodríguez,Center Forward,1,40,55,From Corner,Open Play,Right Foot,Overhead Kick,True,False,False,0.3107112,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,María Francesca Caldentey Oliver,Right Wing,1,44,2,From Throw In,Open Play,Left Foot,Normal,True,True,False,0.06915594,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Olga  Carmona García,Left Back,1,44,35,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.030036984,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Esther Gonzalez Rodríguez,Center Forward,1,45,39,Regular Play,Open Play,Left Foot,Half Volley,False,True,False,0.18889953,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Claudia Pina Medina,Left Wing,1,45,59,From Keeper,Open Play,Right Foot,Normal,False,True,False,0.09843508,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Giovanna Hoffmann,Center Forward,2,45,53,From Free Kick,Open Play,Head,Normal,False,False,False,0.054050487,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Jule Brand,Right Midfield,2,48,35,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.06011534,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Ona Batlle Pascual,Right Back,2,51,4,From Free Kick,Open Play,Right Foot,Normal,False,False,True,0.09381584,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Aitana Bonmati Conca,Right Center Midfield,2,57,5,From Goal Kick,Open Play,Left Foot,Normal,False,False,False,0.078253016,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Klara Bühl,Left Midfield,2,62,53,From Counter,Open Play,Right Foot,Normal,False,True,False,0.08342617,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Aitana Bonmati Conca,Right Center Midfield,2,68,2,From Throw In,Open Play,Right Foot,Volley,True,False,False,0.044805977,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,74,53,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.028161207,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Klara Bühl,Left Midfield,2,84,25,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.06713743,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Salma Paralluelo Ayingono,Center Forward,2,90,4,From Throw In,Open Play,Left Foot,Backheel,True,True,False,0.051607855,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Klara Bühl,Left Midfield,2,93,40,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.040261835,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Carlotta Wamser,Right Back,2,93,45,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.09745167,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Elisa Senß,Right Center Midfield,2,94,27,From Corner,Open Play,Right Foot,Half Volley,True,True,False,0.022884615,Wayward,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Jule Brand,Right Midfield,2,94,28,From Corner,Open Play,Head,Normal,False,False,False,0.051213812,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Carlotta Wamser,Right Back,3,91,9,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.053367198,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Athenea del Castillo Belvide,Right Wing,3,99,55,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.2696923,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Cristina Martín-Prieto Gutierrez,Center Forward,3,103,30,From Throw In,Open Play,Head,Normal,False,True,False,0.056027897,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,3,104,47,From Corner,Open Play,Head,Normal,False,True,False,0.05297924,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Elisa Senß,Left Center Midfield,4,107,10,From Free Kick,Open Play,Right Foot,Half Volley,True,False,False,0.020334862,Wayward,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Klara Bühl,Left Midfield,4,109,19,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.035721008,Blocked,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Aitana Bonmati Conca,Right Center Midfield,4,112,33,From Goal Kick,Open Play,Right Foot,Normal,True,True,False,0.013613528,Goal,True
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Lea Schüller,Left Center Midfield,4,117,0,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.032885715,Saved,False
+weuro2025,4020077,2025-07-23,Semi-finals,Germany Women's,Spain Women's,Selina Cerci,Center Forward,4,117,37,From Corner,Open Play,Head,Normal,False,False,False,0.05454805,Off T,False
+weuro2025,4020077,2025-07-23,Semi-finals,Spain Women's,Germany Women's,Salma Paralluelo Ayingono,Left Wing,4,120,30,From Counter,Open Play,Left Foot,Normal,False,False,False,0.101391226,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lauren James,Right Wing,1,10,24,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.13763943,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Alessia Russo,Center Forward,1,19,1,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.123430714,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Sofia Cantore,Right Attacking Midfield,1,20,28,From Goal Kick,Open Play,Right Foot,Lob,True,False,False,0.045431316,Wayward,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lauren Hemp,Left Wing,1,22,51,From Throw In,Open Play,Head,Normal,False,True,False,0.059988502,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Cristiana Girelli,Center Forward,1,32,7,From Throw In,Open Play,Left Foot,Volley,True,False,False,0.41662762,Wayward,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Barbara Bonansea,Left Attacking Midfield,1,32,8,From Throw In,Open Play,Left Foot,Volley,False,True,False,0.09690126,Goal,True
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lauren James,Right Wing,1,37,21,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.091876104,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Arianna Caruso,Right Defensive Midfield,1,43,46,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.008236191,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Alex Greenwood,Left Back,2,48,48,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.020626368,Saved Off Target,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lauren Hemp,Left Wing,2,50,10,From Throw In,Open Play,Head,Normal,False,False,True,0.15246725,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Keira Walsh,Right Defensive Midfield,2,51,39,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.05683132,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lauren Hemp,Left Wing,2,51,51,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.242595,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Sofia Cantore,Right Center Forward,2,52,24,From Keeper,Open Play,Right Foot,Normal,False,False,False,0.045035295,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Keira Walsh,Right Defensive Midfield,2,55,27,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.027188806,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Georgia Stanway,Left Defensive Midfield,2,56,42,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.12356619,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Alex Greenwood,Left Back,2,59,31,Regular Play,Open Play,Head,Normal,False,True,False,0.18203786,Wayward,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Ella Toone,Center Attacking Midfield,2,69,24,From Counter,Open Play,Right Foot,Half Volley,False,True,False,0.041064415,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Georgia Stanway,Left Defensive Midfield,2,72,53,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.03349057,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Arianna Caruso,Right Center Midfield,2,76,7,From Goal Kick,Open Play,Right Foot,Lob,True,False,False,0.012809928,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Martina Piemonte,Left Center Forward,2,77,49,From Throw In,Open Play,Head,Normal,False,False,False,0.12254368,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Chloe Kelly,Right Wing,2,78,59,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.03181569,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lucy Bronze,Right Back,2,79,36,From Corner,Open Play,Head,Normal,False,False,False,0.045580313,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Michela Cambiaghi,Right Center Forward,2,85,52,From Corner,Open Play,Right Foot,Half Volley,True,True,False,0.0775313,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Emma Severini,Left Center Midfield,2,85,54,From Corner,Open Play,Left Foot,Half Volley,True,False,False,0.32903278,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Elisabetta Oliviero,Right Wing Back,2,91,50,From Counter,Open Play,Right Foot,Normal,False,False,False,0.008095162,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Keira Walsh,Right Defensive Midfield,2,93,27,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.018964224,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Michelle Agyemang,Left Center Forward,2,95,2,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.09691288,Goal,True
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Agnes Beever-Jones,Right Center Forward,2,98,23,From Free Kick,Open Play,Head,Normal,False,False,False,0.05472218,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,Italy Women's,England Women's,Giada Greggi,Left Center Midfield,3,96,16,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.021866526,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Chloe Kelly,Right Midfield,3,97,27,From Keeper,Open Play,Left Foot,Normal,False,True,False,0.082567,Off T,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Lucy Bronze,Right Back,4,108,8,From Corner,Open Play,Head,Normal,False,True,False,0.020905986,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Alex Greenwood,Left Center Back,4,114,5,From Corner,Open Play,Head,Normal,False,True,False,0.037192676,Blocked,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Michelle Agyemang,Center Forward,4,116,0,From Keeper,Open Play,Right Foot,Lob,False,False,False,0.045986976,Post,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Chloe Kelly,Right Midfield,4,118,50,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4020005,2025-07-22,Semi-finals,England Women's,Italy Women's,Chloe Kelly,Right Midfield,4,118,52,Other,Open Play,Left Foot,Half Volley,True,True,False,0.5417955,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Jule Brand,Right Midfield,1,8,31,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.04497543,Off T,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Onema Grace Geyoro,Right Center Midfield,1,14,14,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Marie-Antoinette Katoto,Center Forward,1,20,29,From Throw In,Open Play,Head,Normal,False,True,False,0.13044341,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Kadidiatou Diani,Left Wing,1,23,42,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.029138802,Off T,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Sjoeke Nüsken,Left Defensive Midfield,1,24,52,From Corner,Open Play,Head,Normal,False,False,False,0.08840973,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Delphine Cascarino,Right Wing,1,27,56,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.008510993,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Delphine Cascarino,Right Wing,2,55,19,From Counter,Open Play,Right Foot,Normal,False,True,False,0.060398906,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Marie-Antoinette Katoto,Center Forward,2,56,1,From Corner,Open Play,Head,Normal,False,False,False,0.31555992,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Kadidiatou Diani,Left Wing,2,61,12,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.068140954,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Kadidiatou Diani,Left Wing,2,61,24,From Throw In,Open Play,Left Foot,Half Volley,False,False,False,0.061028253,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Sjoeke Nüsken,Left Defensive Midfield,2,68,42,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Klara Bühl,Left Midfield,2,69,21,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.046486195,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Jule Brand,Right Midfield,2,70,14,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.04338335,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Klara Bühl,Left Midfield,2,70,19,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.09814468,Off T,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Onema Grace Geyoro,Left Center Midfield,2,76,42,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.034541696,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Sakina Karchaoui,Right Center Midfield,2,85,39,From Free Kick,Open Play,Left Foot,Normal,False,True,False,0.028069349,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Elisa De Almeida,Right Back,2,88,12,From Corner,Open Play,Right Foot,Volley,True,False,False,0.044335194,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Selma Bacha,Left Back,2,92,39,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.016613046,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Jule Brand,Right Midfield,2,94,22,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.03926183,Off T,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Sandy Baltimore,Left Wing,2,95,21,From Goal Kick,Open Play,Left Foot,Normal,True,False,False,0.03298015,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Sandy Baltimore,Right Wing,3,102,1,From Free Kick,Open Play,Left Foot,Normal,True,True,False,0.03571369,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Maëlle Lakrar,Left Center Back,3,104,54,From Free Kick,Open Play,Other,Normal,False,True,True,0.12864618,Off T,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Melvine Malard,Left Wing,3,105,41,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.042539176,Blocked,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Melvine Malard,Left Wing,3,106,28,Regular Play,Open Play,Head,Normal,False,True,False,0.09479077,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Melvine Malard,Left Wing,4,122,26,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.00711156,Post,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Janina Minge,Right Center Back,5,120,34,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Amel Majri,Right Center Midfield,5,121,35,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Linda Dallmann,Right Midfield,5,122,15,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Sakina Karchaoui,Left Center Midfield,5,123,3,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Rebecca Knaak,Left Center Back,5,123,47,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Melvine Malard,Left Wing,5,124,39,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Sara Däbritz,Right Defensive Midfield,5,125,33,Other,Penalty,Left Foot,Normal,False,False,True,0.7835,Post,False
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Sandy Baltimore,Right Wing,5,126,32,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Ann-Katrin Berger,Goalkeeper,5,127,8,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Oriane Jean-François,Center Defensive Midfield,5,128,3,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Klara Bühl,Left Midfield,5,128,53,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Melween Ndongala,Right Back,5,129,42,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,Germany Women's,France Women's,Sjoeke Nüsken,Left Defensive Midfield,5,130,24,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018357,2025-07-19,Quarter-finals,France Women's,Germany Women's,Alice Sombath,Right Center Back,5,131,17,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Switzerland Women's,Spain Women's,Lia Wälti,Right Defensive Midfield,1,0,22,From Kick Off,Open Play,Left Foot,Normal,False,True,False,0.018683188,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Aitana Bonmati Conca,Right Center Midfield,1,6,42,Regular Play,Open Play,Right Foot,Volley,True,False,False,0.12509719,Wayward,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,María Francesca Caldentey Oliver,Right Wing,1,8,2,Other,Penalty,Right Foot,Normal,False,False,True,0.7835,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Switzerland Women's,Spain Women's,Ana-Maria Crnogorčević,Right Back,1,13,52,From Free Kick,Open Play,Right Foot,Normal,True,False,False,0.009650117,Wayward,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Esther Gonzalez Rodríguez,Center Forward,1,16,35,Regular Play,Open Play,Head,Normal,False,False,False,0.056352567,Wayward,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Claudia Pina Medina,Left Wing,1,17,55,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.009983052,Saved,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Irene Paredes Hernandez,Right Center Back,1,18,1,From Free Kick,Open Play,Head,Normal,False,False,False,0.07984554,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Claudia Pina Medina,Left Wing,1,23,39,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.051490404,Saved,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Claudia Pina Medina,Left Wing,1,27,4,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.08511865,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Aitana Bonmati Conca,Right Center Midfield,1,28,12,From Counter,Open Play,Right Foot,Normal,False,False,False,0.036224533,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Aitana Bonmati Conca,Right Center Midfield,1,30,40,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.09009882,Blocked,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Olga  Carmona García,Left Back,1,33,46,From Corner,Open Play,Left Foot,Normal,True,False,False,0.057147976,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Esther Gonzalez Rodríguez,Center Forward,1,35,33,From Throw In,Open Play,Head,Normal,False,True,False,0.23181897,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Irene Paredes Hernandez,Right Center Back,1,42,6,From Corner,Open Play,Head,Normal,False,False,False,0.057051633,Post,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,45,34,From Kick Off,Open Play,Left Foot,Half Volley,True,False,False,0.05318782,Saved,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Switzerland Women's,Spain Women's,Sydney Schertenleib,Center Attacking Midfield,2,50,0,Regular Play,Open Play,Right Foot,Lob,False,False,False,0.0043088906,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Claudia Pina Medina,Right Wing,2,56,8,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.075712726,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Esther Gonzalez Rodríguez,Center Forward,2,58,37,Regular Play,Open Play,Head,Normal,False,False,False,0.06692457,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,60,6,From Corner,Open Play,Head,Normal,False,False,False,0.03348607,Post,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Esther Gonzalez Rodríguez,Center Forward,2,60,9,From Corner,Open Play,Right Foot,Half Volley,False,False,False,0.39543322,Post,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Irene Paredes Hernandez,Right Center Back,2,60,10,From Corner,Open Play,Right Foot,Half Volley,False,False,False,0.20833245,Blocked,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Athenea del Castillo Belvide,Right Wing,2,65,18,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.2751694,Goal,True
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Claudia Pina Medina,Left Wing,2,68,41,From Keeper,Open Play,Right Foot,Normal,True,False,False,0.06471921,Blocked,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Claudia Pina Medina,Left Wing,2,70,2,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.049007278,Goal,True
+weuro2025,4018356,2025-07-18,Quarter-finals,Switzerland Women's,Spain Women's,Leila Wandeler,Left Midfield,2,76,28,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.0070814053,Off T,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Alexia Putellas Segura,Left Center Midfield,2,87,34,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018356,2025-07-18,Quarter-finals,Spain Women's,Switzerland Women's,Athenea del Castillo Belvide,Left Wing,2,93,14,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.024438296,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Kosovare Asllani,Center Attacking Midfield,1,1,44,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.262062,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Emma Stina Blackstenius,Center Forward,1,4,7,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.13563293,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren Hemp,Left Wing,1,5,43,From Free Kick,Open Play,Left Foot,Normal,True,False,False,0.03454295,Saved to Post,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Emma Stina Blackstenius,Center Forward,1,24,39,From Throw In,Open Play,Right Foot,Normal,False,True,True,0.28601122,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Ella Toone,Center Attacking Midfield,1,27,8,From Counter,Open Play,Right Foot,Normal,False,False,False,0.063342206,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren James,Right Wing,1,38,30,From Free Kick,Open Play,Right Foot,Normal,True,True,False,0.028288899,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Fridolina Rolfö,Left Wing,1,45,39,From Counter,Open Play,Left Foot,Normal,False,False,False,0.08270639,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren Hemp,Left Wing,2,50,12,Regular Play,Open Play,Head,Normal,False,False,False,0.07977866,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Emma Stina Blackstenius,Center Forward,2,54,26,From Counter,Open Play,Left Foot,Normal,False,True,False,0.39117333,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren James,Left Wing,2,58,18,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.0321295,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Georgia Stanway,Left Defensive Midfield,2,58,59,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.04025518,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Johanna Rytting-Kaneryd,Right Wing,2,64,47,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.057559036,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Ella Toone,Center Attacking Midfield,2,66,29,From Throw In,Open Play,Left Foot,Normal,True,True,False,0.057787847,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Michelle Agyemang,Left Center Forward,2,72,42,From Free Kick,Open Play,Head,Normal,False,True,False,0.03268166,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren Hemp,Left Center Midfield,2,72,43,From Free Kick,Open Play,Head,Normal,False,True,False,0.1185305,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Michelle Agyemang,Left Center Forward,2,75,30,Regular Play,Open Play,Head,Normal,False,True,False,0.028825706,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lucy Bronze,Right Back,2,78,31,Regular Play,Open Play,Head,Normal,False,False,True,0.3577363,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Bethany Mead,Right Center Midfield,2,80,12,From Throw In,Open Play,Head,Normal,False,True,False,0.19102228,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Michelle Agyemang,Left Center Forward,2,80,13,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.4997025,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Madelen Fatimma Maria Janogy,Left Wing,2,87,21,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.08567687,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Alessia Russo,Right Center Forward,2,92,7,From Counter,Open Play,Right Foot,Normal,False,False,False,0.17311251,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren James,Left Defensive Midfield,3,94,19,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.01853047,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,3,95,12,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.014418916,Saved Off Target,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Gun Nathalie Björn,Right Center Back,3,97,18,From Free Kick,Open Play,Head,Normal,False,True,False,0.043490734,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lucy Bronze,Right Back,3,99,59,From Corner,Open Play,Right Foot,Normal,False,True,False,0.020434776,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Emma Stina Blackstenius,Center Forward,3,104,10,From Free Kick,Open Play,Right Foot,Half Volley,True,True,False,0.09388511,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Madelen Fatimma Maria Janogy,Left Wing,4,109,43,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.05967086,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Lina Mona Andréa Hurtig,Center Attacking Midfield,4,109,48,From Free Kick,Open Play,Head,Normal,False,True,False,0.15947537,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Gun Nathalie Björn,Right Center Back,4,110,39,From Corner,Open Play,Head,Normal,False,True,False,0.056428157,Blocked,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Alessia Russo,Center Attacking Midfield,4,121,7,From Free Kick,Open Play,Right Foot,Half Volley,False,False,False,0.03806189,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Alessia Russo,Center Attacking Midfield,4,122,50,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.09635302,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Alessia Russo,Center Attacking Midfield,5,120,2,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,5,120,46,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lauren James,Right Wing,5,121,32,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Julia Zigiotti-Olme,Left Defensive Midfield,5,122,21,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Bethany Mead,Right Defensive Midfield,5,123,3,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Magdalena Lilly Eriksson,Left Center Back,5,123,49,Other,Penalty,Left Foot,Normal,False,False,True,0.7835,Post,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Alex Greenwood,Left Center Back,5,124,30,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Gun Nathalie Björn,Right Center Back,5,125,16,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Chloe Kelly,Left Wing,5,126,20,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Jennifer Miley Falk,Goalkeeper,5,127,10,Other,Penalty,Right Foot,Normal,False,False,True,0.7835,Off T,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Grace Clinton,Left Defensive Midfield,5,127,50,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved,False
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Eva Sofia Jakobsson,Right Wing,5,128,35,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Saved to Post,False
+weuro2025,4018355,2025-07-17,Quarter-finals,England Women's,Sweden Women's,Lucy Bronze,Right Back,5,129,26,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,4018355,2025-07-17,Quarter-finals,Sweden Women's,England Women's,Smilla Holmberg,Right Back,5,130,8,Other,Penalty,Right Foot,Normal,False,False,True,0.7835,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Arianna Caruso,Right Center Midfield,1,7,38,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.078373656,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Emma Severini,Left Center Midfield,1,18,43,Regular Play,Open Play,Head,Normal,False,False,False,0.17177658,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Emma Severini,Left Center Midfield,1,21,1,From Free Kick,Open Play,Left Foot,Normal,True,False,False,0.1696566,Saved,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Cristiana Girelli,Center Forward,1,28,12,From Corner,Open Play,Head,Normal,False,True,False,0.04082099,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Lucia Di Guglielmo,Left Back,1,31,18,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.07362808,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Ada Stolsmo Hegerberg,Center Forward,1,35,58,Regular Play,Open Play,Other,Normal,True,True,False,0.59087294,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Arianna Caruso,Right Center Midfield,1,42,10,From Corner,Open Play,Right Foot,Half Volley,False,False,False,0.02715804,Saved,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Signe Gaupset,Left Wing,1,44,14,From Counter,Open Play,Right Foot,Lob,False,False,False,0.006376416,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Sofia Cantore,Right Midfield,2,49,29,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.030121574,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Cristiana Girelli,Center Forward,2,49,30,Regular Play,Open Play,Left Foot,Normal,False,True,True,0.70497894,Goal,True
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Cristiana Girelli,Center Forward,2,51,37,Regular Play,Open Play,Head,Normal,False,True,False,0.05042892,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Barbara Bonansea,Left Midfield,2,52,32,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.03687308,Wayward,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Barbara Bonansea,Left Midfield,2,54,36,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.010475628,Saved,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Ada Stolsmo Hegerberg,Center Forward,2,59,37,Other,Penalty,Right Foot,Normal,False,False,True,0.7835,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Signe Gaupset,Left Wing,2,62,3,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.030120118,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Ada Stolsmo Hegerberg,Center Forward,2,65,5,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.17538495,Goal,True
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Ada Stolsmo Hegerberg,Center Forward,2,68,20,From Free Kick,Open Play,Left Foot,Half Volley,True,False,False,0.087142445,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Signe Gaupset,Left Wing,2,69,24,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.032826386,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Signe Gaupset,Left Wing,2,70,58,From Corner,Open Play,Right Foot,Normal,False,True,False,0.10248803,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Caroline Graham Hansen,Right Wing,2,75,38,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.052604645,Blocked,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Sofia Cantore,Left Midfield,2,79,15,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.012523898,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Arianna Caruso,Right Center Midfield,2,82,22,From Corner,Open Play,Right Foot,Volley,True,False,False,0.029223852,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Norway Women's,Italy Women's,Ingrid Syrstad Engen,Left Defensive Midfield,2,85,34,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.034101628,Off T,False
+weuro2025,4018354,2025-07-16,Quarter-finals,Italy Women's,Norway Women's,Cristiana Girelli,Center Forward,2,89,16,Other,Open Play,Head,Normal,False,True,True,0.16120471,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Georgia Stanway,Left Center Midfield,1,12,41,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,Wales W,England Women's,Jessica Fishlock,Left Center Forward,1,19,33,From Counter,Open Play,Right Foot,Normal,False,True,False,0.020157922,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Ella Toone,Right Center Midfield,1,20,24,From Goal Kick,Open Play,Right Foot,Normal,True,False,False,0.67210984,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Ella Toone,Right Center Midfield,1,20,25,From Goal Kick,Open Play,Right Foot,Volley,True,False,False,0.5909761,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Keira Walsh,Center Defensive Midfield,1,23,15,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.051609535,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Lauren James,Right Wing,1,25,58,Regular Play,Open Play,Left Foot,Volley,True,True,False,0.039598726,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,Wales W,England Women's,Angharad James,Right Defensive Midfield,1,26,42,From Goal Kick,Open Play,Right Foot,Normal,True,True,False,0.10269824,Saved,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Alessia Russo,Center Forward,1,27,16,From Keeper,Open Play,Head,Normal,False,True,False,0.08669564,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Lauren Hemp,Left Wing,1,29,19,From Throw In,Open Play,Head,Normal,False,True,False,0.17684019,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Keira Walsh,Center Defensive Midfield,1,31,10,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.056727037,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Leah Williamson,Right Center Back,1,32,23,From Corner,Open Play,Head,Normal,False,True,False,0.052086078,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Lauren Hemp,Left Wing,1,38,49,Regular Play,Open Play,Head,Normal,False,True,False,0.15431112,Wayward,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Alessia Russo,Center Forward,1,40,32,From Throw In,Open Play,Right Foot,Volley,True,True,False,0.056579806,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Alessia Russo,Center Forward,1,43,29,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.68644935,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Lauren James,Right Wing,1,45,39,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.28675836,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,Wales W,England Women's,Rachel Rowe,Left Defensive Midfield,1,48,10,From Corner,Open Play,Right Foot,Normal,False,True,False,0.046160296,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,Wales W,England Women's,Jessica Fishlock,Left Center Forward,1,49,59,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.09856263,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Leah Williamson,Right Center Back,2,51,1,From Corner,Open Play,Right Foot,Volley,True,False,False,0.069017194,Wayward,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Georgia Stanway,Left Center Midfield,2,51,2,From Corner,Open Play,Right Foot,Half Volley,True,True,False,0.18869601,Saved,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Jessica Park,Right Center Midfield,2,51,14,From Corner,Open Play,Right Foot,Volley,True,False,False,0.11685306,Saved to Post,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Georgia Stanway,Left Center Midfield,2,58,49,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.24227732,Saved,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Lucy Bronze,Right Back,2,59,31,From Corner,Open Play,Head,Normal,False,True,False,0.08300818,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,Wales W,England Women's,Jessica Fishlock,Left Center Forward,2,62,51,From Free Kick,Open Play,Head,Normal,False,True,False,0.07008953,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Georgia Stanway,Left Center Midfield,2,63,50,From Counter,Open Play,Right Foot,Normal,False,False,False,0.03358623,Blocked,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Chloe Kelly,Right Wing,2,66,50,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.07326549,Wayward,False
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Bethany Mead,Left Wing,2,71,36,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.34548658,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Chloe Kelly,Right Wing,2,73,50,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.04240585,Off T,False
+weuro2025,3998858,2025-07-13,Group Stage,Wales W,England Women's,Hannah Cain,Left Midfield,2,75,52,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.2947986,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Agnes Beever-Jones,Center Forward,2,88,26,Regular Play,Open Play,Head,Normal,False,False,False,0.43334556,Goal,True
+weuro2025,3998858,2025-07-13,Group Stage,England Women's,Wales W,Keira Walsh,Center Defensive Midfield,2,91,9,From Corner,Open Play,Right Foot,Normal,False,True,False,0.064985014,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Victoria Pelova,Left Wing,1,1,51,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.026714627,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Delphine Cascarino,Right Wing,1,6,17,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.07529044,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Sakina Karchaoui,Left Center Midfield,1,6,20,From Throw In,Open Play,Right Foot,Half Volley,False,False,False,0.06208407,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Danielle van de Donk,Right Center Midfield,1,15,37,From Corner,Open Play,Head,Normal,False,True,False,0.13382035,Off T,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Marie-Antoinette Katoto,Center Forward,1,20,25,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.08650583,Wayward,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Sandie Toletti,Center Defensive Midfield,1,21,50,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.05846639,Goal,True
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Chasity Grant,Right Wing,1,25,33,From Throw In,Open Play,Right Foot,Volley,True,False,False,0.04858318,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Victoria Pelova,Left Wing,1,25,37,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.070043914,Goal,True
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Danielle van de Donk,Right Center Midfield,1,30,55,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.07573048,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Lineth Beerensteyn,Center Forward,1,32,19,Regular Play,Open Play,Head,Normal,False,True,False,0.19935055,Off T,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Dominique Johanna Anna Petrone Janssen,Left Center Back,1,33,50,From Corner,Open Play,Head,Normal,False,True,False,0.10056631,Blocked,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Jackie Groenen,Center Defensive Midfield,1,33,53,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.021411674,Blocked,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Selma Bacha,Left Back,1,35,9,From Free Kick,Open Play,Left Foot,Normal,True,False,False,0.012084112,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Sakina Karchaoui,Left Center Midfield,1,39,18,From Corner,Open Play,Head,Normal,False,False,False,0.053462625,Wayward,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Marie-Antoinette Katoto,Center Forward,1,39,24,From Corner,Open Play,Head,Normal,False,False,False,0.0842748,Off T,False
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Lineth Beerensteyn,Center Forward,1,40,20,From Goal Kick,Open Play,Right Foot,Half Volley,True,False,False,0.33562157,Wayward,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Delphine Cascarino,Right Wing,2,51,22,From Throw In,Open Play,Right Foot,Half Volley,True,True,False,0.31812727,Off T,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Delphine Cascarino,Right Wing,2,53,48,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.043515526,Blocked,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Delphine Cascarino,Right Wing,2,54,36,From Corner,Open Play,Head,Normal,False,False,False,0.09076457,Blocked,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Marie-Antoinette Katoto,Center Forward,2,60,38,From Counter,Open Play,Left Foot,Normal,False,False,False,0.34387833,Goal,True
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Jill Roord,Left Center Midfield,2,62,9,From Corner,Open Play,Right Foot,Volley,True,False,False,0.026189076,Blocked,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Delphine Cascarino,Right Wing,2,63,33,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05053872,Goal,True
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Marie-Antoinette Katoto,Center Forward,2,66,0,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.23697083,Post,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Delphine Cascarino,Right Wing,2,66,4,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.07062728,Goal,True
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Clara Mateo,Center Forward,2,77,53,Regular Play,Open Play,Left Foot,Normal,True,True,False,0.01876857,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Elisa De Almeida,Right Center Back,2,78,59,From Corner,Open Play,Left Foot,Half Volley,True,False,False,0.031649113,Wayward,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Sandy Baltimore,Left Wing,2,79,51,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.1344894,Saved,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Onema Grace Geyoro,Left Defensive Midfield,2,86,49,From Counter,Open Play,Right Foot,Normal,False,False,False,0.062042378,Off T,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Oriane Jean-François,Right Defensive Midfield,2,88,37,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.02795366,Blocked,False
+weuro2025,3998859,2025-07-13,Group Stage,France Women's,Netherlands Women's,Sakina Karchaoui,Center Attacking Midfield,2,91,13,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998859,2025-07-13,Group Stage,Netherlands Women's,France Women's,Lineth Beerensteyn,Center Forward,2,94,30,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.04709249,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Tanja Pawollek,Left Defensive Midfield,1,2,33,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.07616602,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Right Center Forward,1,3,30,From Keeper,Open Play,Left Foot,Normal,False,False,False,0.027903717,Blocked,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Pernille Mosegaard Harder,Left Center Forward,1,5,3,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.09273458,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Janni Thomsen,Center Attacking Midfield,1,7,42,Regular Play,Open Play,Left Foot,Volley,True,False,False,0.4437394,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Ewa Pajor,Center Forward,1,12,3,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.31249267,Blocked,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Natalia Padilla-Bidas,Right Wing,1,12,5,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.22221313,Goal,True
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Right Center Forward,1,17,1,From Counter,Open Play,Right Foot,Lob,True,True,False,0.0072654877,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Ewa Pajor,Center Forward,1,19,20,Regular Play,Open Play,Head,Normal,False,False,False,0.15093206,Goal,True
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Paulina Tomasiak,Left Wing,1,26,40,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.049772453,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Natalia Padilla-Bidas,Right Wing,1,28,59,From Free Kick,Open Play,Left Foot,Volley,True,False,False,0.38637865,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Ewelina Kamczyk,Center Attacking Midfield,1,31,13,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.050584517,Saved to Post,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Sofie Bruun Bredgaard,Left Center Forward,1,43,17,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.024196096,Blocked,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Right Center Forward,1,45,16,From Throw In,Open Play,Head,Normal,False,True,False,0.12434977,Post,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Right Center Forward,1,46,6,From Throw In,Open Play,Head,Normal,False,True,False,0.098703764,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Sofie Bruun Bredgaard,Left Center Forward,2,47,49,From Free Kick,Open Play,Left Foot,Half Volley,False,True,False,0.06176575,Blocked,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Natalia Padilla-Bidas,Right Wing,2,49,9,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.32135466,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Sofie Bruun Bredgaard,Left Center Forward,2,52,44,From Goal Kick,Open Play,Left Foot,Normal,False,True,False,0.025149522,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Janni Thomsen,Right Center Midfield,2,56,9,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.112782195,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Janni Thomsen,Right Center Midfield,2,58,48,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.06444651,Goal,True
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Adriana Achcińska,Left Defensive Midfield,2,61,15,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.015283983,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Left Center Forward,2,66,59,Regular Play,Open Play,Left Foot,Volley,True,True,False,0.07467882,Wayward,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Left Center Forward,2,68,48,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.13770433,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Ewa Pajor,Center Forward,2,71,49,From Counter,Open Play,Left Foot,Normal,False,False,False,0.037595652,Blocked,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Ewa Pajor,Center Forward,2,73,33,From Corner,Open Play,Right Foot,Normal,True,True,False,0.046472557,Wayward,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Klaudia Jedlińska,Right Wing,2,73,40,From Corner,Open Play,Right Foot,Half Volley,True,True,False,0.008973429,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Martyna Wiankowska,Left Back,2,75,36,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.1788615,Goal,True
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Natalia Padilla-Bidas,Left Wing,2,80,15,From Free Kick,Open Play,Head,Normal,False,True,False,0.048198234,Saved Off Target,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Signe Kallesøe Bruun,Left Center Forward,2,82,41,Regular Play,Open Play,Head,Normal,False,True,False,0.10337336,Goal,True
+weuro2025,3998857,2025-07-12,Group Stage,Poland Women's,Denmark Women's,Klaudia Słowińska,Center Attacking Midfield,2,85,43,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.041846108,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Nadia Nadim,Center Attacking Midfield,2,89,26,From Goal Kick,Open Play,Left Foot,Normal,True,False,False,0.057347782,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Janni Thomsen,Left Wing Back,2,89,56,Regular Play,Open Play,Right Foot,Half Volley,False,True,False,0.02983149,Off T,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Nadia Nadim,Center Attacking Midfield,2,91,39,From Throw In,Open Play,Other,Normal,False,False,False,0.1010115,Saved,False
+weuro2025,3998857,2025-07-12,Group Stage,Denmark Women's,Poland Women's,Amalie Jørgensen Vangsgaard,Right Center Forward,2,93,17,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.02839675,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Jule Brand,Right Wing,1,0,17,From Kick Off,Open Play,Left Foot,Normal,True,False,False,0.07965808,Saved,False
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Lea Schüller,Center Forward,1,1,32,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.048322756,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Kosovare Asllani,Center Attacking Midfield,1,2,19,From Goal Kick,Open Play,Right Foot,Normal,False,True,False,0.21016571,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Lea Schüller,Center Forward,1,4,23,From Corner,Open Play,Head,Normal,False,True,False,0.17535955,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Jule Brand,Right Wing,1,6,42,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.19288042,Goal,True
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Lea Schüller,Center Forward,1,9,4,From Goal Kick,Open Play,Left Foot,Normal,True,True,False,0.073497,Blocked,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Emma Stina Blackstenius,Center Forward,1,11,31,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.12851956,Goal,True
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Klara Bühl,Left Wing,1,17,56,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.08271586,Saved,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Smilla Holmberg,Right Back,1,24,26,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.09091374,Goal,True
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Emma Stina Blackstenius,Center Forward,1,29,6,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.07296159,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Fridolina Rolfö,Left Wing,1,30,36,From Free Kick,Open Play,Left Foot,Normal,True,True,False,0.5249184,Blocked,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Fridolina Rolfö,Left Wing,1,33,16,Other,Penalty,Left Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Lea Schüller,Left Midfield,1,37,27,From Keeper,Open Play,Right Foot,Normal,False,False,False,0.032305542,Saved,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Kosovare Asllani,Center Attacking Midfield,1,38,33,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.09002422,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Magdalena Lilly Eriksson,Left Center Back,2,46,2,From Corner,Open Play,Head,Normal,False,True,False,0.12698957,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Smilla Holmberg,Right Back,2,50,24,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.023363832,Blocked,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Emma Stina Blackstenius,Center Forward,2,64,48,Regular Play,Open Play,Head,Normal,False,True,False,0.08723342,Blocked,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,2,65,39,From Corner,Open Play,Left Foot,Volley,True,False,False,0.15284409,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Giovanna Hoffmann,Center Forward,2,72,30,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.02646013,Off T,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Johanna Rytting-Kaneryd,Right Wing,2,75,52,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.039750207,Saved,False
+weuro2025,3998856,2025-07-12,Group Stage,Sweden Women's,Germany Women's,Lina Mona Andréa Hurtig,Center Attacking Midfield,2,79,38,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.5746127,Goal,True
+weuro2025,3998856,2025-07-12,Group Stage,Germany Women's,Sweden Women's,Selina Cerci,Left Center Midfield,2,84,18,From Free Kick,Open Play,Right Foot,Lob,True,False,False,0.16358313,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Arianna Caruso,Left Defensive Midfield,1,5,38,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.022531956,Wayward,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Elena Linari,Left Center Back,1,8,59,From Corner,Open Play,Head,Normal,False,True,False,0.073265135,Post,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Martina Piemonte,Center Forward,1,9,2,From Corner,Open Play,Right Foot,Volley,True,True,False,0.079127714,Wayward,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Lisa Boattin,Left Wing Back,1,9,5,From Corner,Open Play,Left Foot,Normal,True,True,False,0.029644232,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Martina Piemonte,Center Forward,1,9,38,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.060806826,Wayward,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Elisabetta Oliviero,Right Wing Back,1,9,40,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.42367482,Goal,True
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Athenea del Castillo Belvide,Right Wing,1,13,5,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.06852605,Goal,True
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,1,14,21,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.02191954,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Alexia Putellas Segura,Left Center Midfield,1,18,48,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.074892886,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,1,19,53,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.044526134,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Aitana Bonmati Conca,Right Center Midfield,1,26,2,From Corner,Open Play,Left Foot,Normal,False,False,False,0.04055748,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Irene Paredes Hernandez,Right Center Back,1,28,51,From Corner,Open Play,Head,Normal,False,False,False,0.07472925,Wayward,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,María Méndez Fernández,Left Center Back,1,36,17,From Corner,Open Play,Head,Normal,False,False,False,0.096035115,Wayward,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Jana Fernandez Velasco,Right Back,1,39,6,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.041364804,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Barbara Bonansea,Left Wing,1,42,45,Regular Play,Open Play,Head,Normal,False,False,False,0.21590416,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Arianna Caruso,Left Defensive Midfield,2,45,37,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.0321686,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,48,21,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.03505809,Goal,True
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Aitana Bonmati Conca,Right Center Midfield,2,54,46,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.044586,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Irene Paredes Hernandez,Right Center Back,2,57,4,From Corner,Open Play,Head,Normal,False,False,False,0.053053346,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Sofia Cantore,Right Wing,2,60,8,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.029608773,Saved,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Alexia Putellas Segura,Left Center Midfield,2,60,55,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.07337302,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Salma Paralluelo Ayingono,Center Forward,2,61,29,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.03361922,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Alexia Putellas Segura,Left Center Midfield,2,70,20,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.108048685,Saved,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,72,13,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.10618672,Saved,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Alexia Putellas Segura,Left Center Midfield,2,73,0,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.051292602,Saved,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Aitana Bonmati Conca,Right Center Midfield,2,74,46,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.04603091,Saved,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,María Méndez Fernández,Left Center Back,2,77,35,From Corner,Open Play,Head,Normal,False,True,False,0.12828135,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Cristiana Girelli,Center Forward,2,82,28,From Free Kick,Open Play,Right Foot,Half Volley,True,True,False,0.16795136,Wayward,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Annamaria Serturini,Left Wing,2,85,26,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.026301477,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Claudia Pina Medina,Left Wing,2,87,46,From Corner,Open Play,Left Foot,Normal,False,False,False,0.033188567,Saved,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Esther Gonzalez Rodríguez,Center Forward,2,89,12,From Throw In,Open Play,Head,Normal,False,False,False,0.1411324,Off T,False
+weuro2025,3998855,2025-07-11,Group Stage,Spain Women's,Italy Women's,Esther Gonzalez Rodríguez,Center Forward,2,90,53,Regular Play,Open Play,Left Foot,Volley,True,False,False,0.22980581,Goal,True
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Arianna Caruso,Left Defensive Midfield,2,93,58,From Corner,Open Play,Right Foot,Normal,False,False,False,0.050341096,Blocked,False
+weuro2025,3998855,2025-07-11,Group Stage,Italy Women's,Spain Women's,Elisabetta Oliviero,Right Wing Back,2,94,2,From Corner,Open Play,Right Foot,Normal,True,False,False,0.006264587,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Justine Vanhaevermaet,Center Defensive Midfield,1,0,48,Regular Play,Open Play,Head,Normal,False,False,True,0.117361926,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Tessa Wullaert,Right Center Forward,1,2,37,From Goal Kick,Open Play,Left Foot,Normal,True,True,False,0.2580902,Goal,True
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Fátima Alexandra Figueira Pinto,Center Defensive Midfield,1,6,22,From Corner,Open Play,Head,Normal,False,False,False,0.035745244,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Janice Cayman,Left Center Back,1,9,34,From Free Kick,Open Play,Right Foot,Volley,True,False,False,0.03745445,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Sari Kees,Center Back,1,16,49,From Corner,Open Play,Head,Normal,False,False,True,0.029295478,Wayward,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Diana Micaela Abreu de Sousa e Silva,Left Center Forward,1,17,20,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.0064678057,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Francisca Ramos Ribeiro Nazareth Sousa,Center Attacking Midfield,1,25,1,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.055484135,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Diana Catarina Ribeiro Gomes,Right Center Back,1,27,53,From Free Kick,Open Play,Right Foot,Half Volley,True,False,False,0.35134873,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Diana Micaela Abreu de Sousa e Silva,Left Center Forward,1,28,54,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.0152978115,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Joana Filipa Gaspar Silva Marchão,Left Back,1,37,32,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.020055672,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Francisca Ramos Ribeiro Nazareth Sousa,Center Attacking Midfield,1,38,26,From Corner,Open Play,Right Foot,Normal,True,True,False,0.041475266,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Joana Filipa Gaspar Silva Marchão,Left Back,1,40,10,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.012154604,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Ana Ines Palma Capeta,Right Center Forward,1,47,16,Regular Play,Open Play,Right Foot,Lob,True,False,False,0.16221856,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Mariam Abdulai Toloba,Left Center Midfield,2,46,18,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.08857504,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Ana Ines Palma Capeta,Right Center Forward,2,47,41,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.35658705,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Andreia de Jesus Jacinto,Right Defensive Midfield,2,48,50,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.11217288,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Francisca Ramos Ribeiro Nazareth Sousa,Center Attacking Midfield,2,50,16,From Counter,Open Play,Right Foot,Normal,False,False,False,0.025674537,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Fátima Alexandra Figueira Pinto,Left Center Back,2,50,53,From Corner,Open Play,Head,Normal,False,False,False,0.01648349,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Francisca Ramos Ribeiro Nazareth Sousa,Center Attacking Midfield,2,51,38,From Counter,Open Play,Right Foot,Normal,False,True,False,0.32069376,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Mariam Abdulai Toloba,Left Center Midfield,2,52,47,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.13455875,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Diana Micaela Abreu de Sousa e Silva,Left Center Forward,2,53,35,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.0069933697,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Jill Janssens,Right Wing Back,2,57,43,From Throw In,Open Play,Head,Normal,False,True,False,0.07498941,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Jéssica da Silva,Left Center Forward,2,71,47,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.013692915,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Mariam Abdulai Toloba,Left Center Forward,2,76,22,From Keeper,Open Play,Head,Normal,False,True,False,0.15721333,Post,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Fátima Alexandra Figueira Pinto,Right Center Forward,2,80,58,From Free Kick,Open Play,Head,Normal,False,False,False,0.12142891,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Tatiana Vanessa Ferreira Pinto,Right Center Midfield,2,82,8,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.018922338,Off T,False
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Telma Raquel Velosa Encarnação,Left Center Forward,2,86,35,From Throw In,Open Play,Left Foot,Normal,True,True,False,0.23296362,Goal,True
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Tessa Wullaert,Center Forward,2,89,54,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.28472623,Saved,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Janice Cayman,Left Center Back,2,89,58,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.060148843,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Marie Detruyer,Right Wing,2,91,24,From Corner,Open Play,Left Foot,Volley,True,False,False,0.53154665,Wayward,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Janice Cayman,Left Center Back,2,95,41,From Free Kick,Open Play,Right Foot,Half Volley,True,False,False,0.17328677,Blocked,False
+weuro2025,3998854,2025-07-11,Group Stage,Belgium Women's,Portugal Women's,Janice Cayman,Left Center Back,2,95,43,From Free Kick,Open Play,Right Foot,Volley,True,True,False,0.11529419,Goal,True
+weuro2025,3998854,2025-07-11,Group Stage,Portugal Women's,Belgium Women's,Jéssica da Silva,Left Back,2,97,15,From Throw In,Open Play,Right Foot,Half Volley,True,True,False,0.08497889,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Noelle Maritz,Left Center Back,1,6,33,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.08081563,Blocked,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Julia Stierli,Center Back,1,10,28,From Free Kick,Open Play,Head,Normal,False,True,False,0.05308422,Wayward,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Sydney Schertenleib,Left Center Forward,1,12,42,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.025106711,Saved,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Svenja Fölmli,Right Center Forward,1,12,55,Regular Play,Open Play,Right Foot,Backheel,True,True,False,0.07705933,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,WNT Finland,Switzerland Women's,Oona Sevenius,Center Attacking Midfield,1,21,7,From Corner,Open Play,Head,Normal,False,False,False,0.030522214,Saved,False
+weuro2025,3998852,2025-07-10,Group Stage,WNT Finland,Switzerland Women's,Saara Katariina Kosola,Left Midfield,1,21,11,From Corner,Open Play,Left Foot,Half Volley,True,True,False,0.04413486,Blocked,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Géraldine Reuteler,Right Center Midfield,1,32,34,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.056761544,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,WNT Finland,Switzerland Women's,Eva Nyström,Left Center Back,1,44,9,From Free Kick,Open Play,Left Foot,Volley,True,False,False,0.13310277,Saved,False
+weuro2025,3998852,2025-07-10,Group Stage,WNT Finland,Switzerland Women's,Oona Siren,Right Midfield,2,46,48,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.0263423,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Sydney Schertenleib,Left Center Forward,2,49,2,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.011687038,Wayward,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Smilla Vallotto,Left Midfield,2,62,32,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.073081635,Saved,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Leila Wandeler,Right Center Forward,2,64,51,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.024132399,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Smilla Vallotto,Left Midfield,2,72,42,From Counter,Open Play,Head,Normal,False,False,False,0.06468452,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Alayah Pilgrim,Left Center Forward,2,74,53,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.010137726,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,WNT Finland,Switzerland Women's,Natalia Kuikka,Right Center Forward,2,78,36,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Alisha Lehmann,Right Wing Back,2,82,27,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.024572853,Blocked,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Riola Xhemaili,Center Attacking Midfield,2,83,27,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.041503437,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Ana-Maria Crnogorčević,Right Center Back,2,89,50,From Throw In,Open Play,Head,Normal,False,True,False,0.09422376,Off T,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Alisha Lehmann,Right Wing Back,2,90,43,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.012001339,Saved,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Géraldine Reuteler,Right Defensive Midfield,2,91,51,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.032492746,Wayward,False
+weuro2025,3998852,2025-07-10,Group Stage,Switzerland Women's,WNT Finland,Riola Xhemaili,Center Attacking Midfield,2,91,52,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.5188118,Goal,True
+weuro2025,3998852,2025-07-10,Group Stage,WNT Finland,Switzerland Women's,Olga Ahtinen,Right Center Midfield,2,96,48,From Free Kick,Open Play,Right Foot,Half Volley,True,False,False,0.06700614,Off T,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lauren James,Right Wing,1,3,16,From Free Kick,Open Play,Head,Normal,False,True,False,0.15645443,Off T,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Alessia Russo,Center Forward,1,8,26,Regular Play,Open Play,Head,Normal,False,False,False,0.29619226,Off T,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lauren James,Right Wing,1,21,17,From Keeper,Open Play,Left Foot,Normal,False,True,False,0.07064835,Goal,True
+weuro2025,3998851,2025-07-09,Group Stage,Netherlands Women's,England Women's,Jill Roord,Left Wing,1,25,39,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.04543275,Off T,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lauren Hemp,Left Wing,1,35,36,Regular Play,Open Play,Head,Normal,False,True,False,0.13001947,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Alessia Russo,Center Forward,1,37,6,Regular Play,Open Play,Head,Normal,False,True,False,0.041583642,Saved,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lauren James,Right Wing,1,37,8,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.056364562,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Alessia Russo,Center Forward,1,40,16,From Corner,Open Play,Head,Normal,False,True,False,0.07208927,Saved Off Target,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Alessia Russo,Center Forward,1,41,39,From Throw In,Open Play,Head,Normal,False,False,False,0.08385708,Off T,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Georgia Stanway,Left Defensive Midfield,1,43,15,From Free Kick,Open Play,Right Foot,Normal,True,True,False,0.0529295,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lauren James,Right Wing,1,44,0,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.12680161,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Georgia Stanway,Left Defensive Midfield,1,46,1,From Free Kick,Open Play,Right Foot,Half Volley,True,True,False,0.025737682,Goal,True
+weuro2025,3998851,2025-07-09,Group Stage,Netherlands Women's,England Women's,Victoria Pelova,Left Center Midfield,2,54,2,From Counter,Open Play,Right Foot,Normal,False,False,False,0.053810593,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Ella Toone,Center Attacking Midfield,2,59,1,From Goal Kick,Open Play,Left Foot,Normal,True,False,False,0.60967857,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lauren James,Right Wing,2,59,2,From Goal Kick,Open Play,Left Foot,Normal,True,False,False,0.18024932,Goal,True
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Ella Toone,Center Attacking Midfield,2,66,10,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.07765715,Goal,True
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Bethany Mead,Left Wing,2,76,24,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.06162352,Blocked,False
+weuro2025,3998851,2025-07-09,Group Stage,Netherlands Women's,England Women's,Sherida Spitse,Center Back,2,78,55,From Corner,Open Play,Right Foot,Half Volley,True,True,False,0.012254896,Saved,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Alessia Russo,Center Forward,2,81,38,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.3144121,Saved,False
+weuro2025,3998851,2025-07-09,Group Stage,England Women's,Netherlands Women's,Lucy Bronze,Right Back,2,82,21,From Corner,Open Play,Head,Normal,False,False,False,0.04357729,Off T,False
+weuro2025,3998851,2025-07-09,Group Stage,Netherlands Women's,England Women's,Wieke Hendrikje Maria Kaptein,Right Center Midfield,2,83,59,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.052457847,Off T,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Clara Mateo,Center Forward,1,0,17,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.012036904,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Clara Mateo,Center Forward,1,1,39,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.17886883,Blocked,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Clara Mateo,Center Forward,1,6,16,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.017931346,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Clara Mateo,Center Forward,1,7,23,From Corner,Open Play,Right Foot,Volley,False,False,False,0.120666645,Goal,True
+weuro2025,3998850,2025-07-09,Group Stage,Wales W,France Women's,Jessica Fishlock,Left Center Forward,1,12,39,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.7009599,Goal,True
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Selma Bacha,Left Back,1,21,18,From Free Kick,Free Kick,Left Foot,Normal,False,False,False,0.029569194,Off T,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Melvine Malard,Left Midfield,1,27,42,From Goal Kick,Open Play,Right Foot,Normal,False,True,False,0.020898202,Off T,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Amel Majri,Left Center Midfield,1,39,42,From Corner,Open Play,Left Foot,Half Volley,True,False,False,0.05820469,Off T,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Kadidiatou Diani,Right Midfield,1,44,59,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Amel Majri,Left Center Midfield,2,52,8,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.08616685,Goal,True
+weuro2025,3998850,2025-07-09,Group Stage,Wales W,France Women's,Ceri Holland,Left Midfield,2,57,13,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.030264871,Blocked,False
+weuro2025,3998850,2025-07-09,Group Stage,Wales W,France Women's,Kayleigh Anne Marie Barton,Right Midfield,2,58,4,From Corner,Open Play,Head,Normal,False,True,False,0.0779916,Off T,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Onema Grace Geyoro,Right Center Midfield,2,62,37,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.7254227,Goal,True
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Clara Mateo,Center Forward,2,68,20,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.2894357,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Onema Grace Geyoro,Right Center Midfield,2,71,25,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.04079697,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,Wales W,France Women's,Hannah Cain,Right Center Forward,2,81,36,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.31176624,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,Wales W,France Women's,Josie Green,Right Center Back,2,81,37,From Corner,Open Play,Right Foot,Normal,True,False,False,0.14414477,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,Wales W,France Women's,Josie Green,Right Center Back,2,81,38,From Corner,Open Play,Right Foot,Normal,True,True,False,0.18506242,Blocked,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Sakina Karchaoui,Center Defensive Midfield,2,84,42,From Free Kick,Open Play,Left Foot,Normal,False,True,False,0.023405427,Saved,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Kadidiatou Diani,Right Midfield,2,85,23,From Free Kick,Open Play,Left Foot,Normal,False,True,False,0.0652174,Off T,False
+weuro2025,3998850,2025-07-09,Group Stage,France Women's,Wales W,Marie-Antoinette Katoto,Center Forward,2,87,14,From Throw In,Open Play,Left Foot,Volley,True,False,False,0.2609941,Wayward,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Madelen Fatimma Maria Janogy,Left Wing,1,1,21,From Throw In,Open Play,Left Foot,Half Volley,True,False,False,0.06337628,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Kosovare Asllani,Center Attacking Midfield,1,2,0,Regular Play,Open Play,Head,Normal,False,False,False,0.18895821,Post,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Gun Nathalie Björn,Right Center Back,1,2,38,From Corner,Open Play,Head,Normal,False,True,False,0.12518665,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,1,4,0,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.06296742,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Martyna Wiankowska,Left Back,1,4,46,From Goal Kick,Open Play,Left Foot,Normal,False,False,False,0.02314211,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Madelen Fatimma Maria Janogy,Left Wing,1,12,11,Regular Play,Open Play,Head,Normal,False,False,False,0.07607604,Post,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Nadia Krezyman,Right Midfield,1,14,45,Regular Play,Open Play,Left Foot,Normal,True,True,False,0.018829325,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,1,21,32,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.08763009,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Amanda Ilestedt,Left Center Back,1,22,40,From Free Kick,Open Play,Head,Normal,False,True,False,0.07570427,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,1,27,32,Regular Play,Open Play,Head,Normal,False,False,False,0.3741814,Goal,True
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,1,34,12,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.08068972,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,1,42,31,From Counter,Open Play,Right Foot,Normal,True,False,False,0.26651496,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Johanna Rytting-Kaneryd,Right Wing,1,43,20,From Corner,Open Play,Right Foot,Normal,True,False,False,0.053000126,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,1,44,7,From Throw In,Open Play,Head,Normal,False,False,False,0.22968477,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,2,47,19,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.07329216,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Ewa Pajor,Center Forward,2,47,37,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.035835754,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Natalia Padilla-Bidas,Left Midfield,2,49,4,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.0276325,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Kosovare Asllani,Center Attacking Midfield,2,51,42,Regular Play,Open Play,Head,Normal,False,True,False,0.25056672,Goal,True
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,2,57,59,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.07767692,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,2,60,5,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.06854675,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Ewelina Kamczyk,Left Center Midfield,2,61,50,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.03167757,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Amanda Ilestedt,Left Center Back,2,65,14,From Corner,Open Play,Head,Normal,False,True,False,0.13068472,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Lina Mona Andréa Hurtig,Center Attacking Midfield,2,76,52,From Corner,Open Play,Head,Normal,False,True,False,0.164793,Goal,True
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Johanna Rytting-Kaneryd,Right Wing,2,79,5,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.07983272,Off T,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Emma Stina Blackstenius,Center Forward,2,79,41,From Goal Kick,Open Play,Right Foot,Normal,False,False,False,0.060763147,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,2,81,14,From Corner,Open Play,Left Foot,Volley,True,False,False,0.046940733,Wayward,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Milena Kokosz,Right Center Midfield,2,85,25,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.078623295,Blocked,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Ewelina Kamczyk,Left Center Midfield,2,88,8,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.0086998865,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Sweden Women's,Poland Women's,Ingrid Filippa Angeldal,Right Defensive Midfield,2,89,51,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.09498956,Saved,False
+weuro2025,3998848,2025-07-08,Group Stage,Poland Women's,Sweden Women's,Milena Kokosz,Right Center Midfield,2,92,56,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.022848725,Post,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,1,14,From Counter,Open Play,Right Foot,Normal,False,False,False,0.06154986,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,10,30,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.07313162,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,17,1,From Counter,Open Play,Right Foot,Normal,False,False,False,0.08900484,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,17,22,From Counter,Open Play,Right Foot,Normal,True,False,False,0.06407818,Wayward,False
+weuro2025,3998849,2025-07-08,Group Stage,Denmark Women's,Germany Women's,Amalie Jørgensen Vangsgaard,Right Center Forward,1,25,18,From Corner,Open Play,Right Foot,Normal,False,False,False,0.1039813,Goal,True
+weuro2025,3998849,2025-07-08,Group Stage,Denmark Women's,Germany Women's,Pernille Mosegaard Harder,Left Center Forward,1,27,33,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.06378303,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Denmark Women's,Germany Women's,Janni Thomsen,Right Midfield,1,28,52,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.059180163,Off T,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,39,51,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.010534537,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Sarai Linder,Left Back,1,40,21,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.017786637,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Carlotta Wamser,Right Back,1,40,42,From Corner,Open Play,Right Foot,Normal,False,False,False,0.038863935,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,40,56,From Corner,Open Play,Left Foot,Normal,False,False,False,0.040853757,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Linda Dallmann,Center Attacking Midfield,1,41,22,From Corner,Open Play,Left Foot,Volley,True,False,False,0.039198276,Wayward,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Sjoeke Nüsken,Left Defensive Midfield,1,41,23,From Corner,Open Play,Left Foot,Volley,True,False,False,0.14213695,Off T,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,42,46,From Throw In,Open Play,Left Foot,Half Volley,True,False,False,0.04393427,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Denmark Women's,Germany Women's,Sara Holmgaard,Left Midfield,1,43,38,From Free Kick,Open Play,Left Foot,Half Volley,True,False,False,0.02108098,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Denmark Women's,Germany Women's,Sara Holmgaard,Left Midfield,1,44,27,From Corner,Open Play,Head,Normal,False,True,False,0.16868399,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,44,46,From Keeper,Open Play,Left Foot,Normal,False,False,False,0.030154252,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,1,45,36,From Keeper,Open Play,Left Foot,Normal,False,False,False,0.02737292,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Sjoeke Nüsken,Left Defensive Midfield,1,46,25,From Corner,Open Play,Right Foot,Volley,True,False,False,0.14574385,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Sjoeke Nüsken,Left Defensive Midfield,1,46,26,From Corner,Open Play,Right Foot,Normal,True,False,False,0.0653394,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Sarai Linder,Left Back,1,47,9,From Corner,Open Play,Right Foot,Normal,False,False,False,0.018183427,Off T,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Jule Brand,Right Wing,2,46,24,From Kick Off,Open Play,Left Foot,Normal,False,True,False,0.060457006,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Carlotta Wamser,Right Back,2,50,40,From Free Kick,Open Play,Right Foot,Volley,True,False,False,0.03315497,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Sjoeke Nüsken,Right Defensive Midfield,2,55,19,Other,Penalty,Right Foot,Normal,False,False,False,0.7835,Goal,True
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Lea Schüller,Center Forward,2,65,28,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.34206623,Goal,True
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Lea Schüller,Center Forward,2,69,9,Regular Play,Open Play,Head,Normal,False,False,True,0.13738438,Off T,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Giovanna Hoffmann,Center Forward,2,75,17,From Goal Kick,Open Play,Head,Normal,False,True,False,0.09375351,Off T,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Giovanna Hoffmann,Center Forward,2,82,54,Regular Play,Open Play,Right Foot,Backheel,True,False,False,0.173736,Saved,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,2,89,21,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05376168,Off T,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Laura Freigang,Center Attacking Midfield,2,90,17,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.045783803,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,2,95,34,From Corner,Open Play,Left Foot,Normal,False,False,False,0.008353199,Blocked,False
+weuro2025,3998849,2025-07-08,Group Stage,Germany Women's,Denmark Women's,Klara Bühl,Left Wing,2,97,45,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.051433187,Off T,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Cristiana Girelli,Left Center Forward,1,7,16,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.009887733,Saved,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Cristiana Girelli,Left Center Forward,1,8,19,From Corner,Open Play,Right Foot,Volley,True,True,False,0.23085013,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Cecilia Salvai,Center Back,1,19,59,From Free Kick,Open Play,Head,Normal,False,True,False,0.08823394,Post,False
+weuro2025,3998846,2025-07-07,Group Stage,Portugal Women's,Italy Women's,Carole da Silva Costa,Left Center Back,1,22,9,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.0060072704,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Manuela Giugliano,Center Defensive Midfield,1,31,26,Regular Play,Open Play,Left Foot,Normal,True,True,False,0.02029358,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Cristiana Girelli,Left Center Forward,1,35,37,From Free Kick,Open Play,Head,Normal,False,True,False,0.045725204,Saved,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Cristiana Girelli,Left Center Forward,1,44,38,From Throw In,Open Play,Left Foot,Normal,True,True,False,0.1151876,Saved,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Emma Severini,Right Center Midfield,2,58,49,From Throw In,Open Play,Right Foot,Volley,True,True,False,0.062078368,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Arianna Caruso,Center Defensive Midfield,2,59,23,From Goal Kick,Open Play,Right Foot,Normal,False,True,False,0.035911,Off T,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Cristiana Girelli,Left Center Forward,2,69,35,From Keeper,Open Play,Right Foot,Normal,False,True,False,0.027573248,Goal,True
+weuro2025,3998846,2025-07-07,Group Stage,Portugal Women's,Italy Women's,Diana Micaela Abreu de Sousa e Silva,Right Center Forward,2,78,6,From Corner,Open Play,Head,Normal,False,True,False,0.05671469,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Portugal Women's,Italy Women's,Carole da Silva Costa,Center Back,2,88,7,From Corner,Open Play,Head,Normal,False,False,False,0.057450168,Post,False
+weuro2025,3998846,2025-07-07,Group Stage,Portugal Women's,Italy Women's,Diana Catarina Ribeiro Gomes,Left Center Back,2,88,24,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.09480456,Goal,True
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Valentina Bergamaschi,Left Wing Back,2,89,30,From Kick Off,Open Play,Head,Normal,False,False,True,0.10033237,Saved,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Emma Severini,Right Center Midfield,2,91,49,From Throw In,Open Play,Left Foot,Half Volley,True,False,False,0.010633442,Saved,False
+weuro2025,3998846,2025-07-07,Group Stage,Portugal Women's,Italy Women's,Fátima Alexandra Figueira Pinto,Right Center Forward,2,93,47,From Corner,Open Play,Right Foot,Half Volley,False,True,False,0.047866106,Off T,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Barbara Bonansea,Left Center Forward,2,97,16,From Corner,Open Play,Right Foot,Half Volley,False,True,False,0.05089525,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Barbara Bonansea,Left Center Forward,2,97,20,From Corner,Open Play,Left Foot,Normal,False,True,False,0.050973255,Blocked,False
+weuro2025,3998846,2025-07-07,Group Stage,Italy Women's,Portugal Women's,Barbara Bonansea,Left Center Forward,2,97,50,From Counter,Open Play,Right Foot,Normal,False,False,False,0.07955221,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Victoria López,Right Center Midfield,1,1,3,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.082917064,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Belgium Women's,Spain Women's,Mariam Abdulai Toloba,Left Center Midfield,1,4,34,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.072076954,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Claudia Pina Medina,Left Wing,1,8,23,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.06742306,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Olga  Carmona García,Left Back,1,10,39,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.032000203,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Olga  Carmona García,Left Back,1,18,45,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.008488446,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Victoria López,Right Center Midfield,1,20,56,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.059303578,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,1,21,11,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.1763977,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Belgium Women's,Spain Women's,Justine Vanhaevermaet,Center Defensive Midfield,1,23,20,From Corner,Open Play,Head,Normal,False,True,False,0.20984499,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Esther Gonzalez Rodríguez,Center Forward,1,26,5,From Throw In,Open Play,Head,Normal,False,False,False,0.062316082,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Esther Gonzalez Rodríguez,Center Forward,1,30,16,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.03937072,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Irene Paredes Hernandez,Right Center Back,1,31,1,From Corner,Open Play,Right Foot,Volley,True,False,False,0.07067196,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Claudia Pina Medina,Left Wing,1,34,34,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.025119117,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Esther Gonzalez Rodríguez,Center Forward,1,35,54,From Corner,Open Play,Right Foot,Backheel,True,False,False,0.12446231,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Irene Paredes Hernandez,Right Center Back,1,38,41,From Corner,Open Play,Head,Normal,False,True,False,0.049756017,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,1,43,22,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.08763721,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Aitana Bonmati Conca,Right Center Midfield,2,48,26,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.06916214,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Belgium Women's,Spain Women's,Hannah Eurlings,Left Center Forward,2,49,5,From Goal Kick,Open Play,Right Foot,Normal,False,True,False,0.33749804,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Esther Gonzalez Rodríguez,Center Forward,2,51,59,From Kick Off,Open Play,Right Foot,Normal,False,False,False,0.28001806,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Esther Gonzalez Rodríguez,Center Forward,2,60,20,From Corner,Open Play,Left Foot,Half Volley,False,False,False,0.24891983,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,María Francesca Caldentey Oliver,Left Wing,2,60,23,From Corner,Open Play,Right Foot,Half Volley,False,False,False,0.16854393,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Claudia Pina Medina,Right Wing,2,62,19,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.10923643,Saved,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,2,62,22,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.092163265,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Aitana Bonmati Conca,Right Center Midfield,2,62,24,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.08618497,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Aitana Bonmati Conca,Right Center Midfield,2,64,44,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.07047228,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,María Francesca Caldentey Oliver,Left Wing,2,66,10,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.05716926,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,66,45,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.028877446,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,María Francesca Caldentey Oliver,Left Wing,2,67,19,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.050773103,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Belgium Women's,Spain Women's,Elena Dhont,Right Wing Back,2,68,53,Regular Play,Open Play,Head,Normal,False,False,False,0.02006672,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,2,69,35,From Goal Kick,Open Play,Head,Normal,False,False,False,0.20152408,Post,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,María Francesca Caldentey Oliver,Right Wing,2,71,22,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.348308,Saved,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Athenea del Castillo Belvide,Right Wing,2,73,55,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.06993441,Blocked,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,75,22,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.033049807,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Belgium Women's,Spain Women's,Janice Cayman,Left Center Back,2,76,47,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.028387278,Saved,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Claudia Pina Medina,Left Wing,2,79,55,Regular Play,Open Play,Left Foot,Normal,False,False,True,0.10599425,Saved,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Claudia Pina Medina,Left Wing,2,80,14,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.041845027,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Leila Ouahabi El Ouahabi,Left Back,2,85,29,From Corner,Open Play,Left Foot,Half Volley,True,False,False,0.027956653,Wayward,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,2,85,31,From Corner,Open Play,Left Foot,Volley,True,True,False,0.07544898,Goal,True
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,2,91,7,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.047422223,Off T,False
+weuro2025,3998847,2025-07-07,Group Stage,Spain Women's,Belgium Women's,Alexia Putellas Segura,Left Center Midfield,2,92,24,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.057457887,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Ingibjörg Sigurðardóttir,Left Center Back,1,0,43,From Throw In,Open Play,Right Foot,Half Volley,True,True,False,0.05422664,Post,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Julia Stierli,Center Back,1,2,6,From Corner,Open Play,Head,Normal,False,False,False,0.021134576,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Dagný Brynjarsdóttir,Left Defensive Midfield,1,14,20,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.02746413,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Sandra María Jessen,Center Forward,1,40,37,From Throw In,Open Play,Left Foot,Volley,True,True,False,0.10174167,Saved,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Sydney Schertenleib,Left Center Forward,1,44,8,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.023836859,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Iman Beney,Right Wing Back,1,47,4,From Free Kick,Open Play,Right Foot,Half Volley,True,False,False,0.01030725,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Karólína Lea Vilhjálmsdóttir,Center Attacking Midfield,2,47,23,From Free Kick,Free Kick,Right Foot,Normal,False,False,False,0.025385475,Post,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Sydney Schertenleib,Left Center Forward,2,48,1,From Goal Kick,Open Play,Right Foot,Normal,False,False,False,0.02733393,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Svenja Fölmli,Right Center Forward,2,48,26,From Goal Kick,Open Play,Right Foot,Normal,True,True,False,0.040868066,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Sveindís Jane Jónsdóttir,Left Wing,2,50,34,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.006969532,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Glódís Perla Viggósdóttir,Right Center Back,2,51,39,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.068228655,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Glódís Perla Viggósdóttir,Right Center Back,2,51,40,From Throw In,Open Play,Right Foot,Normal,True,False,False,0.075373545,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Iman Beney,Right Wing Back,2,53,8,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.035626482,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Sydney Schertenleib,Left Center Forward,2,57,32,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.022831963,Blocked,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Iman Beney,Right Wing Back,2,58,4,From Throw In,Open Play,Head,Normal,False,True,False,0.040058624,Saved,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Iman Beney,Right Wing Back,2,58,48,From Corner,Open Play,Left Foot,Normal,True,False,False,0.018421214,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Dagný Brynjarsdóttir,Left Defensive Midfield,2,63,5,From Corner,Open Play,Head,Normal,False,False,False,0.067558885,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Hafrún Rakel Halldórsdóttir,Right Wing,2,66,46,From Counter,Open Play,Right Foot,Half Volley,True,True,False,0.026444996,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Sveindís Jane Jónsdóttir,Left Wing,2,74,41,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.010370143,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Géraldine Reuteler,Right Center Midfield,2,75,22,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.2226835,Goal,True
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Karólína Lea Vilhjálmsdóttir,Center Attacking Midfield,2,78,41,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.04143037,Saved,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Leila Wandeler,Right Midfield,2,79,10,From Keeper,Open Play,Left Foot,Normal,False,True,False,0.024488753,Post,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Sydney Schertenleib,Right Center Forward,2,81,39,Regular Play,Open Play,Head,Normal,False,True,False,0.045054123,Wayward,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Alayah Pilgrim,Left Center Forward,2,86,51,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.17331564,Saved,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Alayah Pilgrim,Left Center Forward,2,88,7,From Corner,Open Play,Right Foot,Normal,False,False,False,0.009448158,Off T,False
+weuro2025,3998844,2025-07-06,Group Stage,Switzerland Women's,Iceland Women's,Alayah Pilgrim,Left Center Forward,2,89,40,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05359715,Goal,True
+weuro2025,3998844,2025-07-06,Group Stage,Iceland Women's,Switzerland Women's,Glódís Perla Viggósdóttir,Center Back,2,92,19,From Throw In,Open Play,Head,Normal,False,False,False,0.096462145,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Eveliina Summanen,Left Defensive Midfield,1,9,21,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.021675577,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Linda Sällström,Center Forward,1,14,53,Regular Play,Open Play,Right Foot,Half Volley,False,False,True,0.119785376,Saved,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Ingrid Syrstad Engen,Left Defensive Midfield,1,23,41,From Corner,Open Play,Head,Normal,False,False,False,0.21475178,Post,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Caroline Graham Hansen,Right Midfield,1,29,5,From Goal Kick,Open Play,Right Foot,Normal,False,False,False,0.032290597,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Ada Stolsmo Hegerberg,Right Center Forward,1,29,7,From Goal Kick,Open Play,Left Foot,Normal,True,False,False,0.43246374,Saved,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Ria Öling,Right Wing,1,30,47,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05611172,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Linda Sällström,Center Forward,1,30,52,Regular Play,Open Play,Right Foot,Volley,True,False,False,0.04333569,Saved,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Oona Sevenius,Center Attacking Midfield,1,31,23,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.22493652,Goal,True
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Vilde Bøe Risa,Right Center Midfield,1,37,49,Regular Play,Open Play,Right Foot,Volley,False,False,False,0.028575294,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Oona Sevenius,Center Attacking Midfield,1,38,36,From Goal Kick,Open Play,Right Foot,Normal,False,False,False,0.041065235,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Ria Öling,Right Wing,1,42,1,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05808089,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Ria Öling,Right Wing,1,44,3,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.021124048,Saved,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Saara Katariina Kosola,Left Wing,2,56,58,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.046289545,Saved,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Saara Katariina Kosola,Left Wing,2,58,42,From Corner,Open Play,Right Foot,Half Volley,False,False,False,0.024782097,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Eveliina Summanen,Left Defensive Midfield,2,62,21,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.04614084,Saved to Post,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Oona Sevenius,Center Attacking Midfield,2,67,58,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.10265467,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Natalia Kuikka,Right Center Back,2,68,44,From Corner,Open Play,Head,Normal,False,True,False,0.033187028,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Ada Stolsmo Hegerberg,Center Forward,2,70,36,From Corner,Open Play,Head,Normal,False,True,False,0.07044323,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Thea Bjelde,Right Back,2,78,18,From Corner,Open Play,Left Foot,Half Volley,True,True,False,0.021606134,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Signe Gaupset,Left Midfield,2,78,53,Regular Play,Open Play,Right Foot,Half Volley,True,True,False,0.08478988,Blocked,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Guro Reiten,Left Center Midfield,2,78,55,Regular Play,Open Play,Left Foot,Volley,True,True,False,0.05522314,Saved,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Caroline Graham Hansen,Right Midfield,2,80,25,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.19305263,Off T,False
+weuro2025,3998845,2025-07-06,Group Stage,Norway Women's,WNT Finland,Caroline Graham Hansen,Right Midfield,2,83,45,From Free Kick,Open Play,Right Foot,Lob,False,True,False,0.05258186,Goal,True
+weuro2025,3998845,2025-07-06,Group Stage,WNT Finland,Norway Women's,Joanna Tynnilä,Left Back,2,85,42,From Throw In,Open Play,Right Foot,Half Volley,False,False,False,0.031083371,Off T,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jill Roord,Left Wing,1,4,6,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.012771837,Saved,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Vivianne Miedema,Center Forward,1,15,0,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.070549,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Wieke Hendrikje Maria Kaptein,Left Defensive Midfield,1,15,50,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.09802918,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jackie Groenen,Right Defensive Midfield,1,15,52,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.03890266,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jill Roord,Left Wing,1,34,33,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.041370306,Post,False
+weuro2025,3998842,2025-07-05,Group Stage,Wales W,Netherlands Women's,Angharad James,Left Defensive Midfield,1,38,41,From Goal Kick,Open Play,Right Foot,Volley,True,False,False,0.007027686,Wayward,False
+weuro2025,3998842,2025-07-05,Group Stage,Wales W,Netherlands Women's,Josie Green,Right Wing Back,1,41,57,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.036690947,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Wales W,Netherlands Women's,Lily Woodham,Left Wing Back,1,43,16,From Corner,Open Play,Left Foot,Normal,True,False,False,0.03424923,Off T,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Wieke Hendrikje Maria Kaptein,Left Defensive Midfield,1,44,25,From Goal Kick,Open Play,Right Foot,Normal,False,False,False,0.030688196,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Vivianne Miedema,Center Forward,1,47,0,From Corner,Open Play,Right Foot,Normal,False,False,False,0.045806035,Goal,True
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Victoria Pelova,Right Wing,2,47,21,Regular Play,Open Play,Right Foot,Half Volley,False,False,False,0.13629548,Goal,True
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jill Roord,Left Wing,2,51,24,From Throw In,Open Play,Left Foot,Normal,False,True,True,0.19655123,Post,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jackie Groenen,Right Defensive Midfield,2,56,20,From Corner,Open Play,Right Foot,Normal,False,False,False,0.021395933,Post,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Esmee Brugts,Left Back,2,56,32,From Corner,Open Play,Right Foot,Volley,True,False,False,0.08848912,Goal,True
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jill Roord,Left Wing,2,58,52,From Keeper,Open Play,Left Foot,Normal,False,True,False,0.06006552,Saved,False
+weuro2025,3998842,2025-07-05,Group Stage,Wales W,Netherlands Women's,Gemma Evans,Center Back,2,61,18,From Corner,Open Play,Head,Normal,False,True,False,0.059054602,Off T,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Chasity Grant,Right Wing,2,69,19,From Counter,Open Play,Right Foot,Normal,True,False,False,0.08080828,Off T,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Lineth Beerensteyn,Center Forward,2,74,7,From Throw In,Open Play,Right Foot,Normal,False,False,True,0.4900498,Saved,False
+weuro2025,3998842,2025-07-05,Group Stage,Wales W,Netherlands Women's,Rachel Rowe,Center Attacking Midfield,2,83,53,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.017472986,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Chasity Grant,Right Wing,2,85,43,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.09729676,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Lynn Wilms,Right Back,2,85,55,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.010177413,Off T,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Jackie Groenen,Right Defensive Midfield,2,91,17,From Corner,Open Play,Right Foot,Volley,True,False,False,0.036447804,Blocked,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Caitlin Dijkstra,Left Center Back,2,91,18,From Corner,Open Play,Right Foot,Backheel,False,False,False,0.061545238,Off T,False
+weuro2025,3998842,2025-07-05,Group Stage,Netherlands Women's,Wales W,Victoria Pelova,Center Attacking Midfield,2,93,29,Other,Open Play,Right Foot,Normal,False,False,False,0.122576654,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Lauren James,Center Attacking Midfield,1,0,39,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.07322338,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Selma Bacha,Left Back,1,20,24,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.019616859,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Oriane Jean-François,Center Defensive Midfield,1,20,49,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.03217131,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Lauren James,Center Attacking Midfield,1,22,18,Regular Play,Open Play,Left Foot,Overhead Kick,True,False,False,0.064003974,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Sakina Karchaoui,Right Center Midfield,1,23,58,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.0086007435,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Sakina Karchaoui,Right Center Midfield,1,24,39,From Counter,Open Play,Left Foot,Lob,True,True,False,0.034185946,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Marie-Antoinette Katoto,Center Forward,1,26,28,From Free Kick,Open Play,Head,Normal,False,True,False,0.050929975,Saved,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Selma Bacha,Left Back,1,28,54,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.037722036,Saved,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Marie-Antoinette Katoto,Center Forward,1,35,28,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.62059164,Goal,True
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Sandy Baltimore,Left Wing,1,38,32,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.1898939,Goal,True
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Georgia Stanway,Left Defensive Midfield,1,49,54,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.02526788,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Elisa De Almeida,Right Back,2,49,39,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.010560125,Wayward,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Elisa De Almeida,Right Back,2,50,59,From Free Kick,Open Play,Left Foot,Normal,False,True,False,0.015068616,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Onema Grace Geyoro,Right Center Midfield,2,53,38,From Counter,Open Play,Right Foot,Normal,True,False,False,0.16479349,Saved,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Lauren Hemp,Left Wing,2,56,25,From Corner,Open Play,Left Foot,Normal,False,False,False,0.018480575,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Kadidiatou Diani,Right Wing,2,64,9,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.23568825,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Oriane Jean-François,Center Defensive Midfield,2,75,50,From Free Kick,Open Play,Right Foot,Half Volley,True,True,False,0.06902699,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,France Women's,England Women's,Kadidiatou Diani,Right Wing,2,76,0,From Free Kick,Open Play,Head,Normal,False,True,False,0.15916066,Off T,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Ella Toone,Center Attacking Midfield,2,85,11,Regular Play,Open Play,Left Foot,Volley,True,False,False,0.093458645,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Ella Toone,Center Attacking Midfield,2,85,17,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.06371972,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Keira Walsh,Right Defensive Midfield,2,86,3,From Corner,Open Play,Right Foot,Normal,False,False,False,0.06356522,Goal,True
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Grace Clinton,Left Defensive Midfield,2,89,23,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.038878713,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Michelle Agyemang,Left Center Forward,2,89,27,From Free Kick,Open Play,Left Foot,Normal,True,False,False,0.13677366,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Alessia Russo,Right Center Forward,2,92,43,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.061254237,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Lauren Hemp,Left Wing Back,2,94,25,Regular Play,Open Play,Left Foot,Volley,False,True,False,0.053681348,Blocked,False
+weuro2025,3998843,2025-07-05,Group Stage,England Women's,France Women's,Grace Clinton,Left Defensive Midfield,2,95,6,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.039441664,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Linda Dallmann,Center Attacking Midfield,1,2,49,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.079979666,Wayward,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Klara Bühl,Left Wing,1,7,43,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.037232324,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Emilia Urszula Szymczak,Right Center Back,1,13,50,From Free Kick,Open Play,Right Foot,Volley,True,False,False,0.09523363,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Linda Dallmann,Center Attacking Midfield,1,18,37,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.1413277,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Jule Brand,Right Wing,1,23,4,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.07793738,Saved,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Rebecca Knaak,Left Center Back,1,32,14,From Corner,Open Play,Head,Normal,False,True,False,0.08400307,Wayward,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Giulia Gwinn,Right Back,1,32,27,From Corner,Open Play,Head,Normal,False,False,False,0.060517315,Saved,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Paulina Tomasiak,Right Midfield,1,34,32,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.010157472,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Ewelina Kamczyk,Left Center Midfield,1,35,22,From Corner,Open Play,Right Foot,Normal,False,False,False,0.024341427,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Ewa Pajor,Center Forward,1,35,24,From Corner,Open Play,Right Foot,Volley,True,False,False,0.013551016,Wayward,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Natalia Padilla-Bidas,Left Midfield,1,35,31,From Corner,Open Play,Right Foot,Normal,False,False,False,0.025518952,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Ewa Pajor,Center Forward,1,35,34,From Corner,Open Play,Right Foot,Normal,False,True,False,0.1324522,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Janina Minge,Right Center Back,1,40,10,From Corner,Open Play,Head,Normal,False,True,False,0.04197658,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Left Defensive Midfield,1,42,1,From Free Kick,Open Play,Right Foot,Normal,True,True,False,0.026638309,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Klara Bühl,Left Wing,1,46,13,From Free Kick,Free Kick,Left Foot,Normal,False,False,False,0.04016375,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Lea Schüller,Center Forward,1,47,25,Regular Play,Open Play,Left Foot,Normal,True,False,False,0.3183725,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Right Defensive Midfield,2,45,37,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.10750954,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Jule Brand,Right Wing,2,45,54,From Free Kick,Open Play,Head,Normal,False,False,False,0.045270506,Saved,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Linda Dallmann,Center Attacking Midfield,2,47,32,From Keeper,Open Play,Right Foot,Volley,True,False,False,0.066164955,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Right Defensive Midfield,2,50,5,From Throw In,Open Play,Head,Normal,False,True,False,0.07733557,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Jule Brand,Right Wing,2,51,45,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.030847214,Goal,True
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Sylwia Matysik,Right Back,2,60,2,From Free Kick,Open Play,Right Foot,Half Volley,True,False,False,0.00473038,Wayward,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Right Defensive Midfield,2,60,59,Regular Play,Open Play,Head,Normal,False,False,True,0.18456429,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Klara Bühl,Left Wing,2,62,3,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.05612729,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Ewa Pajor,Center Forward,2,63,5,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.09470412,Saved,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Lea Schüller,Center Forward,2,63,49,Regular Play,Open Play,Head,Normal,False,False,False,0.31455034,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Lea Schüller,Center Forward,2,65,45,From Throw In,Open Play,Head,Normal,False,False,True,0.22547805,Goal,True
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Kayla Joan Zophia Adamek,Left Midfield,2,68,10,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.02366625,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Left Defensive Midfield,2,71,24,From Corner,Open Play,Head,Normal,False,False,False,0.07179645,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Tanja Pawollek,Center Defensive Midfield,2,77,2,From Corner,Open Play,Right Foot,Half Volley,True,False,False,0.06562846,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Jule Brand,Right Wing,2,78,19,Regular Play,Open Play,Left Foot,Volley,True,False,False,0.09685731,Wayward,False
+weuro2025,3998840,2025-07-04,Group Stage,Poland Women's,Germany Women's,Ewa Pajor,Center Forward,2,80,14,From Throw In,Open Play,Head,Normal,False,True,False,0.118617676,Saved,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Left Defensive Midfield,2,83,13,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.01668939,Saved,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Sjoeke Nüsken,Left Defensive Midfield,2,85,18,From Goal Kick,Open Play,Right Foot,Volley,True,False,False,0.07370499,Off T,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Selina Cerci,Left Wing,2,89,54,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.011123675,Blocked,False
+weuro2025,3998840,2025-07-04,Group Stage,Germany Women's,Poland Women's,Giovanna Hoffmann,Center Forward,2,92,36,From Counter,Open Play,Right Foot,Normal,False,True,False,0.009287105,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Esther Gonzalez Rodríguez,Center Forward,1,1,27,From Throw In,Open Play,Right Foot,Volley,False,False,False,0.20179321,Goal,True
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Victoria López,Right Center Midfield,1,6,53,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.5675244,Goal,True
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Esther Gonzalez Rodríguez,Center Forward,1,15,11,Regular Play,Open Play,Right Foot,Normal,False,False,True,0.057982214,Saved,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Claudia Pina Medina,Left Wing,1,17,54,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.113796026,Saved,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Esther Gonzalez Rodríguez,Center Forward,1,18,50,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.057900213,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Alexia Putellas Segura,Left Center Midfield,1,20,25,From Throw In,Open Play,Left Foot,Normal,True,False,False,0.10457949,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Victoria López,Right Center Midfield,1,23,50,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.021873645,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Carole da Silva Costa,Center Back,1,26,2,From Free Kick,Open Play,Head,Normal,False,True,False,0.023910778,Wayward,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Beatriz Pina Fonseca,Left Wing Back,1,26,15,From Free Kick,Open Play,Right Foot,Normal,False,True,False,0.032692973,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Esther Gonzalez Rodríguez,Center Forward,1,28,38,From Throw In,Open Play,Left Foot,Backheel,True,True,False,0.064476766,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Claudia Pina Medina,Left Wing,1,34,35,Regular Play,Open Play,Right Foot,Normal,True,False,False,0.21467435,Saved,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Alexia Putellas Segura,Left Center Midfield,1,40,39,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.16787322,Goal,True
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Esther Gonzalez Rodríguez,Center Forward,1,42,15,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.06441572,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Esther Gonzalez Rodríguez,Center Forward,1,42,23,From Throw In,Open Play,Left Foot,Volley,True,False,False,0.72276735,Goal,True
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Alexia Putellas Segura,Left Center Midfield,2,46,10,From Kick Off,Open Play,Right Foot,Half Volley,False,True,False,0.11348284,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Jéssica da Silva,Center Forward,2,48,44,From Counter,Open Play,Right Foot,Lob,True,False,False,0.0064592687,Wayward,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Olga  Carmona García,Left Back,2,58,49,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.021218397,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,María Francesca Caldentey Oliver,Left Wing,2,60,11,Regular Play,Open Play,Left Foot,Normal,False,False,False,0.04153897,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Alexia Putellas Segura,Left Center Midfield,2,60,51,From Corner,Open Play,Left Foot,Volley,True,True,False,0.06583432,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Andreia Alexandra Norton,Left Center Midfield,2,64,17,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.020211317,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Ana Ines Palma Capeta,Center Forward,2,74,40,From Free Kick,Open Play,Right Foot,Half Volley,False,True,False,0.14030053,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Jana Fernandez Velasco,Right Back,2,79,7,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.020843945,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Patricia Guijarro Gutiérrez,Center Defensive Midfield,2,84,8,From Free Kick,Open Play,Left Foot,Normal,False,False,False,0.039412823,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Cristina Martín-Prieto Gutierrez,Center Forward,2,85,12,From Throw In,Open Play,Right Foot,Normal,True,True,False,0.43679002,Saved,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Olga  Carmona García,Left Back,2,86,6,From Corner,Open Play,Left Foot,Half Volley,True,False,False,0.027190598,Off T,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Ana Ines Palma Capeta,Center Forward,2,88,47,From Free Kick,Open Play,Right Foot,Normal,False,False,False,0.027938487,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Portugal Women's,Spain Women's,Andreia Martins Faria,Center Attacking Midfield,2,89,28,From Corner,Open Play,Right Foot,Volley,True,True,False,0.06415349,Saved,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Salma Paralluelo Ayingono,Left Wing,2,90,11,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.041598216,Blocked,False
+weuro2025,3998839,2025-07-03,Group Stage,Spain Women's,Portugal Women's,Cristina Martín-Prieto Gutierrez,Center Forward,2,92,35,From Corner,Open Play,Head,Normal,False,False,False,0.24645637,Goal,True
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Sandra María Jessen,Center Forward,1,3,55,From Corner,Open Play,Right Foot,Volley,True,False,False,0.043727428,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Linda Sällström,Right Center Forward,1,7,24,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.06937369,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Ria Öling,Center Attacking Midfield,1,7,25,Regular Play,Open Play,Right Foot,Half Volley,True,False,False,0.08141477,Saved,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Karólína Lea Vilhjálmsdóttir,Center Attacking Midfield,1,10,21,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.028363429,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Saara Katariina Kosola,Left Center Midfield,1,12,53,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.025002332,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Sanni Maija Franssi,Left Center Forward,1,15,45,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.023006067,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Saara Katariina Kosola,Left Center Midfield,1,15,48,From Throw In,Open Play,Right Foot,Normal,False,True,False,0.040811963,Saved,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Sandra María Jessen,Center Forward,1,26,41,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.049674973,Wayward,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Sanni Maija Franssi,Left Center Forward,1,27,56,From Throw In,Open Play,Left Foot,Normal,False,True,False,0.07200798,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Oona Siren,Right Center Midfield,1,29,41,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.024380805,Saved,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Saara Katariina Kosola,Left Center Midfield,1,32,0,Regular Play,Open Play,Right Foot,Normal,True,True,False,0.0811538,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Sanni Maija Franssi,Left Center Forward,1,34,46,Regular Play,Open Play,Right Foot,Normal,False,True,False,0.05682604,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Sandra María Jessen,Center Forward,1,39,31,Regular Play,Open Play,Left Foot,Half Volley,True,False,False,0.28854948,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Linda Sällström,Right Center Forward,2,48,25,Regular Play,Open Play,Left Foot,Normal,False,True,False,0.026303,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Ingibjörg Sigurðardóttir,Left Center Back,2,56,2,From Throw In,Open Play,Right Foot,Volley,True,False,False,0.117479876,Saved,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Agla María Albertsdóttir,Right Midfield,2,56,4,From Throw In,Open Play,Left Foot,Volley,True,True,False,0.07228754,Wayward,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Alexandra Jóhannsdóttir,Right Defensive Midfield,2,56,5,From Throw In,Open Play,Right Foot,Half Volley,True,False,False,0.16458614,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Ria Öling,Center Attacking Midfield,2,60,23,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.05983996,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Joanna Tynnilä,Left Back,2,64,27,From Corner,Open Play,Right Foot,Normal,False,False,False,0.027229844,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Guðrún Arnardóttir,Right Center Back,2,66,34,From Corner,Open Play,Right Foot,Backheel,True,True,False,0.07539876,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Saara Katariina Kosola,Left Center Midfield,2,67,56,From Throw In,Open Play,Right Foot,Normal,False,False,False,0.03419653,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Natalia Kuikka,Right Center Back,2,68,36,From Corner,Open Play,Head,Normal,False,True,False,0.036259063,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Saara Katariina Kosola,Left Center Midfield,2,69,50,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.06489573,Goal,True
+weuro2025,3998836,2025-07-02,Group Stage,WNT Finland,Iceland Women's,Saara Katariina Kosola,Left Center Midfield,2,72,42,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.044327248,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Sveindís Jane Jónsdóttir,Center Forward,2,74,37,From Goal Kick,Open Play,Right Foot,Normal,True,True,False,0.0623256,Off T,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Agla María Albertsdóttir,Right Wing Back,2,84,32,From Goal Kick,Open Play,Left Foot,Normal,False,False,False,0.022150569,Saved,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Katla Tryggvadóttir,Right Center Midfield,2,88,58,From Throw In,Open Play,Left Foot,Normal,False,False,False,0.027080998,Blocked,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Katla Tryggvadóttir,Right Center Midfield,2,90,42,Regular Play,Open Play,Right Foot,Normal,False,False,False,0.035943866,Saved,False
+weuro2025,3998836,2025-07-02,Group Stage,Iceland Women's,WNT Finland,Sveindís Jane Jónsdóttir,Center Forward,2,95,26,From Counter,Open Play,Right Foot,Half Volley,True,False,False,0.00941428,Off T,False
