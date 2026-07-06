@@ -160,7 +160,7 @@ range(seasons)
 #> [1]  1 25
 ```
 
-Only about 14% of 10,000 simulated seasons produce exactly 10 goals, and the tallies range from 1 all the way to 25 -- from "release him" to "sell for a fortune," with no change whatsoever in the underlying player.
+Only about 14% of 10,000 simulated seasons produce exactly 10 goals, and the tallies range from 1 all the way to 25 -- from "release her" to "sell for a fortune," with no change whatsoever in the underlying player.
 This type of variation is part of almost any data generating process.
 It is possible that the 8% difference in the finishing trial is due to this natural variation.
 However, the larger the difference we observe (for a particular sample size), the less believable it is that the difference is due to chance.
