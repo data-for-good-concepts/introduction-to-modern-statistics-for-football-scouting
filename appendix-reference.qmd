@@ -1,0 +1,244 @@
+# Quick reference {#sec-appendix-reference}
+
+Every symbol in this book is decomposed piece by piece exactly once — in the chapter that owns it — and used freely ever after.
+That discipline keeps the chapters readable, but it means a reader who skipped, or forgot, needs a map back to each symbol's home.
+This appendix is that map, plus four more consolidations students asked for: an index of the recurring R idioms the code leans on, the football vocabulary the examples take for granted, a decision guide to the book's inferential catalog, and the complete ledger of the penalty convention's exhibits.
+Nothing here is new; everything here is a pointer.
+
+## Notation index {#sec-notation-index}
+
+The table lists every piece of notation in the book, in the order the book introduces it, with a plain-words reading and the chapter where it is taken apart in full.
+
+| Symbol | Read as | Introduced in |
+|:-----------------------|:---------------------------------------|:--------|
+| proportion (fraction / percent) | the share of cases with a given property, written as a fraction, decimal, or percent | @sec-data-hello |
+| explanatory $\rightarrow$ response | the arrow of a suspected influence: explanatory variable might affect response variable | @sec-data-hello |
+| association $\neq$ causation | two variables moving together does not mean one drives the other | @sec-data-hello |
+| $\approx$ | approximately equal to | @sec-data-hello |
+| $\bar{x}$ | "x-bar," the sample mean | @sec-explore-numerical |
+| $x_i$ | the $i$-th observation in a sample | @sec-explore-numerical |
+| $n$ | the sample size | @sec-explore-numerical |
+| $\mu$ | "mu," the population mean | @sec-explore-numerical |
+| $s^2$ | the sample variance | @sec-explore-numerical |
+| $s$ | the sample standard deviation | @sec-explore-numerical |
+| $\sigma^2$ | "sigma squared," the population variance | @sec-explore-numerical |
+| $\sigma$ | "sigma," the population standard deviation | @sec-explore-numerical |
+| $\Sigma$ | capital sigma: sum the indexed terms | @sec-explore-numerical |
+| $Q_1$, $Q_3$ | first and third quartiles — the 25th and 75th percentiles | @sec-explore-numerical |
+| IQR | interquartile range, $Q_3 - Q_1$ | @sec-explore-numerical |
+| 1.5 × IQR rule | the outlier fence: flag points beyond the quartiles by more than 1.5 × IQR | @sec-explore-numerical |
+| $\log_{10}$ | the base-10 logarithm | @sec-explore-numerical |
+| $\pm$ | plus or minus | @sec-explore-numerical |
+| $b_0$, $b_1$ | sample (fitted) intercept and slope | @sec-model-slr |
+| $\beta_0$, $\beta_1$ | "beta," the population intercept and slope the sample values estimate | @sec-model-slr |
+| $e_i$ | the residual of observation $i$: observed minus predicted | @sec-model-slr |
+| $\hat{y}$ | "y-hat," the model's predicted value | @sec-model-slr |
+| $r$ | the correlation coefficient | @sec-model-slr |
+| $R^2$ | the share of the response's variability the model explains | @sec-model-slr |
+| SST, SSE, SSR | total, error, and regression sums of squares | @sec-model-slr |
+| $b_1 = (s_y / s_x)\, r$ | the slope, built from the correlation and the two standard deviations | @sec-model-slr |
+| $\lvert \cdot \rvert$ | absolute value of the quantity inside | @sec-model-slr |
+| $x_1, \dots, x_k$ | the $k$ predictors of a multiple regression | @sec-model-mlr |
+| $k$ | the number of predictors | @sec-model-mlr |
+| $R^2_{adj}$ | adjusted $R^2$, penalized for the number of predictors | @sec-model-mlr |
+| $n - k - 1$ | degrees of freedom left after fitting an intercept and $k$ slopes | @sec-model-mlr |
+| level-indicator subscripts | coefficient subscripts naming one level of a categorical predictor (a 0/1 indicator) | @sec-model-mlr |
+| $Y_i$ | the binary outcome of observation $i$ | @sec-model-logistic |
+| $p_i$ | the probability of success for observation $i$ | @sec-model-logistic |
+| $\hat{p}_i$ | the model's estimate of that probability | @sec-model-logistic |
+| $\text{logit}(p_i) = \log_e \frac{p_i}{1-p_i}$ | the log-odds transform that links probabilities to a linear model | @sec-model-logistic |
+| $e^{\beta_0 + \cdots}$ | the back-transform from log-odds to odds | @sec-model-logistic |
+| AIC | Akaike information criterion, a model-comparison score | @sec-model-logistic |
+| $H_0$ | the null hypothesis — the skeptic's "nothing is going on" | @sec-foundations-randomization |
+| $H_A$ | the alternative hypothesis | @sec-foundations-randomization |
+| $\hat{p}$ with group subscripts | "p-hat," a sample proportion, subscripted by the group it belongs to | @sec-foundations-randomization |
+| p-value | the probability, if $H_0$ were true, of a result at least as extreme as the one observed | @sec-foundations-randomization |
+| $\alpha$ | "alpha," the discernibility level — the cutoff a p-value is judged against | @sec-foundations-randomization |
+| $\hat{p}_{boot}$ | the proportion computed from one bootstrap resample | @sec-foundations-bootstrapping |
+| bootstrap percentile interval | the middle X% of the bootstrapped statistics, used as a confidence interval | @sec-foundations-bootstrapping |
+| $N(\mu, \sigma)$ | a normal distribution with mean $\mu$ and standard deviation $\sigma$ | @sec-foundations-mathematical |
+| $Z$ | a Z-score: distance from the center in standard deviations (or standard errors) | @sec-foundations-mathematical |
+| $z^\star$ | the critical value multiplier — 1.96 for 95% confidence | @sec-foundations-mathematical |
+| SE | standard error: the standard deviation of a statistic's sampling distribution | @sec-foundations-mathematical |
+| margin of error | $z^\star \times SE$, the half-width of a confidence interval | @sec-foundations-mathematical |
+| point estimate $\pm\ 1.96 \times SE$ | the 95% confidence interval recipe | @sec-foundations-mathematical |
+| $p_0$ (informal) | the null value a proportion is tested against (formalized later) | @sec-foundations-mathematical |
+| $\neq$ in $H_A$ | a two-sided alternative: a difference in either direction counts | @sec-foundations-decision-errors |
+| $p_T$, $p_C$ | the true treatment- and control-group proportions | @sec-foundations-decision-errors |
+| power | the probability of detecting a real effect when there is one | @sec-foundations-decision-errors |
+| $p_0$ (formal) | the null-hypothesized value of a population proportion | @sec-inference-one-prop |
+| $SE(\hat{p}) = \sqrt{p(1-p)/n}$ | the standard error of a sample proportion | @sec-inference-one-prop |
+| $\hat{p}_{sim}$ | the proportion from one simulated null-world sample | @sec-inference-one-prop |
+| $z^\star$ at other levels | 1.65 for 90%, 2.58 for 99% confidence | @sec-inference-one-prop |
+| $P(\cdot)$ | "the probability of" the event in the parentheses | @sec-inference-one-prop |
+| $p_1 - p_2$ | the difference between two population proportions | @sec-inference-two-props |
+| $\hat{p}_1 - \hat{p}_2$ | the difference between two sample proportions | @sec-inference-two-props |
+| two-sample SE | $\sqrt{\hat{p}_1(1-\hat{p}_1)/n_1 + \hat{p}_2(1-\hat{p}_2)/n_2}$ — each group contributes its own variability | @sec-inference-two-props |
+| $\hat{p}_{pool}$ | the pooled proportion — all successes over all observations — used for the SE of a hypothesis test | @sec-inference-two-props |
+| $X^2$ | the chi-squared statistic, summed over a table's cells | @sec-inference-tables |
+| expected count | row total × column total / table total, the count a cell would show under independence | @sec-inference-tables |
+| $df = (R-1)(C-1)$ | a two-way table's degrees of freedom | @sec-inference-tables |
+| $T$ | the t-statistic | @sec-inference-one-mean |
+| $t^\star_{df}$ | the critical value from a $t$-distribution with $df$ degrees of freedom | @sec-inference-one-mean |
+| $df = n - 1$ | one-sample degrees of freedom | @sec-inference-one-mean |
+| $SE = s / \sqrt{n}$ | the standard error of a sample mean | @sec-inference-one-mean |
+| $SE_{BS}$ | the bootstrap standard error — the SD of the bootstrapped statistics | @sec-inference-one-mean |
+| $\bar{x}_{bs}$ | the mean of one bootstrap resample | @sec-inference-one-mean |
+| $\mu_1 - \mu_2$ | the difference between two population means | @sec-inference-two-means |
+| $\bar{x}_1 - \bar{x}_2$ | the difference between two sample means | @sec-inference-two-means |
+| $\sqrt{s_1^2/n_1 + s_2^2/n_2}$ | the two-sample SE for a difference in means | @sec-inference-two-means |
+| $df = \min(n_1 - 1,\ n_2 - 1)$ | the conservative two-sample degrees of freedom | @sec-inference-two-means |
+| $\mu_{diff}$ | the population mean of the paired differences | @sec-inference-paired-means |
+| $\bar{x}_{diff}$ | the sample mean of the paired differences | @sec-inference-paired-means |
+| $s_{diff}$ | the standard deviation of the paired differences | @sec-inference-paired-means |
+| $n_{diff}$ | the number of pairs | @sec-inference-paired-means |
+| $F$ | the F-statistic, MSG / MSE | @sec-inference-many-means |
+| MSG | mean square between groups | @sec-inference-many-means |
+| MSE | mean square error (within groups) | @sec-inference-many-means |
+| SSG, SSE / SST (ANOVA) | between-group, within-group, and total sums of squares | @sec-inference-many-means |
+| $df_G = k - 1$ | group degrees of freedom, for $k$ groups | @sec-inference-many-means |
+| $df_E = n - k$ | error degrees of freedom | @sec-inference-many-means |
+| $SE_{b_i}$ | the standard error of a fitted regression coefficient | @sec-inf-model-slr |
+| $t^\star_{n-2}$ | the critical value for a single-predictor slope | @sec-inf-model-slr |
+| $b_i \pm t^\star SE_{b_i}$ | the confidence interval recipe for a coefficient | @sec-inf-model-slr |
+| LINE conditions | Linearity, Independence, Normality (of residuals), Equal variability | @sec-inf-model-slr |
+| $\varepsilon$ | "epsilon," the population error term around the true line | @sec-inf-model-slr |
+| conditional $H_0\!: \beta_i = 0$ given others | a coefficient's null hypothesis, stated with the other predictors held in the model | @sec-inf-model-mlr |
+| $\hat{y}_{cv,i}$ | the cross-validated prediction for observation $i$, made by the fold that did not train on it | @sec-inf-model-mlr |
+| CV SSE | the sum of squared errors accumulated across cross-validation folds | @sec-inf-model-mlr |
+| $k$ folds | the number of pieces the data are split into for cross-validation | @sec-inf-model-mlr |
+| $E[\cdot]$ | "the expected value of" the quantity in brackets | @sec-inf-model-mlr |
+| logistic residual $e_i = Y_i - \hat{p}_i$ | outcome minus estimated probability | @sec-inf-model-logistic |
+| Wald test, $Z = b_i / SE(b_i)$ | the Z-test for a logistic regression coefficient | @sec-inf-model-logistic |
+
+: Every piece of notation in the book, in order of first appearance, with the chapter that decomposes it. {#tbl-notation-index}
+
+## R idioms, indexed {#sec-r-idioms}
+
+The code, like the notation, explains each construction only once — in the chapter that first needs it.
+This table indexes the recurring idioms that are not self-evident from their names, with a plain-sentence reading and the chapter where each is first used and explained.
+
+| Idiom | What it does, in one sentence | First used in |
+|:-----------------------|:---------------------------------------------|:--------|
+| **\|>** (the native pipe) | passes the result on its left into the function on its right, so a multi-step computation reads top to bottom | @sec-data-hello |
+| `count()` then `pivot_wider()` | tallies rows by combinations of variables, then spreads one variable across the columns — the book's contingency-table builder | @sec-data-hello |
+| `$` extraction | pulls a single column out of a data frame as a bare vector, ready for functions like `mean()` or `cor()` | @sec-data-hello |
+| `%%` and `%/%` | remainder and whole-number division: `idx %% 10` cycles 0–9, `idx %/% 10` ticks up after every ten | @sec-explore-categorical |
+| `\(x)` (a lambda) | defines a tiny anonymous function right where it is needed, instead of naming one elsewhere | @sec-explore-applications |
+| patchwork's `+` and `/` | combines saved ggplots into one figure: `+` places side by side, `/` stacks vertically | @sec-model-slr |
+| `map_dbl()` / `map_dfr()` with `reformulate()` and `set_names()` | applies a function to every element of a collection (returning numbers, or row-bound data frames), builds a model formula from strings, and labels a result vector — together, the machinery for fitting many candidate models at once | @sec-model-mlr (the stepwise-selection helpers); `map_dfr()` in @sec-foundations-mathematical |
+| `replicate()` | runs the same expression many times and collects the results — the book's plainest simulation loop | @sec-foundations-bootstrapping |
+| `after_stat()` | in a ggplot, refers to a quantity the plot computed (such as `density`) rather than a column of the data — how histograms get density-scaled for a normal-curve overlay | @sec-foundations-mathematical |
+| `rep_slice_sample()` | infer's repeated sampler: draws many samples of a stated size, tagged by replicate number | @sec-foundations-applications |
+| `droplevels()` | discards a factor's unused levels after filtering, so empty groups do not haunt later summaries | @sec-inference-many-means |
+| the for-loop CV pattern | a `for` loop over folds: hold one fold out, fit on the rest, predict the held-out fold, accumulate the errors | @sec-inf-model-mlr, reused in @sec-inf-model-logistic |
+
+: The book's recurring R idioms, in order of first appearance. {#tbl-r-idioms}
+
+## The football, in one page {#sec-football-primer}
+
+The examples assume no statistical background, but they do assume some football.
+Here is every term the book uses without stopping to define it — in plain words, no diagram required.
+
+**Penalty area.** The large box in front of each goal, 18 yards deep. Fouls by defenders inside it concede a penalty kick; most goals in the data are scored from inside it.
+
+**Six-yard box.** The small box inside the penalty area, immediately in front of the goal. A shot arriving there is close-range by definition.
+
+**Open play versus dead ball / set piece.** Open play is the game flowing freely. A dead ball is any restart after a stoppage — free kick, corner, penalty — and a set piece is the rehearsed routine a team runs from one. The book's datasets tag every shot with its origin, and the distinction carries the book's penalty convention (@sec-pens-at-a-glance).
+
+**Cutback.** A pass pulled backward across the goal from near the byline to a teammate arriving in the box — one of the most reliable ways to create a high-quality shot.
+
+**Low block.** A defensive strategy of retreating deep, packing players between the ball and the goal, and conceding territory but not chances. Morocco's 2022 run is the book's recurring example.
+
+**Pressing.** The opposite instinct: hunting the ball high up the pitch, in coordinated groups, to force a turnover before the opponent can settle. The data's `under_pressure` tag marks shots taken while being closed down.
+
+**Woodwork.** The goal frame — posts and crossbar. A shot off the woodwork that stays out counts as no goal, however close it came.
+
+**Gilt-edged chance.** Scouting vernacular for an outstanding opportunity — the kind a striker is expected to score. Vague by design, which is why the book prefers a number (xG) to the phrase.
+
+**Shot diet.** The mix of shots a team or player habitually takes — headers versus feet, close versus distant, open play versus set pieces. Two strikers with equal shot counts can have utterly different shot diets, and therefore utterly different conversion rates.
+
+**Target forward.** A striker whose role is to receive long or crossed balls and finish close-range chances — typically few shots, high conversion: a walking confounder for naive comparisons.
+
+**Rondo.** A training exercise — a circle of players keeping the ball from one or two defenders in the middle — that appears in the book's training-intervention scenarios.
+
+**Per-90.** Normalization by playing time: a count divided by minutes played, times 90 (a full match), so that a starter and a substitute can be compared. Like any rate, it is treacherous on small denominators — a per-90 figure computed from 340 minutes is four matches of evidence wearing a season's confidence.
+
+And the workplace the book drops you into, in two sentences: a scouting department runs a network of regional scouts who watch matches and file dossiers on prospects, which the club's analysts triage against data before shortlisting. The sporting director — Northbridge's Marta Vidal — makes the final sign-or-pass call, and your report is one of the inputs she stakes the budget on.
+
+## Choosing a method {#sec-method-chooser}
+
+Two questions locate almost every method in this book: *what is the response variable's structure*, and *do you want a test or an interval?*
+The tables below consolidate the book's own recaps — @tbl-foundations-summary for the three inferential engines, and @tbl-zcompare / @tbl-tcompare for the mathematical catalog.
+Remember that each mathematical row has simulation counterparts from the foundations chapters: a randomization test (@sec-foundations-randomization) wherever there is an explanatory variable to shuffle, and a bootstrap interval (@sec-foundations-bootstrapping) wherever there is a statistic to resample.
+
+And before any row of any table applies, the book's standing reminder:
+
+| First, always | |
+|:------------------------------------|:---------------------------------|
+| **Which observations are in the frame?** | State which shots (or players, or evaluations) the analysis includes and why, *before* computing anything. In this book's shot data that decision is usually penalties in or out — see @sec-chp11-pens-out and the ledger in @sec-pens-at-a-glance — and it has moved more verdicts than any formula. |
+
+: The standing reminder that precedes every method choice. {#tbl-method-frame}
+
+**Categorical response (z and chi-squared families).**
+
+| Response | Question | Method | SE and df | Chapter |
+|:----------------|:---------|:----------------------|:-----------------------|:-------|
+| One proportion | Test vs $p_0$ | Z-test (success-failure with $p_0$); if it fails, simulate the null with `rbinom()` | $SE = \sqrt{\frac{p_0(1-p_0)}{n}}$ | @sec-inference-one-prop |
+| One proportion | Interval | $\hat{p} \pm z^\star SE$; or bootstrap percentile | $SE = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ | @sec-inference-one-prop, @sec-foundations-bootstrapping |
+| Two proportions | Test of $p_1 = p_2$ | Z-test with *pooled* SE; or permutation test | $SE = \sqrt{\hat{p}_{pool}(1-\hat{p}_{pool})\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}$ | @sec-inference-two-props |
+| Two proportions | Interval for $p_1 - p_2$ | $(\hat{p}_1 - \hat{p}_2) \pm z^\star SE$ with *unpooled* SE | $SE = \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}$ | @sec-inference-two-props |
+| Two-way table | Test of independence only (no single parameter, so no interval) | Chi-squared test, expected counts $\frac{\text{row} \times \text{col}}{n}$; or permutation | $df = (R-1)(C-1)$ | @sec-inference-tables |
+
+: Method chooser for categorical responses. The test/interval SE substitution discipline ($p_0$ or pooled for tests, observed $\hat{p}$ for intervals) is @tbl-zcompare's. {#tbl-method-categorical}
+
+**Numeric response (t and F families).**
+
+| Response | Question | Method | SE and df | Chapter |
+|:----------------|:---------|:----------------------|:-----------------------|:-------|
+| One mean | Test vs $\mu_0$ | $T = \frac{\bar{x} - \mu_0}{SE}$ | $SE = \frac{s}{\sqrt{n}},\ df = n - 1$ | @sec-inference-one-mean |
+| One mean | Interval | $\bar{x} \pm t^\star_{df}\, SE$; or bootstrap | as above | @sec-inference-one-mean |
+| Paired means | Either | Take each pair's difference, then run the one-mean row on the differences | $SE = \frac{s_{diff}}{\sqrt{n_{diff}}},\ df = n_{diff} - 1$ | @sec-inference-paired-means |
+| Two independent means | Either | $T$ on $\bar{x}_1 - \bar{x}_2$; interval $\pm\, t^\star SE$; or permutation / bootstrap | $SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}},\ df = \min(n_1 - 1, n_2 - 1)$ | @sec-inference-two-means |
+| Many means ($k$ groups) | Test only (are *any* means different?) | ANOVA: $F = \frac{MSG}{MSE}$; or permutation of $F$ | $df_G = k - 1,\ df_E = n - k$ | @sec-inference-many-means |
+
+: Method chooser for numeric responses, condensing @tbl-tcompare plus the ANOVA family. {#tbl-method-numeric}
+
+**Model coefficients.**
+
+| Response | Question | Method | SE and df | Chapter |
+|:----------------|:---------|:----------------------|:-----------------------|:-------|
+| Numeric (regression slope) | Test of $\beta_i = 0$ | $T = \frac{b_i}{SE_{b_i}}$; or permute the response | $df = n - 2$ (one predictor); software supplies $df$ with more | @sec-inf-model-slr, @sec-inf-model-mlr |
+| Numeric (regression slope) | Interval | $b_i \pm t^\star_{df}\, SE_{b_i}$; or bootstrap | as above | @sec-inf-model-slr |
+| Binary (logistic coefficient) | Test of $\beta_i = 0$ | Wald test, $Z = \frac{b_i}{SE(b_i)}$, against the standard normal | $SE(b_i)$ from software | @sec-inf-model-logistic |
+| Binary (logistic coefficient) | Interval | $b_i \pm z^\star SE(b_i)$, back-transformed with $e^{(\cdot)}$ if odds are wanted | as above | @sec-inf-model-logistic |
+
+: Method chooser for regression and logistic-regression coefficients. With multiple predictors, every hypothesis is conditional — "given the other variables in the model" (@sec-inf-model-mlr). {#tbl-method-models}
+
+## The penalty convention at a glance {#sec-pens-at-a-glance}
+
+Penalties — 64 at the 2022 World Cup, 51 at the 2025 Women's Euro, every one priced at 0.78 xG — sit on one side of most headline splits, so the frame decision (penalties in or out) can manufacture, mask, inflate, or flip a result all by itself.
+The book's convention, set in @sec-chp11-pens-out, is to show every affected comparison both ways and treat the contrast as the lesson.
+Here is the complete ledger of those exhibits, each recomputed in full in its owning chapter.
+
+| Exhibit | Penalties in | Penalties out | What the penalties do | Where |
+|:--------------------|:----------------|:----------------|:----------------|:------|
+| Under-pressure conversion gap, permutation test (WC 2022) | $p = 0.084$ — discernible at $\alpha = 0.10$ | $p = 0.385$ — nowhere close | **Manufacture** a near-effect | @sec-chp11-pens-out |
+| One-on-one conversion baseline $p_0$ (WC 2022) | $17/85 = 0.200$ | $17/77 = 0.221$ | **Drag the baseline down** — for once the artifact points the other way: all six 1v1 penalties were missed | @sec-inference-one-prop |
+| Play pattern × goal table (WC 2022) | $X^2 = 162$ with the penalty row in | $X^2 = 4.63$, $p \approx 0.10$ | **Manufacture** a monstrous statistic | @sec-chp18-real-table |
+| WEuro pressured mean xG vs WC benchmark | $T = -6.11$ vs $\mu_0 = 0.1259$ — thumping rejection | $T = -1.22$, $p = 0.22$ vs $\mu_0 = 0.0983$ | **Inflate the benchmark** the sample is tested against | @sec-one-mean-math |
+| Pressured vs unpressured mean xG, two-sample (WC 2022) | $T = 4.27$, $p \approx 0.00003$ | $T = 0.37$, $p = 0.71$ | **Flip** the verdict | @sec-math2samp |
+| Within-team paired pressure gap (WC 2022, 22 teams) | $T = -2.43$, $p = 0.024$ | $T = -0.28$, $p = 0.78$ | **Flip** the verdict — penalties can only sit on the unpressured side of a pair | @sec-mathpaired |
+| Mean xG by position group, ANOVA (WC 2022) | $F = 6.10$ | $F = 12.30$ | **Mask**: the 0.78 spike doubles MSE and halves $F$ (both frames still reject) | @sec-mathANOVA |
+| Single-mean xG benchmark, bootstrap 95% CIs (WC 2022) | $(0.1172,\ 0.1357)$ | $(0.0919,\ 0.1047)$ | **Inflate**: the two frames' intervals are disjoint | @sec-inference-applications |
+| Wald test on the `one_on_one` coefficient, logistic model (WC 2022) | $b = 0.576$, $p = 0.074$ | $b = 1.126$, $p = 0.0005$ | **Flip** the verdict — six penalties carry the 1v1 tag | @sec-inf-model-logistic |
+| The 1v1 premium on chance quality (WC 2022) | slope $0.127$ | slope $0.104$ | **Frame vs control**: removing six penalties moves the estimate the way analysts expect "controlling for" to — while actually adding controls moves it back up (to $0.1273$) | @sec-case-study-mario-cart |
+
+: The book's penalty-convention exhibits, in chapter order. Every number is computed in the chapter cited. {#tbl-pens-at-a-glance}
+
+Read down the fourth column and the moral assembles itself: the penalties' effect has no fixed direction — they have manufactured effects, masked them, inflated benchmarks, and flipped verdicts in both directions — which is precisely why no formula can absorb the frame decision for you.
+State the frame, show both when it matters, and let the contrast teach.
+
+------------------------------------------------------------------------
+
+This appendix is original to this adaptation, licensed CC BY-SA 4.0. Match data: StatsBomb open data.

@@ -1,0 +1,438 @@
+1.  **Chance creation at the Women's Euro, randomization test.** The book's flagship regression — goals on accumulated chance quality — was tested at the 2022 Men's World Cup in @sec-randslope.
+    Per this book's replication habit, we now ask whether the relationship holds at the 2025 Women's Euro.
+    The code below aggregates the tournament's 913 shots into 62 team-matches (unlike the World Cup's 127, no side finished a Euro match without a shot); per the penalty convention, note the frame: the shot log counts in-game penalties and shoot-out kicks in both `total_xg` and `goals`, on both sides of the model.[^_24-ex-inf-model-slr-7]
+    Shown below are the linear model output for predicting goals from total xG and a summary of the slopes from 1,000 randomized datasets (1,000 times, `goals` was permuted and regressed against `total_xg`).[^_24-ex-inf-model-slr-1]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    team_match_weuro <- weuro2025_shots |>
+      group_by(match_id, team) |>
+      summarize(
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        goals = sum(goal),
+        .groups = "drop"
+      )
+
+    fit_weuro_xg <- lm(goals ~ total_xg, data = team_match_weuro)
+    tidy(fit_weuro_xg)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)    0.423    0.208       2.03 4.63e- 2
+    #> 2 total_xg       0.785    0.0777     10.1  1.43e-14
+
+    set.seed(2410)
+    weuro_slope_null <- team_match_weuro |>
+      specify(goals ~ total_xg) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "slope")
+    ```
+
+    A histogram of the 1,000 randomized slopes is centered at 0 and ranges from $-0.34$ to $+0.40$; a red vertical line drawn at the observed slope of $0.785$ sits far outside the histogram, and none of the 1,000 randomized slopes was at least as far from zero.
+
+    a.  What are the null and alternative hypotheses for evaluating whether the slope of the model predicting a team's goals from its accumulated chance quality is different than 0?
+
+    b.  Using the histogram which describes the distribution of slopes when the null hypothesis is true, find the p-value and conclude the hypothesis test in the context of the problem (use words like chance quality and goals).
+
+    c.  Is the conclusion based on the histogram of randomized slopes consistent with the conclusion the mathematical model would have reached?
+        Explain your reasoning.
+
+2.  **Fatigue drift at the Women's Euro, randomization test.** In @sec-bootbeta1 the fatigue-drift theory — chances get better as the match wears on — collapsed on the World Cup's open-play shots.
+    Here we study the same relationship at the 2025 Women's Euro, on the same frame as @sec-bootbeta1, per the book's penalty convention: `shot_type == "Open Play"` (851 shots), stated because penalty kicks carry a fixed chance quality and the shoot-out kicks sit at the very end of the clock.
+    Shown below are the linear model output for predicting chance quality (xG) from the minute of the match and a summary of the slopes from 1,000 randomized datasets (1,000 times, `statsbomb_xg` was permuted and regressed against `minute`).[^_24-ex-inf-model-slr-2]
+
+    ```r
+    weuro_open <- weuro2025_shots |>
+      filter(shot_type == "Open Play")
+
+    fit_weuro_minute <- lm(statsbomb_xg ~ minute, data = weuro_open)
+    tidy(fit_weuro_minute)
+    #> # A tibble: 2 × 5
+    #>   term         estimate std.error statistic  p.value
+    #>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)  0.104     0.00791     13.1   4.88e-36
+    #> 2 minute      -0.000125  0.000132    -0.951 3.42e- 1
+
+    set.seed(2411)
+    weuro_minute_null <- weuro_open |>
+      specify(statsbomb_xg ~ minute) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "slope")
+    ```
+
+    A histogram of the 1,000 randomized slopes is centered at 0 and ranges from $-0.00042$ to $+0.00039$; a red vertical line drawn at the observed slope of $-0.000125$ falls well inside the histogram, and 363 of the 1,000 randomized slopes were at least as far from zero as the observed slope.
+
+    a.  What are the null and alternative hypotheses for evaluating whether the slope of the model predicting a shot's chance quality from the minute of the match is different than 0?
+        Note that at this tournament the observed drift runs *downhill* — the opposite sign to the World Cup's.
+
+    b.  Using the randomized slopes, find the p-value and conclude the hypothesis test in the context of the problem (use words like minute and chance quality).
+        What does the conclusion of your test say about whether the match clock is a useful predictor of chance quality?
+
+    c.  Is the conclusion based on the histogram of randomized slopes consistent with the conclusion from the mathematical model?
+        Explain your reasoning.
+
+3.  **Shot volume and chance quality at the Women's Euro, mathematical test.** Does a team's shot count in a match predict how much chance quality it accumulates?
+    The scatterplot and least squares summary below show the relationship between the number of shots and the total xG across the 62 team-matches of the 2025 Women's Euro (all-shots frame, as in Exercise 1).[^_24-ex-inf-model-slr-7]
+    The 62 points climb from quiet outings of 4 shots and under 0.5 xG toward high-volume performances of up to 34 shots, with total xG reaching 7.4; the cloud spreads noticeably as the shot counts grow.
+
+    ```r
+    fit_weuro_shots <- lm(total_xg ~ n_shots, data = team_match_weuro)
+    tidy(fit_weuro_shots)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic      p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>        <dbl>
+    #> 1 (Intercept)   -0.491    0.436      -1.13 0.265
+    #> 2 n_shots        0.168    0.0270      6.24 0.0000000481
+    ```
+
+    a.  Describe the relationship between the number of shots and total chance quality.
+
+    b.  Write the equation of the regression line.
+        Interpret the slope and intercept in context.
+
+    c.  Do the data provide convincing evidence that the true slope parameter is different than 0?
+        State the null and alternative hypotheses, report the p-value (using a mathematical model), and state your conclusion.
+
+    d.  The correlation coefficient between the number of shots and total xG is 0.63.
+        Calculate $R^2$ and interpret it in context.
+
+4.  **Fatigue drift at the Women's Euro, mathematical test.** Is the minute of the match useful in predicting a shot's chance quality?
+    Use the least squares summary of the open-play model from Exercise 2, repeated here.
+
+    ```r
+    tidy(fit_weuro_minute)
+    #> # A tibble: 2 × 5
+    #>   term         estimate std.error statistic  p.value
+    #>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)  0.104     0.00791     13.1   4.88e-36
+    #> 2 minute      -0.000125  0.000132    -0.951 3.42e- 1
+    ```
+
+    a.  What is the predicted chance quality of an open-play shot taken in the 30th minute?
+
+    b.  Do the data provide convincing evidence that the model for predicting chance quality from the minute has a slope different than 0?
+        State the null and alternative hypotheses, report the p-value (using a mathematical model), and state your conclusion.
+
+    c.  Based on your conclusion, is the match clock a useful predictor of chance quality?
+
+5.  **Chance creation at the Women's Euro, bootstrap percentile interval.** In order to estimate the slope of the model predicting a team's goals from its accumulated chance quality, 1,000 bootstrap samples are taken from the 62 team-matches of the 2025 Women's Euro.
+    A linear model predicting `goals` from `total_xg` is fit to each bootstrap sample, and the slope is estimated.
+
+    ```r
+    set.seed(2412)
+    weuro_slope_boot <- team_match_weuro |>
+      specify(goals ~ total_xg) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "slope")
+    ```
+
+    The histogram of the 1,000 bootstrapped slopes is bell-shaped, running from 0.55 to 1.32; its 1st and 99th percentiles are 0.598 and 1.087.
+
+    a.  Using the bootstrap percentile method, find a 98% confidence interval for the slope parameter.
+
+    b.  Interpret the confidence interval in the context of the problem.
+
+6.  **Fatigue drift at the Women's Euro, bootstrap percentile interval.** Returning to the open-play shots of the 2025 Women's Euro, we want an interval estimate for the slope of the model predicting a shot's chance quality from the minute of the match.
+    Below, 1,000 bootstrap samples of the 851 shots are taken and a linear model is fit to each.
+
+    ```r
+    set.seed(2413)
+    weuro_minute_boot <- weuro_open |>
+      specify(statsbomb_xg ~ minute) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "slope")
+    ```
+
+    The histogram of the 1,000 bootstrapped slopes is bell-shaped, running from $-0.00057$ to $+0.00031$; its 2.5th and 97.5th percentiles are $-0.00037$ and $+0.00013.$
+
+    a.  Using the bootstrap percentile method, find a 95% confidence interval for the slope parameter.
+
+    b.  Interpret the confidence interval in the context of the problem.
+        What does the interval say about the fatigue-drift theory at this tournament?
+
+7.  **Chance creation at the Women's Euro, standard error bootstrap interval.** A linear model is built to predict a team's goals in a match from its accumulated chance quality across the 62 team-matches of the 2025 Women's Euro.
+    Shown below are the linear model output and a summary of the bootstrap distribution of the slope statistic from the 1,000 bootstrap samples of Exercise 5 (seed 2412): the histogram is bell-shaped and centered near 0.79, with most of the bootstrapped slopes falling between 0.57 and 1.00.
+
+    ```r
+    tidy(fit_weuro_xg)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)    0.423    0.208       2.03 4.63e- 2
+    #> 2 total_xg       0.785    0.0777     10.1  1.43e-14
+    ```
+
+    a.  Using the histogram, approximate the standard error of the slope statistic (that is, quantify the variability of the slope statistic from sample to sample).
+
+    b.  Find a 98% bootstrap SE confidence interval for the slope parameter.
+
+    c.  Interpret the confidence interval in the context of the problem.
+
+8.  **Fatigue drift at the Women's Euro, standard error bootstrap interval.** Shown below are the linear model output for predicting an open-play shot's chance quality from the minute of the match at the 2025 Women's Euro and a summary of the bootstrap distribution of the slope from the 1,000 bootstrap samples of Exercise 6 (seed 2413): the histogram is bell-shaped and centered near $-0.00012,$ and the standard deviation of the bootstrapped slopes is 0.00013.
+
+    ```r
+    tidy(fit_weuro_minute)
+    #> # A tibble: 2 × 5
+    #>   term         estimate std.error statistic  p.value
+    #>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)  0.104     0.00791     13.1   4.88e-36
+    #> 2 minute      -0.000125  0.000132    -0.951 3.42e- 1
+    ```
+
+    a.  Using the bootstrap distribution, report the standard error of the slope statistic.
+
+    b.  Find a 95% bootstrap SE confidence interval for the slope parameter.
+
+    c.  Interpret the confidence interval in the context of the problem.
+
+9.  **Shot volume and chance quality at the Women's Euro, conditions.** The residual plot described below comes from the linear model of total xG vs. number of shots across the 62 team-matches of the 2025 Women's Euro (Exercise 3), with the number of shots on the x-axis and the residuals on the y-axis.
+    Most of the 62 residuals sit in a band between $-2.1$ and $+2,$ scattered around zero — but a handful of points float above the band, with residuals between $+3$ and $+4.8.$
+
+    a.  For these data, $R^2$ is 39%.
+        What is the value of the correlation coefficient?
+        How can you tell if it is positive or negative?
+        (Hint: you may need to look at a previous exercise.)
+
+    b.  Examine the residual plot.
+        What do you observe?
+        Is a simple least squares fit appropriate for these data?
+        Which of the LINE conditions are met or not met?
+        (One further hint, in the spirit of the book's penalty convention: the four largest residuals all belong to team-matches from two of the Euro's three penalty shoot-outs, in which each side added 7 kicks at 0.7835 xG apiece to its totals — and France and Germany each stacked an eighth penalty, an in-game award, on top.)
+
+10. **Fatigue drift at the Women's Euro, conditions.** The residual plot described below comes from the linear model of open-play chance quality vs. minute at the 2025 Women's Euro (Exercise 2), with the minute on the x-axis and the residuals on the y-axis.
+    The residuals form a dense band hugging the underside of zero — 72% of them are negative, none falling below $-0.10$ — while the rest stretch upward in a long right tail reaching $+0.63,$ at every point of the clock.
+
+    a.  For these data, $R^2$ is 0.1%.
+        What is the value of the correlation coefficient?
+        How can you tell if it is positive or negative?
+        (Hint: you may need to look at a previous exercise.)
+
+    b.  Examine the residual plot.
+        What do you observe?
+        Is a simple least squares fit appropriate for these data?
+        Which of the LINE conditions are met or not met?
+
+11. **Twenty matches, randomization test.** Priya Rao pulls a random sample of 20 matches from the 2022 Men's World Cup and asks the chapter's headline question at the level of whole matches: does the combined chance quality of a match predict its combined goal count?
+    Both totals are computed from the shot log for regulation and extra time (shoot-out kicks excluded, so both sides of the model live on the same frame; in-game penalties included in both).
+    Shown below are the linear model output and a summary of the slopes from 1,000 randomized datasets (1,000 times, `match_goals` was permuted and regressed against `match_xg`).[^_24-ex-inf-model-slr-3]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_match_xg <- wc2022_shots |>
+      filter(period <= 4) |>
+      group_by(match_id) |>
+      summarize(
+        match_goals = sum(goal),
+        match_xg = sum(statsbomb_xg),
+        .groups = "drop"
+      )
+
+    set.seed(2414)
+    matches20 <- wc_match_xg |> slice_sample(n = 20)
+
+    fit_matches20 <- lm(match_goals ~ match_xg, data = matches20)
+    tidy(fit_matches20)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
+    #> 1 (Intercept)    0.238     0.966     0.247 0.808
+    #> 2 match_xg       1.10      0.330     3.35  0.00356
+
+    set.seed(2415)
+    matches20_null <- matches20 |>
+      specify(match_goals ~ match_xg) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "slope")
+    ```
+
+    A histogram of the 1,000 randomized slopes is centered at 0 and ranges from $-1.22$ to $+1.24$; a red vertical line drawn at the observed slope of $1.10$ sits in its extreme right tail, and 5 of the 1,000 randomized slopes were at least as far from zero.
+
+    a.  What are the null and alternative hypotheses for evaluating whether the slope of the model predicting a match's combined goals from its combined chance quality is different than 0?
+
+    b.  Using the histogram which describes the distribution of slopes when the null hypothesis is true, find the p-value and conclude the hypothesis test in the context of the problem.
+
+    c.  Is the conclusion based on the histogram of randomized slopes consistent with the conclusion which would have been obtained using the mathematical model?
+        Explain your reasoning.
+
+12. **Twenty matches, mathematical test.** The table below repeats the output of the linear model predicting a match's combined goal count from its combined chance quality in the random sample of 20 World Cup matches of Exercise 11.
+
+    ```r
+    tidy(fit_matches20)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
+    #> 1 (Intercept)    0.238     0.966     0.247 0.808
+    #> 2 match_xg       1.10      0.330     3.35  0.00356
+    ```
+
+    a.  What are the hypotheses for evaluating whether the slope of the model predicting match goals from match xG is different than 0?
+
+    b.  State the conclusion of the hypothesis test from part (a) in context.
+        What does this say about whether a match's chance quality is a useful predictor of its goal count?
+
+    c.  Calculate a 95% confidence interval for the slope of match xG, and interpret it in context.
+        (With $n = 20,$ the model's degrees of freedom are $20 - 2 = 18,$ and $t^{\star}_{18} = 2.10.$)
+
+    d.  Do your results from the hypothesis test and the confidence interval agree?
+        Explain your reasoning.
+
+13. **Twenty matches, bootstrap percentile interval.** Using the 20 sampled World Cup matches of Exercise 11, we want to estimate the slope of the model predicting `match_goals` from `match_xg`.
+    We take 1,000 bootstrap samples of the data and fit a linear model to each.
+
+    ```r
+    set.seed(2416)
+    matches20_boot <- matches20 |>
+      specify(match_goals ~ match_xg) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "slope")
+    ```
+
+    The histogram of the 1,000 bootstrapped slopes runs from 0.21 to 2.50; its 5th and 95th percentiles are 0.78 and 1.68.
+
+    a.  Using the percentile bootstrap method, find a 90% confidence interval for the slope parameter.
+
+    b.  Interpret the confidence interval in the context of the problem.
+
+14. **Twenty matches, standard error bootstrap interval.** A linear model is built to predict a match's combined goals from its combined chance quality in the random sample of 20 World Cup matches of Exercise 11.
+    The bootstrap distribution of the slope from the 1,000 bootstrap samples of Exercise 13 (seed 2416) is roughly bell-shaped, and the standard deviation of the bootstrapped slopes is 0.28.
+
+    a.  Report the (bootstrap) standard error of the slope statistic, i.e., the variability of the slope statistic from sample to sample.
+
+    b.  Find a 90% bootstrap SE confidence interval for the slope parameter.
+
+    c.  Interpret the confidence interval in the context of the problem.
+
+15. **Twenty matches, conditions.** The scatterplot of the 20 sampled matches (Exercise 11) shows combined goals from 0 to 8 against combined chance quality from 0.5 to 5.4 xG, rising with the fitted line drawn through the cloud.
+    In the residual plot (chance quality on the x-axis), about half the residuals fall between $-1.7$ and $+1.6$ around zero, a few reach from $-2.3$ down to $-2.8$ and one sits at $+2.8$, plus one clear straggler at $+4.0$ — England's 6--2 win over Iran, whose 8 goals came from just 3.4 xG.
+
+    a.  For these data, $R^2$ is 38%.
+        What is the value of the correlation coefficient?
+        How can you tell if it is positive or negative?
+
+    b.  Examine the residual plot.
+        What do you observe?
+        Is a simple least squares fit appropriate for the data?
+        Which of the LINE conditions are met or not met?
+
+16. **Shot volume and chance quality, World Cup.** Across the 127 team-matches of the 2022 Men's World Cup (the canonical `team_match` data, all-shots frame), a linear model is built to predict a team's accumulated chance quality (`total_xg`) from its number of shots (`n_shots`).
+    The table below shows the model output.[^_24-ex-inf-model-slr-4]
+
+    ```r
+    team_match <- wc2022_shots |>
+      group_by(match_id, team) |>
+      summarize(
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        goals = sum(goal),
+        prop_under_pressure = mean(under_pressure),
+        prop_set_piece = mean(play_pattern %in%
+          c("From Corner", "From Free Kick", "From Throw In")),
+        .groups = "drop"
+      )
+
+    fit_wc_shots <- lm(total_xg ~ n_shots, data = team_match)
+    tidy(fit_wc_shots)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   -0.326    0.182      -1.79 7.65e- 2
+    #> 2 n_shots        0.154    0.0140     10.9  6.01e-20
+    ```
+
+    a.  What are the hypotheses for evaluating whether shot volume is positively associated with accumulated chance quality?
+
+    b.  State the conclusion of the hypothesis test from part (a) in context.
+
+    c.  Calculate a 95% confidence interval for the slope of `n_shots`, and interpret it in context.
+        (The model's degrees of freedom are $127 - 2 = 125,$ and $t^{\star}_{125} = 1.98.$)
+
+    d.  Do your results from the hypothesis test and the confidence interval agree?
+        Explain your reasoning.
+
+17. **Extra finishing sessions.** Jonas Beck suspects that the number of extra finishing sessions an academy forward completes each month drives the improvement in the club's standardized finishing assessment (scored in points).
+    To find out, sixteen academy forwards were *randomly assigned* a number of extra sessions for one month — between 1 and 9 — on top of the common program, and their assessment gains were recorded.
+    This is a constructed Northbridge scenario, built by the seeded code below; the scatterplot shows the sixteen points climbing steadily with the session count, and the regression table summarizes the fit.[^_24-ex-inf-model-slr-5]
+
+    ```r
+    set.seed(2417)
+    drill16 <- tibble(
+      sessions = sample(1:9, 16, replace = TRUE),
+      gain     = round(1 + 2.2 * sessions + rnorm(16, mean = 0, sd = 3), 1)
+    )
+
+    fit_drill <- lm(gain ~ sessions, data = drill16)
+    tidy(fit_drill)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic    p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>      <dbl>
+    #> 1 (Intercept)     1.79     1.60       1.12 0.282
+    #> 2 sessions        2.19     0.279      7.85 0.00000170
+    ```
+
+    a.  Describe the relationship between the number of extra sessions and the assessment gain.
+
+    b.  Write the equation of the regression line.
+        Interpret the slope and intercept in context.
+
+    c.  Do the data provide convincing evidence that completing more extra sessions is associated with a larger assessment gain?
+        State the null and alternative hypotheses, report the p-value, and state your conclusion.
+        Given the design of the study, can the conclusion be causal?
+
+    d.  The correlation coefficient for sessions and gain is 0.90.
+        Calculate $R^2$ and interpret it in context.
+
+    e.  Suppose Priya instead scraped a league-wide database of academy forwards who *choose* their own number of extra sessions, and regressed their assessment gains on their session counts.
+        Would the relationship between sessions and gains be as strong as the relationship found in Jonas's study?
+        Why?
+
+18. **Team shot profiles, conditions.** The scatterplot of the 32 World Cup squads' shot profiles shows the share of a team's shots that were headers against the share taken under defensive pressure — pressure shares running from 0.02 to 0.29, header shares from 0.09 to 0.31 — with an upward least squares line ($\widehat{\texttt{prop\_headers}} = 0.11 + 0.40 \times \texttt{prop\_pressure}$): teams that shoot under pressure a lot also head the ball a lot, both symptoms of living on crosses into a crowded box (recall @sec-fit-line-res-cor).[^_24-ex-inf-model-slr-6]
+    In the residual plot (pressure share on the x-axis), the 32 residuals scatter between $-0.09$ and $+0.10$ with no strong pattern.
+
+    a.  For these data, $R^2$ is 25%.
+        What is the value of the correlation coefficient?
+        How can you tell if it is positive or negative?
+
+    b.  Examine the residual plot.
+        What do you observe?
+        Is a simple least squares fit appropriate for the data?
+        Which of the LINE conditions are met or not met?
+
+19. **Shot volume and chance quality, LINE conditions.** The figure described below shows the predicted values and residuals generated from the linear model of Exercise 16, predicting a team's accumulated chance quality from its number of shots across the 127 World Cup team-matches.
+    In the residual plot (predicted total xG on the x-axis), the residuals of the low-volume team-matches hug the zero line tightly, while the residuals spread wider and wider as the predicted values grow: splitting the team-matches into thirds by shot volume, the residual standard deviations are 0.41 (fewest shots), 0.77, and 1.24 (most shots).
+
+    a.  Examine the residual plot.
+        Notice that for the small predicted values the residuals have a smaller magnitude than the larger residuals seen with the larger predicted values.
+        The change in magnitude of the residuals across the predicted values is an indication of a violation of which LINE technical condition?
+
+    b.  If the LINE condition described in part (a) is violated, might it lead to an incorrect conclusion about the model (i.e., the least squares regression line itself), the inference of the model (i.e., the p-value associated with the least squares regression line), neither, or both?
+        Explain your reasoning.
+
+20. **Extra finishing sessions, LINE conditions.** The figure described below shows the predicted values and residuals generated from the linear model of Exercise 17, predicting the assessment gain from the number of extra finishing sessions randomly assigned to sixteen Northbridge academy forwards.
+    The sixteen residuals scatter between $-5.7$ and $+5.8$ across predicted values from 4 to 21.5, with no obvious arrangement.
+
+    a.  Examine the residual plot.
+        Notice that it is difficult to identify any convincing patterns for or against violation of the LINE technical conditions.
+        What is it about the residual plot that makes it difficult to assess the LINE technical conditions?
+
+    b.  Is there anything about the residual plot which would make you hesitate to use the linear model for inference?
+        Is there anything about the design of the study which would make you hesitate to generalize the conclusion to all academy forwards?
+
+[^_24-ex-inf-model-slr-1]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data); `team_match_weuro` aggregates them by match and team.
+
+[^_24-ex-inf-model-slr-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_24-ex-inf-model-slr-3]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_24-ex-inf-model-slr-4]: The `team_match` data are the book's canonical aggregate of `data/derived/wc2022_shots.csv` (StatsBomb open data), rebuilt with the code shown in @sec-randslope; the all-shots frame (penalties and shoot-out kicks included on both sides of the model) travels with the object.
+
+[^_24-ex-inf-model-slr-5]: The `drill16` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real academy players were assessed.
+
+[^_24-ex-inf-model-slr-6]: The team shot profiles are computed from `data/derived/wc2022_shots.csv` (StatsBomb open data) with the `team_profile` code of @sec-data-hello and @sec-fit-line-res-cor.
+
+[^_24-ex-inf-model-slr-7]: A caution that travels with every `team_match`-style aggregate, per the Data callout of @sec-randslope: the `goals` column sums the shot log's goal flags, so it counts converted shoot-out kicks too — it is not the recorded match score.

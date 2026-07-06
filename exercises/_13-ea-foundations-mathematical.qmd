@@ -1,0 +1,15 @@
+**2.** (a) 87.08%. (b) 57.14%. (c) Essentially 0% (about $7 \times 10^{-14}\%$). (d) 38.29%.
+
+**4.** (a) Boys U17: $N(\mu = 322, \sigma = 21)$; Women U19: $N(\mu = 341, \sigma = 28).$ (b) $Z_{Tomas} = (351 - 322)/21 = 1.38,$ $Z_{Mara} = (352 - 341)/28 = 0.39$: both finished slower than their group means — Tomas 1.38 and Mara 0.39 standard deviations above the mean time. (c) Mara — her Z score is smaller on a scale where a faster (lower) time is better. (d) $1 - 0.9164 = 0.0836,$ about 8.4%. (e) $1 - 0.6528 = 0.3472,$ about 34.7%. (f) The answer to part (b) would not change; parts (c)--(e) could not be answered without a nearly normal model.
+
+**6.** (a) $322 - 1.64 \times 21 = 287.5$ seconds or faster (`qnorm(0.05, 322, 21)` returns 287.5). (b) $341 + 1.28 \times 28 = 376.9$ seconds or slower (`qnorm(0.90, 341, 28)` returns 376.9).
+
+**8.** (a) $Z = (0 - 14.7)/33 = -0.45$: the squad loses value in about 32.8% of years. (b) $14.7 + 1.04 \times 33 = 48.9$: annual gains of about $+48.9\%$ or more (`qnorm(0.85, 14.7, 33)` returns 48.9).
+
+**10.** (a) $\sigma = (132 - 100)/2.05 = 15.6.$ (b) $\sigma = (220 - 185)/0.90 = 39.0.$
+
+**12.** (a) $0.5 \pm 2.58 \times 0.005 \to (0.487, 0.513)$: we are 99% confident that between 48.7% and 51.3% of season-ticket holders get their transfer news primarily from social media. (b) (i) False — the interval contains 50% (the point estimate *is* 50%), so there is no evidence that more than half do. (ii) False — the standard error measures the uncertainty of the estimate, not what share of the population was polled. (iii) False — reducing the standard error requires polling *more* season-ticket holders. (iv) False — a 90% confidence interval is *narrower* than a 99% interval.
+
+**14.** (a) We are 95% confident that season-ticket holders watched a full match on 3.40 to 4.24 of the past 30 days, on average. (b) 95% of intervals constructed this way from repeated samples would capture the true population mean. (c) Wider. (d) Larger.
+
+**16.** (a) A sampling distribution. (b) Right skewed — with $p = 0.13$ and $n = 40,$ the expected number of goals per sample is $40 \times 0.13 = 5.2 < 10,$ so the success-failure condition fails. (c) Standard error. (d) Smaller — sample proportions from samples of 90 shots vary less than those from samples of 40.

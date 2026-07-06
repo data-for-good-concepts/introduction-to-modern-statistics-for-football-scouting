@@ -1,0 +1,15 @@
+**2.** (a) $912 \times 3262/13664 = 217.7.$ (b) $3160 \times 3262/13664 = 754.4.$ (c) $3518 \times 3262/13664 = 839.9.$ (d) $6074 \times 3262/13664 = 1450.0.$
+
+**4.** (a) $93/859 = 0.108.$ (b) Open play $554 \times 0.108 = 60.0$; set piece $264 \times 0.108 = 28.6$; counter $41 \times 0.108 = 4.4.$ (c) The gaps are modest (68 vs 60.0, 22 vs 28.6, 3 vs 4.4) — at most a weak association at first glance. (d) No — a formal test is required to judge whether gaps of this size exceed chance.
+
+**6.** The original data ($X^2 = 3.43$ vs about 1.1 for the shuffle) — shuffling pushes the counts toward the expected counts.
+
+**8.** (a) Independence — the shuffle severs any link between play pattern and result. (b) About 0.06 to 17, with the vast majority below 8. (c) $H_0:$ play pattern and shot result are independent; $H_A:$ they are associated; p-value $= 174/1000 = 0.174 > 0.05$; fail to reject $H_0$ — no convincing evidence that play pattern and result are associated at this tournament.
+
+**10.** (a) Independence — the shuffle destroys any association by construction. (b) About 0.5 to 15. (c) $H_0:$ independent; $H_A:$ associated; p-value $= 771/1000 = 0.771$; fail to reject $H_0$ — no evidence of association in the smaller dataset. (d) Smaller samples mean lower power — the same proportional departures produce a smaller $X^2$ and become undetectable.
+
+**12.** (a) True. (b) True (p-value $= 0.075 > 0.05$). (c) False — chi-squared p-values are always the area in the upper tail only. (d) False — the variability of the chi-squared distribution increases as the degrees of freedom increases.
+
+**14.** (a) $H_0:$ season injury outcome is independent of protocol (all three protocols have the same injury-free rate); $H_A:$ outcome and protocol are associated. Conditions met — randomized experiment, and the smallest expected count is 13.1, at least 5 in every cell. (b) $X^2 = 23.7,$ $df = 2,$ p-value $< 0.0001$; reject $H_0$ — the protocols perform differently (the daily full program had the best injury-free rate), and randomization makes the difference causal.
+
+**16.** (a) Chi-squared test of independence. (b) $H_0:$ weekly training volume and overuse injury are independent; $H_A:$ they are associated. (c) Injured $2607/50739 = 0.051$; not injured $48132/50739 = 0.949.$ (d) Observed count $= 373$; expected count $= 6617 \times 2607/50739 = 340.0$; contribution $= (373 - 340)^2/340 = 3.21.$ (e) $df = 4$; p-value $= 0.0003.$ (f) Reject $H_0$ — convincing evidence that training volume and overuse injury are associated. (g) Answers vary; key: agree — observational cohort; association, not causation.

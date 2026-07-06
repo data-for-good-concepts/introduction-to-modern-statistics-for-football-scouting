@@ -1,0 +1,19 @@
+**2.** 913 observations and 7 variables.
+
+**4.** (a) "Is there a relationship between honesty, age, and self-control in academy players?" (b) The 160 academy players between the ages of 8 and 15. (c) Four variables: instruction group (categorical, not ordinal), whether the player cheated, i.e., the reported marker color (categorical, not ordinal), sex (categorical, not ordinal), and age (numerical, discrete).
+
+**6.** (a) "Is there an association between perceived standing and unethical behavior (taking snacks reserved for others)?" (b) The 129 trialists at the Northbridge residential trial camp. (c) Two variables: perceived standing (categorical: low/high, not ordinal as recorded) and number of snacks taken (numerical, discrete).
+
+**8.** (a) Treatment: $66/85 = 0.78,$ i.e., 78%. (b) Control: $65/81 = 0.80,$ i.e., 80%. (c) The control (standard care) group: 80% vs. 78%. (d) The observed difference between the two group percentages could be due to chance. (e) Explanatory: treatment group (structured recovery vs. standard care); response: whether symptoms improved.
+
+**10.** (a) Experiment; the 2,260 players were randomly assigned to the two warm-up groups. (b) The 2,260 academy players aged 12 to 15. (c) Whether the player suffered a serious knee injury (categorical, not ordinal). (d) One explanatory variable: warm-up group, new vs. standard (categorical, not ordinal).
+
+**12.** (a) A survey respondent — one Northbridge season-ticket holder. (b) 1,691. (c) Sex: categorical, not ordinal. Age: numerical, discrete. Ticket tier: categorical, ordinal (Bronze < Silver < Gold). Income band: categorical, ordinal. Away travel: categorical, not ordinal. League aways: numerical, discrete. Cup aways: numerical, discrete.
+
+**14.** (a) Team, match number (derived from match date), play-pattern family (derived from play pattern), and percent of the team's shots. (b) Team: categorical, not ordinal. Match number: numerical, discrete. Play-pattern family: categorical, not ordinal. Percent of the team's shots: numerical, continuous.
+
+**16.** (a) Competition, tournament stage, and shot outcome. (b) Competition: categorical, not ordinal. Stage: categorical, ordinal. Outcome: categorical, not ordinal.
+
+**18.** (a) Competition, body part, and result (goal or no goal). (b) All three are categorical and not ordinal. (c) Response: result (whether the shot was scored); explanatory: body part and competition.
+
+**20.** (a) A randomized experiment. (b) Yes; stress level was randomly assigned, so a causal conclusion is justified.

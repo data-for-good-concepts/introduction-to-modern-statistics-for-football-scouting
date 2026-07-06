@@ -1,0 +1,495 @@
+1.  **Two seasons of running data.** Average match-day total running distance was collected for a random sample of 25 first-division clubs in the 2024--25 season, and then again for the same 25 clubs in the 2025--26 season.
+    We would like to use these data to compare average match-day running between the two seasons.
+    Should we use a paired or non-paired test?
+    Explain your reasoning.
+
+2.  **True / False: paired.** Determine if the following statements are true or false.
+    If false, explain.
+
+    a.  In a paired analysis we first take the difference of each pair of observations, and then we do inference on these differences.
+
+    b.  Two datasets of different sizes cannot be analyzed as paired data.
+
+    c.  Consider two sets of data that are paired with each other.
+        Each observation in one dataset has a natural correspondence with exactly one observation from the other dataset.
+
+    d.  Consider two sets of data that are paired with each other.
+        Each observation in one dataset is subtracted from the average of the other dataset's observations.
+
+3.  **Paired or not? I.** In each of the following scenarios, determine if the data are paired.
+
+    a.  Compare the pre-season and end-of-season 30-meter sprint times of the same cohort of academy players.
+
+    b.  Assess a positional pay gap by comparing the salaries of randomly sampled defenders and randomly sampled forwards from across the league.
+
+    c.  Compare countermovement-jump heights at the beginning of a study and after two years of a plyometric program for the same group of academy players.
+
+    d.  Assess the effectiveness of a nutrition plan by comparing the before and after body-fat measurements of the players who followed it.
+
+4.  **Paired or not? II.** In each of the following scenarios, determine if the data are paired.
+
+    a.  We would like to know if two rival clubs generate similar shot volumes over a season.
+        To find out, we take a random sample of 50 rounds of fixtures, and record both clubs' shot counts in those same 50 rounds.
+
+    b.  We randomly sample 50 items from the academy's equipment catalogue and note the price quoted for each item by each of two suppliers.
+
+    c.  A league's development board would like to determine whether there is a difference in average technical-test scores for players at one academy versus another academy in the region.
+        To check, they take a simple random sample of 100 players from each academy.
+
+5.  **Sample size and pairing.** Determine if the following statement is true or false, and if false, explain your reasoning: If comparing means of two groups with equal sample sizes, always use a paired test.
+
+6.  **Home and away labels, randomization test.** Every 2022 Men's World Cup match sheet lists a "home" and an "away" team, yet the entire tournament was played at neutral venues in one country — the labels are administrative, fixed by the draw.
+    Priya Rao uses this as a calibration exercise for the paired machinery: if the labels carry no footballing meaning, a paired analysis of the 64 matches should say so.
+    For each match, the number of open-play shots credited to the home-listed side and to the away-listed side is recorded; per the book's penalty convention the frame is stated up front — penalty kicks (including the 41 shoot-out kicks, which would flood the counts of any match decided from the spot) and other dead-ball shots are excluded.
+    One match, Spain 7--0 Costa Rica, produced no away-side open-play shots at all; `values_fill = 0` records it honestly.[^_21-ex-inference-paired-means-1]
+
+    ```r
+    wc2022_shots   <- read_csv("data/derived/wc2022_shots.csv")
+    wc2022_matches <- read_csv("data/derived/wc2022_matches.csv")
+
+    side_pairs <- wc2022_shots |>
+      filter(shot_type == "Open Play") |>
+      left_join(wc2022_matches |> select(match_id, home_team, away_team),
+                by = "match_id") |>
+      mutate(side = if_else(team == home_team, "home", "away")) |>
+      count(match_id, side) |>
+      pivot_wider(names_from = side, values_from = n, values_fill = 0) |>
+      mutate(diff = home - away)
+
+    side_pairs |>
+      summarize(n = n(), mean = round(mean(diff), 2), sd = round(sd(diff), 2))
+    #> # A tibble: 1 × 3
+    #>       n  mean    sd
+    #>   <int> <dbl> <dbl>
+    #> 1    64 -0.19  8.31
+    ```
+
+    Side-by-side box plots of the home-side and away-side shot counts, a histogram of the 64 within-match differences, and the randomization distribution are drawn by the code below.
+    The randomization distribution was produced by doing the following 1,000 times: for each match, the two shot counts were randomly assigned to either the home or the away label, and the average difference was taken across the 64 matches.
+
+    ```r
+    p_box <- side_pairs |>
+      pivot_longer(c(home, away), names_to = "side", values_to = "shots") |>
+      ggplot(aes(x = side, y = shots, color = side)) +
+      geom_boxplot(show.legend = FALSE) +
+      geom_jitter(alpha = 0.6, width = 0.35, show.legend = FALSE) +
+      labs(x = NULL, y = "Open-play shots in the match")
+
+    p_hist <- ggplot(side_pairs, aes(x = diff)) +
+      geom_histogram(binwidth = 5) +
+      labs(x = "Differences in shot counts\n(home - away)", y = "Count")
+
+    set.seed(2107)
+    side_null <- side_pairs |>
+      specify(response = diff) |>
+      hypothesize(null = "paired independence") |>
+      generate(1000, type = "permute") |>
+      calculate(stat = "mean")
+
+    p_rand <- ggplot(side_null, aes(x = stat)) +
+      geom_histogram(binwidth = 0.25) +
+      geom_vline(xintercept = -0.19, color = "red", linewidth = 1) +
+      labs(
+        title = "1,000 means of randomized differences",
+        x = "Mean of randomized differences in shot counts\n(home - away)",
+        y = "Count"
+      )
+
+    (p_box + p_hist) / p_rand
+    ```
+
+    The box plots are nearly identical (home-listed sides average 10.70 open-play shots with a standard deviation of 4.80; away-listed sides 10.89 with 5.58); the histogram of differences is roughly symmetric around zero, running from $-24$ to $19$; and the randomization distribution is centered at zero, spanning about $-3.3$ to $3.0,$ with the red line at the observed $\bar{x}_{home-away} = -0.19$ buried in its middle.
+
+    ```r
+    side_null |>
+      summarize(
+        n_extreme = sum(abs(stat) >= 0.19),
+        p_value   = mean(abs(stat) >= 0.19)
+      )
+    #> # A tibble: 1 × 2
+    #>   n_extreme p_value
+    #>       <int>   <dbl>
+    #> 1       856   0.856
+    ```
+
+    a.  Is there a clear difference in the average number of open-play shots taken by home-listed and away-listed sides?
+
+    b.  Are the home-side and away-side shot counts of a given match independent of each other?
+
+    c.  Create hypotheses appropriate for the following research question: is there an evident difference in the average open-play shot counts of home-listed and away-listed sides at this tournament?
+
+    d.  Is the average of the observed differences $(\bar{x}_{home-away} = -0.19)$ consistent with the distribution of randomized average differences?
+        Explain.
+
+    e.  Do these data provide convincing evidence of a difference between the average shot counts under the two labels?
+        Estimate the p-value from the randomization test, and conclude the hypothesis test using words like "home-listed side" and "away-listed side."
+
+7.  **First halves and second halves, randomization test.** Emil Sørensen's scouts have a standing rule of thumb: "the second half is where the shots are."
+    Let's put it to the 2025 Women's Euro.
+    For each of the tournament's 31 matches, we count the open-play shots (by both teams combined) in the first half and in the second half — regulation halves only, so shots from extra time are excluded, as are penalty kicks (including the 37 shoot-out kicks logged as period 5) and other dead-ball shots; the frame keeps 815 of the 913 logged shots.
+    The difference is taken as second half minus first half for each match, so the 31 matches form 31 pairs.
+    The average of the 31 differences was $\bar{x}_{2nd-1st} = 2.74$ shots with a standard deviation of $5.51$ shots.
+    We are interested in determining whether these data provide strong evidence that open-play shot production differs between the two halves.[^_21-ex-inference-paired-means-2]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    half_pairs <- weuro2025_shots |>
+      filter(shot_type == "Open Play", period %in% c(1, 2)) |>
+      mutate(half = if_else(period == 1, "first", "second")) |>
+      count(match_id, half) |>
+      pivot_wider(names_from = half, values_from = n, values_fill = 0) |>
+      mutate(diff = second - first)
+
+    half_pairs |>
+      summarize(n = n(), mean = round(mean(diff), 2), sd = round(sd(diff), 2))
+    #> # A tibble: 1 × 3
+    #>       n  mean    sd
+    #>   <int> <dbl> <dbl>
+    #> 1    31  2.74  5.51
+
+    set.seed(2109)
+    half_null <- half_pairs |>
+      specify(response = diff) |>
+      hypothesize(null = "paired independence") |>
+      generate(1000, type = "permute") |>
+      calculate(stat = "mean")
+
+    ggplot(half_null, aes(x = stat)) +
+      geom_histogram(binwidth = 0.5) +
+      geom_vline(xintercept = 2.74, color = "red", linewidth = 1) +
+      labs(
+        title = "1,000 means of randomized differences",
+        x = "Mean of randomized differences in shot counts\n(second half - first half)",
+        y = "Count"
+      )
+    ```
+
+    The randomization distribution is centered at zero and spans about $-3.6$ to $3.3;$ only 11 of the 1,000 shuffled averages fell at least as far from zero as the observed $2.74.$
+
+    a.  Create hypotheses appropriate for the following research question: is there an evident difference in average open-play shot counts across the two regulation halves?
+
+    b.  Is the average of the observed differences $(\bar{x}_{2nd-1st} = 2.74$ shots$)$ consistent with the distribution of randomized average differences?
+        Explain.
+
+    c.  Do these data provide convincing evidence of a difference between the halves?
+        Estimate the p-value from the randomization test, and conclude the hypothesis test using words like "open-play shots in the first half" and "open-play shots in the second half."
+
+8.  **Home and away labels, bootstrap interval.** We considered the differences between the open-play shot counts of home-listed and away-listed sides across the 64 matches of the 2022 Men's World Cup.
+    The mean and standard deviation of the differences are $\bar{x}_{home-away} = -0.19$ and $s_{home-away} = 8.31$ shots.
+    The bootstrap distribution below was produced by bootstrapping from the sample of 64 differences 1,000 times.
+
+    ```r
+    obs_side <- side_pairs |>
+      specify(response = diff) |>
+      calculate(stat = "mean")
+
+    set.seed(2108)
+    side_boot <- side_pairs |>
+      specify(response = diff) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "mean")
+
+    ggplot(side_boot, aes(x = stat)) +
+      geom_histogram(binwidth = 0.25) +
+      labs(
+        title = "1,000 means of bootstrapped differences",
+        x = "Mean of bootstrapped differences in shot counts\n(home - away)",
+        y = "Count"
+      )
+
+    get_confidence_interval(side_boot, level = 0.95, type = "percentile")
+    #> # A tibble: 1 × 2
+    #>   lower_ci upper_ci
+    #>      <dbl>    <dbl>
+    #> 1    -2.17     1.72
+
+    get_confidence_interval(side_boot, level = 0.95, type = "se",
+                            point_estimate = obs_side)
+    #> # A tibble: 1 × 2
+    #>   lower_ci upper_ci
+    #>      <dbl>    <dbl>
+    #> 1    -2.22     1.84
+    ```
+
+    a.  Find an approximate 95% bootstrap percentile confidence interval for the true average difference in open-play shot counts (home $-$ away).
+
+    b.  Find an approximate 95% bootstrap SE confidence interval for the true average difference in open-play shot counts (home $-$ away), given that the standard deviation of the 1,000 bootstrapped means is 1.04 shots.
+
+    c.  Interpret both confidence intervals using words like "process" and "shot count."
+
+    d.  From the confidence intervals calculated above, does it appear that there is a discernible difference in the average shot counts of home-listed and away-listed sides?
+
+9.  **First halves and second halves, bootstrap interval.** We considered the difference in the open-play shot counts of the first and second regulation halves across the 31 matches of the 2025 Women's Euro.
+    The mean and standard deviation of the reported differences are 2.74 and 5.51 shots.
+
+    ```r
+    obs_half <- half_pairs |>
+      specify(response = diff) |>
+      calculate(stat = "mean")
+
+    set.seed(2110)
+    half_boot <- half_pairs |>
+      specify(response = diff) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "mean")
+
+    ggplot(half_boot, aes(x = stat)) +
+      geom_histogram(binwidth = 0.25) +
+      labs(
+        title = "1,000 means of bootstrapped differences",
+        x = "Mean of bootstrapped differences in shot counts\n(second half - first half)",
+        y = "Count"
+      )
+
+    get_confidence_interval(half_boot, level = 0.90, type = "percentile")
+    #> # A tibble: 1 × 2
+    #>   lower_ci upper_ci
+    #>      <dbl>    <dbl>
+    #> 1     1.06     4.39
+
+    get_confidence_interval(half_boot, level = 0.90, type = "se",
+                            point_estimate = obs_half)
+    #> # A tibble: 1 × 2
+    #>   lower_ci upper_ci
+    #>      <dbl>    <dbl>
+    #> 1     1.11     4.38
+    ```
+
+    a.  Calculate a 90% bootstrap percentile confidence interval for the average difference in open-play shot counts between the second and first halves.
+
+    b.  Calculate a 90% bootstrap SE confidence interval for the average difference in open-play shot counts between the second and first halves, given that the standard deviation of the 1,000 bootstrapped means is 0.99 shots.
+
+    c.  Interpret both intervals in context.
+
+    d.  Do the confidence intervals provide convincing evidence that there were more open-play shots in second halves than in first halves at this tournament?
+        Explain your reasoning.
+
+10. **Home and away labels, mathematical test.** We considered the differences between the open-play shot counts of home-listed and away-listed sides across the 64 matches of the 2022 Men's World Cup.
+
+    a.  Create hypotheses appropriate for the following research question: is there an evident difference in the average open-play shot counts under the two labels?
+
+    b.  Check the conditions required to complete this test.
+
+    c.  The average observed difference in shot counts is $\bar{x}_{home-away} = -0.19,$ and the standard deviation of the differences is $s_{home-away} = 8.31$ shots.
+        Do these data provide convincing evidence of a difference between the average shot counts under the two labels?
+
+    d.  What type of error might we have made?
+        Explain what the error means in the context of the application.
+
+    e.  Based on the results of this hypothesis test, would you expect a confidence interval for the average difference between the home-listed and away-listed shot counts to include 0?
+        Explain your reasoning.
+
+11. **First halves and second halves, mathematical test.** We considered the difference in the open-play shot counts of the first and second regulation halves across the 31 matches of the 2025 Women's Euro.
+    The mean and standard deviation of the reported differences are 2.74 and 5.51 shots, and the histogram of the 31 differences drawn by the code below is roughly symmetric around 3, running from $-10$ to $14$ with no gaps.
+
+    ```r
+    ggplot(half_pairs, aes(x = diff)) +
+      geom_histogram(binwidth = 4) +
+      labs(
+        x = "Difference in open-play shots\n(second half - first half)",
+        y = "Count"
+      )
+    ```
+
+    a.  Is there a relationship between the shot count observed in the first half and the shot count observed in the second half of the same match?
+        Or are the observations in the two groups independent?
+        Explain your reasoning.
+
+    b.  Write hypotheses for this research in symbols and in words.
+
+    c.  Check the conditions required to complete this test.
+
+    d.  Calculate the test statistic and find the p-value.
+
+    e.  Use $\alpha = 0.05$ to evaluate the test, and interpret your conclusion in context.
+
+    f.  What type of error might we have made?
+        Explain in context what the error means.
+
+    g.  Based on the results of this hypothesis test, would you expect a confidence interval for the average difference between the second-half and first-half open-play shot counts to include 0?
+        Explain your reasoning.
+
+12. **Home and away labels, mathematical interval.** We considered the differences between the open-play shot counts of home-listed and away-listed sides across the 64 matches of the 2022 Men's World Cup.
+    The mean and standard deviation of the differences are $\bar{x}_{home-away} = -0.19$ and $s_{home-away} = 8.31$ shots.
+
+    a.  Calculate a 95% confidence interval for the average difference between the open-play shot counts of home-listed and away-listed sides.
+
+    b.  Interpret this interval in context.
+
+    c.  Does the confidence interval provide convincing evidence that the labels are associated with a real difference in average shot counts?
+        Explain.
+
+13. **First halves and second halves, mathematical interval.** We considered the difference in the open-play shot counts of the first and second regulation halves across the 31 matches of the 2025 Women's Euro.
+    The mean and standard deviation of the reported differences are 2.74 and 5.51 shots.
+
+    a.  Calculate a 90% confidence interval for the average difference in open-play shot counts between the second and first halves.
+        We've already checked the conditions for you.
+
+    b.  Interpret the interval in context.
+
+    c.  Does the confidence interval provide convincing evidence that there were more open-play shots in second halves than in first halves?
+        Explain your reasoning.
+
+14. **Possible paired randomized differences.** Two tracking vendors' systems each logged the number of final-third touches for the same five academy players in the same match, giving two observations per player.
+    Which of the following could be a possible randomization of the paired differences given in the table below?
+    If the set of values could not be a randomized set of differences, indicate why not.
+
+    |                    |  1  |  2  |  3  |  4  |  5  |
+    |:-------------------|:---:|:---:|:---:|:---:|:---:|
+    | Vendor A (touches) |  3  | 14  |  4  |  5  | 10  |
+    | Vendor B (touches) |  7  |  3  |  6  |  5  |  9  |
+    | Difference         | -4  | 11  | -2  |  0  |  1  |
+
+    : Final-third touches logged by two tracking vendors for five academy players. {#tbl-vendor-touches}
+
+    a.  -2, 1, 1, 11, -2
+
+    b.  -4, 11, -2, 0, 1
+
+    c.  -2, 2, -11, 11, -2, 2, 0, 1, -1
+
+    d.  0, -1, 2, -4, 11
+
+    e.  4, -11, 2, 0, -1
+
+15. **Music in the finishing bays.** In order to test the effects of running finishing drills with music playing versus in silence, academy players agree to be randomized to two treatments (i.e., drill with music or drill in silence).
+    There are two standardized finishing assessments during the season, so Jonas Beck's staff can either randomize the players to have one assessment period prepared with music and one prepared in silence (randomly selecting which assessment corresponds to which drill environment) or randomize the players to one drill environment for both assessments.
+
+    The staff are interested in estimating the true population difference of finishing-assessment score for players who drill with music as compared to players who drill in silence.
+
+    a.  Describe the experiment which is consistent with a paired designed experiment.
+        How is the treatment assigned, and how are the data collected such that the observations are paired?
+
+    b.  Describe the experiment which is consistent with an independent samples experiment.
+        How is the treatment assigned, and how are the data collected such that the observations are independent?
+
+16. **Artificial turf, high-intensity output.** A belief circulates in Northbridge's sports-science office: players hold back on artificial turf.
+    To investigate, staff selected two comparable standard training sessions for each of 10 first-team players — one held on grass and one on an artificial surface — and recorded the high-intensity running distance (in meters) each player covered in each session.
+    This is a constructed scenario, generated by the seeded code below; the summary statistics follow, where the difference is the high-intensity running distance on grass minus that on turf.[^_21-ex-inference-paired-means-3]
+
+    ```r
+    set.seed(2111)
+    turf10 <- tibble(
+      player = paste("player", 1:10),
+      grass  = rnorm(10, 1250, 150),
+      turf   = grass - rnorm(10, 55, 35)
+    ) |>
+      mutate(
+        grass = round(grass),
+        turf  = round(turf),
+        diff  = grass - turf
+      )
+
+    round(c(mean(turf10$grass), sd(turf10$grass)), 1)
+    #> [1] 1224.5  136.2
+    round(c(mean(turf10$turf), sd(turf10$turf)), 1)
+    #> [1] 1173.7  153.9
+    round(c(mean(turf10$diff), sd(turf10$diff)), 1)
+    #> [1] 50.8 39.0
+    ```
+
+    |            |   n | Mean   | SD    |
+    |:-----------|----:|-------:|------:|
+    | grass      |  10 | 1224.5 | 136.2 |
+    | turf       |  10 | 1173.7 | 153.9 |
+    | difference |  10 |   50.8 |  39.0 |
+
+    : Summary statistics for high-intensity running distance (m) by surface, and for the 10 within-player differences. {#tbl-turf10-summary}
+
+    a.  Are there any underlying structures in these data that should be considered in an analysis?
+        Explain.
+
+    b.  What are the hypotheses for evaluating whether the average recorded high-intensity running distance is different on grass than on artificial turf?
+
+    c.  Check conditions to carry out the hypothesis test from part (b) using mathematical models.
+        (The 10 differences run from 0 to 135 meters, with no gaps.)
+
+    d.  Calculate the test statistic and the p-value.
+
+    e.  What is the conclusion of the hypothesis test?
+
+    f.  Interpret the p-value in this context.
+
+    g.  What type of error might have been made in the conclusion of your test?
+        Explain.
+
+17. **Artificial turf, injury flags.** The turf question has a medical side.
+    Northbridge's partner academies each ran two eight-week training blocks in the same season — one predominantly on grass, one predominantly on artificial turf — and their medical staff recorded the number of soft-tissue injury flags raised in each block.
+    This is a constructed scenario, generated by the seeded code below; the difference is the flag count in the grass block minus the flag count in the turf block.[^_21-ex-inference-paired-means-4]
+
+    ```r
+    set.seed(2112)
+    academies6 <- tibble(
+      academy     = paste("academy", 1:6),
+      grass_block = rpois(6, 7),
+      turf_block  = grass_block + rpois(6, 3)
+    ) |>
+      mutate(diff = grass_block - turf_block)
+
+    academies6
+    #> # A tibble: 6 × 4
+    #>   academy   grass_block turf_block  diff
+    #>   <chr>           <int>      <int> <int>
+    #> 1 academy 1           9         11    -2
+    #> 2 academy 2           7         10    -3
+    #> 3 academy 3           6         10    -4
+    #> 4 academy 4           5          7    -2
+    #> 5 academy 5           5          9    -4
+    #> 6 academy 6           8          9    -1
+    ```
+
+    The mean of the six differences is $-2.67$ flags with a standard deviation of $1.21.$
+
+    a.  Conduct a hypothesis test using mathematical models to evaluate if there is a difference between the average numbers of soft-tissue injury flags in grass-heavy and turf-heavy training blocks.
+
+    b.  Calculate a 95% confidence interval using mathematical models for the difference between the average numbers of soft-tissue injury flags in grass-heavy and turf-heavy blocks.
+
+    c.  A draft memo from one academy concludes, "Artificial turf is dangerous for soft tissue. The risk of an injury flag may be increased by as much as 40%. Staying on grass is recommended." Do you agree with this statement?
+        Explain your reasoning.
+
+18. **Academy growth.** Northbridge's sports-science staff wanted to better understand the physical development of the players admitted to the academy's 2021 intake.
+    They measured the countermovement jump (in cm) of a random sample of 50 players from that intake at admission in 2021 and again measured the same players at their 2025 review.
+    This is a constructed scenario, generated by the seeded code below; the data are summarized underneath.[^_21-ex-inference-paired-means-5]
+
+    ```r
+    set.seed(2113)
+    jump50 <- tibble(
+      player      = paste("player", 1:50),
+      intake_2021 = rnorm(50, 27, 3.5),
+      review_2025 = intake_2021 + rnorm(50, 12.5, 7.2)
+    ) |>
+      mutate(diff = review_2025 - intake_2021)
+
+    jump50 |>
+      pivot_longer(c(intake_2021, review_2025, diff),
+                   names_to = "measurement", values_to = "cm") |>
+      group_by(measurement) |>
+      summarize(n = n(), mean = round(mean(cm), 1), sd = round(sd(cm), 1))
+    #> # A tibble: 3 × 4
+    #>   measurement     n  mean    sd
+    #>   <chr>       <int> <dbl> <dbl>
+    #> 1 diff           50  11.7   6.3
+    #> 2 intake_2021    50  27.7   3.5
+    #> 3 review_2025    50  39.4   7.2
+    ```
+
+    | Measurement | Mean | SD  | n   |
+    |:------------|-----:|----:|----:|
+    | 2021 intake | 27.7 | 3.5 | 50  |
+    | 2025 review | 39.4 | 7.2 | 50  |
+    | Difference  | 11.7 | 6.3 | 50  |
+
+    : Countermovement jump (cm) of 50 academy players at 2021 intake and 2025 review. {#tbl-jump50-summary}
+
+    Construct a 99% confidence interval for the average countermovement-jump improvement of the academy's 2021 intake over 2021--2025.
+
+[^_21-ex-inference-paired-means-1]: The 2022 Men's World Cup shot and match data used in this exercise are in `data/derived/wc2022_shots.csv` and `data/derived/wc2022_matches.csv` (StatsBomb open data).
+
+[^_21-ex-inference-paired-means-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_21-ex-inference-paired-means-3]: The `turf10` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real sessions were tracked.
+
+[^_21-ex-inference-paired-means-4]: The `academies6` data are a constructed scenario, generated entirely by the seeded code shown; no real academies were monitored.
+
+[^_21-ex-inference-paired-means-5]: The `jump50` data are a constructed scenario, generated entirely by the seeded code shown; no real intake was measured.

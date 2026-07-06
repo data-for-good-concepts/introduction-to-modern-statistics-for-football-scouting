@@ -1,0 +1,7 @@
+**2.** The middle 92% of the bootstrapped proportions runs from the 4th to the 96th percentile: $(0.521, 0.581).$ We are 92% confident that between 52.1% and 58.1% of shots at this level are taken with the right foot.
+
+**4.** A: $\hat{p} = 0.13$; B: $\hat{p} = 0.43$; C: $\hat{p} = 0.30$; D: $\hat{p} = 0.22$ (each bootstrap distribution is centered at its cohort's observed proportion, so the middle-95% midpoints — about 0.13, 0.43, 0.30, 0.24 — give the matching, with D's 0.22 confirmed by elimination).
+
+**6.** (a) None comfortably — perhaps A (0.05 lies inside A's full range but below its middle 95%); not B, C, or D. (b) A only. (c) A and B; perhaps C (0.45 sits just beyond C's 97.5th percentile of 0.438 but inside its range); not D (beyond D's maximum of 0.449). (d) A; perhaps B (0.55 is beyond B's 97.5th percentile of 0.5 but inside its range); not C or D. (e) None comfortably — perhaps A (0.75 is beyond A's middle 95% but inside its full range); impossible for B, C, and D, whose ranges it exceeds.
+
+**8.** (a) Not supported — 3 hours is 180 minutes, and the entire interval (128, 147) lies below 180, so the data indicate the mean generation time is under 3 hours. (b) Supported — 2.2 hours is 132 minutes, which falls inside the interval, so it is a plausible value for the mean. (c) Supported — a 99% interval is wider than the 95% interval from the same data, so 132 minutes remains inside it.

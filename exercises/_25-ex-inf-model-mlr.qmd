@@ -1,0 +1,611 @@
+1.  **Scout certification, mathematical interval.** At the end of Northbridge United's scout-certification course, Priya Rao surveyed the 55 trainees about their weekly hours of video study (`video_hours`), hours of sleep per night (`sleepnight`), and the number of live matches they attend per week, recorded as the indicator `live_mt2` (`1` if the trainee attends more than two live matches a week, and `0` otherwise).
+    We use these data to build a model predicting the final certification assessment (`assessment`, scored 0--100) from the other variables.
+    This is a constructed scenario, built by the seeded code below; a summary of the model follows.[^_25-ex-inf-model-mlr-1]
+
+    ```r
+    set.seed(2503)
+    trainee55 <- tibble(
+      video_hours = round(pmax(rnorm(55, mean = 14, sd = 5), 2), 1),
+      matches     = rpois(55, lambda = 2),
+      sleepnight  = round(pmin(pmax(rnorm(55, mean = 7 - 0.3 * matches, sd = 0.9), 4.5), 9.5), 1),
+      live_mt2    = if_else(matches > 2, 1, 0),
+      assessment  = round(58 + 0.15 * video_hours + 0.8 * sleepnight +
+                            2 * live_mt2 + rnorm(55, mean = 0, sd = 8))
+    )
+
+    m_cert <- lm(assessment ~ video_hours + sleepnight + live_mt2,
+                 data = trainee55)
+    tidy(m_cert)
+    #> # A tibble: 4 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   53.5       7.09      7.55  7.44e-10
+    #> 2 video_hours    0.388     0.222     1.75  8.69e- 2
+    #> 3 sleepnight     0.775     0.913     0.849 4.00e- 1
+    #> 4 live_mt2       3.31      2.40      1.38  1.74e- 1
+    ```
+
+    a.  Calculate a 95% confidence interval for the coefficient of `live_mt2` (attends more than two live matches a week) in the model, and interpret it in the context of the data.
+        (With $n = 55$ observations and $k = 3$ predictors, use $t^\star_{51} = 2.01.$)
+
+    b.  Would you expect a 95% confidence interval for the slope of the remaining variables to include 0?
+        Explain your reasoning.
+
+2.  **Matchday chance creation.** For each of the 31 matches of the 2025 Women's Euro, a Northbridge analyst tallies the number of open-play shots in the match (both teams combined) and the total chance quality those shots carried.
+    The frame is open play only — penalties, fixed by law near 0.78, would otherwise ride along in the totals.
+    Three plots are drawn by the code below: a scatterplot showing the relationship between the two variables along with the least squares fit, a residuals plot, and a histogram of residuals.[^_25-ex-inf-model-mlr-2]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    match_we <- weuro2025_shots |>
+      filter(shot_type == "Open Play") |>
+      group_by(match_id) |>
+      summarize(
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        .groups = "drop"
+      )
+
+    m_matchday <- lm(total_xg ~ n_shots, data = match_we)
+    tidy(m_matchday)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
+    #> 1 (Intercept)   0.206     0.756      0.273 0.787
+    #> 2 n_shots       0.0899    0.0270     3.32  0.00241
+
+    m_aug <- augment(m_matchday)
+
+    p_1 <- ggplot(match_we, aes(x = n_shots, y = total_xg)) +
+      geom_smooth(method = "lm", se = FALSE, color = "darkgray") +
+      geom_point(size = 3, alpha = 0.6) +
+      labs(x = "Open-play shots in match", y = "Total chance quality (xG)")
+
+    p_2 <- ggplot(m_aug, aes(x = .fitted, y = .resid)) +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      geom_point(size = 3, alpha = 0.6) +
+      labs(x = "Predicted total chance quality", y = "Residuals")
+
+    p_3 <- ggplot(m_aug, aes(x = .resid)) +
+      geom_histogram(binwidth = 0.5) +
+      labs(x = "Residuals", y = NULL)
+
+    p_1 + p_2 + p_3
+    ```
+
+    The scatterplot shows shot counts from 19 to 39 and totals from 1.19 to 5.24 xG, rising moderately with a correlation of $r = 0.525.$
+    One match floats far above the line: England's 6--1 group-stage win over Wales packed 5.24 xG into 29 open-play shots, a residual of $+2.42.$
+    The residual plot shows the remaining residuals between about $-1.2$ and $+1.4$ with no clear curve, though the scatter looks somewhat wider at higher predicted values; the histogram is centered just below zero (median $-0.16$) with a long right tail created by the England match.
+
+    a.  Describe the relationship between the number of open-play shots and the total chance quality of a match.
+
+    b.  What are the predictor and the outcome variables?
+
+    c.  Why might a club want to fit a regression line to these data?
+
+    d.  Do the data meet the LINE conditions of @sec-inf-model-slr required for fitting a least squares line?
+        Use the scatterplot, the residuals plot, and the histogram to answer this question.
+
+3.  **Team chance volume, collinear predictors.** The total chance quality a team accumulates over a tournament is the headline number in a scouting dossier, but it can only be tallied once every match has been parsed.
+    Instead, quicker counts — how many shots the team took, how many matches it played — may be used to predict a team's total chance volume.
+    We compute all three quantities for the 32 teams of the 2022 Men's World Cup, on the open-play frame (stated filter: `shot_type == "Open Play"`).[^_25-ex-inf-model-mlr-3]
+    The pairwise correlations are shown below, followed by three regression model outputs: `total_xg` vs. `n_shots`, `total_xg` vs. `n_matches`, and `total_xg` vs. `n_shots + n_matches`.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    team_wc <- wc2022_shots |>
+      filter(shot_type == "Open Play") |>
+      group_by(team) |>
+      summarize(
+        n_matches = n_distinct(match_id),
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        .groups = "drop"
+      )
+
+    team_wc |>
+      summarize(
+        r_xg_shots      = cor(total_xg, n_shots),
+        r_xg_matches    = cor(total_xg, n_matches),
+        r_shots_matches = cor(n_shots, n_matches)
+      )
+    #> # A tibble: 1 × 3
+    #>   r_xg_shots r_xg_matches r_shots_matches
+    #>        <dbl>        <dbl>           <dbl>
+    #> 1      0.950        0.773           0.836
+
+    lm(total_xg ~ n_shots, data = team_wc) |> tidy()
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   -0.354   0.309       -1.15 2.60e- 1
+    #> 2 n_shots        0.107   0.00641     16.6  1.14e-16
+
+    lm(total_xg ~ n_matches, data = team_wc) |> tidy()
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic     p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>       <dbl>
+    #> 1 (Intercept)    -1.13     0.852     -1.33 0.194
+    #> 2 n_matches       1.35     0.203      6.67 0.000000216
+
+    lm(total_xg ~ n_shots + n_matches, data = team_wc) |> tidy()
+    #> # A tibble: 3 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   -0.154    0.437     -0.353 7.27e- 1
+    #> 2 n_shots        0.113    0.0118     9.58  1.74e-10
+    #> 3 n_matches     -0.121    0.184     -0.654 5.18e- 1
+    ```
+
+    a.  There are three variables described above, and each is paired with each other to create three different relationships.
+        Rate the pairwise relationships from most correlated to least correlated.
+
+    b.  When using only one variable to model a team's `total_xg`, is `n_shots` a discernible predictor?
+        Is `n_matches` a discernible predictor?
+        Explain your reasoning.
+
+    c.  When using both `n_shots` and `n_matches` to predict a team's `total_xg`, are both predictors still discernible?
+        Explain your reasoning.
+
+4.  **Scout certification, collinear predictors.** In this exercise we return to the constructed survey of 55 Northbridge certification trainees from Exercise 1, now working with the number of live `matches` attended per week (the count itself, not the indicator), nightly `sleepnight`, and the final `assessment` score.
+    Trainees who attend more evening matches sleep less, so the two predictors are themselves correlated.
+    The pairwise correlations are shown below, followed by three regression model outputs: `assessment` vs. `matches`, `assessment` vs. `sleepnight`, and `assessment` vs. `matches + sleepnight`.
+
+    ```r
+    trainee55 |>
+      summarize(
+        r_matches_sleep  = cor(matches, sleepnight),
+        r_assess_matches = cor(assessment, matches),
+        r_assess_sleep   = cor(assessment, sleepnight)
+      )
+    #> # A tibble: 1 × 3
+    #>   r_matches_sleep r_assess_matches r_assess_sleep
+    #>             <dbl>            <dbl>          <dbl>
+    #> 1          -0.491          -0.0351         0.0398
+
+    lm(assessment ~ matches, data = trainee55) |> tidy()
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   65.1       1.74     37.4   9.28e-40
+    #> 2 matches       -0.168     0.659    -0.255 7.99e- 1
+
+    lm(assessment ~ sleepnight, data = trainee55) |> tidy()
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   63.1       5.60     11.3   1.05e-15
+    #> 2 sleepnight     0.247     0.852     0.290 7.73e- 1
+
+    lm(assessment ~ matches + sleepnight, data = trainee55) |> tidy()
+    #> # A tibble: 3 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)  63.8        7.37      8.65  1.23e-11
+    #> 2 matches      -0.0982     0.764    -0.129 8.98e- 1
+    #> 3 sleepnight    0.185      0.988     0.187 8.52e- 1
+    ```
+
+    a.  There are three variables described above, and each is paired with each other to create three different relationships.
+        Rate the pairwise relationships from most correlated to least correlated.
+
+    b.  When using only one variable to model `assessment`, is `matches` a discernible predictor?
+        Is `sleepnight` a discernible predictor?
+        Explain your reasoning.
+
+    c.  When using both `matches` and `sleepnight` to predict `assessment` in a multiple regression model, are either of the variables discernible?
+        Explain your reasoning.
+
+5.  **Transfer market returns.** A recruitment analyst writes in a club briefing that "academy graduates get nowhere near the transfer fees of marquee signings, but there's a huge incentive for clubs to keep producing them. The return-on-investment potential for academy graduates is absurd."
+    To investigate how the return-on-investment (ROI, the ratio of a player's resale value to what the club paid for him) compares between recruitment channels and how this relationship has changed over time, an analyst fits a linear regression model to predict ROI from recruitment channel and window year for 540 transfers completed between 2010 and 2018.
+    This is a constructed market, built by the seeded code below.[^_25-ex-inf-model-mlr-4]
+    Using the plots drawn at the end of the code, determine if this regression model is appropriate for these data.
+    In particular, use the residual plots to check the LINE conditions of @sec-inf-model-slr.
+
+    ```r
+    set.seed(2504)
+    channels <- c("Academy graduate", "Domestic league", "Free transfer",
+                  "Loan-to-buy", "Marquee signing")
+    transfer540 <- tibble(
+      channel = sample(channels, 540, replace = TRUE,
+                       prob = c(0.12, 0.38, 0.18, 0.12, 0.20)),
+      window_year = sample(2010:2018, 540, replace = TRUE),
+      roi = round(rlnorm(540,
+        meanlog = case_when(
+          channel == "Academy graduate" ~ 1.6,
+          channel == "Marquee signing"  ~ -0.1,
+          .default = 0.4
+        ),
+        sdlog = case_when(channel == "Academy graduate" ~ 1.1, .default = 0.7)
+      ), 2)
+    )
+
+    transfer540 |>
+      group_by(channel) |>
+      summarize(n = n(), mean_roi = mean(roi), max_roi = max(roi))
+    #> # A tibble: 5 × 4
+    #>   channel              n mean_roi max_roi
+    #>   <chr>            <int>    <dbl>   <dbl>
+    #> 1 Academy graduate    55    9.76    89.1
+    #> 2 Domestic league    198    1.91     7.36
+    #> 3 Free transfer      108    1.67     5.85
+    #> 4 Loan-to-buy         57    2.18     9.32
+    #> 5 Marquee signing    122    0.983    4.59
+
+    m_roi <- lm(roi ~ window_year + channel, data = transfer540)
+    m_roi_aug <- augment(m_roi) |> mutate(order = row_number())
+
+    p_res_hist <- ggplot(m_roi_aug, aes(x = .resid)) +
+      geom_histogram() +
+      labs(x = "Residual", y = "Count", title = "Histogram of residuals")
+
+    p_res_order <- ggplot(m_roi_aug, aes(y = .resid, x = order)) +
+      geom_point() +
+      labs(x = "Data order", y = "Residual", title = "Residuals vs. data order")
+
+    p_res_pred <- ggplot(m_roi_aug, aes(x = .fitted, y = .resid, color = channel)) +
+      geom_point(alpha = 0.8, size = 1) +
+      labs(x = "Predicted ROI", y = "Residual", color = "Channel",
+           title = "Residuals vs. predicted values")
+
+    (p_res_hist + p_res_order) /
+      p_res_pred
+    ```
+
+    The histogram of residuals is sharply right-skewed: residuals run from $-9.6$ to $+79.0.$
+    The residuals-vs-order plot shows no drift, but its vertical spread is punctuated by a band of extreme positive values.
+    In the residuals-vs-predicted plot, the academy-graduate transfers form their own high-fitted-value column whose residual spread dwarfs every other channel's — of the ten residuals above $+5,$ seven belong to academy graduates.
+
+6.  **Difficult negotiations.** Northbridge United's recruitment department analyzed a league-wide negotiations dataset, compiled by the players' association, to identify factors associated with difficult transfer negotiations.
+    The data consist of 527 completed negotiations from clubs across the league; after each negotiation, the association's standardized Negotiation Difficulty Questionnaire (NDQ-10) was completed for the deal.
+    A higher score on the NDQ-10 indicates a more difficult negotiation.
+    The maximum possible score is 60, and negotiations scoring 30 and higher are considered difficult.
+    A model was fit to predict NDQ-10 score from features of the club staff member who led the negotiation: age, whether they formerly played professionally (`former_pro`, Yes or not), and years working in recruitment.
+    The regression table below is a constructed illustration mirroring the corresponding IMS exercise; no underlying dataset is provided.[^_25-ex-inf-model-mlr-5]
+
+    | term          | estimate | std.error | statistic | p.value |
+    |:--------------|---------:|----------:|----------:|--------:|
+    | (Intercept)   |   30.594 |     2.886 |    10.601 | <0.0001 |
+    | age           |   -0.016 |     0.104 |    -0.157 |   0.876 |
+    | former_proYes |   -0.535 |     0.781 |    -0.686 |   0.494 |
+    | yrs_recruit   |    0.096 |     0.215 |     0.445 |   0.656 |
+
+    a.  The intercept of the model is 30.594.
+        What is the age, playing background, and years in recruitment of a staff member whom this model would predict to lead a negotiation scoring 30.594 on the NDQ-10?
+        Is such a staff member plausible?
+
+    b.  Is there evidence of a discernible association between NDQ-10 score and any of the staff features?
+
+7.  **Chance quality, mathematical test.** In @sec-model-mlr we fit the full tag model to the 1,365 open-play shots of the `shots_wc` frame (stated filter: open play, `Other` body parts and patterns dropped), predicting `statsbomb_xg` from `body_part`, `technique`, `under_pressure`, `one_on_one`, `play_pattern`, and `minute`.
+    The summary table below reproduces that model, and the code beneath it draws a set of diagnostic plots and summarizes the residuals.
+
+    ```r
+    m_full <- lm(
+      statsbomb_xg ~ body_part + technique + under_pressure + one_on_one +
+        play_pattern + minute,
+      data = shots_wc
+    )
+
+    tidy(m_full) |> print(n = 19)
+    #> # A tibble: 19 × 5
+    #>    term                        estimate std.error statistic  p.value
+    #>    <chr>                          <dbl>     <dbl>     <dbl>    <dbl>
+    #>  1 (Intercept)                 0.0741    0.00890      8.32  2.08e-16
+    #>  2 body_partLeft Foot          0.00349   0.00722      0.483 6.29e- 1
+    #>  3 body_partHead               0.0197    0.0105       1.88  6.06e- 2
+    #>  4 techniqueBackheel          -0.0246    0.0521      -0.473 6.36e- 1
+    #>  5 techniqueDiving Header      0.0790    0.0322       2.45  1.44e- 2
+    #>  6 techniqueHalf Volley        0.0285    0.00909      3.13  1.78e- 3
+    #>  7 techniqueLob                0.136     0.0329       4.15  3.61e- 5
+    #>  8 techniqueOverhead Kick     -0.0193    0.0441      -0.438 6.61e- 1
+    #>  9 techniqueVolley             0.0385    0.0130       2.97  3.05e- 3
+    #> 10 under_pressure             -0.00516   0.00924     -0.558 5.77e- 1
+    #> 11 one_on_one                  0.0872    0.0144       6.07  1.67e- 9
+    #> 12 play_patternFrom Corner     0.00131   0.0103       0.127 8.99e- 1
+    #> 13 play_patternFrom Counter    0.0544    0.0166       3.27  1.09e- 3
+    #> 14 play_patternFrom Free Kick -0.0195    0.00945     -2.07  3.89e- 2
+    #> 15 play_patternFrom Goal Kick  0.0152    0.0142       1.07  2.86e- 1
+    #> 16 play_patternFrom Keeper     0.0133    0.0259       0.513 6.08e- 1
+    #> 17 play_patternFrom Kick Off  -0.00898   0.0289      -0.311 7.56e- 1
+    #> 18 play_patternFrom Throw In  -0.0133    0.00872     -1.53  1.27e- 1
+    #> 19 minute                      0.000123  0.000110     1.12  2.65e- 1
+
+    m_full_aug <- augment(m_full)
+
+    p_res_hist <- ggplot(m_full_aug, aes(x = .resid)) +
+      geom_histogram(binwidth = 0.05) +
+      labs(x = "Residual", y = "Count", title = "Histogram of residuals")
+
+    p_res_pred <- ggplot(m_full_aug, aes(x = .fitted, y = .resid)) +
+      geom_point(alpha = 0.3, size = 1) +
+      labs(x = "Predicted chance quality", y = "Residual",
+           title = "Residuals vs. predicted values")
+
+    p_res_hist + p_res_pred
+
+    m_full_aug |>
+      summarize(
+        min_resid = min(.resid),
+        max_resid = max(.resid),
+        n_beyond_0.3 = sum(abs(.resid) > 0.3),
+        n_above_0.3 = sum(.resid > 0.3)
+      )
+    #> # A tibble: 1 × 4
+    #>   min_resid max_resid n_beyond_0.3 n_above_0.3
+    #>       <dbl>     <dbl>        <int>       <int>
+    #> 1    -0.236     0.817           44          44
+    ```
+
+    The histogram of residuals rises to a sharp peak just below zero and trails a long right tail; the residuals-vs-predicted plot (fitted values run from 0.045 to 0.316) is cut off below by a diagonal floor and fans upward on the positive side.
+
+    a.  Determine if the conditions for doing inference based on mathematical models with these data are met, using the diagnostic plots and summaries above.
+        If not, describe how to proceed with the analysis.
+
+    b.  Using the regression output, evaluate whether the true slope of `under_pressure` is different than 0, given the other variables in the model.
+        State the null and alternative hypotheses, report the p-value (using a mathematical model), and state your conclusion.
+
+8.  **Goals scored, collinear predictors.** In this exercise we study the relationship between the goals a team scores in a match and two explanatory variables: the team's shot count and its accumulated chance quality.
+    We rebuild the canonical `team_match` frame of @sec-explore-numerical (127 team-matches of the 2022 Men's World Cup; the full shot log, including penalties and shoot-out kicks, as flagged in @sec-model-slr).
+    The pairwise correlations are shown below, followed by three regression model outputs: `goals` vs. `n_shots`, `goals` vs. `total_xg`, and `goals` vs. `n_shots + total_xg`.
+
+    ```r
+    team_match <- wc2022_shots |>
+      group_by(match_id, team) |>
+      summarize(
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        goals = sum(goal),
+        prop_under_pressure = mean(under_pressure),
+        prop_set_piece = mean(play_pattern %in%
+          c("From Corner", "From Free Kick", "From Throw In")),
+        .groups = "drop"
+      )
+
+    team_match |>
+      summarize(
+        r_goals_shots = cor(goals, n_shots),
+        r_goals_xg    = cor(goals, total_xg),
+        r_shots_xg    = cor(n_shots, total_xg)
+      )
+    #> # A tibble: 1 × 3
+    #>   r_goals_shots r_goals_xg r_shots_xg
+    #>           <dbl>      <dbl>      <dbl>
+    #> 1         0.403      0.691      0.699
+
+    lm(goals ~ n_shots, data = team_match) |> tidy()
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic    p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>      <dbl>
+    #> 1 (Intercept)    0.167    0.307      0.542 0.589
+    #> 2 n_shots        0.116    0.0236     4.93  0.00000260
+
+    lm(goals ~ total_xg, data = team_match) |> tidy()
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)    0.190    0.163       1.17 2.45e- 1
+    #> 2 total_xg       0.909    0.0849     10.7  2.31e-19
+
+    lm(goals ~ n_shots + total_xg, data = team_match) |> tidy()
+    #> # A tibble: 3 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   0.510     0.244       2.09 3.83e- 2
+    #> 2 n_shots      -0.0453    0.0259     -1.75 8.22e- 2
+    #> 3 total_xg      1.05      0.118       8.94 4.64e-15
+    ```
+
+    a.  There are three variables described above, and each is paired with each other to create three different relationships.
+        Rate the pairwise relationships from most correlated to least correlated.
+
+    b.  When using only one variable to model a team's `goals`, is `n_shots` a discernible predictor?
+        Is `total_xg` a discernible predictor?
+        Explain your reasoning.
+
+    c.  When using both `n_shots` and `total_xg` to predict a team's `goals`, are both predictors still discernible?
+        Explain what happened to the coefficient on `n_shots`, and why the phrase "given the other variables in the model" matters for reading its p-value.
+
+9.  **Chance quality, cross-validation.** Using a seeded random sample of 100 open-play shots from the 2025 Women's Euro (same frame filters as @sec-model-mlr: open play, `Other` body parts and patterns dropped), we study how well a shot's chance quality can be predicted from its tags.[^_25-ex-inf-model-mlr-6]
+    The code below computes prediction errors associated with two different models designed to predict `statsbomb_xg`; one model uses 7 predictors, one model uses 2 predictors.
+    Using 4-fold cross-validation, the data were split into 4 folds.
+    Three of the folds estimate the $\beta_i$ parameters using $b_i$, and the model is applied to the held-out fold for prediction.
+    The process was repeated 4 times (each time holding out one of the folds).
+
+    $$
+    \begin{aligned}
+    E[\texttt{statsbomb\_xg}] = \beta_0 &+ \beta_1\times \texttt{one\_on\_one} + \beta_2\times \texttt{under\_pressure} + \beta_3 \times \texttt{first\_time} \\
+    &+ \beta_4 \times \texttt{minute} + \beta_5 \times \texttt{period} + \beta_6 \times \texttt{body\_part}_{\texttt{Left Foot}} + \beta_7 \times \texttt{body\_part}_{\texttt{Head}}\\
+    E[\texttt{statsbomb\_xg}] = \beta_0 &+ \beta_1\times \texttt{one\_on\_one} + \beta_2\times \texttt{first\_time}
+    \end{aligned}
+    $$
+
+    ```r
+    shots_we_cv <- weuro2025_shots |>
+      filter(
+        shot_type == "Open Play",
+        body_part != "Other",
+        play_pattern != "Other"
+      ) |>
+      mutate(
+        body_part = factor(body_part, levels = c("Right Foot", "Left Foot", "Head")),
+        under_pressure = if_else(under_pressure, 1, 0),
+        one_on_one = if_else(one_on_one, 1, 0),
+        first_time = if_else(first_time, 1, 0)
+      ) |>
+      select(statsbomb_xg, one_on_one, under_pressure, first_time,
+             minute, period, body_part)
+
+    set.seed(2505)
+    we100 <- shots_we_cv |> slice_sample(n = 100)
+
+    set.seed(2506)
+    we100 <- we100 |>
+      mutate(fold = sample(rep(1:4, length.out = n())))
+
+    pred_7 <- rep(NA_real_, 100)
+    pred_2 <- rep(NA_real_, 100)
+    for (f in 1:4) {
+      held_out <- we100$fold == f
+      fit_7 <- lm(
+        statsbomb_xg ~ one_on_one + under_pressure + first_time + minute +
+          period + body_part,
+        data = we100[!held_out, ]
+      )
+      fit_2 <- lm(statsbomb_xg ~ one_on_one + first_time,
+                  data = we100[!held_out, ])
+      pred_7[held_out] <- predict(fit_7, newdata = we100[held_out, ])
+      pred_2[held_out] <- predict(fit_2, newdata = we100[held_out, ])
+    }
+
+    c(
+      cv_sse_7 = sum((pred_7 - we100$statsbomb_xg)^2),
+      cv_sse_2 = sum((pred_2 - we100$statsbomb_xg)^2)
+    )
+    #> cv_sse_7 cv_sse_2
+    #> 1.252065 1.180412
+
+    we100 |>
+      mutate(pred = pred_7, error = statsbomb_xg - pred) |>
+      ggplot(aes(x = pred, y = error,
+                 color = factor(fold), shape = factor(fold))) +
+      geom_point(size = 2, alpha = 0.8) +
+      geom_hline(yintercept = 0) +
+      labs(title = "Model with 7 predictors", color = "CV fold",
+           shape = "CV fold", x = "Predicted", y = "Prediction error\n(residual)")
+    ```
+
+    The analogous plot for the 2-predictor model is drawn by swapping in `pred_2`.
+    In both plots the errors are centered around zero, with most between $-0.13$ and $+0.15;$ in the 7-predictor plot, one point sits far above the rest at roughly (predicted $= 0.06,$ error $= 0.5$), drawn in fold 3's color.
+
+    a.  Using the point at roughly (predicted $= 0.06$ and error $= 0.5$) in the 7-predictor plot, estimate the observed and predicted value for that observation.
+
+    b.  Using the same point, describe which cross-validation fold(s) were used to build its prediction model.
+
+    c.  For the 7-predictor model, how many coefficients were estimated in the linear model for each cross-validation fold?
+        For the 2-predictor model, how many coefficients were estimated?
+
+    d.  Do the values of the residuals (along the y-axis, not the x-axis) seem markedly different for the two models?
+        Explain your reasoning.
+
+10. **Match goals, cross-validation.** How well can a World Cup match's open-play goals be predicted from that match's shot profile?
+    A match's score of course counts every goal, the ones from the penalty spot included — but the response we *choose* to model here is the open-play component, the part a shot profile has a fighting chance of explaining.
+    For each of the 64 matches of the 2022 Men's World Cup we compute, on the open-play frame (stated filter: `shot_type == "Open Play"`), the total open-play goals plus six candidate predictors.
+    The code below computes prediction errors associated with two different models; one model uses 6 predictors, one model uses 2 predictors.
+    Using 3-fold cross-validation, the data were split into 3 folds.
+    Two of the folds estimate the $\beta_i$ parameters using $b_i$, and the model is applied to the held-out fold for prediction.
+    The process was repeated 3 times (each time holding out one of the folds).
+
+    $$
+    \begin{aligned}
+    E[\texttt{goals}] = \beta_0 &+ \beta_1 \times \texttt{total\_xg} + \beta_2 \times \texttt{n\_shots} + \beta_3 \times \texttt{prop\_pressure}\\
+    &+ \beta_4 \times \texttt{prop\_first\_time} + \beta_5 \times \texttt{prop\_head} + \beta_6 \times \texttt{prop\_counter} \\
+    E[\texttt{goals}] = \beta_0 &+ \beta_1\times \texttt{total\_xg} + \beta_2\times \texttt{n\_shots}
+    \end{aligned}
+    $$
+
+    ```r
+    match64 <- wc2022_shots |>
+      filter(shot_type == "Open Play") |>
+      group_by(match_id) |>
+      summarize(
+        goals = sum(goal),
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        prop_pressure = mean(under_pressure),
+        prop_first_time = mean(first_time),
+        prop_head = mean(body_part == "Head"),
+        prop_counter = mean(play_pattern == "From Counter"),
+        .groups = "drop"
+      )
+
+    set.seed(2507)
+    match64 <- match64 |>
+      mutate(fold = sample(rep(1:3, length.out = n())))
+
+    pred_6 <- rep(NA_real_, 64)
+    pred_2 <- rep(NA_real_, 64)
+    for (f in 1:3) {
+      held_out <- match64$fold == f
+      fit_6 <- lm(
+        goals ~ total_xg + n_shots + prop_pressure + prop_first_time +
+          prop_head + prop_counter,
+        data = match64[!held_out, ]
+      )
+      fit_2 <- lm(goals ~ total_xg + n_shots, data = match64[!held_out, ])
+      pred_6[held_out] <- predict(fit_6, newdata = match64[held_out, ])
+      pred_2[held_out] <- predict(fit_2, newdata = match64[held_out, ])
+    }
+
+    c(
+      cv_sse_6 = sum((pred_6 - match64$goals)^2),
+      cv_sse_2 = sum((pred_2 - match64$goals)^2)
+    )
+    #> cv_sse_6 cv_sse_2
+    #> 143.2271 128.3698
+
+    match64 |>
+      mutate(pred = pred_2, error = goals - pred) |>
+      ggplot(aes(x = pred, y = error,
+                 color = factor(fold), shape = factor(fold))) +
+      geom_point(size = 2, alpha = 0.8) +
+      geom_hline(yintercept = 0) +
+      labs(title = "Model with 2 predictors", color = "CV fold",
+           shape = "CV fold", x = "Predicted", y = "Prediction error\n(residual)")
+    ```
+
+    The analogous plot for the 6-predictor model is drawn by swapping in `pred_6`.
+    In both plots the errors range between about $-3.8$ and $+4.1;$ in the 2-predictor plot, one point sits alone at roughly (predicted $= 3,$ error $= 4$), drawn in fold 1's color — a match whose seven open-play goals far outran its shot profile.
+
+    a.  Using the point at roughly (predicted $= 3$ and error $= 4$) in the 2-predictor plot, estimate the observed and predicted value for that observation.
+
+    b.  Using the same point, describe which cross-validation fold(s) were used to build its prediction model.
+
+    c.  For the 6-predictor model, how many coefficients were estimated in the linear model for each cross-validation fold?
+        For the 2-predictor model, how many coefficients were estimated?
+
+    d.  Do the values of the residuals (along the y-axis, not the x-axis) seem markedly different for the two models?
+        Explain your reasoning.
+
+11. **Chance quality, cross-validation for model selection.** This exercise continues the seeded analysis of Exercise 9: 100 open-play shots from the 2025 Women's Euro, a 7-predictor model and a 2-predictor model of `statsbomb_xg`, and the same 4-fold cross-validation (seeds 2505 and 2506).
+    The cross-validated prediction errors gave
+
+    $$\mbox{CV SSE}_{7\text{-pred}} = 1.25 \qquad \mbox{CV SSE}_{2\text{-pred}} = 1.18$$
+
+    with 76% of the 7-predictor model's errors falling within $\pm 0.1,$ against 86% for the 2-predictor model.
+
+    a.  Using the spread of the points (in the y-direction), which model should be chosen for a final report on these data?
+        Explain your reasoning.
+
+    b.  Using the summary statistic (CV SSE), which model should be chosen for a final report on these data?
+        Explain your reasoning.
+
+    c.  Why would the model with more predictors fit the data less closely than the model with only two predictors?
+
+12. **Match goals, cross-validation for model selection.** This exercise continues the seeded analysis of Exercise 10: the 64 World Cup matches, a 6-predictor model and a 2-predictor model of open-play `goals`, and the same 3-fold cross-validation (seed 2507).
+    The cross-validated prediction errors gave
+
+    $$\mbox{CV SSE}_{6\text{-pred}} = 143.2 \qquad \mbox{CV SSE}_{2\text{-pred}} = 128.4$$
+
+    and the two residual plots span nearly identical ranges (about $-3.8$ to $+4.1$).
+
+    a.  Using the spread of the points (in the y-direction), which model should be chosen for a final report on these data?
+        Explain your reasoning.
+
+    b.  Using the summary statistic (CV SSE), which model should be chosen for a final report on these data?
+        Explain your reasoning.
+
+    c.  Why would the model with more predictors fit the data less closely than the model with only two predictors?
+
+[^_25-ex-inf-model-mlr-1]: The `trainee55` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real trainees were surveyed.
+
+[^_25-ex-inf-model-mlr-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_25-ex-inf-model-mlr-3]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_25-ex-inf-model-mlr-4]: The `transfer540` data are a constructed market scenario, generated entirely by the seeded code shown; no real transfers were analyzed.
+
+[^_25-ex-inf-model-mlr-5]: The NDQ-10 regression table is a constructed illustration whose numbers mirror the corresponding exercise in *Introduction to Modern Statistics*; treat it as reported output from a partner analysis.
+
+[^_25-ex-inf-model-mlr-6]: The `we100` data are a seeded random sample of real shots from `data/derived/weuro2025_shots.csv` (StatsBomb open data), drawn by the code shown.

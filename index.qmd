@@ -1,0 +1,30 @@
+# Welcome {.unnumbered}
+
+I have spent a career teaching statistics, and long enough around football to know how the two usually meet: badly. A scout watches three matches and "knows"; an analyst quotes a per-90 number computed from 340 minutes as if it were a law of nature (a per-90 number scales a stat to per 90 minutes played; the football glossary at the back of the book covers every such term); a sporting director asks whether a striker's cold streak is "real" and gets either a shrug or false certainty in reply. Every one of those is a statistics question, and every one has a rigorous answer — if you learn to ask it precisely.
+
+This book teaches modern statistics — the real thing, definitions, notation, derivations and all — using football scouting and recruitment as its *only* world. Every case study is a scouting problem. Every dataset is match data (much of it real: StatsBomb's open event data from the 2022 men's World Cup and the 2025 Women's Euro) or an explicitly constructed scouting scenario you can reproduce in code. Every exercise puts you in the seat of an analyst whose report is about to influence a decision worth millions.
+
+Two promises about how I will teach:
+
+1. **Rigor before intuition.** Formal definition and notation first, football second. The first time any symbol appears — $H_0$, $\alpha$, $\hat{p}$ — I will take it apart piece by piece in plain words before we use it. The football keeps you oriented; it never substitutes for the mathematics.
+2. **You will compute everything.** The code is R with tidyverse conventions, and every number in this book can be reproduced from the data files that ship with it. Statistics you cannot recompute is folklore.
+
+## How to read this book {.unnumbered}
+
+- **Important boxes** hold the formal definitions — these are the sentences worth memorizing.
+- **Worked examples** carry the full calculation, step by step.
+- **Check your understanding** boxes pose a short question before moving on. Answer before reading on; a scout who never tests their own reads never calibrates.
+
+**The back matter is part of the toolkit — know it exists before you need it.** At the end of the book sit a setup guide for R (@sec-appendix-setup); worked solutions to the odd-numbered exercises ([Appendix -@sec-exercise-solutions]) and final answers to the even-numbered ones ([Appendix -@sec-appendix-even-answers]); a quick reference (@sec-appendix-reference) holding the notation index, a one-page football glossary (@sec-football-primer), and a method chooser (@sec-method-chooser); and appendices on further reading (@sec-appendix-further) and on dependent observations (@sec-appendix-dependence). If you do not follow football, skim the football page *first* — it defines, in plain words, every football term the examples take for granted.
+
+**If you have had a statistics course before.** Chapters 1–2 and 4–6 will read largely as review — with two exceptions that will not: Chapter 3's data discipline (what a row is, what a frame is, which shots are even in the table) and Chapter 5's demonstration that the familiar 68/95 guideline misfires the moment a distribution stops being bell-shaped. Chapters 11–14 and 19 must be read closely whatever your background — they carry the book's inferential logic and the conventions every later verdict leans on. And because the running datasets, the Northbridge cast, and the frame conventions planted in Parts I–II are load-bearing everywhere after, skipping the early chapters is costly: skim them, don't skip them.
+
+One working assumption is worth stating plainly: this book assumes you compute in R (tidyverse conventions throughout), and the setup appendix (@sec-appendix-setup) walks through installing everything the code needs.
+
+## Where the book stands {.unnumbered}
+
+All twenty-seven chapters are complete: Parts I–IV carry you from data and study design through exploratory analysis, modeling, and the foundations of inference; Parts V and VI finish the argument with the full catalog of inferential methods — proportions, tables, means, ANOVA — and inference for regression models, closing with the end-to-end case studies that send you back to the club with a number, an interval, and a stated frame. The adaptation preserves IMS's chapter structure and section anchors exactly, so readers moving between this book and the original can cross the bridge in either direction.
+
+## Attribution and license {.unnumbered}
+
+This book is an adaptation of *Introduction to Modern Statistics* (2nd edition) by Mine Çetinkaya-Rundel and Johanna Hardin, used under CC BY-SA 4.0. The pedagogical structure, curriculum sequence, and statistical definitions follow the original faithfully; the football-scouting setting, examples, and exercises are new. Section anchors mirror IMS's exactly — which is why an occasional anchor name carries the flavor of an IMS example rather than its football counterpart — so that cross-references and deep links stay navigable between the two books. This adaptation is likewise licensed CC BY-SA 4.0. Match data: [StatsBomb open data](https://github.com/statsbomb/open-data), used under its non-commercial license.

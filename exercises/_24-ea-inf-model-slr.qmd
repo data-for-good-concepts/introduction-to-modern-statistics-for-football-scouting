@@ -1,0 +1,19 @@
+**2.** (a) $H_0: \beta_1 = 0,$ no linear relationship between the minute of the match and a shot's chance quality; $H_A: \beta_1 \ne 0$ (two-sided, whichever direction the drift runs). (b) p-value $= 363/1000 = 0.363 > 0.05;$ fail to reject $H_0$ — no convincing evidence that the minute is linearly related to chance quality, so the match clock is not a useful predictor. (c) Yes — the mathematical model's p-value of $0.342$ is nearly identical to $0.363,$ and both fail to reject $H_0.$
+
+**4.** (a) $\widehat{\texttt{statsbomb\_xg}} = 0.104 - 0.000125 \times 30 \approx 0.100.$ (b) $H_0: \beta_1 = 0;$ $H_A: \beta_1 \ne 0;$ p-value $= 0.342 > 0.05;$ fail to reject $H_0$ — no convincing evidence of a linear minute--chance-quality relationship. (c) No — the match clock is not a useful predictor of chance quality.
+
+**6.** (a) $(-0.00037, +0.00013).$ (b) With 95% confidence, each additional minute changes the predicted chance quality of an open-play shot by between $-0.00037$ and $+0.00013$ xG; the interval contains 0, so the fatigue-drift theory finds no support at this tournament.
+
+**8.** (a) $SE = 0.00013.$ (b) $-0.000125 \pm 1.96 \times 0.00013 \rightarrow (-0.00038, +0.00013).$ (c) With 95% confidence, each additional minute changes predicted chance quality by between $-0.00038$ and $+0.00013$ xG per minute; the interval contains 0 — no discernible drift.
+
+**10.** (a) $r = -\sqrt{0.001} \approx -0.03;$ negative because the fitted slope in Exercise 2 is negative. (b) Residuals hug zero from below with a long right tail at every minute (xG is bounded near zero): **N**ormality clearly violated; **L**inearity acceptable (no curvature); **E**qual variability roughly met (the same skewed band across the clock); **I**ndependence strained (shots cluster within matches). The line can describe the near-zero trend, but mathematical p-values should be read as approximations.
+
+**12.** (a) $H_0: \beta_1 = 0,$ no linear relationship between a match's combined xG and its combined goals; $H_A: \beta_1 \ne 0.$ (b) p-value $= 0.00356 < 0.05;$ reject $H_0$ — a match's chance quality is a useful predictor of its goal count. (c) $1.10 \pm 2.10 \times 0.330 \rightarrow (0.41, 1.79):$ with 95% confidence, each additional unit of combined chance quality predicts between 0.41 and 1.79 more combined goals. (d) Yes — the interval excludes 0 and the test rejects $H_0,$ as they must at matching levels.
+
+**14.** (a) $SE = 0.28.$ (b) $1.10 \pm 1.645 \times 0.28 \rightarrow (0.64, 1.56).$ (c) With 90% confidence, each additional unit of combined chance quality predicts between 0.64 and 1.56 more combined goals in a match.
+
+**16.** (a) $H_0: \beta_1 = 0;$ $H_A: \beta_1 > 0,$ shot volume is positively associated with accumulated chance quality. (b) One-sided p-value $= 6.01 \times 10^{-20}/2 = 3.0 \times 10^{-20};$ reject $H_0$ — convincing evidence of a positive association. (c) $0.154 \pm 1.98 \times 0.0140 \rightarrow (0.126, 0.182):$ with 95% confidence, each additional shot predicts between 0.126 and 0.182 more xG in a team-match. (d) Yes — the interval sits entirely above 0, agreeing with the rejection of $H_0.$
+
+**18.** (a) $r = +\sqrt{0.25} = +0.50;$ positive because the fitted slope $(+0.40)$ is positive. (b) Residuals scatter evenly around zero with no pattern: **L**, **E**, and **N** are met, **I**ndependence is reasonable (32 distinct squads) — a least squares fit is appropriate.
+
+**20.** (a) Answers vary; key: only 16 residuals — too few to show patterns. (b) Residual plot: no — nothing alarming. Design: yes — 16 forwards from one club's academy, so the causal finding generalizes only to similar Northbridge-like forwards, not all academy forwards.

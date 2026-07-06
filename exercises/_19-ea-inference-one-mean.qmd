@@ -1,0 +1,21 @@
+**2.** (a) The statistic is the average number of years of organized football among the 20 sampled signings; the parameter is the average number of years of organized football among all newly signed academy players from that recruitment region. (b) The statistic is the average creatine kinase concentration in the blood of the measured players; the parameter is the average creatine kinase concentration among all first-team players regularly exposed to congested fixture schedules.
+
+**4.** (a) $5.9/\sqrt{10} = 1.87$ cm. (b) $0.83$ cm. (c) $0.59$ cm. (d) $0.19$ cm. (e) The sample-to-sample variability of the sample mean — the typical distance between the mean of a random sample of size $n$ and the population mean.
+
+**6.** (a) $SE \approx$ the standard deviation of the 1,000 bootstrapped means $\approx 0.25$ cm. (b) The 5th to 95th percentile of the bootstrapped means: $(57.94, 58.75).$ We are 90% confident that the true average jump-and-reach score of trialists from this pipeline is between about 57.9 and 58.7 cm. (c) $58.3 \pm 1.65 \times 0.25 \rightarrow (57.89, 58.71).$ We are 90% confident that the true average jump-and-reach score is between about 57.9 and 58.7 cm.
+
+**8.** Solid: the standard normal ($z$) — tallest peak, thinnest tails. Dashed: $t$ with $df = 5.$ Dotted: $t$ with $df = 1$ — lowest peak, heaviest tails. The fewer the degrees of freedom, the heavier the tails; as $df$ grows, the $t$-distribution approaches the normal.
+
+**10.** (a) $df = 25,$ p-value $= 0.020$ (from `2 * (1 - pt(2.485, df = 25))`), do not reject $H_0$ at $\alpha = 0.01.$ (b) $df = 17,$ p-value $= 0.623,$ do not reject $H_0.$
+
+**12.** (a) Mean 0.134 xG; median 0.060 xG. With the mean more than double the median and above $Q3,$ the distribution is strongly right skewed — mostly low-quality shots with a long tail of high-quality chances. (b) $H_0: \mu = 0.10$; $H_A: \mu \neq 0.10.$ $SE = 0.193/\sqrt{1000} = 0.0061,$ $T = (0.134 - 0.10)/0.0061 = 5.57,$ $df = 999,$ p-value $\approx 3 \times 10^{-8} < 0.0001$: reject $H_0$ — the mean chance quality per shot is discernibly above 0.10 xG. (c) The penalty claim is addressable: dropping the 49 penalties leaves 951 shots with mean $(134 - 49 \times 0.7835)/951 \approx 0.100$ xG, so for non-penalty shots the pundit's 0.10 survives. The provider claim is not addressable — the sample carries only StatsBomb's xG values, with no other vendor's model to compare.
+
+**14.** (a) False — the p-value is not the probability that $H_0$ is true. (b) False — nor the probability that $H_A$ is true; it is computed assuming $H_0$ holds. (c) False — a large p-value means insufficient evidence against $H_0,$ not proof that it is true. (d) False — the p-value here is 0.23, which is not small, and a p-value says nothing about how far the population average sits from 10 grams. (e) True.
+
+**16.** $\bar{x} = (65 + 77)/2 = 71$; $ME = (77 - 65)/2 = 6$; with $df = 25 - 1 = 24$ and $t^{\star}_{24} = 1.71$: $s = ME \times \sqrt{n}/t^{\star}_{24} = 6 \times 5/1.71 = 17.5.$
+
+**18.** For a two-sided p-value of 0.05, $|T| = t^{\star}_{19} = 2.093$ with $SE = 8/\sqrt{20} = 1.789$: $\bar{x} = 60 \pm 2.093 \times 1.789,$ i.e., $\bar{x} = 63.74$ or $\bar{x} = 56.26.$
+
+**20.** (a) Yes — a bootstrap sample may repeat a single observed value six times. (b) No — 13 is not in the original sample. (c) No — a bootstrap sample must contain $n = 6$ values, not 3. (d) No — it contains 7 values, more than $n = 6.$ (e) Yes.
+
+**22.** (a) $H_0: \mu = 220$ U/L; $H_A: \mu \neq 220$ U/L, where $\mu$ is the mean creatine kinase concentration of players playing twice a week through the congested period. (b) Independence: the 52 players are treated as a random sample of players under this schedule — reasonable. Normality: $n = 52 \geq 30,$ and with no raw data to inspect we rely on the large-sample allowance for mild skew; no extreme outliers are indicated. Conditions met. (c) $SE = 258.52/\sqrt{52} = 35.85,$ $T = (851.59 - 220)/35.85 = 17.62,$ $df = 51,$ one-sided p-value $< 0.0001$: reject $H_0$ — congested-schedule players carry a far higher creatine kinase concentration than the rested benchmark, evidence of substantial accumulated muscle damage.

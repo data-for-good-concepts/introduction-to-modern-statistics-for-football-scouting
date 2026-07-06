@@ -1,0 +1,430 @@
+1.  **Shooting under pressure at the World Cup, hypothesis test.** Do shots taken under defensive pressure convert at a different rate?
+    You met this question at the 2022 Men's World Cup in [Chapter -@sec-foundations-randomization], where the frame proved to be half the analysis: on all 1,494 shots the conversion gap is $-0.035,$ but the tournament's 64 penalty kicks — which can never be taken under pressure — prop up the unpressured pile, and @sec-chp11-pens-out showed the open-play gap is far smaller.
+    Per the book's penalty convention, this exercise states its frame up front: open-play shots only, `shot_type == "Open Play"`.
+    Among the 1,382 open-play shots, the 238 taken under pressure converted at $24/238 = 0.101$ and the 1,144 others at $126/1144 = 0.110.$
+    To assess the conversion gap with this chapter's machinery, a randomization simulation was performed.[^_17-ex-inference-two-props-1]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    set.seed(1706)
+    wc2022_shots |>
+      filter(shot_type == "Open Play") |>
+      mutate(
+        pressure = if_else(under_pressure, "pressured", "not pressured"),
+        result   = if_else(goal, "goal", "no goal")
+      ) |>
+      specify(result ~ pressure, success = "goal") |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "diff in props",
+                order = c("pressured", "not pressured")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.005) +
+      labs(
+        title = "1,000 randomized differences",
+        x = "Difference in randomized conversion rates\n(pressured - not pressured)",
+        y = "Count"
+      )
+    ```
+
+    The resulting histogram is bell-shaped and centered at 0, with nearly all of the 1,000 differences falling between $-0.07$ and $+0.07.$
+
+    a.  In both words and symbols provide the parameter and statistic of interest for this study.
+        Do you know the numerical value of either the parameter or statistic of interest?
+        If so, provide the numerical value.
+
+    b.  The histogram above provides the sampling distribution (under randomization) for $\hat{p}_{prs} - \hat{p}_{nop}$ under repeated null randomizations ($\hat{p}$ is the proportion of shots in the sample that were scored).
+        Estimate the standard error of $\hat{p}_{prs} - \hat{p}_{nop}$ based on the randomization histogram.
+
+    c.  Consider the hypothesis test to determine if there is a difference in open-play conversion between pressured and unpressured shots.
+        Write out the null and alternative hypotheses, estimate a p-value using the randomization histogram (in this run, 392 of the 1,000 shuffled differences were at least as far below zero as the observed difference), and conclude the test in the context of the problem.
+        Keep in mind what kind of study this is, and what that means for your conclusion.
+
+2.  **Muscle-flag warm-up trial, hypothesis test.** This is a second, separate warm-up trial — not the knee-injury prevention trial you met in the exercises of @sec-data-hello, which tracked a different cohort and a different outcome.
+    Here a federation-coordinated trial across the league's youth academies randomized 439 players: 292 to a new neuromuscular protocol and 147 to the standard warm-up, with each academy recording whether the player logged at least one muscle-tightness or minor-strain flag in the physio system during the season.
+    89 of the 292 new-protocol players and 106 of the 147 standard-warm-up players logged such a flag.[^_17-ex-inference-two-props-2]
+
+    ```r
+    muscle439 <- tibble(
+      protocol = c(rep("new", 292), rep("standard", 147)),
+      outcome  = c(
+        rep("flagged", 89), rep("no flag", 203),
+        rep("flagged", 106), rep("no flag", 41)
+      )
+    )
+
+    set.seed(1707)
+    muscle439 |>
+      specify(outcome ~ protocol, success = "flagged") |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "diff in props", order = c("new", "standard")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.02) +
+      labs(
+        title = "1,000 randomized differences",
+        x = "Difference in randomized proportions flagged\n(new - standard)",
+        y = "Count"
+      )
+    ```
+
+    The resulting histogram is bell-shaped and centered at 0, with nearly all of the 1,000 differences falling between $-0.15$ and $+0.15.$
+
+    a.  In both words and symbols provide the parameter and statistic of interest for this study.
+        Do you know the numerical value of either the parameter or statistic of interest?
+        If so, provide the numerical value.
+
+    b.  The histogram above provides the sampling distribution (under randomization) for $\hat{p}_{new} - \hat{p}_{std}$ under repeated null randomizations ($\hat{p}$ is the proportion of players in the sample who were flagged).
+        Estimate the standard error of $\hat{p}_{new} - \hat{p}_{std}$ based on the randomization histogram.
+
+    c.  Consider the hypothesis test constructed to show a lower flag proportion on the new warm-up protocol as compared to the standard warm-up.
+        Write out the null and alternative hypotheses, estimate a p-value using the randomization histogram, and conclude the test in the context of the problem.
+
+3.  **Shooting under pressure at the Women's Euro, confidence interval.** Does the open-play pressure gap replicate at the 2025 Women's Euro, and how large might it be?
+    As in Exercise 1 — and per the book's penalty convention — the frame is open play: the Euro's 51 penalty kicks (none of them pressured, converting at 0.549) all sit in the unpressured pile and inflate the all-shots gap to $-0.052.$
+    Among the 851 open-play shots, the 325 taken under pressure converted at $33/325 = 0.102$ and the 526 others at $62/526 = 0.118.$
+    A confidence interval for the difference in conversion rates is desired.[^_17-ex-inference-two-props-3]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    set.seed(1708)
+    weuro2025_shots |>
+      filter(shot_type == "Open Play") |>
+      mutate(
+        pressure = if_else(under_pressure, "pressured", "not pressured"),
+        result   = if_else(goal, "goal", "no goal")
+      ) |>
+      specify(result ~ pressure, success = "goal") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "diff in props",
+                order = c("pressured", "not pressured")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.005) +
+      labs(
+        title = "1,000 bootstrapped differences",
+        x = "Difference in bootstrapped conversion rates\n(pressured - not pressured)",
+        y = "Count"
+      )
+    ```
+
+    The resulting histogram is bell-shaped and centered near the observed difference of $-0.016,$ with nearly all of the 1,000 bootstrapped differences falling between $-0.08$ and $+0.05.$
+    In this run, the 2.5th and 97.5th percentiles of the bootstrapped differences are $-0.057$ and $0.025,$ and the standard deviation of the bootstrapped differences is $0.021.$
+
+    a.  Consider the bootstrap distribution of the difference in sample conversion rates (pressured minus not pressured) in 1,000 bootstrap repetitions as above.
+        Estimate the standard error of the difference in sample proportions, as seen in the histogram.
+
+    b.  Using the standard error from the bootstrap distribution, find a 95% bootstrap SE confidence interval for the true difference in open-play conversion rates (pressured minus not pressured) at this tournament.
+        Interpret the interval in the context of the problem.
+
+    c.  Using the entire bootstrap distribution, find a 95% bootstrap percentile confidence interval for the true difference in open-play conversion rates (pressured minus not pressured).
+        Interpret the interval in the context of the problem.
+
+4.  **Muscle-flag warm-up trial, confidence interval.** The randomized muscle-flag trial of Exercise 2 compared a new neuromuscular protocol (89 of 292 players logging a flag) with the standard warm-up (106 of 147).
+    A confidence interval for the difference in flag proportions is desired.
+
+    ```r
+    set.seed(1709)
+    muscle439 |>
+      specify(outcome ~ protocol, success = "flagged") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "diff in props", order = c("new", "standard")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.02) +
+      labs(
+        title = "1,000 bootstrapped differences",
+        x = "Difference in bootstrapped proportions flagged\n(new - standard)",
+        y = "Count"
+      )
+    ```
+
+    The resulting histogram is bell-shaped and centered near the observed difference of $-0.416,$ with nearly all of the 1,000 bootstrapped differences falling between $-0.55$ and $-0.28.$
+    In this run, the 2.5th and 97.5th percentiles of the bootstrapped differences are $-0.500$ and $-0.333,$ and the standard deviation of the bootstrapped differences is $0.044.$
+
+    a.  Consider the bootstrap distribution of the difference in sample proportions flagged (new protocol minus standard) in 1,000 bootstrap repetitions as above.
+        Estimate the standard error of the difference in sample proportions, as seen in the histogram.
+
+    b.  Using the standard error from the bootstrap distribution, find a 95% bootstrap SE confidence interval for the true difference in flag proportions (new minus standard) in the population.
+        Interpret the interval in the context of the problem.
+
+    c.  Using the entire bootstrap distribution, find a 95% bootstrap percentile confidence interval for the true difference in flag proportions (new minus standard) in the population.
+        Interpret the interval in the context of the problem.
+
+5.  **Fixture congestion and scouting coverage.** A 2026 survey drawn from the federation's licensing registry reached 3,941 scouts working in men's football and 2,064 scouts working in women's football (respondents were not randomly selected but were weighted so as to represent the licensed profession).
+    The survey found that 51% of the men's-game scouts and 44% of the women's-game scouts said the congested winter fixture calendar will negatively impact their ability to complete their assigned coverage.[^_17-ex-inference-two-props-4]
+
+    Below are two histograms generated with different computational approaches (both use 1,000 repetitions) to research questions which could be asked of these data.
+    One of the histograms can be used to do a randomization test on whether the proportions of men's-game and women's-game scouts who expect a negative impact on their coverage are different.
+    The other histogram is a bootstrap distribution used to quantify the difference in the proportions of men's-game and women's-game scouts who feel this way.
+
+    ```r
+    coverage_survey <- tibble(
+      game    = c(rep("men", 3941), rep("women", 2064)),
+      opinion = c(
+        rep("negative impact", 2010), rep("no impact", 1931),
+        rep("negative impact", 908), rep("no impact", 1156)
+      )
+    )
+
+    set.seed(1710)
+    p_A <- coverage_survey |>
+      specify(opinion ~ game, success = "negative impact") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "diff in props", order = c("men", "women")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(bins = 20) +
+      labs(
+        title = "Computational method A",
+        x = "Difference in simulated proportions\n(men - women)",
+        y = "Count"
+      )
+
+    set.seed(1711)
+    p_B <- coverage_survey |>
+      specify(opinion ~ game, success = "negative impact") |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "diff in props", order = c("men", "women")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(bins = 20) +
+      labs(
+        title = "Computational method B",
+        x = "Difference in simulated proportions\n(men - women)",
+        y = "Count"
+      )
+
+    p_A + p_B
+    ```
+
+    Both histograms are bell-shaped: method A's is centered near 0.07 and spans roughly 0.03 to 0.11, while method B's is centered at 0 and spans roughly $-0.04$ to $+0.04.$
+
+    a.  Are the center and standard error of the two graphs approximately the same?
+        Explain.
+
+    b.  Write a research question that can be addressed using the histogram generated with computational method A.
+
+    c.  Write a research question that can be addressed using the histogram generated with computational method B.
+
+6.  **Mandatory xG appendices.** A survey of licensed coaches and club analysts across the confederation's member associations reached 5,447 coaches and 7,962 analysts.
+    31% of the coaches and 81% of the analysts said "an xG appendix should be mandatory in every prospect report submitted to a sporting director."
+
+    Below are two histograms generated with different computational approaches (both use 1,000 repetitions) to research questions which could be asked of these data.
+    One of the histograms can be used to do a randomization test on whether the proportions of coaches and analysts who support mandatory xG appendices are different.
+    The other histogram is a bootstrap distribution used to quantify the difference in the proportions of coaches and analysts who agree with the statement.
+
+    ```r
+    xg_survey <- tibble(
+      role    = c(rep("coach", 5447), rep("analyst", 7962)),
+      opinion = c(
+        rep("necessary", 1689), rep("not necessary", 3758),
+        rep("necessary", 6449), rep("not necessary", 1513)
+      )
+    )
+
+    set.seed(1712)
+    p_A <- xg_survey |>
+      specify(opinion ~ role, success = "necessary") |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "diff in props", order = c("coach", "analyst")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(bins = 20) +
+      labs(
+        title = "Computational method A",
+        x = "Difference in simulated proportions\n(coach - analyst)",
+        y = "Count"
+      )
+
+    set.seed(1713)
+    p_B <- xg_survey |>
+      specify(opinion ~ role, success = "necessary") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "diff in props", order = c("coach", "analyst")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(bins = 20) +
+      labs(
+        title = "Computational method B",
+        x = "Difference in simulated proportions\n(coach - analyst)",
+        y = "Count"
+      )
+
+    p_A + p_B
+    ```
+
+    Both histograms are bell-shaped: method A's is centered at 0 and spans roughly $-0.03$ to $+0.03,$ while method B's is centered near $-0.50$ and spans roughly $-0.52$ to $-0.48.$
+
+    a.  Are the center and standard error of the two graphs approximately the same?
+        Explain.
+
+    b.  Write a research question that can be addressed using the histogram generated with computational method A.
+
+    c.  Write a research question that can be addressed using the histogram generated with computational method B.
+
+7.  **Return-to-play protocols.** Northbridge's medical department, together with two partner clubs, ran a randomized comparison of two rehabilitation protocols for players returning from comparable minor muscle injuries.
+    240 players participated; 120 were randomized to each of the two protocols: the standard rehabilitation program, or a new graded-return program that staggers the reintroduction of full-intensity training.
+    Twenty-four weeks after returning to play, each player's status was reviewed to determine whether the same muscle had been re-injured.
+    Twenty-six of the 120 players on the standard program experienced a re-injury, while 10 of the 120 players on the graded-return program experienced a re-injury.
+
+    a.  Create a two-way table presenting the results of this study.
+
+    b.  State appropriate hypotheses to test for a difference in re-injury rates between the two protocols.
+
+    c.  Complete the hypothesis test and state an appropriate conclusion.
+        (Reminder: Verify any necessary conditions for the test.)
+
+8.  **Professional-terms pipelines.** The fraction of registered academy players who go on to sign professional terms by age 19 varies by region.
+    Suppose 1% of academy players registered with the Northern regional association and 6% of those registered with the Capital regional association sign professional terms by 19.
+    Now suppose that we plan a study drawing random samples of 1,000 player records from each association, and we will compute the sample proportions $\hat{p}_{N}$ for the Northern association and $\hat{p}_{C}$ for the Capital association.
+
+    a.  What is the associated mean and standard deviation of $\hat{p}_{N}$ in repeated samples of size 1000?
+
+    b.  What is the associated mean and standard deviation of $\hat{p}_{C}$ in repeated samples of size 1000?
+
+    c.  Calculate and interpret the mean and standard deviation associated with the difference in sample proportions for the two groups, $\hat{p}_{C} - \hat{p}_{N},$ in repeated samples of 1000 in each group.
+
+    d.  How are the standard deviations from parts (a), (b), and (c) related?
+
+9.  **Standardized data feed.** A federation working group surveyed club staff attending an international sporting directors' congress on a proposal that leagues distribute a standardized event-data feed to all clubs.
+    Among those surveyed were 347 sporting directors and 617 club analysts; 79% of the sporting directors and 55% of the analysts supported the proposal.
+
+    a.  Calculate a 95% confidence interval for the difference between the proportions of sporting directors and analysts who support the proposal $(p_{SD} - p_{AN}),$ and interpret it in this context.
+        We have already checked conditions for you.
+
+    b.  True or false: If we had picked a random sporting director and a random analyst at the time of this survey, it is more likely that the sporting director would support the proposal than the analyst.
+
+10. **Academy graduates on the team sheet, confidence interval.** A league audit examined how much playing time goes to club-trained players.
+    In a simple random sample of 11,545 player-appearances from League A, 924 (8.0%) were by graduates of the fielding club's own academy; in a simple random sample of 4,691 player-appearances from League B, 413 (8.8%) were.
+    Calculate a 95% confidence interval for the difference between the proportions of appearances by club-trained academy graduates in the two leagues $(p_{A} - p_{B}),$ and interpret it in the context of the data.
+
+11. **Valuing foreign-trained players.** A market study compared agencies' average asking prices for domestically trained and foreign-trained players of matched age, position, and output across 21 market brackets.
+
+    a.  If training origin played no role in pricing, then we would expect the domestically trained player to carry the higher average price in about half of the brackets, and the foreign-trained player in the other half.
+        Write appropriate hypotheses to test this scenario.
+
+    b.  Domestically trained players were, on average, priced higher in 19 of the 21 brackets.
+        Complete a hypothesis test using your hypotheses from part (a).
+
+12. **Academy graduates on the team sheet, hypothesis test.** The league audit of Exercise 10 found that 924 of 11,545 sampled player-appearances in League A (8.0%) and 413 of 4,691 in League B (8.8%) were by club-trained academy graduates, based on simple random samples of appearance records.
+
+    a.  Conduct a hypothesis test to determine if these data provide strong evidence that the rate of appearances by academy graduates is different for the two leagues.
+        (Reminder: Check conditions.)
+        Note that because the null hypothesis claims the two rates are equal, the standard error here is built from the pooled proportion — explain why this SE differs from the unpooled SE you used for the confidence interval in Exercise 10.
+
+    b.  It is possible the conclusion of the test in part (a) is incorrect.
+        If this is the case, what type of error was made?
+
+13. **Pre-match visualization pilot.** Priya Rao piloted a pre-match visualization routine with 50 academy forwards.
+    The players were randomly assigned to two groups: 34 to a group that completed the guided visualization routine before their next fixture (treatment) and 16 to a group that prepared as usual (control).
+    In the following fixture, 10 of the 34 treatment players and 4 of the 16 control players scored.[^_17-ex-inference-two-props-5]
+
+    |           | scored | did not score | Total |
+    |:----------|-------:|--------------:|------:|
+    | treatment |     10 |            24 |    34 |
+    | control   |      4 |            12 |    16 |
+
+    Suppose we are interested in estimating the difference in scoring rates between the control and treatment groups using a confidence interval.
+    Explain why we cannot construct such an interval using the normal approximation.
+    What might go wrong if we constructed the confidence interval despite this problem?
+
+14. **Development program revisited.** Recall the `academy103` data from the exercises of [Chapter -@sec-foundations-randomization]: a constructed scenario in which 103 academy players flagged as at risk of release either entered Jonas Beck's individualized development program or did not (the program was *not* randomly assigned).
+    Of the 69 players in the development group, 24 were retained (45 released); of the 34 players in the control group, 4 were retained (30 released).
+
+    Suppose we are interested in estimating the difference in retention rates between the development and control groups using a confidence interval.
+    Explain why we cannot construct such an interval using the normal approximation.
+    What might go wrong if we constructed the confidence interval despite this problem?
+
+15. **Winter window coverage.** The league's compressed winter transfer window ran for five weeks.
+    A survey of 614 randomly sampled club scouts during this period reported that 48% of scouts at clubs with January budgets under €10M and 55% of scouts at clubs at or above that threshold said the compressed window has not at all affected their completed assignments.
+    A 95% confidence interval for $(p_{<10M} - p_{\geq 10M}),$ where $p$ is the proportion of scouts who said the compressed window has not at all affected their completed assignments, is $(-0.16, 0.02).$
+    Based on this information, determine if the following statements are true or false, and explain your reasoning if you identify the statement as false.
+
+    a.  At the 5% discernibility level, the data provide convincing evidence of a real difference in the proportion whose assignments are unaffected between scouts at sub-€10M clubs and scouts at clubs at or above €10M.
+
+    b.  We are 95% confident that 16% more to 2% fewer scouts at sub-€10M clubs are not at all affected by the compressed window compared to scouts at clubs at or above €10M.
+
+    c.  A 90% confidence interval for $(p_{<10M} - p_{\geq 10M})$ would be wider than the $(-0.16, 0.02)$ interval.
+
+    d.  A 95% confidence interval for $(p_{\geq 10M} - p_{<10M})$ is $(-0.02, 0.16).$
+
+16. **AI-assisted tagging by age.** A scouting-association poll asked member scouts aged 18--29 and 30--49 whether they have personally used AI-assisted video tagging in their work during the past season.
+    A 95% confidence interval for the difference between the proportions of 18--29 year-old and 30--49 year-old scouts who have personally used AI-assisted tagging $(p_{18-29} - p_{30-49})$ was calculated to be $(0.115, 0.185).$
+    Based on this information, determine if the following statements are true or false, and explain your reasoning for each statement you identify as false.
+
+    a.  We are 95% confident that the true proportion of 18--29 year-old scouts who have used AI-assisted tagging is 11.5% to 18.5% lower than the true proportion of 30--49 year-old scouts who have.
+
+    b.  We are 95% confident that the true proportion of 18--29 year-old scouts who have used AI-assisted tagging is 11.5% to 18.5% higher than the true proportion of 30--49 year-old scouts who have.
+
+    c.  95% of random samples will produce 95% confidence intervals that include the true difference between the population proportions of 18--29 year-old and 30--49 year-old scouts who have used AI-assisted tagging.
+
+    d.  We can conclude that the difference between the proportions of 18--29 year-old and 30--49 year-old scouts who have used AI-assisted tagging is too large to plausibly be due to chance, if in fact there is no difference between the two proportions.
+
+    e.  The 90% confidence interval for $(p_{18-29} - p_{30-49})$ cannot be calculated with only the information given in this exercise.
+
+17. **Decision errors and comparing proportions, I.** In the following research studies, conclusions were made based on the data provided.
+    It is always possible that the analysis conclusion could be wrong, although we will almost never actually know if an error has been made or not.
+    For each study conclusion, specify which of a Type I or Type II error could have been made, and state the error in the context of the problem.
+
+    a.  The graded-return rehabilitation program was seen to be effective at lowering the rate of re-injury (when compared to the standard program).
+
+    b.  At the 2022 Men's World Cup, pressured and unpressured open-play shots are not observed to convert at different rates.
+
+    c.  There is no evidence to claim a difference in the proportion of scouts whose assignments are unaffected by the compressed winter window when comparing scouts at sub-€10M clubs and scouts at clubs at or above €10M.
+
+18. **Decision errors and comparing proportions, II.** In the following research studies, conclusions were made based on the data provided.
+    It is always possible that the analysis conclusion could be wrong, although we will almost never actually know if an error has been made or not.
+    For each study conclusion, specify which of a Type I or Type II error could have been made, and state the error in the context of the problem.
+
+    a.  Among the league's registered scouts, the proportion who report not knowing enough to voice an opinion on the proposed homegrown-quota change is different across those who hold an analytics qualification and those who do not.
+
+    b.  In comparing open-play conversion under pressure and not under pressure at the 2025 Women's Euro, there is no evidence to support a difference in the rates.
+
+19. **Trust in xG rankings.** Priya Rao wants to know whether the scouting network's attitude toward xG-based prospect rankings changed over the season.
+    She surveys all 48 regional scouts in August, asking whether they trust xG-based rankings when compiling a shortlist, and asks the same 48 scouts the same question again in May.
+    Can she use the methods we learned in this chapter for this analysis?
+    Explain your reasoning.
+
+20. **Video self-review beliefs.** At the start of the season, Jonas Beck asked the academy intake whether they believed reviewing their own match video weekly improves finishing; 40% of the players responded yes.
+    Throughout the season, embedded analysts ran weekly self-review sessions with every age group.
+    Jonas asked the same players the same question at the end of the season, and this time 60% responded yes.
+    Can he use a two-proportion method from this chapter for this analysis?
+    Explain your reasoning.
+
+21. **Muscle-flag warm-up trial, effect size.** The randomized trial of Exercise 2 assigned 292 academy players to a new neuromuscular protocol and 147 to the standard warm-up; 89 of 292 new-protocol and 106 of 147 standard players logged a muscle-tightness or minor-strain flag during the season.
+
+    Recall that in order to reject the null hypothesis that the two protocols are equivalent, we'd need the difference in sample proportions to be about 2 standard errors below the hypothesized value of zero.
+
+    Say that the true difference (in the population) is given as $\delta,$ the sample sizes are the same in both groups $(n_{new} = n_{std}),$ and the true proportion who log a muscle flag on the standard warm-up is $p_{std} = 0.7.$
+    If you ran your own study (in the future), how likely is it that you would get a difference in sample proportions that was sufficiently far below zero that you could reject under each of the conditions below?
+    (*Hint:* Use the mathematical model.)
+
+    a.  $\delta = -0.1$ and $n_{new} = n_{std} = 20$
+
+    b.  $\delta = -0.4$ and $n_{new} = n_{std} = 20$
+
+    c.  $\delta = -0.1$ and $n_{new} = n_{std} = 100$
+
+    d.  $\delta = -0.4$ and $n_{new} = n_{std} = 100$
+
+    e.  What can you conclude about values of $\delta$ and the sample size?
+
+22. **Vendor tagging errors.** The league's data-quality unit audited event-data records from its two suppliers.
+    The audit found that 717 of 47,774 sampled records (1.5%) from the established vendor and 146 of 5,855 sampled records (2.5%) from a challenger vendor contained player-identification errors.
+
+    a.  Create a two-way table presenting the results of this audit.
+
+    b.  State appropriate hypotheses to test for a difference in error rates between the two vendors.
+
+    c.  The sample difference is about 1 percentage point.
+        If we completed the hypothesis test, we would find that the p-value is very small (about 0), meaning the difference is statistically discernible.
+        Use this result to explain the difference between statistically discernible and practically important findings.
+
+[^_17-ex-inference-two-props-1]: The 2022 World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_17-ex-inference-two-props-2]: The `muscle439` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real academy players were involved.
+
+[^_17-ex-inference-two-props-3]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_17-ex-inference-two-props-4]: The surveys, audits, and market studies in Exercises 5, 6, 8, 9, 10, 11, 12, 15, 16, and 22 are constructed scouting scenarios for practice; wherever a dataset is analyzed, the seeded code that builds it is shown.
+
+[^_17-ex-inference-two-props-5]: The visualization-pilot data are a constructed scenario; the counts are stated in the exercise.

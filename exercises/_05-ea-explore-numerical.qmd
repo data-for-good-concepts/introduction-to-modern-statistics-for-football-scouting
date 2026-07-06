@@ -1,0 +1,25 @@
+**2.** (a) Positive: (1), linear; (3), nonlinear. (b) Negative: (4), linear. (c) No association: (2).
+
+**4.** Answers vary; key: inverted-U — rises, peaks at moderate arousal, then falls.
+
+**6.** (a) $Q_1 = 1,$ median $= 2,$ $Q_3 = 4$ shots. (b) Larger; the long right tail (out to 34 shots) pulls the mean (3.46) above the median.
+
+**8.** (a) Medians equal (both 6); IQRs equal — only the maximum differs, and neither statistic uses it. (b) B has the higher median (7 vs. 6); IQRs similar, B's slightly larger. (c) B has the higher median (8 vs. 3); IQRs equal — same spread, shifted location. (d) B has the higher median (500 vs. 50) and the higher IQR (500 vs. 50); B is A scaled by 10.
+
+**10.** (a): symmetric, unimodal, and bell-shaped, centered near 33 — box plot (2). (b): uniform — flat and symmetric with no distinct mode — box plot (3). (c): unimodal and right skewed with a long upper tail — box plot (1).
+
+**12.** Median $\approx 81$ (the middle observation falls in the 80--85% bin; computed: 80.7); the mean is lower than the median — the distribution is left skewed.
+
+**14.** Right skewed; the mean (4.25) is well above the median (3), indicating a long right tail of high-volume shooters.
+
+**16.** (a) Right skewed (deals above €6,000,000 stretch the upper tail); median and IQR. (b) Symmetric (quartiles evenly spaced, tail capped near €1,200,000); mean and SD. (c) Right skewed (most trialists have 0 caps, a few have many); median and IQR. (d) Right skewed (a few star salaries); median and IQR. (e) Right skewed (tight 38--40 day core with setbacks out to 90 days); median and IQR.
+
+**18.** Not symmetric; expect left skew — the test has a ceiling of 100, and $85 + 15 = 100$ leaves no room for an upper tail.
+
+**20.** Both distributions are unimodal and strongly right skewed, with roughly 70% of shots below 0.10 xG in each group. Unpressured shots have the higher typical chance quality (mean 0.131 vs. 0.096) and far greater variability (SD 0.196 vs. 0.095), with a long right tail — 94 shots above 0.5, a penalty spike at 0.78, maximum 0.90; pressured shots rarely exceed 0.5 (max 0.64).
+
+**22.** (a) The median (€33,711); the mean (€36,496) is pulled up by the two marquee wages — the median is robust to extreme observations, the mean is not. (b) The IQR ($\approx$ €6,100); the SD tripled (5,168 to 15,852) on adding just two players — the IQR is robust, the SD is not.
+
+**24.** (a) Unimodal and right skewed: 22 of the 30 zones fall between 0.05 and 0.15, with a thin tail out to 0.315. A log transformation would tame the right skew, but the values span less than one order of magnitude, so it is optional rather than essential. (b) Chance quality peaks in band 1's central channels (0.315), decays with each band away from goal, and within every band is higher centrally than wide; lowest in band 5's wide zones (0.066).
+
+**26.** (a) Histogram: the bimodality — two clearly separated clusters — which the box plot hides entirely (its median, 16.1, sits in the empty gap between them). Box plot: the precise median, quartiles, and whisker values, and any outliers, which are hard to read from the histogram. (b) Two squads are mixed in one plot: senior winning times (about 14--16 minutes) form one cluster and U18 times (about 16--18) the other. (c) Senior times are about 2 minutes faster (median 14.8 vs. 16.9) with similarly small spreads and no overlap between the squads; the U18 side shows two high outliers (17.9 and 18.1). (d) The time trend: both squads' winning times fall steeply through the 1990s--2000s and then plateau, with the roughly two-minute gap persisting throughout — invisible in the histogram and box plots.

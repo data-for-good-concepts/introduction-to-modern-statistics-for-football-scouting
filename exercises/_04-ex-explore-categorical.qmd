@@ -1,0 +1,436 @@
+1.  **Shot origins at the Women's Euro.** Marta Vidal asks a deceptively simple question in the recruitment meeting: where do shots actually come from?
+    Priya Rao pulls the 913 shots of the 2025 Women's Euro and tallies the possession pattern each shot arose from.[^_04-ex-explore-categorical-1]
+    The bar plot and the pie chart below show the same distribution of the nine play patterns.
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro2025_shots |>
+      count(play_pattern, sort = TRUE) |>
+      mutate(proportion = n / sum(n))
+    #> # A tibble: 9 × 3
+    #>   play_pattern       n proportion
+    #>   <chr>          <int>      <dbl>
+    #> 1 Regular Play     310     0.340
+    #> 2 From Throw In    177     0.194
+    #> 3 From Corner      160     0.175
+    #> 4 From Free Kick   104     0.114
+    #> 5 Other             54     0.0591
+    #> 6 From Counter      41     0.0449
+    #> 7 From Goal Kick    35     0.0383
+    #> 8 From Keeper       22     0.0241
+    #> 9 From Kick Off     10     0.0110
+
+    # Sorted bar plot
+    weuro2025_shots |>
+      count(play_pattern, sort = TRUE) |>
+      mutate(play_pattern = reorder(play_pattern, n)) |>
+      ggplot(aes(x = n, y = play_pattern)) +
+      geom_col() +
+      labs(x = "Count", y = "Play pattern")
+
+    # Pie chart
+    weuro2025_shots |>
+      count(play_pattern, sort = TRUE) |>
+      mutate(play_pattern = reorder(play_pattern, -n)) |>
+      ggplot(aes(x = "", y = n, fill = play_pattern)) +
+      geom_col(width = 1, color = "white") +
+      coord_polar(theta = "y") +
+      theme_void() +
+      labs(fill = "Play pattern", title = "Play pattern")
+    ```
+
+    In the bar plot the nine patterns appear as bars sorted by count, from Regular Play (310 shots) down to From Kick Off (10 shots).
+    In the pie chart the same nine proportions appear as wedges of a circle: the throw-in (19.4%) and corner (17.5%) wedges are near-neighbors in size, and the five smallest wedges form a fringe of thin slices.
+
+    a.  What features are apparent in the bar plot but not in the pie chart?
+
+    b.  What features are apparent in the pie chart but not in the bar plot?
+
+    c.  Which graph would you prefer to use for displaying these categorical data?
+
+2.  **Shot technique and result.** One of Emil Sørensen's scouts insists that volleyed finishes are "low-percentage showboating" and should be coached out of young forwards.
+    The 1,494 shots of the 2022 Men's World Cup record the `technique` of each strike.[^_04-ex-explore-categorical-2]
+    Following the convention of this chapter, we drop the 39 shots struck with rarer techniques (backheels, lobs, diving headers, and overhead kicks) — and we say so — leaving 1,455 shots struck normally, on the half volley, or on the volley.
+    The results are summarized below by whether the shot was scored.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_technique <- wc2022_shots |>
+      filter(technique %in% c("Normal", "Half Volley", "Volley")) |>
+      mutate(
+        technique = factor(technique, levels = c("Normal", "Half Volley", "Volley")),
+        result = factor(if_else(goal, "goal", "no goal"), levels = c("goal", "no goal"))
+      )
+
+    wc_technique |>
+      count(technique, result) |>
+      pivot_wider(names_from = result, values_from = n)
+    #> # A tibble: 3 × 3
+    #>   technique    goal `no goal`
+    #>   <fct>       <int>     <int>
+    #> 1 Normal        153       998
+    #> 2 Half Volley    22       190
+    #> 3 Volley         14        78
+    ```
+
+    |             | goal | no goal | Total |
+    |:------------|-----:|--------:|------:|
+    | Normal      |  153 |     998 | 1,151 |
+    | Half Volley |   22 |     190 |   212 |
+    | Volley      |   14 |      78 |    92 |
+    | Total       |  189 |   1,266 | 1,455 |
+
+    a.  What percent of these 1,455 shots were struck on the volley?
+
+    b.  What percent of these shots were scored?
+
+    c.  What percent of these shots were volleys *and* were scored?
+
+    d.  What percent of the volleys were scored?
+        What percent of the half volleys were scored?
+        What percent of the shots struck normally were scored?
+
+    e.  Do shot technique and result appear to be associated?
+        Explain your reasoning.
+
+    f.  Conjecture other variables that might explain the potential relationship between these two variables.
+
+3.  **First-time shots.** A shot is logged as *first-time* when the shooter strikes the ball without a controlling touch.
+    At the 2022 Men's World Cup, 468 of the 1,494 shots were first-time efforts.
+    The code below collapses the detailed `outcome` variable into five levels — goal, saved, blocked, woodwork, off target — and builds a standardized bar plot of the outcome mix for first-time shots and for shots taken after a controlling touch.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_tempo <- wc2022_shots |>
+      mutate(
+        tempo = if_else(first_time, "first-time", "not first-time"),
+        outcome5 = case_when(
+          outcome == "Goal" ~ "goal",
+          outcome %in% c("Saved", "Saved to Post") ~ "saved",
+          outcome == "Blocked" ~ "blocked",
+          outcome == "Post" ~ "woodwork",
+          .default = "off target"
+        ),
+        outcome5 = factor(outcome5,
+                          levels = c("goal", "saved", "blocked", "woodwork", "off target"))
+      )
+
+    wc_tempo |>
+      count(tempo, outcome5) |>
+      pivot_wider(names_from = outcome5, values_from = n)
+    #> # A tibble: 2 × 6
+    #>   tempo           goal saved blocked woodwork `off target`
+    #>   <chr>          <int> <int>   <int>    <int>        <int>
+    #> 1 first-time        71    99     109        8          181
+    #> 2 not first-time   124   250     270       28          354
+
+    ggplot(wc_tempo, aes(y = tempo, fill = outcome5)) +
+      geom_bar(position = "fill") +
+      labs(x = "Proportion", y = NULL, fill = "Shot outcome")
+    ```
+
+    In the standardized bar plot each bar is split into the five outcome segments.
+    The goal segment is wider for first-time shots ($71/468 = 0.152$ against $124/1026 = 0.121$), and so is the off-target segment ($0.387$ against $0.345$); the saved and blocked segments are both wider for shots taken after a controlling touch.
+
+    a.  Based on the standardized bar plot, do shot tempo (first-time or not) and shot outcome appear to be associated?
+        Explain your reasoning.
+
+    b.  Conjecture other possible variables that might explain the potential association between these two variables.
+
+4.  **One-on-ones.** Among the 1,494 shots of the 2022 Men's World Cup, 85 are logged as one-on-ones: the shooter faced only the goalkeeper.
+    The code below summarizes these shots by result and draws a standardized bar plot.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_1v1 <- wc2022_shots |>
+      mutate(
+        situation = if_else(one_on_one, "one-on-one", "not one-on-one"),
+        result = factor(if_else(goal, "goal", "no goal"), levels = c("goal", "no goal"))
+      )
+
+    wc_1v1 |>
+      count(situation, result) |>
+      pivot_wider(names_from = result, values_from = n)
+    #> # A tibble: 2 × 3
+    #>   situation       goal `no goal`
+    #>   <chr>          <int>     <int>
+    #> 1 not one-on-one   178      1231
+    #> 2 one-on-one        17        68
+
+    ggplot(wc_1v1, aes(y = situation, fill = result)) +
+      geom_bar(position = "fill") +
+      labs(x = "Proportion", y = NULL, fill = "Result")
+    ```
+
+    |                | goal | no goal | Total |
+    |:---------------|-----:|--------:|------:|
+    | one-on-one     |   17 |      68 |    85 |
+    | not one-on-one |  178 |   1,231 | 1,409 |
+    | Total          |  195 |   1,299 | 1,494 |
+
+    In the standardized bar plot, the goal segment occupies $17/85 = 0.200$ of the one-on-one bar and $178/1409 = 0.126$ of the other bar.
+
+    a.  Based on the standardized bar plot, do facing only the goalkeeper and scoring appear to be associated?
+        Explain your reasoning.
+
+    b.  Conjecture other possible variables that might explain the potential association between these two variables.
+
+5.  **Finishing programme data display.** Jonas Beck ran a randomized experiment to determine whether an individualized finishing programme improves academy forwards' output.
+    Each of 75 academy forwards was randomly assigned — 45 to the programme and 30 to standard sessions, a 3:2 allocation dictated by coaching capacity — and at the end of the season each player either met the club's finishing benchmark or missed it.
+    This is a constructed scenario; the trial's results are rebuilt by the visible code below.[^_04-ex-explore-categorical-3]
+    The visualizations display two different versions of the results.
+
+    ```r
+    drill75 <- tibble(
+      group = factor(rep(c("programme", "standard"), times = c(45, 30)),
+                     levels = c("programme", "standard")),
+      benchmark = factor(c(rep("met", 27), rep("missed", 18),
+                           rep("met", 12), rep("missed", 18)),
+                         levels = c("met", "missed"))
+    )
+
+    drill75 |>
+      count(group, benchmark)
+    #> # A tibble: 4 × 3
+    #>   group     benchmark     n
+    #>   <fct>     <fct>     <int>
+    #> 1 programme met          27
+    #> 2 programme missed       18
+    #> 3 standard  met          12
+    #> 4 standard  missed       18
+
+    p_stacked <- ggplot(drill75, aes(y = group, fill = benchmark)) +
+      geom_bar() +
+      labs(x = "Count", y = "Group", fill = "Outcome")
+
+    p_standardized <- ggplot(drill75, aes(y = group, fill = benchmark)) +
+      geom_bar(position = "fill") +
+      labs(x = "Proportion", y = NULL, fill = "Outcome")
+
+    p_stacked + p_standardized
+    ```
+
+    In the stacked bar plot (left) the programme bar is half again as long as the standard bar; in the standardized bar plot (right) both bars run from 0 to 1, splitting at $27/45 = 0.60$ for the programme group and $12/30 = 0.40$ for the standard group.
+
+    a.  Provide one aspect of the two group comparison that is easier to see from the stacked bar plot (left)?
+
+    b.  Provide one aspect of the two group comparison that is easier to see from the standardized bar plot (right)?
+
+    c.  For the finishing-programme trial, which of those aspects would be more important to display?
+        That is, which bar plot would be better as a data visualization?
+
+6.  **Body parts and position groups data display.** Which position groups shoot with which body parts?
+    Using the 2022 Men's World Cup shots — dropping the 13 shots with body part `Other`, per this chapter's convention, and applying the position-group mapping defined earlier in this chapter (no goalkeeper took a shot at this tournament) — the code below builds the contingency table and two standardized bar plots of the same 1,481 shots.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_bp_pos <- wc2022_shots |>
+      filter(body_part != "Other") |>
+      mutate(
+        pos_group = case_when(
+          position == "Goalkeeper" ~ "GK",
+          grepl("Back", position) ~ "DF",
+          grepl("Midfield", position) ~ "MF",
+          .default = "FW"
+        ),
+        pos_group = factor(pos_group, levels = c("FW", "MF", "DF")),
+        body_part = factor(body_part, levels = c("Right Foot", "Left Foot", "Head"))
+      )
+
+    wc_bp_pos |>
+      count(pos_group, body_part) |>
+      pivot_wider(names_from = body_part, values_from = n)
+    #> # A tibble: 3 × 4
+    #>   pos_group `Right Foot` `Left Foot`  Head
+    #>   <fct>            <int>       <int> <int>
+    #> 1 FW                 358         242   127
+    #> 2 MF                 300         141    42
+    #> 3 DF                 122          66    83
+
+    # First plot
+    ggplot(wc_bp_pos, aes(y = pos_group, fill = body_part)) +
+      geom_bar(position = "fill") +
+      labs(x = "Proportion", y = "Position group", fill = "Body part")
+
+    # Second plot
+    ggplot(wc_bp_pos, aes(y = body_part, fill = pos_group)) +
+      geom_bar(position = "fill") +
+      labs(x = "Proportion", y = "Body part", fill = "Position group")
+    ```
+
+    In the first plot, each position group's bar is split by body part: the Head segment occupies $127/727 = 0.175$ of the FW bar, $42/483 = 0.087$ of the MF bar, and $83/271 = 0.306$ of the DF bar.
+    In the second plot, each body part's bar is split by position group: forwards occupy $358/780 = 0.459$ of the Right Foot bar, $242/449 = 0.539$ of the Left Foot bar, and $127/252 = 0.504$ of the Head bar.
+
+    a.  Which plot (first or second) would you use to understand the body-part profile of each position group's shooting?
+        Explain.
+
+    b.  Which plot (first or second) would you use to understand which position groups supply the shots taken with each body part?
+        Explain.
+
+    c.  Priya Rao is assembling every headed attempt from this tournament for an aerial-threat study and wants to know which position group she will mostly be watching.
+        Which position group contributed the largest share of the headers — and is it the same group that has the largest header share *within its own* shots?
+        Say which plot answers each half of the question.
+
+    d.  Jonas Beck wants to add heading drills for the position group whose shot profile currently contains the *smallest* share of headers.
+        To which position group should the drills be targeted?
+
+7.  **Shot volume and chance quality.** Do the players who shoot most often also get the best chances?
+    Priya Rao aggregates the 2022 Men's World Cup shots into one row per player — 432 players in all — recording how many shots each player took, the mean chance quality (`statsbomb_xg`) of those shots, and the position group the player took most of their shots from (a handful of players have tied groups; the code below breaks such ties as shown).
+    The two ridge plots show, by position group, the distribution of shots per player and the distribution of mean chance quality per player.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    player_profile <- wc2022_shots |>
+      mutate(
+        pos_group = case_when(
+          position == "Goalkeeper" ~ "GK",
+          grepl("Back", position) ~ "DF",
+          grepl("Midfield", position) ~ "MF",
+          .default = "FW"
+        )
+      ) |>
+      group_by(player) |>
+      summarize(
+        shots = n(),
+        mean_xg = mean(statsbomb_xg),
+        pos_group = names(which.max(table(pos_group)))
+      ) |>
+      mutate(pos_group = factor(pos_group, levels = c("FW", "MF", "DF")))
+
+    player_profile |>
+      group_by(pos_group) |>
+      summarize(players = n(), median_shots = median(shots), median_xg = median(mean_xg))
+    #> # A tibble: 3 × 4
+    #>   pos_group players median_shots median_xg
+    #>   <fct>       <int>        <dbl>     <dbl>
+    #> 1 FW            153            3    0.106
+    #> 2 MF            145            2    0.0548
+    #> 3 DF            134            2    0.0580
+
+    library(ggridges)
+
+    p_volume <- ggplot(player_profile, aes(x = shots, y = pos_group,
+                                           fill = pos_group, color = pos_group)) +
+      geom_density_ridges(alpha = 0.5, show.legend = FALSE) +
+      labs(x = "Shots per player", y = NULL)
+
+    p_quality <- ggplot(player_profile, aes(x = mean_xg, y = pos_group,
+                                            fill = pos_group, color = pos_group)) +
+      geom_density_ridges(alpha = 0.5, show.legend = FALSE) +
+      labs(x = "Mean chance quality (xG) per player", y = NULL)
+
+    p_volume / p_quality
+    ```
+
+    In the first ridge plot, the forwards' ridge stretches farthest right (median 3 shots per player, with a long tail past 30 shots), while the midfielder and defender ridges concentrate at 1–2 shots (their maxima are 12 and 6 shots).
+    In the second, the forwards' ridge again sits to the right (median mean xG $0.106$), while the midfielders' ($0.0548$) and defenders' ($0.0580$) ridges are nearly indistinguishable from each other.
+
+    a.  Do the graphs above demonstrate that shot volume and chance quality are associated?
+        That is, can you tell if the players who shoot least also get the poorest chances?
+        Explain.
+
+    b.  Let's assume that you had a plot comparing shots per player and mean chance quality per player, and they *do* seem associated.
+        Marta Vidal says that the plot shows that shooting more often leads to better chances — "volume creates quality."
+        You correctly say, no, we can't tell if there is a causal relationship because the relationship is confounded by position group.
+        Explain what you mean.
+
+    c.  How can you investigate the relationship between shot volume and chance quality in the presence of confounding variables (like position group)?
+
+8.  **The founding chief scout.** Agnes Whitmore, Northbridge United's founding chief scout, was an early advocate of systematic match logging.
+    In her final report to the board, she opined, "In comparing the finishing of one forward with that of another, any conversion statistics are justly considered absolutely valueless which do not give the chance quality, the body parts, and the play patterns of all the shots."
+
+    a.  Whitmore describes three confounding variables to consider when comparing conversion rates across forwards.
+        What are they?
+        Describe what makes each variable potentially confounding.
+
+    b.  Provide two additional potential confounding variables for this situation.
+        Check to make sure that the variables are associated with both the explanatory variable (which forward took the shot) and the response variable (whether the shot was scored).
+
+    c.  Why does Whitmore say that the statistics are "valueless" if given without being broken down by chance quality, body part, and play pattern?
+        Explain.
+
+9.  **Headers and footed shots.** Consider all 1,481 shots at the 2022 Men's World Cup struck with the head or a foot (the 13 shots with body part `Other` are excluded, per this chapter's convention), grouped by the possession context the shot arose from: a corner, a free kick or throw-in, or open play (including counters and all other patterns).
+    Below are the tabulated counts of goals and non-goals for each body part in each context.[^_04-ex-explore-categorical-4]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_hf <- wc2022_shots |>
+      filter(body_part != "Other") |>
+      mutate(
+        body = if_else(body_part == "Head", "header", "footed shot"),
+        context = case_when(
+          play_pattern == "From Corner" ~ "corner",
+          play_pattern %in% c("From Free Kick", "From Throw In") ~ "free kick / throw-in",
+          .default = "open play / other"
+        )
+      )
+
+    wc_hf |>
+      group_by(context, body) |>
+      summarize(shots = n(), goals = sum(goal), .groups = "drop") |>
+      mutate(conversion = goals / shots)
+    #> # A tibble: 6 × 5
+    #>   context              body        shots goals conversion
+    #>   <chr>                <chr>       <int> <int>      <dbl>
+    #> 1 corner               footed shot   120    12     0.1
+    #> 2 corner               header         99     5     0.0505
+    #> 3 free kick / throw-in footed shot   484    43     0.0888
+    #> 4 free kick / throw-in header         95    10     0.105
+    #> 5 open play / other    footed shot   625   109     0.174
+    #> 6 open play / other    header         58    13     0.224
+    ```
+
+    | Context              | Body part   | goal | no goal | Total |
+    |:---------------------|:------------|-----:|--------:|------:|
+    | corner               | footed shot |   12 |     108 |   120 |
+    | corner               | header      |    5 |      94 |    99 |
+    | free kick / throw-in | footed shot |   43 |     441 |   484 |
+    | free kick / throw-in | header      |   10 |      85 |    95 |
+    | open play / other    | footed shot |  109 |     516 |   625 |
+    | open play / other    | header      |   13 |      45 |    58 |
+
+    a.  What percent of all headers were scored?
+        What percent of all footed shots were scored?
+        (Note, the overall conversion rates are typically what would be reported in a scouting summary and associated with heading ability.)
+
+    b.  For each of the three possession contexts, find the conversion rate for headers and for footed shots (you should have 6 numbers).
+
+    c.  Headers have a higher conversion rate than footed shots both in open play and in free-kick/throw-in possessions, yet footed shots have a higher conversion rate overall.
+        Explain, using the data counts provided, how the seeming paradox could happen.[^_04-ex-explore-categorical-pens]
+
+10. **Squad rebuild.** Northbridge United's squad is dominated by two units: the attacking unit and the defensive unit.
+    The attacking unit is considered the more attack-minded of the two and the defensive unit the more defense-minded.
+    However, within each unit there is an internal spectrum from defense-minded to attack-minded.
+    For example, a hard-tackling defensive forward or a marauding attacking full-back would be labeled hybrid.
+    Consider a transfer window where the only change in the squad is that the most defense-minded members of the attacking unit are sold and replaced by a set of new signings for the defensive unit who are more attack-minded than the incumbent defensive-unit players but more defense-minded than the attackers they replaced.
+
+    a.  After the window, is the attacking unit more attack-minded or more defense-minded on average?
+        Explain.
+
+    b.  After the window, is the defensive unit more attack-minded or more defense-minded on average?
+        Explain.
+
+    c.  After the window, is the overall squad more attack-minded or more defense-minded on average?
+        Explain.
+
+    d.  In what settings would you report the outcome of the window as making the squad more defense-minded?
+        And in what settings would you report the outcome as making it more attack-minded?[^_04-ex-explore-categorical-5]
+
+[^_04-ex-explore-categorical-1]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_04-ex-explore-categorical-2]: The 2022 Men's World Cup shot data used in this and several later exercises are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_04-ex-explore-categorical-3]: The `drill75` data are a constructed scouting scenario, rebuilt entirely by the visible code shown; the counts are fixed by construction, so no random generation is involved. No real academy players were assessed.
+
+[^_04-ex-explore-categorical-4]: The conundrum is a cousin of Simpson's Paradox, which is explored in @sec-data-applications.
+
+[^_04-ex-explore-categorical-pens]: One disclosure the book's penalty convention requires (recall @sec-data-applications): this data source files penalty kicks under play pattern `Other`, so the "open play / other" context inherits all 64 of them — every one footed, uncontested by law, and 43 of them scored — inside its $109/625 = 0.174$ footed cell. Set the penalties aside and that cell converts at $66/561 \approx 0.118,$ while the *overall* footed rate falls to $121/1165 \approx 0.104,$ below the headers' $0.111$: without the penalties there is no overall reversal to explain, so the paradox in these tabulated counts is itself largely a penalty artifact. The context-weighting mechanism part (c) asks you to articulate is real arithmetic on the table as given — but the table's frame is doing the heavy lifting.
+
+[^_04-ex-explore-categorical-5]: The conundrum is known as Simpson's Paradox and is explored in @sec-data-applications.

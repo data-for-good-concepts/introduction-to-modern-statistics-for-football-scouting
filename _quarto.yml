@@ -1,0 +1,66 @@
+project:
+  type: book
+
+book:
+  title: "Statistics for Football Scouting"
+  subtitle: "A football-scouting adaptation of Introduction to Modern Statistics"
+  author: "Adapted from Çetinkaya-Rundel & Hardin's IMS for the recruitment analyst"
+  chapters:
+    - index.qmd
+    # Parts mirror IMS exactly; chapters are added here as they are written.
+    # Writing order: Part IV (foundations) -> Part V (inference) -> I, II -> III, VI, VII.
+    - part: "Introduction to data"
+      chapters:
+        - data-hello.qmd
+        - data-design.qmd
+        - data-applications.qmd
+    - part: "Exploratory data analysis"
+      chapters:
+        - explore-categorical.qmd
+        - explore-numerical.qmd
+        - explore-applications.qmd
+    - part: "Regression modeling"
+      chapters:
+        - model-slr.qmd
+        - model-mlr.qmd
+        - model-logistic.qmd
+        - model-applications.qmd
+    - part: "Foundations of inference"
+      chapters:
+        - foundations-randomization.qmd
+        - foundations-bootstrapping.qmd
+        - foundations-mathematical.qmd
+        - foundations-errors.qmd
+        - foundations-applications.qmd
+    - part: "Statistical inference"
+      chapters:
+        - inference-one-prop.qmd
+        - inference-two-props.qmd
+        - inference-tables.qmd
+        - inference-one-mean.qmd
+        - inference-two-means.qmd
+        - inference-paired-means.qmd
+        - inference-many-means.qmd
+        - inference-applications.qmd
+    - part: "Inferential modeling"
+      chapters:
+        - inf-model-slr.qmd
+        - inf-model-mlr.qmd
+        - inf-model-logistic.qmd
+        - inf-model-applications.qmd
+  appendices:
+    - appendix-setup.qmd
+    - exercise-solutions.qmd
+    - appendix-even-answers.qmd
+    - appendix-reference.qmd
+    - appendix-further.qmd
+    - appendix-dependence.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+  pdf:
+    documentclass: scrbook
+
+license: "CC BY-SA 4.0"

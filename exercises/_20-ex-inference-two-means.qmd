@@ -1,0 +1,339 @@
+1.  **Corner-delivery experiment.** Northbridge's set-piece coach is experimenting with inswinging (IN) and outswinging (OUT) corner deliveries.
+    In a training session, the coach has the first team defend a dozen corners of each type; afterwards, a panel of analysts scores each delivery on a scale of 1 to 10 on the danger it created, working from the coded event record of each delivery (first contact won, chance created) without seeing which arm of the session plan the delivery came from.
+    The coach comes up with the following set of hypotheses for evaluating whether there is a difference in the average danger created by inswinging and outswinging deliveries.
+    What is wrong with the hypotheses as stated?
+
+    $$H_0: \bar{x}_{IN} \leq \bar{x}_{OUT} \quad \quad H_A: \bar{x}_{IN} > \bar{x}_{OUT}$$
+
+2.  **Fill in the blanks.** We use a \_\_\_ to evaluate if data provide convincing evidence of a difference between two population means and we use a \_\_\_ to estimate this difference.
+
+3.  **Shooting under pressure at the Euro, randomization test.** In @sec-math2samp we compared the average chance quality of pressured and unpressured shots at the 2022 Men's World Cup.
+    Northbridge's replication habit demands the same question be put to the 2025 Women's Euro: its 913 shots split into 325 taken under pressure and 588 taken unpressured.[^_20-ex-inference-two-means-1]
+
+    | Group          | n   | Mean   | SD     |
+    |:---------------|:---:|:------:|:------:|
+    | not pressured  | 588 | 0.1591 | 0.2231 |
+    | under pressure | 325 | 0.0914 | 0.1018 |
+
+    : All 913 shots, penalties and shoot-out kicks included. {#tbl-weuro-pressure-all}
+
+    In order to simulate the null distribution of differences in average chance quality, we randomize the pressure label across the 913 recorded chance qualities.
+    The seeded code below generates 1,000 such differences; with this seed, the randomized differences range from about $-0.042$ to $+0.037,$ and *none* of the 1,000 reaches the observed difference of $0.1591 - 0.0914 = 0.0677.$
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    set.seed(2004)
+    weuro2025_shots |>
+      mutate(pressure = if_else(under_pressure, "pressured", "not pressured")) |>
+      specify(statsbomb_xg ~ pressure) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "diff in means",
+                order = c("not pressured", "pressured")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.005) +
+      geom_vline(xintercept = 0.0677, color = "red", linewidth = 1) +
+      labs(
+        title = "1,000 randomized differences in means",
+        x = "Difference in randomized mean chance quality\n(not pressured - pressured)",
+        y = "Count"
+      )
+    ```
+
+    a.  Using the randomization distribution, conduct a hypothesis test to evaluate if there is a difference between the average chance quality of unpressured and pressured shots at this tournament.
+        Make sure to state your hypotheses clearly and interpret your results in context of the data, remembering what kind of study this is.
+
+    b.  All 51 of the Euro's penalty kicks — stored chance quality 0.7835 each — and all 11 of its direct free kicks sit in the *unpressured* group; the pressured group is pure open play.
+        The rerun on the 851 open-play shots gives unpressured $n = 526,$ mean $0.1011,$ SD $0.1186$ (the pressured group is unchanged), an observed difference of $0.0097,$ and, with `set.seed(2005)`, 111 of 1,000 randomized differences at or above it.
+        What is the two-sided p-value of the open-play test, what is your verdict, and which of the two frames belongs in a scouting claim about shooting under defensive pressure?
+
+4.  **First-time finishing chances, randomization test.** Do first-time shots arise from better or worse positions than shots taken after a controlled touch?
+    Because a penalty kick is a placed, dead-ball strike that can never be hit first time (and would sit entirely in one group), we state the frame up front: the 1,382 open-play shots of the 2022 Men's World Cup, of which 468 were struck first time (mean chance quality 0.1347, SD 0.1558) and 914 followed a controlled touch (mean 0.0797, SD 0.1009).[^_20-ex-inference-two-means-2]
+    The observed difference is $\bar{x}_{ft} - \bar{x}_{ct} = 0.1347 - 0.0797 = 0.0549$ (computed from the unrounded means). The seeded code below generates 1,000 randomized differences; with this seed they range from about $-0.021$ to $+0.023,$ and none of the 1,000 comes anywhere near the observed difference in either direction.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    set.seed(2006)
+    wc2022_shots |>
+      filter(shot_type == "Open Play") |>
+      mutate(touch = if_else(first_time, "first time", "controlled")) |>
+      specify(statsbomb_xg ~ touch) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "diff in means",
+                order = c("first time", "controlled")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.003) +
+      geom_vline(xintercept = 0.0549, color = "red", linewidth = 1) +
+      labs(
+        title = "1,000 randomized differences in means",
+        x = "Difference in randomized mean chance quality\n(first time - controlled)",
+        y = "Count"
+      )
+    ```
+
+    a.  Using the randomization distribution, conduct a hypothesis test to evaluate whether first-time and controlled-touch open-play shots differ in average chance quality.
+        State your hypotheses clearly and interpret your results in context of the data.
+
+    b.  These are observational data.
+        Offer one football mechanism that could produce this association without first-time *technique* having anything to do with it.
+
+5.  **Shooting under pressure at the Euro, bootstrap interval.** We continue with the 913 shots of the 2025 Women's Euro — all shots, penalties included, as in @tbl-weuro-pressure-all — and now estimate the difference in average chance quality between unpressured and pressured shots.
+    The seeded code below draws 1,000 bootstrap differences in means, resampling each group separately; with this seed, the bootstrapped differences form a bell centered at 0.068, running from about 0.034 to 0.102, and the standard deviation of the 1,000 differences is 0.0111.[^_20-ex-inference-two-means-1]
+
+    ```r
+    set.seed(2007)
+    weuro2025_shots |>
+      mutate(pressure = if_else(under_pressure, "pressured", "not pressured")) |>
+      specify(statsbomb_xg ~ pressure) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "diff in means",
+                order = c("not pressured", "pressured")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.005) +
+      labs(
+        title = "1,000 bootstrapped differences in means",
+        x = "Difference in bootstrapped mean chance quality\n(not pressured - pressured)",
+        y = "Count"
+      )
+    ```
+
+    a.  Using the bootstrap distribution, create a (rough) 95% bootstrap percentile confidence interval for the true difference in average chance quality between unpressured and pressured shots at this tournament.
+
+    b.  Using the bootstrap distribution, create a (rough) 95% bootstrap SE confidence interval for the same difference.
+        Note that the standard error of the bootstrap distribution is 0.0111.
+
+    c.  Per the club's penalty convention, state precisely which comparison your intervals describe — and what you would recompute before either interval appeared in a dossier about defensive pressure.
+
+6.  **First-time finishing chances, bootstrap interval.** We continue with the 1,382 open-play shots of the 2022 Men's World Cup from the earlier exercise: 468 first-time shots (mean chance quality 0.1347) and 914 controlled-touch shots (mean 0.0797).
+    The seeded code below draws 1,000 bootstrap differences in means; with this seed, the bootstrapped differences form a bell centered at the observed difference of 0.0549, running from about 0.027 to 0.081, and the standard deviation of the 1,000 differences is 0.0081.[^_20-ex-inference-two-means-2]
+
+    ```r
+    set.seed(2008)
+    wc2022_shots |>
+      filter(shot_type == "Open Play") |>
+      mutate(touch = if_else(first_time, "first time", "controlled")) |>
+      specify(statsbomb_xg ~ touch) |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "diff in means",
+                order = c("first time", "controlled")) |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.003) +
+      labs(
+        title = "1,000 bootstrapped differences in means",
+        x = "Difference in bootstrapped mean chance quality\n(first time - controlled)",
+        y = "Count"
+      )
+    ```
+
+    a.  Using the bootstrap distribution, create a (rough) 90% bootstrap percentile confidence interval for the true difference in average chance quality between first-time and controlled-touch open-play shots.
+
+    b.  Using the bootstrap distribution, create a (rough) 90% bootstrap SE confidence interval for the same difference.
+
+7.  **Conditioning programs.** You are reading an internal report in which the sports-science staff have created a 95% confidence interval for the difference in average distance covered per match under two pre-season conditioning programs, based on a randomized comparison across the squad.
+    They are 95% confident that the true difference in average distance covered over the season's first month is somewhere between (0.1 km, 2.5 km).
+    The authors claim that, "therefore program A ($\bar{x}_A = 11.8$ km per match) results in a much larger average match output as compared to program B ($\bar{x}_B = 10.5$ km per match)." Comment on the authors' claim.[^_20-ex-inference-two-means-3]
+
+8.  **Possible randomized means.** In a training match, data were collected on chances created under two in-possession instructions (A and B).
+    There were 3 players measured under instruction A and two players measured under instruction B.
+
+    | Instruction | Measurement 1 | Measurement 2 | Measurement 3 |
+    |:-----------:|:-------------:|:-------------:|:-------------:|
+    | A           | 1             | 15            | 5             |
+    | B           | 7             | 3             |               |
+
+    If the data are (repeatedly) randomly allocated across the two instructions, provide the following: (1) the values which are assigned to group A, (2) the values which are assigned to group B, and (3) the difference in averages $(\bar{x}_A - \bar{x}_B)$ for each of the following:
+
+    a.  When the randomized difference in averages is as large as possible.
+
+    b.  When the randomized difference in averages is as small as possible (a big in magnitude negative number).
+
+    c.  When the randomized difference in averages is as close to zero as possible.
+
+    d.  When the observed values are randomly assigned to the two groups, to which of the previous parts would you expect the difference in means to fall closest?
+        Explain your reasoning.
+
+9.  **Shooting under pressure at the Euro, mathematical test.** We return to the average chance quality of pressured and unpressured shots at the 2025 Women's Euro, now with the mathematical model.
+    Sample statistics are provided below for both analysis frames; the chance-quality distributions in every group carry the strong right skew xG always has, with no isolated single observations.[^_20-ex-inference-two-means-1]
+
+    | Frame                    | Group          | n   | Mean   | SD     |
+    |:-------------------------|:---------------|:---:|:------:|:------:|
+    | all shots                | not pressured  | 588 | 0.1591 | 0.2231 |
+    | all shots                | under pressure | 325 | 0.0914 | 0.1018 |
+    | open play                | not pressured  | 526 | 0.1011 | 0.1186 |
+    | open play                | under pressure | 325 | 0.0914 | 0.1018 |
+
+    : Chance quality (xG) by pressure at the 2025 Women's Euro, in the all-shots frame (penalties and direct free kicks included) and the open-play frame. {#tbl-weuro-pressure-frames}
+
+    a.  Conduct a hypothesis test using a mathematical model to evaluate if there is a difference in average chance quality between unpressured and pressured shots in the *all-shots* frame.
+        Make sure to state your hypotheses clearly, check relevant conditions, and interpret your results in context of the data.
+
+    b.  Repeat the test in the *open-play* frame.
+
+    c.  The two frames return different verdicts.
+        Which one answers a scout's question about shooting under defensive pressure, and why?
+
+10. **Template A/B analysis plan.** Following @sec-rand2mean, Priya Rao asks two junior analysts to plan the analysis of next season's report-template experiment, in which reports will again be randomly assigned to one of two templates and scored for accuracy.
+    They agree on how the null hypothesis should be set: on average, reports are equally accurate under template A and template B.
+    The first analyst is convinced the redesigned template will produce more accurate reports and hence wants to use a one-tailed test; the second argues that a two-tailed test would be a better choice.
+    Which analyst do you agree with, and why?
+
+11. **Shooting under pressure at the Euro, mathematical interval.** Using the sample statistics in @tbl-weuro-pressure-frames, and assuming that the conditions for conducting inference using a mathematical model are satisfied:[^_20-ex-inference-two-means-1]
+
+    a.  Construct a 95% confidence interval for the true difference in average chance quality between unpressured and pressured shots in the *all-shots* frame, and interpret it in context.
+
+    b.  Construct the corresponding 95% confidence interval in the *open-play* frame.
+        What does the pair of intervals, taken together, tell the club?
+
+12. **True / False: comparing means.** Determine if the following statements about club analytics practice are true or false, and explain your reasoning for statements you identify as false.
+
+    a.  As the degrees of freedom increases, the $t$-distribution approaches normality.
+
+    b.  If a 95% confidence interval for the difference between two population means contains 0, a 99% confidence interval calculated based on the same two samples will also contain 0.
+
+    c.  If a 95% confidence interval for the difference between two population means contains 0, a 90% confidence interval calculated based on the same two samples will also contain 0.
+
+13. **Difference of prospect ratings.** Northbridge's recruitment database assigns prospects a net-impact rating (positive values above replacement level, negative below).
+    We collect two random samples of prospects from two scouting regions.
+    In each part below, consider the sample means $\bar{x}_1$ and $\bar{x}_2$ that we might observe from these two samples.[^_20-ex-inference-two-means-3]
+
+    | Population | Mean | Standard deviation | Sample size |
+    |:-----------|:----:|:------------------:|:-----------:|
+    | Region 1   | 15   | 20                 | 50          |
+    | Region 2   | 20   | 10                 | 30          |
+
+    a.  What is the associated mean and standard deviation of $\bar{x}_1$?
+
+    b.  What is the associated mean and standard deviation of $\bar{x}_2$?
+
+    c.  Calculate and interpret the mean and standard deviation associated with the difference in sample means for the two groups, $\bar{x}_2 - \bar{x}_1.$
+
+    d.  How are the standard deviations from parts (a), (b), and (c) related?
+
+14. **Mindfulness during a congested schedule.** To address the mental toll of a congested winter schedule, Jonas Beck's player-care staff ran a mindfulness-based intervention (MBI) study on 60 academy players facing twice-weekly fixtures.
+    The participants were randomly allocated to one of two groups of 30: the treatment group received 8 MBI sessions across the block and the control group received no intervention.
+    Match-related exhaustion was measured with a 9-item questionnaire, each item on a 0 ("never") to 6 ("every day") scale.
+    Players in the treatment group had an average exhaustion score of 15.47, with a standard deviation of 4.44, and players in the control group had an average exhaustion score of 32.43, with a standard deviation of 8.87.
+    Do these data provide convincing evidence that exhaustion differs between the treatment and control groups?
+    Assume that conditions for conducting inference using mathematical models are satisfied.[^_20-ex-inference-two-means-3]
+
+15. **Finishing programs: static repetition vs. pattern drills.** Academy finishing development is a crowded market of methods, and any program that genuinely accelerates young forwards is worth money to a selling club.
+    Jonas Beck randomized 71 newly promoted academy forwards across six finishing-development programs for one training block; the outcome is each player's score on the club's 400-point composite finishing assessment at the end of the block.
+    The cohort is a constructed Northbridge scenario, generated by the seeded code below.
+    In this exercise we consider the players assigned to *static repetition* and *pattern drills*.[^_20-ex-inference-two-means-4]
+
+    ```r
+    set.seed(2009)
+    programs <- c("constraint games", "static repetition", "pattern drills",
+                  "video review", "small-sided games", "shadow play")
+    ns  <- c(12, 10, 12, 11, 14, 12)
+    mus <- c(324, 160, 196, 277, 246, 329)
+    sds <- c(64, 39, 52, 50, 54, 49)
+
+    intake71 <- tibble(
+      program = rep(programs, times = ns),
+      score   = round(rnorm(71, mean = rep(mus, times = ns),
+                            sd = rep(sds, times = ns)))
+    )
+
+    rep_pat <- intake71 |>
+      filter(program %in% c("static repetition", "pattern drills"))
+
+    rep_pat |>
+      group_by(program) |>
+      summarize(Mean = round(mean(score), 2), SD = round(sd(score), 2), n = n())
+    #> # A tibble: 2 × 4
+    #>   program            Mean    SD     n
+    #>   <chr>             <dbl> <dbl> <int>
+    #> 1 pattern drills     220.  54.3    12
+    #> 2 static repetition  170.  35.4    10
+
+    ggplot(rep_pat, aes(y = program, x = score)) +
+      geom_boxplot() +
+      labs(y = "Program", x = "Finishing assessment score (of 400)")
+
+    ggplot(rep_pat, aes(x = score)) +
+      geom_histogram(binwidth = 25) +
+      facet_wrap(~program, ncol = 1) +
+      labs(x = "Finishing assessment score (of 400)", y = "Count")
+    ```
+
+    | Program           | Mean   | SD    | n   |
+    |:------------------|:------:|:-----:|:---:|
+    | pattern drills    | 220.08 | 54.33 | 12  |
+    | static repetition | 169.80 | 35.43 | 10  |
+
+    a.  Describe the distributions of assessment scores for the players in the static-repetition and pattern-drills arms.
+
+    b.  Do these data provide strong evidence that the average assessment scores under pattern drills and static repetition are different?
+        Use a 5% discernibility level.
+
+    c.  What type of error might we have committed?
+        Explain.
+
+    d.  Would your conclusion change if we used $\alpha = 0.01$?
+
+16. **Goals per match across tournaments.** Do the two tournaments in the club's library differ in average goals per match?
+    The seeded code below draws a random sample of 25 matches from each of the 2022 Men's World Cup (64 matches) and the 2025 Women's Euro (31 matches) and records the total goals scored in each sampled match.[^_20-ex-inference-two-means-5]
+    Do these data provide strong evidence of a difference between the two tournaments' average total goals per match?
+
+    ```r
+    wc2022_matches   <- read_csv("data/derived/wc2022_matches.csv")
+    weuro2025_matches <- read_csv("data/derived/weuro2025_matches.csv")
+
+    set.seed(2010)
+    wc_sample <- wc2022_matches |>
+      mutate(goals = home_score + away_score) |>
+      slice_sample(n = 25)
+    we_sample <- weuro2025_matches |>
+      mutate(goals = home_score + away_score) |>
+      slice_sample(n = 25)
+    ```
+
+    | Tournament        | Mean | SD   | n   |
+    |:------------------|:----:|:----:|:---:|
+    | WC 2022 (men)     | 2.68 | 1.91 | 25  |
+    | WEuro 2025 (women)| 3.68 | 1.99 | 25  |
+
+17. **Finishing programs: constraint-led games vs. small-sided games.** Constraint-led coaching is fashionable — and expensive in staff time.
+    Does it outperform ordinary small-sided games?
+    Using the six-arm finishing trial from the earlier exercise (the 71-player cohort generated with `set.seed(2009)`), we now consider the players assigned to *constraint games* and *small-sided games*.
+    Assume that the conditions for conducting inference using mathematical models are met, and using the data provided below, test the hypothesis that the average assessment score under constraint-led games is different than the average score under small-sided games.
+    If your hypothesis test yields a statistically discernible result, discuss whether the higher average score can be attributed to the constraint-led program.[^_20-ex-inference-two-means-4]
+
+    | Program           | Mean   | SD    | n   |
+    |:------------------|:------:|:-----:|:---:|
+    | constraint games  | 314.33 | 60.63 | 12  |
+    | small-sided games | 223.64 | 46.80 | 14  |
+
+18. **Margins of victory across tournaments.** Using the same seeded samples of 25 matches per tournament from the earlier exercise (`set.seed(2010)`), we now record each sampled match's margin of victory — the absolute difference between the two teams' scores (0 for a draw).[^_20-ex-inference-two-means-5]
+    Do these data provide strong evidence of a difference between the two tournaments' average margin of victory?
+
+    | Tournament        | Mean | SD   | n   |
+    |:------------------|:----:|:----:|:---:|
+    | WC 2022 (men)     | 1.24 | 1.23 | 25  |
+    | WEuro 2025 (women)| 2.00 | 1.44 | 25  |
+
+19. **Screens in the canteen, intake.** Northbridge's player-care staff worry that screens at the academy canteen lead to mindless snacking.
+    They monitored snack intake for a group of 44 academy players who were randomized into two equal groups: the treatment group ate lunch while re-watching their own match clips on tablets, and the control group ate lunch without any screens.
+    Players in the treatment group consumed 52.1 grams of snack food alongside lunch, with a standard deviation of 45.1 grams, and players in the control group consumed 27.1 grams, with a standard deviation of 26.4 grams.
+    Do these data provide convincing evidence that the average snack intake is different for the players in the treatment group compared to the control group?
+    Assume that conditions for conducting inference using mathematical models are satisfied.[^_20-ex-inference-two-means-3]
+
+20. **Screens in the canteen, recall.** The player-care study from the previous exercise also probed awareness: the 22 players in the treatment group who ate while re-watching their match clips were asked afterward to recall, in order, the items of their lunch.
+    The average number of items recalled by the players in this group was 4.9, with a standard deviation of 1.8.
+    The average number of items recalled by the players in the control group (no screens) was 6.1, with a standard deviation of 1.8.
+    Do these data provide strong evidence that the average numbers of lunch items recalled by the players in the treatment and control groups are different?
+    Assume that conditions for conducting inference using mathematical models are satisfied.[^_20-ex-inference-two-means-3]
+
+[^_20-ex-inference-two-means-1]: The shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data): all 913 shots of the 2025 Women's Euro.
+
+[^_20-ex-inference-two-means-2]: The shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data), filtered to the 1,382 open-play shots as stated.
+
+[^_20-ex-inference-two-means-3]: The summary figures in this exercise and in Exercises 8, 13, 14, 19, and 20 are constructed Northbridge scenarios, stated for the exercise; they are not drawn from real studies.
+
+[^_20-ex-inference-two-means-4]: The six-arm finishing trial is a constructed Northbridge scenario, generated entirely by the seeded code shown; no real academy cohort was assessed. The generation parameters are, of course, visible in the code — the exercise concerns what the *sample* can demonstrate.
+
+[^_20-ex-inference-two-means-5]: The match data used in this exercise are in `data/derived/wc2022_matches.csv` and `data/derived/weuro2025_matches.csv` (StatsBomb open data); the samples are drawn by the seeded code shown. Scores are full-time or after extra time where played; shoot-out goals are not included.

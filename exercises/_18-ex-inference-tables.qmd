@@ -1,0 +1,521 @@
+1.  **Mentor scheme.** Does pairing an academy player with a senior-player mentor affect whether the player meets his development benchmark?
+    In a constructed scenario, Jonas Beck enrolled 300 academy players — drawn from across Northbridge and its partner academies, in a trial coordinated with the federation's youth program — in a randomized experiment.
+    150 players were randomly assigned to a group that followed the standard development plan and met weekly with a senior-player mentor; the other 150 followed the standard plan and did not meet with a mentor.
+    At the end of the season, 40 of the players in the mentor plus standard group had met their development benchmark while only 30 players had met it in the other group.
+
+    a.  Create a two-way table presenting the results of this study.
+
+    b.  Answer each of the following questions under the null hypothesis that meeting weekly with a mentor does not affect a player's ability to meet the benchmark, and indicate whether the expected values are higher or lower than the observed values.
+
+        i.  How many players in the "mentor + standard" group would you expect to meet the benchmark?
+
+        ii. How many players in the "standard only" group would you expect to *not* meet the benchmark?
+
+2.  **Away-day survey.** The table below summarizes results from a constructed supporter poll in which Northbridge's fan-relations office asked season-ticket holders whether they had personally attended at least one of the club's away fixtures within the last year, split by the respondent's age cohort.
+    The differences in each cohort may be due to chance.
+    Complete the following computations under the null hypothesis of independence between a supporter's age cohort and whether they attended an away fixture within the last year.
+
+    | Age cohort   | Attended | Did not attend |  Total |
+    |:-------------|---------:|---------------:|-------:|
+    | Under 30     |      292 |            620 |    912 |
+    | 30--44       |      885 |          2,275 |  3,160 |
+    | 45--59       |      809 |          2,709 |  3,518 |
+    | 60 and older |    1,276 |          4,798 |  6,074 |
+    | Total        |    3,262 |         10,402 | 13,664 |
+
+    If there is no relationship between age and attendance,
+
+    a.  how many supporters under 30 would you expect to have attended an away fixture within the last year?
+
+    b.  how many supporters aged 30--44 would you expect to have attended an away fixture within the last year?
+
+    c.  how many supporters aged 45--59 would you expect to have attended an away fixture within the last year?
+
+    d.  how many supporters aged 60 and older would you expect to have attended an away fixture within the last year?
+
+3.  **Position groups and body parts, data.** In order to assess whether the position a shooter plays is related to how they strike their shots, all open-play shots of the 2022 Men's World Cup were cross-tabulated by the shooter's position group (FW/MF/DF, the mapping defined in @sec-explore-categorical) and the body part used.[^_18-ex-inference-tables-1]
+    The frame is stated up front: penalties, direct free kicks, and the tournament's two direct corner attempts are excluded by the open-play filter, since dead-ball strikes are taken by designated (footed) takers and would tie body part to set-piece duty rather than to position; the 13 shots with body part `Other` are dropped, as in @sec-explore-categorical; and no goalkeeper took an open-play shot at this tournament.
+    That leaves 1,369 shots.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_pos_bp <- wc2022_shots |>
+      filter(shot_type == "Open Play", body_part != "Other") |>
+      mutate(
+        pos_group = case_when(
+          position == "Goalkeeper" ~ "GK",
+          grepl("Back", position) ~ "DF",
+          grepl("Midfield", position) ~ "MF",
+          .default = "FW"
+        ),
+        pos_group = factor(pos_group, levels = c("FW", "MF", "DF")),
+        body_part = factor(body_part, levels = c("Right Foot", "Left Foot", "Head"))
+      )
+
+    wc_pos_bp |>
+      count(pos_group, body_part) |>
+      pivot_wider(names_from = body_part, values_from = n)
+    #> # A tibble: 3 × 4
+    #>   pos_group `Right Foot` `Left Foot`  Head
+    #>   <fct>            <int>       <int> <int>
+    #> 1 FW                 322         224   127
+    #> 2 MF                 271         127    42
+    #> 3 DF                 110          63    83
+    ```
+
+    |       | Right Foot | Left Foot | Head | Total |
+    |:------|-----------:|----------:|-----:|------:|
+    | FW    |        322 |       224 |  127 |   673 |
+    | MF    |        271 |       127 |   42 |   440 |
+    | DF    |        110 |        63 |   83 |   256 |
+    | Total |        703 |       414 |  252 | 1,369 |
+
+    a.  If the variables describing the position group and the body part are independent, what proportion of shots (total) would be expected in each of the three body-part categories?
+
+    b.  Given the proportions of each body part, how many shots by each position group would you expect to be struck with the right foot?
+        with the left foot?
+        with the head?
+
+    c.  Compare the observed (original data) and expected (part b.) tables.
+        From a first glance, does it seem as though the position group and body part may be associated?
+
+    d.  Regardless of your answer to part (c), is it possible to tell from looking only at the expected and observed counts whether the two variables are associated?
+
+4.  **Play patterns at the Women's Euro, data.** @sec-chp18-real-table asked whether the way a shot's possession began is associated with whether the shot was scored, using the 2022 Men's World Cup.
+    Does the question come out the same way at the 2025 Women's Euro?[^_18-ex-inference-tables-2]
+    The code below applies the same collapse and the same penalty-convention filter: the `Other` bucket — 54 shots, made up of the tournament's 51 penalty kicks (28 of them scored) plus 3 open-play-tagged shots (2 scored) — is excluded with the stated filter `play_pattern != "Other"`, leaving $913 - 54 = 859$ shots.
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro2025_shots |>
+      filter(play_pattern == "Other") |>
+      count(shot_type, goal)
+    #> # A tibble: 4 × 3
+    #>   shot_type goal      n
+    #>   <chr>     <lgl> <int>
+    #> 1 Open Play FALSE     1
+    #> 2 Open Play TRUE      2
+    #> 3 Penalty   FALSE    23
+    #> 4 Penalty   TRUE     28
+
+    we_pattern <- weuro2025_shots |>
+      filter(play_pattern != "Other") |>
+      mutate(
+        pattern3 = case_when(
+          play_pattern %in% c("From Free Kick", "From Corner") ~ "set piece",
+          play_pattern == "From Counter" ~ "counter",
+          .default = "open play"
+        ),
+        pattern3 = factor(pattern3, levels = c("open play", "set piece", "counter")),
+        result = factor(if_else(goal, "goal", "no goal"), levels = c("goal", "no goal"))
+      )
+
+    we_pattern |>
+      group_by(pattern3) |>
+      summarize(shots = n(), goals = sum(goal), conversion = mean(goal))
+    #> # A tibble: 3 × 4
+    #>   pattern3  shots goals conversion
+    #>   <fct>     <int> <int>      <dbl>
+    #> 1 open play   554    68     0.123
+    #> 2 set piece   264    22     0.0833
+    #> 3 counter      41     3     0.0732
+    ```
+
+    | Play pattern | goal | no goal | Total |
+    |:-------------|-----:|--------:|------:|
+    | open play    |   68 |     486 |   554 |
+    | set piece    |   22 |     242 |   264 |
+    | counter      |    3 |      38 |    41 |
+    | Total        |   93 |     766 |   859 |
+
+    a.  If the variables describing the play pattern and the shot result are independent, estimate the proportion of shots (total) that were goals.
+
+    b.  Given the overall conversion rate, how many goals would you expect in each of the three play-pattern groups?
+
+    c.  Compare the observed and expected counts.
+        From a first glance, does it seem as though the play pattern and the result may be associated?
+        Note, before you over-read the counter row: at this tournament counters converted at the *lowest* rate of the three groups, the reverse of the World Cup ordering in @sec-chp18-real-table.
+
+    d.  Regardless of your answer to part (c), is it possible to tell from looking only at the expected and observed counts whether the two variables are associated?
+
+5.  **Position groups and body parts, randomize once.** In order to assess whether the position a shooter plays is related to how they strike their shots, the 1,369 open-play World Cup shots of Exercise 3 were cross-tabulated by position group and body part.
+    Then, the data were randomized once, where the body part was randomly reassigned to the shots across the position groups.
+    The original data are shown in the first table below and the results of the randomization in the second.
+
+    ```r
+    set.seed(1805)
+    wc_pos_bp_shuffle <- wc_pos_bp |>
+      mutate(body_part = sample(body_part))
+
+    wc_pos_bp_shuffle |>
+      count(pos_group, body_part) |>
+      pivot_wider(names_from = body_part, values_from = n)
+    #> # A tibble: 3 × 4
+    #>   pos_group `Right Foot` `Left Foot`  Head
+    #>   <fct>            <int>       <int> <int>
+    #> 1 FW                 356         193   124
+    #> 2 MF                 213         145    82
+    #> 3 DF                 134          76    46
+    ```
+
+    | Original | Right Foot | Left Foot | Head | Total |
+    |:---------|-----------:|----------:|-----:|------:|
+    | FW       |        322 |       224 |  127 |   673 |
+    | MF       |        271 |       127 |   42 |   440 |
+    | DF       |        110 |        63 |   83 |   256 |
+    | Total    |        703 |       414 |  252 | 1,369 |
+
+    | Randomized | Right Foot | Left Foot | Head | Total |
+    |:-----------|-----------:|----------:|-----:|------:|
+    | FW         |        356 |       193 |  124 |   673 |
+    | MF         |        213 |       145 |   82 |   440 |
+    | DF         |        134 |        76 |   46 |   256 |
+    | Total      |        703 |       414 |  252 | 1,369 |
+
+    Recall that the chi-squared statistic $(X^2)$ measures the difference between the expected and observed counts.
+    Without calculating the actual statistic, report on whether the original data or the randomized data will have a larger chi-squared statistic.
+    Explain your choice.
+
+6.  **Play patterns at the Women's Euro, randomize once.** The 859 Women's Euro shots of Exercise 4 (penalties excluded, as stated there) were cross-tabulated by collapsed play pattern and shot result.
+    Then, the data were randomized once, where the result was randomly reassigned to the shots across the play patterns.
+    The original data are shown in the first table below and the results of the randomization in the second.
+
+    ```r
+    set.seed(1808)
+    we_pattern_shuffle <- we_pattern |>
+      mutate(result = sample(result))
+
+    we_pattern_shuffle |>
+      count(pattern3, result) |>
+      pivot_wider(names_from = result, values_from = n)
+    #> # A tibble: 3 × 3
+    #>   pattern3   goal `no goal`
+    #>   <fct>     <int>     <int>
+    #> 1 open play    56       498
+    #> 2 set piece    33       231
+    #> 3 counter       4        37
+    ```
+
+    | Original  | goal | no goal | Total |
+    |:----------|-----:|--------:|------:|
+    | open play |   68 |     486 |   554 |
+    | set piece |   22 |     242 |   264 |
+    | counter   |    3 |      38 |    41 |
+    | Total     |   93 |     766 |   859 |
+
+    | Randomized | goal | no goal | Total |
+    |:-----------|-----:|--------:|------:|
+    | open play  |   56 |     498 |   554 |
+    | set piece  |   33 |     231 |   264 |
+    | counter    |    4 |      37 |    41 |
+    | Total      |   93 |     766 |   859 |
+
+    Recall that the chi-squared statistic $(X^2)$ measures the difference between the expected and observed counts.
+    Without calculating the actual statistic, report on whether the original data or the randomized data will have a larger chi-squared statistic.
+    Explain your choice.
+
+7.  **Position groups and body parts, randomization test.** In order to assess whether the position a shooter plays is related to how they strike their shots, the 1,369 open-play World Cup shots of Exercise 3 were randomized 1,000 times (body part randomly reassigned to the shots across position groups), and the chi-squared statistic was computed for each randomization.
+
+    ```r
+    wc_pos_bp_obs_x2 <- wc_pos_bp |>
+      specify(body_part ~ pos_group) |>
+      calculate(stat = "Chisq") |>
+      pull()
+
+    wc_pos_bp_obs_x2
+    #> X-squared
+    #>  65.28439
+
+    set.seed(1806)
+    wc_pos_bp_null <- wc_pos_bp |>
+      specify(body_part ~ pos_group) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "Chisq")
+
+    ggplot(wc_pos_bp_null, aes(x = stat)) +
+      geom_histogram(binwidth = 1) +
+      labs(
+        title = "1,000 randomized chi-squared statistics",
+        x = "Chi-squared statistic for randomized data",
+        y = "Count"
+      )
+    ```
+
+    The histogram of the 1,000 randomized chi-squared statistics is right skewed, with values ranging from about 0.2 to 20 and the vast majority below 10.
+    None of the 1,000 randomized statistics reached the observed statistic of 65.28.
+
+    a.  The histogram describes the chi-squared statistics for 1,000 different randomized datasets.
+        When randomizing the data, is the imposed structure that the variables are independent or that the variables are associated?
+        Explain.
+
+    b.  What is the range of plausible values for the randomized chi-squared statistic?
+
+    c.  The observed chi-squared statistic is 65.28.
+        Does the observed value provide evidence against the null hypothesis?
+        To answer the question, state the null and alternative hypotheses, approximate the p-value, and conclude the test in the context of the problem.
+        Keep in mind what kind of data these are: nobody assigned positions or body parts at random.
+
+8.  **Play patterns at the Women's Euro, randomization test.** The 859 Women's Euro shots of Exercise 4 (penalties excluded, as stated there) were randomized 1,000 times (shot result randomly reassigned to the shots across play patterns), and the chi-squared statistic was computed for each randomization.
+
+    ```r
+    we_pattern_obs_x2 <- we_pattern |>
+      specify(result ~ pattern3) |>
+      calculate(stat = "Chisq") |>
+      pull()
+
+    we_pattern_obs_x2
+    #> X-squared
+    #>  3.425706
+
+    set.seed(1809)
+    we_pattern_null <- we_pattern |>
+      specify(result ~ pattern3) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "Chisq")
+
+    ggplot(we_pattern_null, aes(x = stat)) +
+      geom_histogram(binwidth = 1) +
+      labs(
+        title = "1,000 randomized chi-squared statistics",
+        x = "Chi-squared statistic for randomized data",
+        y = "Count"
+      )
+    ```
+
+    The histogram of the 1,000 randomized chi-squared statistics is right skewed, with values ranging from about 0.06 to 17 and the vast majority below 8.
+    174 of the 1,000 randomized statistics were at least as large as the observed statistic of 3.43.
+
+    a.  The histogram describes the chi-squared statistics for 1,000 different randomized datasets.
+        When randomizing the data, is the imposed structure that the variables are independent or that the variables are associated?
+        Explain.
+
+    b.  What is the range of plausible values for the randomized chi-squared statistic?
+
+    c.  The observed chi-squared statistic is 3.43.
+        Does the observed value provide evidence against the null hypothesis?
+        To answer the question, state the null and alternative hypotheses, approximate the p-value, and conclude the test in the context of the problem.
+
+9.  **Position groups and body parts, larger data.** Consider the situation where the position-group and body-part dataset of Exercise 3 is 5 times *larger* than the original data (but has the same proportional representation in each category).
+    The distribution of shots in each cell of the larger dataset is as follows.
+
+    ```r
+    wc_pos_bp_large <- wc_pos_bp |>
+      count(pos_group, body_part) |>
+      mutate(n = n * 5) |>
+      uncount(weights = n)
+
+    wc_pos_bp_large |>
+      count(pos_group, body_part) |>
+      pivot_wider(names_from = body_part, values_from = n)
+    #> # A tibble: 3 × 4
+    #>   pos_group `Right Foot` `Left Foot`  Head
+    #>   <fct>            <int>       <int> <int>
+    #> 1 FW                1610        1120   635
+    #> 2 MF                1355         635   210
+    #> 3 DF                 550         315   415
+    ```
+
+    | Larger data | Right Foot | Left Foot | Head | Total |
+    |:------------|-----------:|----------:|-----:|------:|
+    | FW          |      1,610 |     1,120 |  635 | 3,365 |
+    | MF          |      1,355 |       635 |  210 | 2,200 |
+    | DF          |        550 |       315 |  415 | 1,280 |
+    | Total       |      3,515 |     2,070 | 1,260 | 6,845 |
+
+    The larger dataset was randomized 1,000 times (body part randomly reassigned to the shots across position groups), and the chi-squared statistic was computed for each randomization.
+
+    ```r
+    wc_pos_bp_large_x2 <- wc_pos_bp_large |>
+      specify(body_part ~ pos_group) |>
+      calculate(stat = "Chisq") |>
+      pull()
+
+    wc_pos_bp_large_x2
+    #> X-squared
+    #>  326.4219
+
+    set.seed(1807)
+    wc_pos_bp_large_null <- wc_pos_bp_large |>
+      specify(body_part ~ pos_group) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "Chisq")
+    ```
+
+    The histogram of the 1,000 randomized chi-squared statistics is right skewed, with values ranging from about 0.05 to 22 — essentially the same range as for the original data in Exercise 7.
+    None of the 1,000 randomized statistics came anywhere near the observed statistic of 326.42.
+
+    a.  The histogram describes the chi-squared statistics for 1,000 different randomizations of the larger dataset.
+        When randomizing the data, is the imposed structure that the variables are independent or that the variables are associated?
+        Explain.
+
+    b.  What is the (approximate) range of plausible values for the randomized chi-squared statistic?
+
+    c.  The observed chi-squared statistic is 326.42.
+        Does the observed value provide evidence against the null hypothesis?
+        To answer the question, state the null and alternative hypotheses, approximate the p-value, and conclude the test in the context of the problem.
+
+    d.  If the alternative hypothesis is true, how does the sample size affect the ability to reject the null hypothesis?
+        (*Hint:* Compare the observed statistics for the original data, 65.28, and for the larger dataset, 326.42, with the same proportional values — and note what happened, or didn't, to the null distribution.)
+
+10. **Play patterns at the Women's Euro, smaller data.** Consider the situation where the play-pattern dataset of Exercise 4 is roughly 8 times *smaller* than the original data (each cell count divided by eight and rounded, keeping approximately the same proportional representation).
+    The distribution of shots in the smaller dataset is as follows.
+
+    ```r
+    we_pattern_small <- we_pattern |>
+      count(pattern3, result) |>
+      mutate(n = round(n / 8)) |>
+      uncount(weights = n)
+
+    we_pattern_small |>
+      count(pattern3, result) |>
+      pivot_wider(names_from = result, values_from = n, values_fill = 0)
+    #> # A tibble: 3 × 3
+    #>   pattern3   goal `no goal`
+    #>   <fct>     <int>     <int>
+    #> 1 open play     8        61
+    #> 2 set piece     3        30
+    #> 3 counter       0         5
+    ```
+
+    | Smaller data | goal | no goal | Total |
+    |:-------------|-----:|--------:|------:|
+    | open play    |    8 |      61 |    69 |
+    | set piece    |    3 |      30 |    33 |
+    | counter      |    0 |       5 |     5 |
+    | Total        |   11 |      96 |   107 |
+
+    The smaller dataset was randomized 1,000 times (shot result randomly reassigned to the shots across play patterns), and the chi-squared statistic was computed for each randomization.
+
+    ```r
+    we_pattern_small_x2 <- we_pattern_small |>
+      specify(result ~ pattern3) |>
+      calculate(stat = "Chisq") |>
+      pull()
+
+    we_pattern_small_x2
+    #> X-squared
+    #> 0.7526675
+
+    set.seed(1810)
+    we_pattern_small_null <- we_pattern_small |>
+      specify(result ~ pattern3) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "Chisq")
+    ```
+
+    The histogram of the 1,000 randomized chi-squared statistics is right skewed, with values ranging from about 0.5 to 15.
+    771 of the 1,000 randomized statistics were at least as large as the observed statistic of 0.75.
+
+    a.  The histogram describes the chi-squared statistics for 1,000 different randomizations of the smaller dataset.
+        When randomizing the data, is the imposed structure that the variables are independent or that the variables are associated?
+        Explain.
+
+    b.  What is the (approximate) range of plausible values for the randomized chi-squared statistic?
+
+    c.  The observed chi-squared statistic is 0.75.
+        Does the observed value provide evidence against the null hypothesis?
+        To answer the question, state the null and alternative hypotheses, approximate the p-value, and conclude the test in the context of the problem.
+
+    d.  If the alternative hypothesis is true, how does the sample size affect the ability to reject the null hypothesis?
+        (*Hint:* Consider the original data as compared with the smaller dataset that has approximately the same proportional values.)
+
+11. **True / False, I.** Determine if the statements below are true or false.
+    For each false statement, suggest an alternative wording to make it a true statement.
+
+    a.  The chi-squared distribution, just like the normal distribution, has two parameters, mean and standard deviation.
+
+    b.  The chi-squared distribution is always right skewed, regardless of the value of the degrees of freedom parameter.
+
+    c.  The chi-squared statistic is always greater than or equal to 0.
+
+    d.  As the degrees of freedom increases, the shape of the chi-squared distribution becomes more skewed.
+
+12. **True / False, II.** Determine if the statements below are true or false.
+    For each false statement, suggest an alternative wording to make it a true statement.
+
+    a.  As the degrees of freedom increases, the mean of the chi-squared distribution increases.
+
+    b.  If you found $X^2 = 10$ with $df = 5$ you would fail to reject $H_0$ at the 5% discernibility level.
+
+    c.  When finding the p-value of a chi-squared test, we always shade the tail areas in both tails.
+
+    d.  As the degrees of freedom increases, the variability of the chi-squared distribution decreases.
+
+13. **Sleep-deprived scouts.** In a constructed scenario modeled on a national sleep survey, the league's medical working group surveyed randomly sampled regional scouts — whose jobs involve near-constant matchday travel — and randomly sampled office-based club analysts who serve as a "control" for comparison, asking how much sleep they typically get on work nights.
+    The results of the survey are shown below.
+    Conduct a hypothesis test to evaluate if these data provide evidence of an association between sleep levels and job type.
+
+    | Job type        | Less than 6 hours | 6 to 8 hours | More than 8 hours | Total |
+    |:----------------|------------------:|-------------:|------------------:|------:|
+    | Office analysts |                35 |          193 |                64 |   292 |
+    | Regional scouts |               104 |          499 |               192 |   795 |
+    | Total           |               139 |          692 |               256 | 1,087 |
+
+14. **Injury-prevention protocols.** Soft-tissue injuries cost academies training days all season.
+    In a constructed scenario, Northbridge's partner academies ran a randomized experiment comparing three injury-prevention protocols: the full prevention program performed daily, a reduced program performed twice weekly, and the reduced program performed only as a preseason block.
+    The outcome for each of the 165 players was whether they remained injury-free for the full season.
+
+    | Protocol              | Injury-free | Injured | Total |
+    |:----------------------|------------:|--------:|------:|
+    | Full program, daily |          52 |       2 |    54 |
+    | Reduced, twice weekly |          31 |      24 |    55 |
+    | Reduced, preseason only |        42 |      14 |    56 |
+    | Total                 |         125 |      40 |   165 |
+
+    a.  Set up hypotheses for evaluating whether there is any difference in the performance of the protocols, and also check conditions.
+
+    b.  Statistical software was used to run a chi-squared test, which output: $X^2 = 23.7, \quad df = 2, \quad \text{p-value} < 0.0001.$
+        Use these results to evaluate the hypotheses from part (a), and provide a conclusion in the context of the problem.
+
+15. **Report-format preferences.** In a constructed scenario, 500 randomly sampled accredited scouts at the national scouting convention were asked which format they prefer for receiving opposition reports.
+    The table below shows the distribution of responses by age group as well as the expected counts for each cell (shown in parentheses).
+
+    | Format                | 18--34     | 35--54      | 55+        | Total |
+    |:----------------------|-----------:|------------:|-----------:|------:|
+    | Written dossier       | 72 (80.9)  | 97 (102.4)  | 76 (61.7)  |   245 |
+    | Video package         | 52 (53.5)  | 76 (67.7)   | 34 (40.8)  |   162 |
+    | Interactive dashboard | 31 (21.1)  | 24 (26.8)   | 9 (16.1)   |    64 |
+    | Something else        | 7 (5.3)    | 6 (6.7)     | 3 (4.0)    |    16 |
+    | Not sure              | 3 (4.3)    | 6 (5.4)     | 4 (3.3)    |    13 |
+    | Total                 | 165        | 209         | 126        |   500 |
+
+    a.  State the null and alternative hypotheses for testing for independence of age and preferred report format among accredited scouts.
+
+    b.  Are the conditions for inference using a chi-squared test satisfied?
+
+16. **Training volume and overuse injury.** Researchers at a national football federation investigated the relationship between weekly organized training volume and the risk of growth-related overuse injury in youth players.
+    In this constructed scenario mirroring a well-known cohort design, they collected data on 50,739 registered academy-age players free of injury at the start of the study, followed the players for ten seasons, used annual questionnaires to record each player's weekly hours of organized training, and recorded physician-diagnosed overuse injuries.
+    The table below shows the distribution of overuse-injury incidence by weekly organized training volume, in hours per week.
+
+    | Overuse injury | Under 2 | 2--6  | 7--13  | 14--21 | 22 or more | Total  |
+    |:---------------|--------:|------:|-------:|-------:|-----------:|-------:|
+    | Yes            |     670 | \_\_\_|    905 |    564 |         95 |  2,607 |
+    | No             |  11,545 | 6,244 | 16,329 | 11,726 |      2,288 | 48,132 |
+    | Total          |  12,215 | 6,617 | 17,234 | 12,290 |      2,383 | 50,739 |
+
+    a.  What type of test is appropriate for evaluating if there is an association between training volume and overuse injury?
+
+    b.  Write the hypotheses for the test you identified in part (a).
+
+    c.  Calculate the overall proportion of players who did and did not suffer an overuse injury.
+
+    d.  Identify the expected count for the empty cell, and calculate the contribution of this cell to the test statistic.
+
+    e.  The test statistic is $X^2 = 20.93.$
+        What is the p-value?
+
+    f.  What is the conclusion of the hypothesis test?
+
+    g.  One of the study's authors was quoted in the football press as saying it was "too early to recommend that academies change their training volumes" based on just this study.
+        Do you agree with this statement?
+        Explain your reasoning.
+
+[^_18-ex-inference-tables-1]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data); the position-group mapping is the one defined once in @sec-explore-categorical and reused throughout the book.
+
+[^_18-ex-inference-tables-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).

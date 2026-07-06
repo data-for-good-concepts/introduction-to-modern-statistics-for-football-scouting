@@ -1,0 +1,31 @@
+**2.** (a) Fan shape: residuals centered at 0 but spreading wider from left to right; linear model not appropriate (non-constant variance). (b) Arch: residuals below zero at both ends and above zero in the middle; linear model not appropriate (nonlinear trend).
+
+**4.** (a) Strong relationship, but nonlinear (S-shaped); a straight line would not fit the data. (b) Strong relationship, but nonlinear (steep-sided valley); a straight line would not fit the data. (c) Strong relationship, and a linear fit would be reasonable. (d) Weak relationship, and trying a linear fit would be reasonable. (e) Moderate relationship, and a linear fit would be reasonable. (f) Moderate-to-strong relationship, and a linear fit would be reasonable.
+
+**6.** (a) Strong, positive, but nonlinear: accuracy climbs steeply at low match counts and levels off past roughly 60 matches. (b) Very strong, positive, linear. (c) The travel plot (right panel): its band is tighter and straight ($r \approx 0.94$ vs $\approx 0.86$). (d) Only the axis labels/scale would change; the shape of the plots and the correlations would not change.
+
+**8.** (a) $r = 0.65 \to (2).$ (b) $r = -0.35 \to (1).$ (c) $r = 0.03 \to (4).$ (d) $r = -0.89 \to (3).$
+
+**10.** They will be identical: changing units (km to miles) does not affect the correlation coefficient.
+
+**12.** (a) Moderate, negative, linear association — warmer cohorts reach sharpness sooner — with one clear outlier at (12 C, 36 days). (b) No change in form, direction, or strength; only the axis scales change. (c) $r = -0.72.$
+
+**14.** (a) $r = 1.$ (b) $r = 1.$ (c) $r = 1.$ (Each rule is an exact positive linear relationship.)
+
+**16.** (I) is higher: more scatter around the line means more uncertainty in the slope estimate.
+
+**18.** Underestimate: the residual is $+0.5,$ so the observed incidence (2.0 per 1,000 hours) exceeded the predicted 1.5.
+
+**20.** (a) Positive, moderate ($r = 0.40$), roughly linear, with goals in integer bands and variability increasing with shot count. (b) Predictor: `n_shots`; outcome: `goals`. (c) To predict a team's goals from the shot counts that basic media feeds publish. (d) Prediction errors are more variable for team-matches with higher predicted goals (fan shape).
+
+**22.** (a) $b_1 = 0.66 \times 8.7/10.0 = 0.5742,$ $b_0 = 172.1 - 0.5742 \times 107.6 = 110.32$: $\widehat{height} = 110.32 + 0.5742 \times girth.$ (b) Slope: for each additional cm of shoulder girth, predicted height is 0.5742 cm greater, on average. Intercept: predicted height of 110.32 cm at girth 0 cm — meaningless in context, it only adjusts the height of the line. (c) $R^2 = 0.66^2 = 0.436$: shoulder girth explains about 43.6% of the variability in trialists' heights. (d) $110.32 + 0.5742 \times 100 = 167.7$ cm. (e) $e = 160 - 167.7 = -7.7$ cm: the model overpredicts this trialist's height by 7.7 cm. (f) No — 56 cm is far below the observed girth range; this would be extrapolation.
+
+**24.** (a) $\widehat{\texttt{goals}} = 0.423 + 0.785 \times \texttt{total\_xg}.$ (b) A team-match with zero accumulated chance quality is predicted 0.423 goals, on average — mainly a height adjustment for the line. (c) Each additional unit of accumulated xG predicts 0.785 more goals, on average. (d) Accumulated chance quality explains 63% of the variability in goals scored across the 62 team-matches. (e) The slope is positive, so $r = +\sqrt{0.63} = 0.79.$
+
+**26.** (a) The far-left point is a high leverage, influential outlier: it visibly flattens the fitted line. (b) The far-left low point is a high leverage, influential outlier: it visibly steepens the fitted line. (c) The mid-range high point is not high leverage and not influential — it simply has a large positive residual.
+
+**28.** No and no: at 12 C the cohort sits near the center of the temperature range, so it does not have high leverage, and refitting without it barely moves the line (slope $-0.59$ with vs $-0.57$ without) — it just has a large positive residual.
+
+**30.** (a) Weak-to-moderate, positive, linear, with heavy scatter ($r \approx 0.43$). (b) Strong, positive, slightly curved rising relationship ($r \approx 0.86$). (c) Goals last season — its relationship with market value is much stronger and tighter, so it predicts value far better than height.
+
+**32.** (a) The trend is negative, so $r = -\sqrt{0.66} = -0.81.$ (b) Slope $b_1 = -0.812 \times 9.3/23.5 = -0.321$; intercept $b_0 = 32.7 + 0.321 \times 43.5 = 46.7$: $\widehat{\texttt{trial\_rate}} = 46.7 - 0.321 \times \texttt{video\_share}.$ (c) A region doing 0% of its assessments from video is predicted a trial rate of 46.7%, on average. (d) Each additional percentage point of video-only assessment predicts a trial rate lower by 0.32 percentage points, on average. (e) Predicted $46.7 - 0.321 \times 40 = 33.8$; residual $= 40 - 33.8 = +6.2$ percentage points: this region sends 6.2 points more of its recommendations to trial than the model predicts.

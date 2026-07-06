@@ -1,0 +1,420 @@
+1.  **Parameters and statistics.** Identify which value represents the sample mean and which value represents the claimed population mean.
+
+    a.  Scouts working in the continent's top divisions spent an average of about €52 thousand each on match travel in the 2023-24 season, according to the official industry figures.
+        To see if this number had changed, an analysts' association conducted a new survey in 2024-25 before the official industry figures were reported.
+        The survey included 150 scouts and found that average travel spending was €58 thousand per scout.
+
+    b.  The average rating of Northbridge trialists on the club's 1-to-5 trial assessment scale was 3.37 in 2014.
+        A review of a sample of 203 trialists from the club's records yielded an average rating of 3.59 a decade later.
+
+2.  **Matches watched per week.** A recent piece in a scouting trade newsletter stated that regional scouts watch an average of 5.5 matches each week, combining live attendance and video.
+    A junior Northbridge analyst who was skeptical about this value decided to conduct a survey by randomly sampling 25 scouts from the federation's register.
+    On average, the sampled scouts watched 6.25 matches per week.
+    Identify which value represents the sample mean and which value represents the claimed population mean.
+
+3.  **Pressure and chance quality, scope of inference.** Researchers collected data to examine the relationship between defensive pressure and the chance quality of shots in top-division football.
+    Pressure on the shooter was coded from tracking data by the data provider.
+    Chance quality was recorded for 143,196 shots logged between the 2015 and 2019 seasons across one continent's top divisions, and the pressure status at the moment of each shot was determined for each of them.
+
+    a.  Identify the population of interest and the sample in this study.
+
+    b.  Comment on whether the results of the study can be generalized to the population, and if the findings of the study can be used to establish causal relationships.
+
+4.  **Honest reporting, scope of inference.** Researchers studying the relationship between honesty, age, and self-control conducted an experiment on 160 academy scholars between the ages of 8 and 15.
+    Each scholar was asked to spin a two-colored spinner (half red, half blue) in private and to record the outcome on a paper sheet, and the researchers said they would only reward scholars who report blue.
+    Half the scholars were explicitly told not to cheat and the others were not given any explicit instructions.
+    Differences were observed in the misreporting rates in the instruction and no-instruction groups, as well as some differences across scholars' characteristics within each group.
+
+    a.  Identify the population of interest and the sample in this study.
+
+    b.  Comment on whether the results of the study can be generalized to the population, and if the findings of the study can be used to establish causal relationships.
+
+5.  **Gamified video analysis, scope of inference.** Priya Rao's team investigated the effects of gamification (application of game-design elements, points, and leaderboards in non-game contexts) on how well young players learn tactical concepts.
+    They randomly assigned 365 academy scholars drawn from Northbridge and two partner academies to one of four groups: one group received no take-home clip packets and no gamification, one group received clip packets but no gamification, one group had gamification but no clip packets, and a final group had gamification and clip packets.
+    Scholars in all groups also attended their regular squad training sessions.
+    The study found that gamification had a positive impact on scholars' tactical-assessment scores compared to traditional review methods involving clip packets.
+
+    a.  Identify the population of interest and the sample in this study.
+
+    b.  Comment on whether the results of the study can be generalized to the population, and if the findings of the study can be used to establish causal relationships.
+
+6.  **Snack takers, scope of inference.** In a study of the relationship between perceived squad status and rule-bending at the training ground, 129 scholars at one academy were asked to identify themselves as having low or high squad status by comparing themselves to teammates with the most (least) minutes, the most (least) youth international caps, and the most (least) respected roles in the squad.
+    They were also presented with a tray of individually wrapped recovery bars and informed that the bars were reserved for the under-12 group, but that they could take some if they wanted.
+    After completing some unrelated drills, the scholars reported the number of bars they had taken.
+    It was found that those who identified as high squad status took more bars than the others.
+
+    a.  Identify the population of interest and the sample in this study.
+
+    b.  Comment on whether the results of the study can be generalized to the population, and if the findings of the study can be used to establish causal relationships.
+
+7.  **Writing up after a matchday.** The league federation's research unit asked the question, *"After an average matchday, about how many hours do you spend writing and filing your reports?"* to a random sample of 1,155 licensed scouts.
+    The average reporting time was found to be 1.65 hours.
+    Determine which of the following is an observation, a variable, a sample statistic, or a population parameter.
+
+    a.  A scout in the sample.
+
+    b.  Number of hours spent writing and filing reports after an average matchday.
+
+    c.  1.65.
+
+    d.  Average number of hours all licensed scouts spend writing and filing reports after an average matchday.
+
+8.  **Set-piece clips.** Suppose you want to estimate the percentage of clips on a large scouting-video platform that are set-piece clips.
+    It is impossible for you to watch every clip on the platform, so you use a random clip picker to select 1,000 clips for you.
+    You find that 2% of these clips are set-piece clips.
+    Determine which of the following is an observation, a variable, a sample statistic, or a population parameter.
+
+    a.  Percentage of all clips on the platform that are set-piece clips.
+
+    b.  2%.
+
+    c.  A clip in your sample.
+
+    d.  Whether a clip is a set-piece clip.
+
+9.  **Curriculum satisfaction across squads.** Northbridge's academy has 160 scholars.
+    All 160 scholars attend the same education sessions together, but the scholars are divided into 4 training squads, each of 40 scholars, run by different lead coaches.
+    Jonas Beck wants to conduct a survey about how satisfied the scholars are with the new training curriculum, and he believes that the squad a scholar is in might affect the scholar's overall satisfaction with the curriculum.
+
+    a.  What type of study is this?
+
+    b.  Suggest a sampling strategy for carrying out this study.
+
+10. **Residence proposal across year groups.** At Northbridge's residential campus, under-16 and under-17 scholars live in the east block and under-19 and under-21 players live in the west block.
+    Suppose you want to collect opinions on a new residence building the club is proposing and you want to make sure your survey equally represents opinions from players from all year groups.
+
+    a.  What type of study is this?
+
+    b.  Suggest a sampling strategy for carrying out this study.
+
+11. **Headers and conversion.** The output and scatterplot below were created as part of a study evaluating the relationship between the share of a team's shots that were headers and the team's conversion rate (the proportion of its shots scored) for the 32 teams at the 2022 Men's World Cup.[^_02-ex-data-design-1]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    team_headers <- wc2022_shots |>
+      group_by(team) |>
+      summarize(
+        shots = n(),
+        header_share = mean(body_part == "Head"),
+        conversion = mean(goal)
+      )
+
+    team_headers |>
+      summarize(teams = n(), r = cor(header_share, conversion))
+    #> # A tibble: 1 × 2
+    #>   teams      r
+    #>   <int>  <dbl>
+    #> 1    32 -0.285
+
+    team_headers |>
+      arrange(desc(header_share)) |>
+      slice(c(1:2, 31:32))
+    #> # A tibble: 4 × 4
+    #>   team       shots header_share conversion
+    #>   <chr>      <int>        <dbl>      <dbl>
+    #> 1 Serbia        32       0.312       0.156
+    #> 2 Australia     26       0.269       0.115
+    #> 3 Argentina    110       0.0909      0.209
+    #> 4 Costa Rica    11       0.0909      0.182
+
+    ggplot(team_headers, aes(x = header_share, y = conversion)) +
+      geom_point() +
+      labs(
+        x = "Share of shots that were headers",
+        y = "Conversion (proportion of shots scored)",
+        title = "Conversion vs. header share",
+        subtitle = "32 teams at the 2022 Men's World Cup"
+      )
+    ```
+
+    The cloud of 32 points is wide, but it drifts downward from left to right.
+    The printed extremes illustrate the drift: Serbia and Australia, with header shares of 0.312 and 0.269, converted 0.156 and 0.115 of their shots, while Argentina and Costa Rica, with header shares of 0.0909 apiece, converted 0.209 and 0.182.
+
+    a.  Describe the relationship between a team's header share and its conversion rate.
+
+    b.  What type of study is this?
+
+    c.  State a possible confounding variable that might explain this relationship and describe its potential effect.
+
+12. **Stressed out.** A study that surveyed a random sample of otherwise healthy academy scholars found that they are more likely to get muscle cramps during school assessment weeks, when they report being stressed.
+    The study also noted that scholars sleep less and drink more caffeinated energy drinks when they are stressed.
+
+    a.  What type of study is this?
+
+    b.  Can this study be used to conclude a causal relationship between increased stress and muscle cramps?
+
+    c.  State possible confounding variables that might explain the observed relationship between increased stress and muscle cramps.
+
+13. **Evaluate sampling methods.** The players' union in Northbridge's country wants to determine what fraction of the roughly 5,000 registered academy players nationwide support a new €25 annual fee to fund a league-wide video-library subscription.
+    For each proposed method below, indicate whether the method is reasonable or not.
+
+    a.  Survey a simple random sample of 500 registered academy players.
+
+    b.  Stratify players by playing position (goalkeeper, defender, midfielder, forward), then sample 10% of players from each stratum.
+
+    c.  Cluster players by birth year (players born in 2008 in one cluster, players born in 2009 in one cluster, etc.), then randomly sample three clusters and survey all players in those clusters.
+
+14. **Random licence sampling.** The federation's research unit surveys scouts using a procedure called random licence sampling, which generates licence numbers at random from the full licensing database, covering every accredited scout in the country.
+    Give a possible reason the research unit chooses random licence sampling instead of picking names from the federation's published scouts' directory.
+
+15. **Harsh raters are gonna rate, study confirms.** A study run by Priya Rao's team asked a group of 200 randomly sampled licensed scouts, recruited through the federation's online research panel, to evaluate how they felt about various subjects, such as artificial pitches, the winter break, futsal-developed players, zonal marking, third-choice goalkeepers, and pre-season friendlies, in order to measure their attitude towards mostly independent stimuli.
+    Then, they presented the scouts with a recruitment dossier for a new prospect.
+    This prospect does not exist, but the scouts didn't know this, and the dossier contained three positive and three negative fabricated match reports.
+    Scouts who reacted positively to the earlier subjects on the dispositional attitude measurement also tended to react positively to the prospect, and those who reacted negatively tended to react negatively to him.
+    The team concluded that *"some scouts tend to like players, whereas others tend to dislike them, and a more thorough understanding of this tendency will lead to a more thorough understanding of how a club should read its scouting reports."*
+
+    a.  What are the cases?
+
+    b.  What is (are) the response variable(s) in this study?
+
+    c.  What is (are) the explanatory variable(s) in this study?
+
+    d.  Does the study employ random sampling?
+        Explain your reasoning.
+
+    e.  Is this an observational study or an experiment?
+        Explain your reasoning.
+
+    f.  Can we establish a causal link between the explanatory and response variables?
+
+    g.  Can the results of the study be generalized to the population at large?
+
+16. **Reading the trade press.** Below are excerpts from two articles published in a football-industry magazine:
+
+    a.  An excerpt from an article titled *Risks: High-Load Players Found More Prone to Tendon Injury* is below.
+        Based on this study, can we conclude that high sprint loads cause tendon injuries later in a career?
+        Explain your reasoning.
+
+    > "Researchers analyzed workload records from 23,123 players who took part in a voluntary league-wide GPS-monitoring scheme and lifestyle survey between 2008 and 2015, when the players were 18 to 28 years old. Over the following decade, about 25% of the group suffered a serious tendon injury, including 1,136 Achilles cases and 416 patellar cases. After adjusting for other factors, the researchers concluded that players averaging more than 25 high-speed-running kilometres per month were 37% more likely than low-load players to develop a tendon injury, and the risks went up with increased load: 44% for 25 to 35 kilometres per month, and twice the risk for more than 35."
+
+    b.  An excerpt from an article titled *The Academy's Persistent Fouler Is Sleepy* is below.
+        A colleague of yours who read the article says, *"The study shows that sleep disorders lead to persistent fouling in academy scholars."*
+        Is this statement justified?
+        If not, how best can you describe the conclusion that can be drawn from this study?
+
+    > "The academy-federation study collected survey data from parents on each scholar's sleep habits and asked both parents and coaches to assess behavioral concerns. About a third of the scholars studied were identified by parents or coaches as having problems with disruptive behavior or persistent fouling. The researchers found that scholars who had behavioral issues and those who were identified as persistent foulers were twice as likely to have shown symptoms of sleep disorders."
+
+17. **Sampling strategies.** A junior analyst who is curious about the relationship between the amount of time academy scholars spend on social media and their performance in the club's education program decides to conduct a survey.
+    Various research strategies for collecting data are described below.
+    In each, name the sampling method proposed and any bias you might expect.
+
+    a.  They randomly sample 40 scholars from the academy's register, give them the survey, ask them to fill it out, and bring it back the next day.
+
+    b.  They give out the survey only to the scholars in their own tutor group, making sure each one of them fills it out.
+
+    c.  They post a link to an online survey on the academy's social feed and ask scholars to fill it out.
+
+    d.  They randomly sample 5 education classes and ask a random sample of scholars from those classes to fill out the survey.
+
+18. **Training-group size.** Suppose we want to estimate the average training-group size at an academy, where a *"training group"* is defined as the set of players who take their session blocks together on the same pitch.
+    If we select academy players at random and ask them how large their training group is, will this be a good measure of training-group size?
+    Or will our average be biased?
+    If so, will it overestimate or underestimate the true value?
+    *Hint:* Think about who is available to be sampled: a group of 30 players offers 30 chances for one of its members to be drawn, while a group of 5 offers only 5 — so which kind of group is a randomly chosen *player* more likely to belong to?
+
+19. **Crowd noise and penalty performance.** A study is designed to test the effect of simulated crowd-noise level on academy players' performance in a standardized ten-kick penalty assessment.
+    The researcher believes that noise levels might have different effects on players who have first-team match experience and players who don't, so they want to make sure both groups of players are equally represented in each treatment.
+    The treatments are no playback, ambient crowd hum, and a hostile away-end recording.
+
+    a.  What is the response variable?
+
+    b.  What is the explanatory variable?
+        What are its levels?
+
+    c.  What is the blocking variable?
+        What are its levels?
+
+20. **Recovery supplements.** To assess the effectiveness of taking large doses of a tart-cherry recovery drink in reducing the duration of post-match muscle soreness, medical staff across an academy consortium recruited 400 healthy volunteer players.
+    A quarter of the players were assigned a placebo drink, and the rest were evenly divided between a 1g dose, a 3g dose, or a 3g dose plus additives, to be taken at the onset of soreness for the following two days.
+    All bottles had identical appearance and packaging.
+    The staff who handed the prescribed bottles to the players knew which player received which treatment, but the physiotherapists assessing the players' soreness did not.
+    No statistically discernible[^_02-ex-data-design-3] differences were observed in any measure of soreness duration or severity between the four groups, and the placebo group had the shortest duration of symptoms.
+
+    a.  Was this an experiment or an observational study?
+        Why?
+
+    b.  What are the explanatory and response variables in this study?
+
+    c.  Were the players blinded to their treatment?
+
+    d.  Was this study double-blind?
+
+    e.  Players are ultimately able to choose whether to drink the doses prescribed to them.
+        We might expect that not all of them will adhere and take their doses.
+        Does this introduce a confounding variable to the study?
+        Explain your reasoning.
+
+21. **Noise, floodlights, and penalty performance.** A study is designed to test the effect of crowd-noise level and floodlight level on academy players' performance in a standardized ten-kick penalty assessment.
+    The researcher believes that noise and floodlight levels might have different effects on players who have first-team match experience and players who don't, so they want to make sure both groups of players are equally represented in each treatment.
+    The noise treatments considered are no playback, ambient crowd hum, and a hostile away-end recording.
+    The floodlight treatments considered are full floodlights, floodlights at half power, and no floodlights (dusk light only).
+
+    a.  What type of study is this?
+
+    b.  How many explanatory variables are being manipulated in this study?
+        Identify them, and describe their levels.
+
+    c.  What is the role of the first-team experience variable in this study?
+
+22. **Audio and video review.** You would like to conduct an experiment with the academy's scholars to see if they retain more from an opposition video-review session if they watch the clips with no audio, with a tactical commentary track, or with matchday crowd audio.
+    Briefly outline a design for this study.
+
+23. **Recovery-drink preference.** You would like to conduct an experiment at the training ground to see if the first-team squad prefer the taste of the club's current isotonic recovery drink or a new sugar-free formulation.
+    Briefly outline a design for this study.
+
+24. **Yoga and player wellness.** A researcher at the league's player-welfare unit is interested in the effects of guided recovery yoga on player wellness and they propose the following study: use stratified random sampling to ensure representative proportions of 18-23, 24-29, and 30-35 year-old players from the league's registered professionals.
+    Next, randomly assign half the subjects from each age group to attend two guided recovery-yoga sessions per week, and instruct the rest not to take up yoga.
+    Conduct a wellness assessment at the beginning and at the end of the study, and compare the results.
+
+    a.  What type of study is this?
+
+    b.  What are the treatment and control groups in this study?
+
+    c.  Does this study make use of blocking?
+        If so, what is the blocking variable?
+
+    d.  Does this study make use of blinding?
+
+    e.  Comment on whether the results of the study can be used to establish a causal relationship between yoga and player wellness, and indicate whether the conclusions can be generalized to the population at large.
+
+    f.  Suppose you are given the task of determining if this proposed study should get funding.
+        Would you have any reservations about the study proposal?
+
+25. **Collagen and tendon soreness.** Collagen supplements have gained a reputation around training grounds as a guard against tendon trouble.
+    In one study, 38 forwards and 38 defenders were recruited from clubs across the league and each group was divided randomly into two groups: treatment or control.
+    One group was given 15 grams of a collagen supplement twice a day, and the other was given a placebo.
+    The subjects volunteered to be a part of the study.
+    After 12 weeks, the researchers found no statistically discernible difference between the groups in reported tendon soreness or recovery times.
+
+    a.  What type of study is this?
+
+    b.  What are the experimental and control treatments in this study?
+
+    c.  Has blocking been used in this study?
+        If so, what is the blocking variable?
+
+    d.  Has blinding been used in this study?
+
+    e.  Comment on whether we can make a causal statement, and indicate whether we can generalize the conclusion to the population at large.
+
+26. **Foreign-market survey.** Marta Vidal has requested a systematic survey of the prospects in a foreign market.
+    The market is broken into many distinct and unique regional leagues, some dominated by big-academy clubs, some entirely semi-professional, and others a diverse mixture of both.
+    For each part below, identify the sampling method described, and describe the statistical pros and cons of the method in the club's context.
+
+    a.  Randomly sample 200 prospects from the market's full registration list.
+
+    b.  Divide the market into its 20 regional leagues, and then sample 10 prospects from each league.
+
+    c.  Divide the market into its 20 regional leagues, randomly sample 3 leagues, and then survey all prospects from those 3 leagues.
+
+    d.  Divide the market into its 20 regional leagues, randomly sample 8 leagues, and then randomly sample 50 prospects from those leagues.
+
+    e.  Sample the 200 prospects who play at the grounds closest to Northbridge's training complex.
+
+27. **Flawed reasoning.** Identify the flaw(s) in reasoning in the following scenarios.
+    Explain what the individuals in the study should have done differently if they wanted to make such strong conclusions.
+
+    a.  Academy scholars are given a questionnaire that they are asked to return after their parents have completed it.
+        One of the questions asked is, *"Do you find that your work schedule makes it difficult to attend your child's academy fixtures?"* Of the parents who replied, 85% said *"no"*.
+        Based on these results, the academy officials conclude that a great majority of the parents have no difficulty attending their children's fixtures.
+
+    b.  A survey is conducted on a simple random sample of 1,000 players released by the region's academies, asking them about the transition support they received.
+        A follow-up survey asking if they are still involved in organized football is conducted 3 years later.
+        However, only 567 of these players are reached using the same contact details.
+        The researcher reports that these 567 players are representative of all released players.
+
+    c.  A club physiotherapist administers a questionnaire to 30 of the senior players who do not have any tendon problems and finds that 20 of them regularly do off-season yoga.
+        He concludes that yoga decreases the risk of tendon problems.
+
+28. **Chance quality and conversion in World Cup teams.** The output and scatterplot below show the relationship between mean chance quality per shot (`statsbomb_xg`) and conversion rate for the 32 teams at the 2022 Men's World Cup.[^_02-ex-data-design-2]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    team_quality <- wc2022_shots |>
+      group_by(team) |>
+      summarize(
+        shots = n(),
+        goals = sum(goal),
+        mean_xg = mean(statsbomb_xg),
+        conversion = mean(goal)
+      )
+
+    team_quality |>
+      summarize(teams = n(), r = cor(mean_xg, conversion))
+    #> # A tibble: 1 × 2
+    #>   teams     r
+    #>   <int> <dbl>
+    #> 1    32 0.673
+
+    team_quality |>
+      arrange(desc(conversion)) |>
+      slice(c(1:3, 30:32))
+    #> # A tibble: 6 × 5
+    #>   team        shots goals mean_xg conversion
+    #>   <chr>       <int> <int>   <dbl>      <dbl>
+    #> 1 Netherlands    48    13  0.186      0.271
+    #> 2 Argentina     110    23  0.191      0.209
+    #> 3 England        63    13  0.139      0.206
+    #> 4 Belgium        35     1  0.106      0.0286
+    #> 5 Canada         35     1  0.112      0.0286
+    #> 6 Denmark        35     1  0.0912     0.0286
+
+    ggplot(team_quality, aes(x = mean_xg, y = conversion)) +
+      geom_point() +
+      labs(
+        x = "Mean chance quality per shot (statsbomb_xg)",
+        y = "Conversion (proportion of shots scored)",
+        title = "Conversion vs. mean chance quality",
+        subtitle = "32 teams at the 2022 Men's World Cup"
+      )
+    ```
+
+    The 32 points climb from lower left to upper right.
+    The printed rows show the extremes: the Netherlands converted 13 of 48 shots (0.271) from a mean chance quality of 0.186, while Belgium, Canada, and Denmark each scored exactly once from 35 shots — conversions of 0.0286 — despite chance quality nowhere near the tournament's worst.[^_02-ex-data-design-pens]
+
+    a.  What are the explanatory and response variables?
+
+    b.  Describe the relationship between the two variables.
+        Make sure to discuss unusual observations, if any.
+
+    c.  Can we conclude that creating higher-quality chances increases a team's conversion rate?
+
+29. **Watch clips, feel sharper.** In a player-development study on the effects of personalized clip review on academy scholars' self-rated match confidence, participants were randomly assigned to three groups: (1) training-as-usual, (2) a reminder intervention involving text-message prompts to review their own match clips plus a login to the club's clip platform, or (3) a clip intervention in which staff delivered two additional short personalized clip-review sessions each day on top of the scholars' normal training.
+    Participants were asked to take a nightly wellness survey on their smartphones.
+    Participants were scholar volunteers at Northbridge's academy.
+    At the end of the 14-day study, only participants in the third group showed improvements to their self-rated match confidence across the 14 days relative to the other groups.
+
+    a.  What type of study is this?
+
+    b.  Identify the explanatory and response variables.
+
+    c.  Comment on whether the results of the study can be generalized to the population.
+
+    d.  Comment on whether the results of the study can be used to establish causal relationships.
+
+    e.  A club-website article reporting on the study states, "The results of this study provide proof that giving young players staff-led clip reviews can improve their confidence, even over a brief period of time." How would you suggest revising this statement so that it can be supported by the study?
+
+30. **Screens, scholars, and well-being.** In a study of three federation-wide, nationally representative youth-registry datasets from three countries, totalling 17,247 players, academy-registered players between the ages of 12 to 15 were asked to keep a diary of their screen time and answer questions about how they felt or acted.
+    The answers to these questions were then used to compute a psychological well-being score.
+    Additional data were collected and included in the analysis, such as each player's sex and age, and on the guardian's education, ethnicity, psychological distress, and employment.
+    The study concluded that there is little clear-cut evidence that screen time decreases young players' well-being.
+
+    a.  What type of study is this?
+
+    b.  Identify the explanatory variables.
+
+    c.  Identify the response variable.
+
+    d.  Comment on whether the results of the study can be generalized to the population, and why.
+
+    e.  Comment on whether the results of the study can be used to establish causal relationships.
+
+[^_02-ex-data-design-1]: The 2022 World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_02-ex-data-design-2]: The 2022 World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_02-ex-data-design-pens]: Per the book's convention of flagging penalty and shoot-out kicks wherever they matter (@sec-data-applications): the conversion rates in `team_quality` count period-5 shoot-out kicks as shots. The Netherlands' 13 of 48 includes 5 shoot-out kicks, 3 of them converted; on their open-play shots alone they converted 10 of 42, a rate of 0.238.
+
+[^_02-ex-data-design-3]: The term *statistically discernible* is defined formally in @sec-foundations-randomization; for now, read it as "a difference too large to attribute comfortably to chance alone." Many other books and papers use the phrase *statistically significant* for the same concept.

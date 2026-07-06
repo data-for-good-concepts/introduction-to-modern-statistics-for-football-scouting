@@ -1,0 +1,135 @@
+# Answers to even-numbered exercises {#sec-appendix-even-answers}
+
+The worked solutions of [Appendix -@sec-exercise-solutions] cover the odd-numbered exercises, following the convention of *Introduction to Modern Statistics*.
+This appendix gives **final answers** for the even-numbered exercises — values, classifications, and verdicts, with at most a clause of justification and never the full worked reasoning — so that a self-studying reader can check every attempt while the exercises remain usable as assigned work.
+If your number disagrees, re-read the exercise's stated frame and seed before doubting your method: in this book, most wrong answers are right answers to a different frame.
+
+## Chapter 1 {#sec-even-answers-01 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_01-ea-data-hello.qmd >}}
+:::
+
+## Chapter 2 {#sec-even-answers-02 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_02-ea-data-design.qmd >}}
+:::
+
+## Chapter 4 {#sec-even-answers-04 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_04-ea-explore-categorical.qmd >}}
+:::
+
+## Chapter 5 {#sec-even-answers-05 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_05-ea-explore-numerical.qmd >}}
+:::
+
+## Chapter 7 {#sec-even-answers-07 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_07-ea-model-slr.qmd >}}
+:::
+
+## Chapter 8 {#sec-even-answers-08 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_08-ea-model-mlr.qmd >}}
+:::
+
+## Chapter 9 {#sec-even-answers-09 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_09-ea-model-logistic.qmd >}}
+:::
+
+## Chapter 11 {#sec-even-answers-11 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_11-ea-foundations-randomization.qmd >}}
+:::
+
+## Chapter 12 {#sec-even-answers-12 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_12-ea-foundations-bootstrapping.qmd >}}
+:::
+
+## Chapter 13 {#sec-even-answers-13 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_13-ea-foundations-mathematical.qmd >}}
+:::
+
+## Chapter 14 {#sec-even-answers-14 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_14-ea-foundations-errors.qmd >}}
+:::
+
+## Chapter 16 {#sec-even-answers-16 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_16-ea-inference-one-prop.qmd >}}
+:::
+
+## Chapter 17 {#sec-even-answers-17 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_17-ea-inference-two-props.qmd >}}
+:::
+
+## Chapter 18 {#sec-even-answers-18 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_18-ea-inference-tables.qmd >}}
+:::
+
+## Chapter 19 {#sec-even-answers-19 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_19-ea-inference-one-mean.qmd >}}
+:::
+
+## Chapter 20 {#sec-even-answers-20 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_20-ea-inference-two-means.qmd >}}
+:::
+
+## Chapter 21 {#sec-even-answers-21 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_21-ea-inference-paired-means.qmd >}}
+:::
+
+## Chapter 22 {#sec-even-answers-22 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_22-ea-inference-many-means.qmd >}}
+:::
+
+## Chapter 24 {#sec-even-answers-24 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_24-ea-inf-model-slr.qmd >}}
+:::
+
+## Chapter 25 {#sec-even-answers-25 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_25-ea-inf-model-mlr.qmd >}}
+:::
+
+## Chapter 26 {#sec-even-answers-26 .unlisted}
+
+::: {.exercises-solution}
+{{< include exercises/_26-ea-inf-model-logistic.qmd >}}
+:::
+
+------------------------------------------------------------------------
+
+This appendix is original to this adaptation, licensed CC BY-SA 4.0. Match data: StatsBomb open data.

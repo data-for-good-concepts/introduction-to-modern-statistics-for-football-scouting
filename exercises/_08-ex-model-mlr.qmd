@@ -1,0 +1,451 @@
+1.  **High correlation, help or hazard?** Two junior analysts on Priya Rao's data team, Frida and Anton, are in disagreement about whether high correlation values are *always* good in the context of regression.
+    Frida claims that a chance-quality model is at its best when all the variables in the dataset are highly correlated with each other.
+    Anton claims that while it's desirable for each of the predictors to be highly correlated with the outcome, it is not desirable for the predictors to be highly correlated with each other.
+    Who is right: Frida, Anton, both, or neither?
+    Explain your reasoning using appropriate terminology.
+
+2.  **A categorical predictor in the model.** Two of Jonas Beck's academy coaches, Dario and Ines, want to build a model predicting a player's top sprint speed (in km/h) from whether the player operates in a wide position (winger or full-back) or a central one.
+    Before building the model they want to conduct some exploratory analysis to evaluate the strength of the association between these two variables, but they're in disagreement about how to evaluate how strongly a categorical predictor is associated with a numerical outcome.
+    Dario claims that it is not possible to calculate a correlation coefficient to summarize the relationship between a categorical predictor and a numerical outcome, however he is not sure what a better alternative is.
+    Ines claims that you can recode a binary predictor as a 0/1 variable (assign one level to be 0 and the other to be 1, say central = 0 and wide = 1), thus converting it to a numerical variable.
+    According to Ines, you can then calculate the correlation coefficient between the predictor and the outcome.
+    Who is right: Dario or Ines?
+    If you pick Dario, can you suggest a better alternative for evaluating the association between the categorical predictor and the numerical outcome?
+
+3.  **Shots and goals at the World Cup.** Marta Vidal's tournament report opens with team totals from the 2022 Men's World Cup: how many shots each of the 32 teams took and how many goals each scored, with penalty shoot-out attempts excluded.[^_08-ex-model-mlr-1]
+    The scatterplot on the top left displays the relationship between goals scored and shots taken.
+    The scatterplot on the top right displays the same relationship colored by how long each team's tournament run lasted (3 matches for a group-stage exit, 4--5 matches, or 6--7 matches for a semifinalist or better).
+    The set of scatterplots across the bottom display the same relationship separately for each run length.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+    wc2022_matches <- read_csv("data/derived/wc2022_matches.csv")
+
+    team_totals <- wc2022_shots |>
+      filter(period <= 4) |>   # exclude penalty shoot-out attempts
+      group_by(team) |>
+      summarize(shots = n(), goals = sum(goal))
+
+    matches_played <- wc2022_matches |>
+      pivot_longer(c(home_team, away_team), values_to = "team") |>
+      count(team, name = "matches")
+
+    team_totals <- team_totals |>
+      left_join(matches_played, by = "team") |>
+      mutate(run = case_when(
+        matches == 3 ~ "3 matches",
+        matches <= 5 ~ "4-5 matches",
+        .default = "6-7 matches"
+      ))
+
+    p_all <- ggplot(team_totals, aes(x = shots, y = goals)) +
+      geom_point() +
+      labs(x = "Shots taken", y = "Goals scored")
+
+    p_run <- ggplot(team_totals,
+                    aes(x = shots, y = goals, color = run, shape = run)) +
+      geom_point() +
+      labs(x = "Shots taken", y = "Goals scored", color = "", shape = "")
+
+    p_facet <- p_all + facet_wrap(~ run)
+
+    (p_all + p_run) / p_facet
+
+    team_totals |>
+      summarize(r = cor(shots, goals))
+    #> # A tibble: 1 × 1
+    #>       r
+    #>   <dbl>
+    #> 1 0.810
+
+    team_totals |>
+      group_by(run) |>
+      summarize(teams = n(), r = cor(shots, goals))
+    #> # A tibble: 3 × 3
+    #>   run         teams     r
+    #>   <chr>       <int> <dbl>
+    #> 1 3 matches      16 0.392
+    #> 2 4-5 matches    12 0.572
+    #> 3 6-7 matches     4 0.977
+    ```
+
+    In the combined scatterplot the points rise steadily from the lower left, where most group-stage exits cluster, to the upper right, where France (102 shots, 16 goals) and Argentina (101 shots, 15 goals) sit.
+    In the colored and faceted versions, the three run-length groups occupy visibly different regions of the plot, and within the two larger groups the clouds are noticeably looser than the combined cloud.
+
+    a.  Describe the relationship between shots taken and goals scored.
+
+    b.  Why do you think the variables are positively associated?
+
+    c.  Is the relationship between shots taken and goals scored stronger, similar, or weaker when broken down by tournament run in the separate plots along the bottom (as compared with the relationship when combined in the top left figure)?
+
+4.  **Chance quality across the clock.** Consider all of the open-play shots at the two tournaments the club tracks, the 2022 Men's World Cup and the 2025 Women's Euro.[^_08-ex-model-mlr-2]
+    We consider the relationship between the match minute and the chance quality of the shot, separately for shots taken under defensive pressure and shots taken unpressured.
+    The figures display a least squares regression line for chance quality versus minute for each pressure group: on the left for the two tournaments combined, on the right faceted by competition.
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    shots_two <- bind_rows(
+      wc2022_shots |> filter(shot_type == "Open Play"),
+      weuro2025_shots |> filter(shot_type == "Open Play")
+    ) |>
+      mutate(pressure = if_else(under_pressure, "Pressured", "Unpressured"))
+
+    shots_two |>
+      count(competition, pressure)
+    #> # A tibble: 4 × 3
+    #>   competition pressure        n
+    #>   <chr>       <chr>       <int>
+    #> 1 wc2022      Pressured     238
+    #> 2 wc2022      Unpressured  1144
+    #> 3 weuro2025   Pressured     325
+    #> 4 weuro2025   Unpressured   526
+
+    p_combined <- ggplot(shots_two,
+                         aes(x = minute, y = statsbomb_xg,
+                             color = pressure, linetype = pressure)) +
+      geom_smooth(method = "lm", se = FALSE) +
+      labs(x = "Minute", y = "Chance quality",
+           color = "Pressure", linetype = "Pressure")
+
+    p_by_comp <- p_combined + facet_wrap(~ competition)
+
+    p_combined + p_by_comp
+    ```
+
+    In the combined figure both lines are nearly flat: the unpressured line drifts gently upward across the match (a rise of roughly 0.007 in chance quality over 90 minutes) while the pressured line drifts gently downward by a similar amount, so the two cross early in the match and never sit more than about a hundredth apart.
+    In the faceted figure, the gentle upward drift among unpressured shots turns out to come entirely from the men's World Cup (roughly +0.015 over 90 minutes there, with the pressured line essentially flat), while at the Women's Euro *both* lines drift slightly downward.
+
+    a.  Does it seem like chance quality changes across the match for pressured and unpressured shots when looking at the two tournaments combined (left figure)?
+        Explain.
+
+    b.  Does it seem like chance quality changes across the match for pressured and unpressured shots when looking at the two tournaments separately (right figure)?
+        Explain.
+
+    c.  Would it be more appropriate to display the combined plot or the plots which display the competitions separately?
+        Explain.
+
+5.  **Thirty days to a trial.** Northbridge offers a trialist a first-team audition 30 days out, and Jonas Beck puts her on a daily preparation plan.
+    Each day she runs a timed finishing circuit and the academy staff record the following information: `days_since_start` (number of days since starting the plan), `days_till_trial` (number of days left until the trial match), `mood` (poor, good, sharp), `fatigue` (1-fresh to 10-exhausted), and `circuit_time` (time to complete the finishing circuit, in seconds).
+    The top few rows of the data they collect are shown below.
+    Using these data the performance staff want to build a model predicting `circuit_time` from the other variables.
+    Should they include all variables shown above in their model?
+    Why or why not?
+
+    | `days_since_start` | `days_till_trial` | `mood` | `fatigue` | `circuit_time` |
+    |---:|---:|:---|---:|---:|
+    | 1 | 29 | good | 3 | 71.2 |
+    | 2 | 28 | poor | 5 | 74.8 |
+    | 3 | 27 | sharp | 4 | 69.3 |
+    | ... | ... | ... | ... | ... |
+
+6.  **Multiple regression fact checking.** Determine which of the following statements are true and false.
+    For each statement that is false, explain why it is false.
+
+    a.  If two predictors in a chance-quality model are collinear, then removing one variable from the model will have no influence on the point estimate of the other variable's coefficient.
+
+    b.  Suppose a numerical predictor $x_1$ — say, a prospect's progressive carries per 90 minutes — has a coefficient of $b_1 = 2.5$ in a multiple regression model predicting the club's 0--100 prospect rating.
+        Suppose also that prospect A has $x_1 = 7.2$, prospect B has $x_1 = 8.2$, and these two prospects have the same values for all other predictors.
+        Then the predicted rating of prospect B will be 2.5 higher than the prediction for prospect A based on the multiple regression model.
+
+    c.  If a regression model's first variable has a coefficient of $b_1 = 5.7$, then if the academy coaches are able to intervene so that a player's $x_1$ will be 1 larger than it would otherwise, the observed value $y_1$ for this player would increase by 5.7.
+
+7.  **Chance quality and defensive pressure.** Here, we study the relationship between defensive pressure and the chance quality of a shot, using the `shots_wc` modeling frame.[^_08-ex-model-mlr-3]
+    The variable `under_pressure` is coded 1 if the shot was taken under defensive pressure, and 0 if not.
+    The summary table below shows the results of a linear regression model for predicting the average chance quality of open-play shots, measured by `statsbomb_xg`, based on pressure status.
+
+    ```r
+    m_pressure <- lm(statsbomb_xg ~ under_pressure, data = shots_wc)
+    tidy(m_pressure)
+    #> # A tibble: 2 × 5
+    #>   term           estimate std.error statistic   p.value
+    #>   <chr>             <dbl>     <dbl>     <dbl>     <dbl>
+    #> 1 (Intercept)    0.0951     0.00357   26.6    2.75e-126
+    #> 2 under_pressure 0.000349   0.00856    0.0408 9.67e-  1
+    ```
+
+    a.  Write the equation of the regression model.
+
+    b.  Interpret the slope in this context, and calculate the predicted chance quality of shots taken under pressure and shots taken unpressured.
+
+8.  **Chance quality and first-time finishes.** The following is a model for predicting the chance quality of an open-play shot from whether the shot was struck *first time* — hit with the first touch, without controlling the ball first.
+
+    ```r
+    shots_wc_ft <- wc2022_shots |>
+      filter(
+        shot_type == "Open Play",
+        body_part != "Other",
+        play_pattern != "Other"
+      ) |>
+      mutate(first_time = if_else(first_time, 1, 0)) |>
+      select(statsbomb_xg, first_time)
+
+    m_first_time <- lm(statsbomb_xg ~ first_time, data = shots_wc_ft)
+    tidy(m_first_time)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)   0.0753   0.00388     19.4  3.48e-74
+    #> 2 first_time    0.0582   0.00666      8.74 6.52e-18
+    ```
+
+    a.  Write the equation of the regression model.
+
+    b.  Interpret the slope in this context, and calculate the predicted chance quality of first-time shots and of shots taken after a controlling touch.
+
+9.  **Possession patterns, prediction.** A model was fit to predict the chance quality of the 1,365 open-play World Cup shots in `shots_wc` based on the match minute and the possession pattern the shot arose from (`play_pattern`, with reference level `Regular Play`).
+    The model output is shown below.
+
+    ```r
+    m_pattern <- lm(statsbomb_xg ~ minute + play_pattern, data = shots_wc)
+    tidy(m_pattern)
+    #> # A tibble: 9 × 5
+    #>   term                         estimate std.error statistic  p.value
+    #>   <chr>                           <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)                 0.0898     0.00827    10.9    2.10e-26
+    #> 2 minute                      0.0000986  0.000113    0.871  3.84e- 1
+    #> 3 play_patternFrom Corner     0.00405    0.00987     0.411  6.81e- 1
+    #> 4 play_patternFrom Counter    0.0617     0.0170      3.62   3.07e- 4
+    #> 5 play_patternFrom Free Kick -0.0129     0.00960    -1.34   1.80e- 1
+    #> 6 play_patternFrom Goal Kick  0.0220     0.0146      1.51   1.31e- 1
+    #> 7 play_patternFrom Keeper     0.00982    0.0266      0.369  7.12e- 1
+    #> 8 play_patternFrom Kick Off   0.00138    0.0295      0.0466 9.63e- 1
+    #> 9 play_patternFrom Throw In  -0.0107     0.00893    -1.20   2.31e- 1
+    ```
+
+    a.  For a shot taken in a given minute, which possession pattern is predicted, on average, to produce the highest chance quality?
+
+    b.  The adjusted $R^2$ of this model is 1.15%.
+        Adding the body part used for the shot to the model increases the adjusted $R^2$ to 1.25%.
+        Should `body_part` be added to the model?
+
+10. **Possession patterns, predicted vs actual.** Emil Sørensen's scouts insist that "chances on the counter-attack are absurdly good."
+    Using the model from the previous exercise, which predicts chance quality from match minute and possession pattern, the plots below show the predicted chance quality vs. the actual chance quality for each possession pattern separately, along with a numerical summary of each panel.
+    Do these figures support the scouts' claim?
+    Note that the x-axis range varies for each plot.
+
+    ```r
+    m_pattern_aug <- augment(m_pattern)
+
+    ggplot(m_pattern_aug,
+           aes(y = .fitted, x = statsbomb_xg, color = play_pattern)) +
+      geom_point(alpha = 0.5, show.legend = FALSE) +
+      facet_wrap(~ play_pattern, scales = "free_x") +
+      labs(x = "Actual chance quality", y = "Predicted chance quality")
+
+    m_pattern_aug |>
+      group_by(play_pattern) |>
+      summarize(
+        lowest_prediction = min(.fitted),
+        highest_prediction = max(.fitted),
+        highest_actual = max(statsbomb_xg)
+      )
+    #> # A tibble: 8 × 4
+    #>   play_pattern   lowest_prediction highest_prediction highest_actual
+    #>   <fct>                      <dbl>              <dbl>          <dbl>
+    #> 1 Regular Play              0.0898             0.102           0.897
+    #> 2 From Corner               0.0940             0.106           0.895
+    #> 3 From Counter              0.153              0.162           0.791
+    #> 4 From Free Kick            0.0773             0.0890          0.665
+    #> 5 From Goal Kick            0.112              0.122           0.852
+    #> 6 From Keeper               0.0998             0.111           0.367
+    #> 7 From Kick Off             0.0912             0.102           0.475
+    #> 8 From Throw In             0.0792             0.0910          0.552
+    ```
+
+    In every panel the predicted values sit in a narrow horizontal band — the model can only move a prediction by the minute of the shot once the pattern is fixed — while the actual chance quality stretches from near 0 to values many times larger than any prediction.
+    The `From Counter` band sits visibly higher than every other panel's.
+
+11. **Predicting chance quality.** A more realistic approach to modeling chance quality is to consider all recorded characteristics of a shot at once.
+    Below are three observations from the `shots_wc` dataset.
+
+    ```r
+    shots_wc |>
+      slice_head(n = 3)
+    #> # A tibble: 3 × 7
+    #>   statsbomb_xg body_part technique   under_pressure one_on_one play_pattern  minute
+    #>          <dbl> <fct>     <fct>                <dbl>      <dbl> <fct>          <dbl>
+    #> 1       0.0389 Left Foot Normal                   1          0 Regular Play       2
+    #> 2       0.0245 Left Foot Lob                      0          0 From Throw In      3
+    #> 3       0.0616 Left Foot Half Volley              0          0 From Corner        9
+    ```
+
+    The summary table below shows the results of a regression model for predicting the average chance quality of a shot based on all of the variables in `shots_wc`: the body part and technique used, whether the striker was under pressure or one-on-one with the goalkeeper, the possession pattern, and the match minute.
+
+    ```r
+    m_full <- lm(
+      statsbomb_xg ~ body_part + technique + under_pressure + one_on_one +
+        play_pattern + minute,
+      data = shots_wc
+    )
+
+    tidy(m_full) |> print(n = 19)
+    #> # A tibble: 19 × 5
+    #>    term                        estimate std.error statistic  p.value
+    #>    <chr>                          <dbl>     <dbl>     <dbl>    <dbl>
+    #>  1 (Intercept)                 0.0741    0.00890      8.32  2.08e-16
+    #>  2 body_partLeft Foot          0.00349   0.00722      0.483 6.29e- 1
+    #>  3 body_partHead               0.0197    0.0105       1.88  6.06e- 2
+    #>  4 techniqueBackheel          -0.0246    0.0521      -0.473 6.36e- 1
+    #>  5 techniqueDiving Header      0.0790    0.0322       2.45  1.44e- 2
+    #>  6 techniqueHalf Volley        0.0285    0.00909      3.13  1.78e- 3
+    #>  7 techniqueLob                0.136     0.0329       4.15  3.61e- 5
+    #>  8 techniqueOverhead Kick     -0.0193    0.0441      -0.438 6.61e- 1
+    #>  9 techniqueVolley             0.0385    0.0130       2.97  3.05e- 3
+    #> 10 under_pressure             -0.00516   0.00924     -0.558 5.77e- 1
+    #> 11 one_on_one                  0.0872    0.0144       6.07  1.67e- 9
+    #> 12 play_patternFrom Corner     0.00131   0.0103       0.127 8.99e- 1
+    #> 13 play_patternFrom Counter    0.0544    0.0166       3.27  1.09e- 3
+    #> 14 play_patternFrom Free Kick -0.0195    0.00945     -2.07  3.89e- 2
+    #> 15 play_patternFrom Goal Kick  0.0152    0.0142       1.07  2.86e- 1
+    #> 16 play_patternFrom Keeper     0.0133    0.0259       0.513 6.08e- 1
+    #> 17 play_patternFrom Kick Off  -0.00898   0.0289      -0.311 7.56e- 1
+    #> 18 play_patternFrom Throw In  -0.0133    0.00872     -1.53  1.27e- 1
+    #> 19 minute                      0.000123  0.000110     1.12  2.65e- 1
+    ```
+
+    a.  Write the equation of the regression model that includes all of the variables.
+
+    b.  Interpret the slopes of `minute` and `under_pressure` in this context.
+
+    c.  In @sec-ind-and-cat-predictors we fit a model predicting chance quality from only `one_on_one`, and observed a slope of 0.1039 — yet the coefficient for `one_on_one` in the larger model above is 0.0872.
+        Why might there be a difference?
+
+    d.  Calculate the residual for the *third* observation shown above.
+
+12. **Women's Euro, predicting chance quality.** Marta Vidal wants to know whether the club's chance-quality lens carries over to a different competition, so Priya turns to the 2025 Women's Euro and keeps the same open-play filters as for `shots_wc`, leaving 844 shots.[^_08-ex-model-mlr-4]
+    The summary table below shows the results of a linear regression model for predicting chance quality from the body part used, pressure status, whether the striker was one-on-one, whether the shot was struck first time, and the match minute.
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    shots_weuro <- weuro2025_shots |>
+      filter(
+        shot_type == "Open Play",
+        body_part != "Other",
+        play_pattern != "Other"
+      ) |>
+      mutate(
+        body_part = factor(body_part, levels = c("Right Foot", "Left Foot", "Head")),
+        under_pressure = if_else(under_pressure, 1, 0),
+        one_on_one = if_else(one_on_one, 1, 0),
+        first_time = if_else(first_time, 1, 0)
+      ) |>
+      select(statsbomb_xg, body_part, under_pressure, one_on_one, first_time, minute)
+
+    m_weuro <- lm(statsbomb_xg ~ body_part + under_pressure + one_on_one +
+                    first_time + minute, data = shots_weuro)
+    tidy(m_weuro)
+    #> # A tibble: 7 × 5
+    #>   term                 estimate std.error statistic  p.value
+    #>   <chr>                   <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)         0.0710     0.00964      7.36  4.45e-13
+    #> 2 body_partLeft Foot  0.00637    0.00845      0.753 4.51e- 1
+    #> 3 body_partHead       0.0421     0.0107       3.92  9.58e- 5
+    #> 4 under_pressure     -0.0118     0.00761     -1.55  1.22e- 1
+    #> 5 one_on_one          0.113      0.0249       4.55  6.17e- 6
+    #> 6 first_time          0.0622     0.00814      7.64  6.06e-14
+    #> 7 minute             -0.0000905  0.000126    -0.720 4.72e- 1
+
+    glance(m_weuro) |>
+      select(r.squared, adj.r.squared, df.residual)
+    #> # A tibble: 1 × 3
+    #>   r.squared adj.r.squared df.residual
+    #>       <dbl>         <dbl>       <int>
+    #> 1    0.0890        0.0824         837
+    ```
+
+    a.  Write the equation of the regression model.
+
+    b.  Interpret each one of the slopes in this context.
+
+    c.  Calculate the residual for a real shot from the data: Alessia Russo's headed effort for England Women's against Netherlands Women's in minute 41 — not struck first time, not under pressure, not one-on-one — which carried an observed chance quality of 0.0839.
+        Does the model overpredict or underpredict this shot's chance quality?
+
+    d.  The $R^2$ of this model is 8.9%.
+        Interpret this value in context of the data and the model.
+
+13. **Chance quality, backward elimination.** Let's consider the full model from Exercise 11, which predicts the chance quality of the 1,365 open-play World Cup shots using six predictors: `body_part`, `technique`, `under_pressure`, `one_on_one`, `play_pattern`, and `minute`.
+    The adjusted $R^2$ of the full model is 0.0680.
+    We remove each variable one by one, refit the model, and record the adjusted $R^2$ (each value below is labeled by the variable *removed*).
+    Which, if any, variable should be removed from the model first?
+
+    ```r
+    library(purrr)
+
+    preds <- c("body_part", "technique", "under_pressure", "one_on_one",
+               "play_pattern", "minute")
+
+    map_dbl(preds, \(v) {
+      glance(lm(reformulate(setdiff(preds, v), response = "statsbomb_xg"),
+                data = shots_wc))$adj.r.squared
+    }) |>
+      set_names(preds) |>
+      round(4)
+    #>      body_part      technique under_pressure     one_on_one   play_pattern
+    #>         0.0669         0.0459         0.0685         0.0432         0.0568
+    #>         minute
+    #>         0.0678
+    ```
+
+14. **Women's Euro, backward elimination.** The full model from Exercise 12 predicts the chance quality of the 844 open-play shots of the 2025 Women's Euro from five predictors: `body_part`, `under_pressure`, `one_on_one`, `first_time`, and `minute`.
+    The adjusted $R^2$ of the full model is 0.0824.
+    In order to evaluate whether any of the predictors can be dropped without losing predictive performance, Priya drops one variable at a time, refits the model, and records the adjusted $R^2$ of the smaller model (each value below is labeled by the variable *removed*).
+    Which, if any, variable should be removed from the model first?
+
+    ```r
+    preds_weuro <- c("body_part", "under_pressure", "one_on_one",
+                     "first_time", "minute")
+
+    map_dbl(preds_weuro, \(v) {
+      glance(lm(reformulate(setdiff(preds_weuro, v), response = "statsbomb_xg"),
+                data = shots_weuro))$adj.r.squared
+    }) |>
+      set_names(preds_weuro) |>
+      round(4)
+    #>      body_part under_pressure     one_on_one     first_time         minute
+    #>         0.0677         0.0809         0.0609         0.0197         0.0830
+    ```
+
+15. **Chance quality, forward selection.** Using the recorded characteristics of a shot, we want to build a model that predicts the chance quality of open-play World Cup shots in `shots_wc`.
+    In order to do so, we will evaluate six candidate predictors: `body_part`, `technique`, `under_pressure`, `one_on_one`, `play_pattern`, and `minute`.
+    And we will make a decision about including them in the model using forward selection and adjusted $R^2$.
+    Below are the six single-predictor models we evaluate and their adjusted $R^2$ values (each value is labeled by the only variable *included*).
+    Which variable should be added to the model first?
+
+    ```r
+    map_dbl(preds, \(v) {
+      glance(lm(reformulate(v, response = "statsbomb_xg"),
+                data = shots_wc))$adj.r.squared
+    }) |>
+      set_names(preds) |>
+      round(4)
+    #>      body_part      technique under_pressure     one_on_one   play_pattern
+    #>         0.0003         0.0280        -0.0007         0.0374         0.0117
+    #>         minute
+    #>        -0.0001
+    ```
+
+16. **Women's Euro, forward selection.** Using the shot characteristics recorded for the 2025 Women's Euro, we want to predict the chance quality of the 844 open-play shots in `shots_weuro`.
+    In order to do so, we will evaluate five candidate predictors — `body_part`, `under_pressure`, `one_on_one`, `first_time`, and `minute` — and make a decision about including them in the model using forward selection and adjusted $R^2$.
+    Below are the five single-predictor models we evaluate and their adjusted $R^2$ values (each value is labeled by the only variable *included*).
+    Which variable should be added to the model first?
+
+    ```r
+    map_dbl(preds_weuro, \(v) {
+      glance(lm(reformulate(v, response = "statsbomb_xg"),
+                data = shots_weuro))$adj.r.squared
+    }) |>
+      set_names(preds_weuro) |>
+      round(4)
+    #>      body_part under_pressure     one_on_one     first_time         minute
+    #>         0.0006         0.0021         0.0184         0.0421         0.0007
+    ```
+
+[^_08-ex-model-mlr-1]: The 2022 Men's World Cup shot and match data used in this exercise are in `data/derived/wc2022_shots.csv` and `data/derived/wc2022_matches.csv` (StatsBomb open data).
+
+[^_08-ex-model-mlr-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_08-ex-model-mlr-3]: `shots_wc` is the modeling frame built at the start of this chapter: the 1,365 open-play shots of the 2022 Men's World Cup that remain after dropping penalties, direct free kicks, and shots whose body part or possession pattern is logged as `Other`.
+
+[^_08-ex-model-mlr-4]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data); Alessia Russo's 41st-minute header is a real shot from that file.

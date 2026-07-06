@@ -1,0 +1,479 @@
+1.  **Will video replace the scout?** The national scouting association polled 4,839 of its accredited members on whether fully automated video-and-data scouting will replace live scouting.[^_16-ex-inference-one-prop-1]
+    You want to evaluate if more than a quarter (25%) of accredited members think it will never replace live scouting.
+    In the poll, 22% responded "it will replace live scouting entirely within a decade", 28% responded "it will replace live scouting partially", 29% responded "it will never replace live scouting", and 22% responded "don't know".
+    A colleague offers to help you set up the hypothesis test and comes up with the following hypotheses.
+    Indicate any errors you see.
+
+    $H_0: \hat{p} = 0.29 \quad \quad H_A: \hat{p} > 0.29$
+
+2.  **Contract by 21.** A league development report suggests that 25% of academy graduates sign a senior professional contract by age 21.
+    You believe that this is incorrect for the current cohort and decide to collect your own sample for a hypothesis test.
+    From a random sample of 776 recent academy graduates, you find that 24% of them signed by 21.
+    A colleague offers to help you set up the hypothesis test and comes up with the following hypotheses.
+    Indicate any errors you see.
+
+    $H_0: \hat{p} = 0.24 \quad \quad H_A: \hat{p} \neq 0.24$
+
+3.  **Leading with xG.** A survey conducted at the league's annual scouting convention reached 650 randomly sampled accredited scouts, of whom 159 named an expected-goals model as the primary tool in their player evaluations.[^_16-ex-inference-one-prop-2]
+
+    a.  A journalist writing up the survey wants to use the headline "More than 1 in 5 scouts now lead with xG."
+        You caution the journalist that they should first conduct a hypothesis test to see if the survey data provide convincing evidence for this claim.
+        Write the hypotheses for this test.
+
+    b.  Calculate the proportion of scouts in the sample who named an xG model as their primary tool.
+
+    c.  Describe a setup for a simulation that would be appropriate in this situation, and how the p-value can be calculated using the simulation results.
+
+    d.  The seeded code below simulates 1,000 values of $\hat{p}_{sim}$ under the null hypothesis and plots them as a histogram.
+        In this run, *none* of the 1,000 simulated proportions was as large as the observed proportion — the largest was $0.243.$
+        Estimate the p-value from the simulation and use it to evaluate the hypotheses.
+
+        ```r
+        xg_first <- tibble(tool = c(rep("xg first", 159), rep("other", 650 - 159)))
+
+        set.seed(1603)
+        null_dist <- xg_first |>
+          specify(response = tool, success = "xg first") |>
+          hypothesize(null = "point", p = 0.20) |>
+          generate(reps = 1000, type = "draw") |>
+          calculate(stat = "prop")
+
+        ggplot(null_dist, aes(x = stat)) +
+          geom_histogram(binwidth = 0.005) +
+          labs(
+            title = "1,000 proportions from null hypothesis draws",
+            subtitle = "p = 0.20",
+            x = "Simulated proportion of scouts who lead with xG",
+            y = "Count"
+          )
+        ```
+
+        The histogram is bell-shaped and centered at $0.20,$ with nearly all simulated proportions falling between $0.15$ and $0.25.$
+
+4.  **Loan placements.** A league development report states that 48.8% of academy players sent out on loan reach at least 900 league minutes during the loan season.
+    An agency that arranges loan placements claims that its placements do better than average.
+    A random sample of 30 of the agency's placements yielded a benchmark rate of 60%.
+    Northbridge's recruitment staff would like to determine if the data provide strong evidence to support the agency's claim.[^_16-ex-inference-one-prop-3]
+
+    a.  Write the hypotheses to test if the benchmark rate for the agency's placements is discernibly higher than the league rate reported in the development report.
+
+    b.  Describe a setup for a simulation that would be appropriate in this situation, and how the p-value can be calculated using the simulation results.
+
+    c.  The seeded code below simulates 1,000 values of $\hat{p}_{sim}$ under the null hypothesis.
+        In this run, 149 of the 1,000 simulated proportions were $0.60$ or larger.
+        Estimate the p-value from the simulation and use it to evaluate the hypotheses.
+
+        ```r
+        loans <- tibble(placement = c(rep("benchmark met", 18),
+                                      rep("benchmark missed", 12)))
+
+        set.seed(1604)
+        null_dist <- loans |>
+          specify(response = placement, success = "benchmark met") |>
+          hypothesize(null = "point", p = 0.488) |>
+          generate(reps = 1000, type = "draw") |>
+          calculate(stat = "prop")
+
+        ggplot(null_dist, aes(x = stat)) +
+          geom_histogram(binwidth = 0.05) +
+          geom_vline(xintercept = 0.6, linetype = "dashed") +
+          labs(
+            title = "1,000 proportions from null hypothesis draws",
+            subtitle = "p = 0.488",
+            x = "Simulated proportion of placements meeting the benchmark",
+            y = "Count"
+          )
+        ```
+
+    d.  After performing this analysis, a rival agency circulates the following headline: "Placement agency falsely advertises its success rate."
+        Comment on the appropriateness of this statement.
+
+5.  **Which dossier layout, simulated null hypothesis.** Emil Sørensen is trialing two layouts for the network's prospect dossiers: the established single-page summary and a new two-page format with a data appendix.
+    Seven senior scouts each review the same prospect written up in both layouts (order randomized) and state which layout they prefer: 5 choose the single-page summary and 2 choose the two-page format.
+    We are interested to know whether these data provide convincing evidence that the network's scouts prefer one of the layouts over the other.[^_16-ex-inference-one-prop-4]
+
+    a.  What are the null and alternative hypotheses for evaluating whether these data provide convincing evidence that the scouts have a preference for one of the layouts?
+
+    b.  A null hypothesis simulation (with 1,000 draws, seeded code below) was run.
+        In this run, 207 of the simulated proportions were at least $5/7 \approx 0.714,$ and 248 were at most $2/7 \approx 0.286.$
+        Find the p-value using this simulation and conclude the hypothesis test in the context of the problem.
+
+        ```r
+        layouts <- tibble(choice = c(rep("single page", 5), rep("two page", 2)))
+
+        set.seed(1605)
+        layouts |>
+          specify(response = choice, success = "single page") |>
+          hypothesize(null = "point", p = 0.5) |>
+          generate(reps = 1000, type = "draw") |>
+          calculate(stat = "prop") |>
+          ggplot(aes(x = stat)) +
+          geom_histogram(binwidth = 0.05) +
+          labs(
+            title = "1,000 proportions from null hypothesis draws",
+            subtitle = "p = 0.5",
+            x = "Simulated proportion of scouts who prefer the single page",
+            y = "Count"
+          )
+        ```
+
+        The histogram shows stacks only at the eight attainable values $0/7, 1/7, \dots, 7/7,$ roughly symmetric around $0.5.$
+
+6.  **Automated offside ballot, simulated null hypothesis.** To adopt semi-automated offside technology, the national association's statutes require approval from at least 55% of its roughly 22,000 voting members — club delegates, match officials, and licensed coaches — in a formal member consultation.
+    A pre-ballot survey asked a random sample of 1,207 of them; 65.3% said they would approve.
+
+    a.  What are the null and alternative hypotheses for evaluating whether these data provide convincing evidence that, if the ballot were held, the technology would be adopted?
+
+    b.  A null hypothesis simulation (with 1,000 draws, seeded code below) was run.
+        In this run, *none* of the 1,000 simulated proportions reached the observed $0.653$ — the largest was $0.596.$
+        Find the p-value using this simulation and conclude the hypothesis test in the context of the problem.
+
+        ```r
+        offside <- tibble(vote = c(rep("approve", 788), rep("do not approve", 419)))
+
+        set.seed(1606)
+        offside |>
+          specify(response = vote, success = "approve") |>
+          hypothesize(null = "point", p = 0.55) |>
+          generate(reps = 1000, type = "draw") |>
+          calculate(stat = "prop") |>
+          ggplot(aes(x = stat)) +
+          geom_histogram(binwidth = 0.005) +
+          labs(
+            title = "1,000 proportions from null hypothesis draws",
+            subtitle = "p = 0.55",
+            x = "Simulated proportion who approve the technology",
+            y = "Count"
+          )
+        ```
+
+7.  **Which dossier layout, standard errors.** The dossier-layout trial described in the earlier exercise found that 5 out of 7 senior scouts chose the single-page summary over the two-page format, which was preferred by the remaining 2 scouts.
+    To evaluate whether these data provide convincing evidence that scouts prefer one of the layouts over the other, we set $H_0: p = 0.5,$ where $p$ is the population proportion of scouts who prefer the single-page summary, and $H_A: p \neq 0.5,$ which suggests some preference, without specifying which layout is more preferred.
+
+    a.  Using the mathematical model, calculate the standard error of the sample proportion in repeated samples of size 7.
+
+    b.  A null hypothesis simulation (with 1,000 draws — the same seeded simulation shown in the earlier exercise) shows the variability of the sample proportion in samples of size 7 when 50% of scouts prefer the single-page summary.
+        The standard deviation of the 1,000 simulated proportions in that run was $0.185.$
+        What is the approximate standard error of the sample proportion based on the simulated distribution?
+
+    c.  Do the mathematical model and the simulated draws yield similar standard errors?
+
+    d.  In order to approach the problem using the mathematical model, is the success-failure condition met for this study?
+        Explain.
+
+    e.  What feature of the simulated null distribution tells us that the mathematical model should probably not be used?
+        (Hint: how many distinct values can $\hat{p}_{sim}$ take?)
+
+8.  **Automated offside ballot, standard errors.** As described in the earlier exercise, a random sample of 1,207 of the national association's voting members found 65.3% would approve semi-automated offside technology, where adoption requires 55% (or more) approval in the member consultation.
+
+    a.  Calculate the standard error of the sample proportion using the mathematical model (with the null value).
+
+    b.  In the seeded 1,000-draw null simulation shown in the earlier exercise (proportions from samples of size 1,207 with $p = 0.55$), the standard deviation of the simulated proportions was $0.014.$
+        Approximate the standard error of the sample proportion based on that distribution.
+
+    c.  Do the mathematical model and the simulated draws yield similar standard errors?
+
+    d.  In this setting (to test whether the true underlying population proportion is greater than 0.55), would there be a strong reason to choose the mathematical model over the simulated null hypothesis (or vice versa)?
+
+9.  **The data desk's filing rate, describe the bootstrap.** Northbridge's filing logs show that about 70% of the network's match reports are filed within 24 hours of full time.
+    Priya Rao wonders if the same proportion holds for the club's newly formed data-scouting desk.
+    She randomly samples 25 of the desk's reports and finds that 15 of them were filed within 24 hours.[^_16-ex-inference-one-prop-5]
+
+    Two sampling distributions are created to describe the variability in the proportion of desk reports filed within 24 hours.
+    The null hypothesis simulation imposes a true population proportion of $p = 0.7,$ while the data bootstrap resamples from the actual sample (in which 60% of the reports were filed within 24 hours).
+
+    ```r
+    desk_reports <- tibble(filing = c(rep("on time", 15), rep("late", 10)))
+
+    set.seed(1607)
+    p_para <- desk_reports |>
+      specify(response = filing, success = "on time") |>
+      hypothesize(null = "point", p = 0.7) |>
+      generate(reps = 1000, type = "draw") |>
+      calculate(stat = "prop") |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.05) +
+      labs(
+        title = "Draws from null hypothesis",
+        subtitle = "p = 0.7",
+        x = "Simulated proportion filed on time",
+        y = "Count"
+      )
+
+    set.seed(1607)
+    p_data <- desk_reports |>
+      specify(response = filing, success = "on time") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "prop") |>
+      ggplot(aes(x = stat)) +
+      geom_histogram(binwidth = 0.05) +
+      labs(
+        title = "Data bootstrap",
+        x = "Bootstrapped proportion filed on time",
+        y = "Count"
+      )
+
+    p_para + p_data
+    ```
+
+    In this seeded run, the 1,000 null-hypothesis draws have mean $0.698$ and standard deviation $0.091$; the 1,000 bootstrapped proportions have mean $0.595$ and standard deviation $0.097.$
+    Both histograms step in increments of $1/25$ and look roughly bell-shaped, the first centered near $0.7,$ the second near $0.6.$
+
+    a.  The sampling was done under two different settings to generate each of the two distributions.
+        Describe the two different settings.
+
+    b.  Where is each of the two distributions centered?
+        How do their centers compare?
+
+    c.  Estimate the standard error of the simulated proportions based on each distribution.
+        Are the two standard errors you estimate roughly equal?
+
+    d.  Describe the shapes of the two distributions.
+        Are they roughly the same?
+
+10. **Majority of agents, simulated null hypothesis.** A television pundit claims that a majority of licensed player intermediaries support the federation's new loan regulations.
+    A survey of a random sample of 617 licensed intermediaries found 339 (55%) in support.
+    Do these data provide strong evidence to support the pundit's statement?
+    One approach is to simulate 1,000 draws from a null hypothesis with $p = 0.5$ as the proportion of intermediaries in support.
+
+    ```r
+    agents <- tibble(opinion = c(rep("support", 339), rep("do not support", 278)))
+
+    set.seed(1608)
+    null_dist <- agents |>
+      specify(response = opinion, success = "support") |>
+      hypothesize(null = "point", p = 0.50) |>
+      generate(reps = 1000, type = "draw") |>
+      calculate(stat = "prop")
+
+    ggplot(null_dist, aes(x = stat)) +
+      geom_histogram(binwidth = 0.005) +
+      labs(
+        title = "1,000 proportions from null hypothesis draws",
+        subtitle = "p = 0.50",
+        x = "Simulated proportion who support the loan regulations",
+        y = "Count"
+      )
+    ```
+
+    The histogram is bell-shaped and centered at $0.50$; in this seeded run, 17 of the 1,000 simulated proportions were at least as large as the observed $339/617 = 0.549.$
+
+    a.  The histogram displays 1,000 values of what?
+
+    b.  Is the observed proportion of intermediaries in support consistent with the simulated proportions under the setting where $p = 0.5$?
+
+    c.  In order to test the claim that "a majority of licensed intermediaries support the new loan regulations," what are the null and alternative hypotheses?
+
+    d.  Using the simulated null distribution, find the p-value and conclude the hypothesis test in the context of the problem.
+
+11. **The data desk's filing rate, use the bootstrap.** As described in the earlier exercise: across Northbridge's network, 70% of match reports are filed within 24 hours, and a random sample of 25 of the data-scouting desk's reports found 15 (60%) filed within 24 hours.
+    Refer to the two seeded distributions from that exercise — the null hypothesis simulation ($p = 0.7$ imposed) and the data bootstrap (resampling the actual sample, $\hat{p} = 0.6$).
+    In that run, 200 of the 1,000 null-hypothesis draws were at or below $0.60$; the middle 98% of the bootstrapped proportions ran from $0.36$ to $0.80,$ and the bootstrap standard deviation was $0.097.$
+
+    a.  Which distribution should be used to test whether the proportion of all of the desk's reports filed within 24 hours is 70%?
+        And which distribution should be used to find a confidence interval for the true proportion of the desk's reports filed within 24 hours?
+
+    b.  Using the appropriate distribution, test the claim that 70% of the desk's reports, like the network's, are filed within 24 hours.
+        State the null and alternative hypotheses, find the p-value, and conclude the test in the context of the problem.
+
+    c.  Using the appropriate distribution, find a 98% bootstrap percentile confidence interval for the true proportion of the desk's reports filed within 24 hours.
+        Interpret the confidence interval in the context of the problem.
+
+    d.  Using the appropriate distribution, find a 98% bootstrap SE confidence interval for the true proportion of the desk's reports filed within 24 hours.
+        Interpret the confidence interval in the context of the problem.
+
+12. **CLT for proportions.** Define the term "sampling distribution" of the sample proportion, and describe how the shape, center, and spread of the sampling distribution change as the number of shots sampled increases, for a striker whose true conversion rate is $p = 0.1.$
+
+13. **Goalkeepers in the register.** Suppose that 8% of the prospects in the federation's national youth talent register are goalkeepers.
+    Determine if the following statements are true or false, and explain your reasoning.
+
+    a.  The distribution of the sample proportions of goalkeepers in random samples of size 60 is approximately normal since $n \geq 30.$
+
+    b.  The distribution of the sample proportions of goalkeepers in random samples of size 50 is right skewed.
+
+    c.  A random sample of 125 prospects where 12% are goalkeepers would be considered unusual.
+
+    d.  A random sample of 250 prospects where 12% are goalkeepers would be considered unusual.
+
+    e.  The standard error would be reduced by one-half if we increased the sample size from 125 to 250.
+
+14. **Academy dream.** About 77% of academy intake players believe they will go on to earn a senior professional contract.
+    Determine if the following statements are true or false, and explain your reasoning.
+
+    a.  The distribution of sample proportions of academy players who believe they will earn a senior contract in random samples of size 20 is left skewed.
+
+    b.  The distribution of sample proportions of academy players who believe they will earn a senior contract in random samples of size 40 is approximately normal since $n \geq 30.$
+
+    c.  A random sample of 60 academy players where 85% believe they will earn a senior contract would be considered unusual.
+
+    d.  A random sample of 120 academy players where 85% believe they will earn a senior contract would be considered unusual.
+
+15. **Right-footed keepers.** Suppose that 90% of the goalkeepers in the federation's talent register are right-footed.
+    Determine if the following statements are true or false, and explain your reasoning.
+
+    a.  The distribution of sample proportions of right-footed keepers in random samples of size 30 is left skewed.
+
+    b.  Using a sample size that is 4 times as large will reduce the standard error of the sample proportion by one-half.
+
+    c.  The distribution of sample proportions of right-footed keepers in random samples of size 140 is approximately normal.
+
+    d.  The distribution of sample proportions of right-footed keepers in random samples of size 280 is approximately normal.
+
+16. **Second invitations.** About 25% of trialists at Northbridge's regional open trials receive a second invitation.
+    Determine if the following statements are true or false, and explain your reasoning.
+
+    a.  The distribution of sample proportions of trialists who receive a second invitation in random samples of size 12 is right skewed.
+
+    b.  In order for the distribution of sample proportions of trialists who receive a second invitation to be approximately normal, we need random samples where the sample size is at least 40.
+
+    c.  A random sample of 50 trialists where 20% receive a second invitation would be considered unusual.
+
+    d.  A random sample of 150 trialists where 20% receive a second invitation would be considered unusual.
+
+    e.  Tripling the sample size will reduce the standard error of the sample proportion by one-third.
+
+17. **Medical disclosure.** A federation survey asked a random sample of 1,390 licensed scouts and club officials the following question: "On the whole, do you think selling clubs should or should not be required to disclose a transfer target's full injury history?" 82% of the respondents said clubs "should be" required.
+    At a 95% confidence level, this sample has a 2% margin of error.
+    Based on this information, determine if the following statements are true or false, and explain your reasoning.
+
+    a.  We are 95% confident that 80% to 84% of respondents in this sample think selling clubs should be required to disclose full injury histories.
+
+    b.  We are 95% confident that 80% to 84% of all licensed scouts and club officials think selling clubs should be required to disclose full injury histories.
+
+    c.  If we considered many random samples of 1,390 licensed scouts and officials, and we calculated 95% confidence intervals for each, 95% of these intervals would include the true population proportion who think selling clubs should be required to disclose full injury histories.
+
+    d.  In order to decrease the margin of error to 1%, we would need to quadruple (multiply by 4) the sample size.
+
+    e.  Based on this confidence interval, there is sufficient evidence to conclude that a majority of licensed scouts and officials think selling clubs should be required to disclose full injury histories.
+
+18. **Veteran fitness testing.** A poll reports that 66% of licensed coaches think players over the age of 34 should be required to pass an independent preseason fitness test before registration, based on a random sample of 1,018 licensed coaches.
+    The poll also reports a margin of error of 3% at the 95% confidence level.
+
+    a.  Verify the reported margin of error using a mathematical model.
+
+    b.  Based on a 95% confidence interval, does the poll provide convincing evidence that *more than* two thirds of licensed coaches think such a fitness test should be required?
+
+19. **Open training day.** A local news outlet reports that 56% of 600 randomly sampled Northbridge season-ticket holders plan to attend the club's open training day.
+    Determine the margin of error for the 56% point estimate using a 95% confidence level using a mathematical model.
+
+20. **Heading limits.** A federation poll surveyed a random sample of 3,731 registered youth coaches, asking how they felt about mandatory heading limits in youth training sessions.
+    The poll found that 57% said they would favor the limits.
+
+    a.  Describe the population parameter of interest.
+        What is the value of the point estimate of this parameter?
+
+    b.  Check if the conditions required for constructing a confidence interval using a mathematical model based on these data are met.
+
+    c.  Construct a 95% confidence interval for the proportion of registered youth coaches who favor mandatory heading limits.
+
+    d.  Without doing any calculations, describe what would happen to the confidence interval if we decided to use a higher confidence level.
+
+    e.  Without doing any calculations, describe what would happen to the confidence interval if we used a larger sample.
+
+21. **Moving abroad.** A survey of 1,509 academy trialists who took Northbridge's technical entry assessment and who completed an optional post-trial web survey shows that 55% are fairly certain they would accept a professional contract abroad if one were offered.
+
+    a.  Is this sample a representative sample from the population of all academy trialists in the country?
+        Explain your reasoning.
+
+    b.  Suppose the conditions for inference are met, regardless of your answer to part (a).
+        Using a mathematical model, construct a 90% confidence interval for the proportion of academy trialists (of those who took the assessment) who are fairly certain they would accept a contract abroad, and interpret this interval in context.
+
+    c.  What does "90% confidence" mean?
+
+    d.  Based on this interval, would it be appropriate to claim that the majority of academy trialists are fairly certain they would accept a contract abroad?
+
+22. **Domestic-first recruitment.** A club survey asked a random sample of 1,563 Northbridge members: "Do you think the club's recruitment should prioritize signing domestic players, or not?" 60% of the respondents said it should.
+
+    a.  Is 60% a sample statistic or a population parameter?
+        Explain.
+
+    b.  Using a mathematical model, construct a 95% confidence interval for the proportion of club members who think recruitment should prioritize domestic players, and interpret it in the context of the data.
+
+    c.  A critic points out that this 95% confidence interval is only accurate if the statistic follows a normal distribution, or if the normal model is a good approximation.
+        Do the technical conditions hold for these data?
+        Explain.
+
+    d.  A club-media piece on the survey states, "Majority of members back domestic-first recruitment." Based on your confidence interval, is the piece's statement justified?
+
+23. **Majority of agents, mathematical inference.** As described in the earlier exercise, a survey of a random sample of 617 licensed player intermediaries found 55% in support of the federation's new loan regulations.
+
+    a.  A television pundit claims that a majority of licensed intermediaries support the new loan regulations.
+        Do these data provide strong evidence to support this type of statement?
+        Your response should use a mathematical model.
+
+    b.  Would you expect a confidence interval for the proportion of intermediaries who *oppose* the regulations to include 0.5?
+        Explain.
+
+24. **Why they left.** Among a simple random sample of 331 former academy players who were released before signing senior terms and are no longer playing professionally, 48% said they left the game because no club offered them a living wage.
+
+    a.  A columnist states that only a minority of released academy players leave the game for financial reasons, and uses the point estimate from this survey as evidence.
+        Conduct a hypothesis test to determine if these data provide strong evidence supporting this statement.
+
+    b.  Would you expect a confidence interval for the proportion of released academy players who left because no club offered a living wage to include 0.5?
+        Explain.
+
+25. **Spot the international.** Some senior scouts claim they can identify a future full international from a single anonymized five-minute clip.
+    Priya Rao put the claim to the test with 80 such scouts.[^_16-ex-inference-one-prop-6]
+    Each scout watched one pair of anonymized clips — one of a player who went on to become a full international, one of a career lower-league player, matched for age and position, with the order randomized — and identified which player became the international.
+    53 scouts identified the correct player.
+
+    a.  Do these data provide strong evidence that these scouts are able to spot the future international, in other words, are the results discernibly better than just random guessing?
+        Your response should use a mathematical model.
+
+    b.  Interpret the p-value in this context.
+
+26. **Will AI make scouts obsolete?** An April survey asked 4,265 accredited members of the national scouting association whether artificial-intelligence scouting tools will make the live scout obsolete.
+    12% of the respondents said such tools will replace live scouting entirely within a decade.
+    37% said they will partially replace it, 39% said they will make no real difference, and the remainder didn't have an opinion on the matter.
+
+    a.  Calculate, using a mathematical model, a 90% confidence interval for the proportion of accredited members who think AI tools will replace live scouting entirely within a decade, and interpret the interval in context.
+
+    b.  Suppose we wanted the margin of error for the 90% confidence level to be about 0.5%.
+        How large of a sample size would you recommend for the survey?
+
+27. **Report quality audit.** As part of a quality-control process for the network's output, Priya Rao randomly samples 212 of the scouting reports filed during a single week to estimate the current rate of reports with data-entry errors (a mislabeled player, a wrong match date, a malformed xG figure).
+    She finds that 27 of the reports contain at least one such error.
+
+    a.  What population is under consideration in the dataset?
+
+    b.  What parameter is being estimated?
+
+    c.  What is the point estimate for the parameter?
+
+    d.  What is the name of the statistic that can be used to measure the uncertainty of the point estimate?
+
+    e.  Compute the value of the statistic from part (d) using a mathematical model.
+
+    f.  The historical rate of data-entry errors is 10%.
+        Should Priya be surprised by the observed rate of errors during the current week?
+
+    g.  Suppose the true population value was found to be 10%.
+        If we use this proportion to recompute the value in part (e) using $p = 0.1$ instead of $\hat{p},$ how much does the resulting value of the statistic change?
+
+28. **Two-footed players.** It is believed that about 8% of professional players are genuinely two-footed.
+    In a random sample of 194 players tracked in Northbridge's recruitment database, 21 are logged as genuinely two-footed.
+    Using a mathematical model, conduct a hypothesis test for the following question: do these data provide evidence that the 8% value is inaccurate?
+
+29. **Trial applications online.** Northbridge is trying to increase completed applications on its youth-trial portal, exposing 1% of first-time visitors to a new application form.
+    Of 752 randomly sampled first-time visitors over a month who saw the new form, 64 completed an application.
+
+    a.  Check the conditions for constructing a confidence interval for the proportion of first-time visitors who would complete an application under the new form using a mathematical model.
+
+    b.  Compute the standard error which would describe the variability of the point estimate associated with repeated samples of size 752.
+
+    c.  Construct and interpret a 90% confidence interval for the fraction of first-time visitors who would complete an application under the new form (assuming stable behavior by new visitors over time).
+
+30. **Scout-driven attendance.** Emil Sørensen samples 603 attendees across the year's open-trial days and finds that 142 of them attended because a regional scout had personally invited them.
+    Using a mathematical model, construct a 95% confidence interval for the fraction of all open-trial attendees during the year who were recruited directly by the scouting network.
+
+[^_16-ex-inference-one-prop-1]: The association polls and club surveys in these exercises are constructed scouting scenarios; no such polls were conducted.
+
+[^_16-ex-inference-one-prop-2]: The convention survey is a constructed scenario. Where an exercise describes a simulated null distribution, the distribution is generated exactly by the seeded code shown, and the counts quoted in the exercise come from that seeded run.
+
+[^_16-ex-inference-one-prop-3]: The development report and the agency's placement records are constructed; the seeded code shown generates the null distribution described.
+
+[^_16-ex-inference-one-prop-4]: The dossier-layout trial is a constructed Northbridge scenario, generated by the seeded code shown.
+
+[^_16-ex-inference-one-prop-5]: The filing-log scenario is constructed; both distributions described are generated exactly by the seeded code shown.
+
+[^_16-ex-inference-one-prop-6]: The clip study is a constructed Northbridge scenario; no real scouts were tested.

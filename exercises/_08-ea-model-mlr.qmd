@@ -1,0 +1,15 @@
+**2.** Ines is right: recoding the binary predictor as 0/1 makes it numerical, and the resulting correlation coefficient (the point-biserial correlation) is a valid summary of the association.
+
+**4.** (a) No — both lines are essentially flat (drifts of roughly $\pm 0.007$ over 90 minutes, negligible on the chance-quality scale). (b) Essentially no — the small drifts differ by tournament (unpressured shots drift up only at the men's World Cup; both lines drift slightly down at the Women's Euro), but all remain tiny. (c) The faceted plots: competition is a grouping variable, and the combined plot masks the fact that the drifts run in different directions at the two tournaments.
+
+**6.** (a) False — collinear predictors share information, so removing one shifts the point estimate of the other. (b) True. (c) False — the coefficient describes the predicted difference between players who differ by 1 in $x_1$, not the effect of intervening on a player's $x_1$; no individual's observed $y$ is guaranteed to rise by 5.7.
+
+**8.** (a) $\widehat{\texttt{statsbomb\_xg}} = 0.0753 + 0.0582 \times \texttt{first\_time}.$ (b) First-time shots are predicted a chance quality 0.0582 higher than controlled-touch shots, on average. First-time: $0.0753 + 0.0582 = 0.1335$; after a controlling touch: $0.0753.$
+
+**10.** Only partly: counter-attack shots carry the highest predicted chance quality (0.153--0.162, against at most 0.122 for any other pattern), but the edge is only about 0.06 xG and the actual chance-quality values overlap heavily across all patterns — better than average, not "absurdly good."
+
+**12.** (a) $\widehat{\texttt{statsbomb\_xg}} = 0.0710 + 0.0064 \times \texttt{body\_part}_{\texttt{Left Foot}} + 0.0421 \times \texttt{body\_part}_{\texttt{Head}} - 0.0118 \times \texttt{under\_pressure} + 0.113 \times \texttt{one\_on\_one} + 0.0622 \times \texttt{first\_time} - 0.0001 \times \texttt{minute}.$ (b) All else held constant: left-footed shots are predicted 0.0064 higher than right-footed ones; headers 0.0421 higher than right-footed shots; shots under pressure 0.0118 lower; one-on-ones 0.113 higher; first-time strikes 0.0622 higher; and each additional minute of match time changes the prediction by $-0.0001$ (essentially nothing). (c) Predicted: $0.0710 + 0.0421 - 0.0000905 \times 41 = 0.1094$; residual $= 0.0839 - 0.1094 = -0.0255$: the model overpredicts this shot's chance quality. (d) The five predictors together explain 8.9% of the variability in chance quality across the 844 shots.
+
+**14.** Remove `minute` first: dropping it raises the adjusted $R^2$ from 0.0824 to 0.0830, and it is the only removal that improves on the full model.
+
+**16.** Add `first_time` first: its single-predictor model has the largest adjusted $R^2$ (0.0421).

@@ -1,0 +1,17 @@
+**2.** (a) True. (b) True. (c) True. (d) False — each observation is subtracted from its own paired observation, not from the other dataset's average.
+
+**4.** (a) Paired — the same 50 rounds are recorded for both clubs. (b) Paired — the same 50 items are priced by both suppliers. (c) Not paired — two independent random samples of players.
+
+**6.** (a) No — 10.70 vs 10.89 shots, nearly identical. (b) No — the two counts come from the same match, so they are dependent (paired). (c) $H_0: \mu_{diff} = 0,$ $H_A: \mu_{diff} \neq 0,$ where $diff = \text{home} - \text{away}$ per match. (d) Yes — $-0.19$ sits in the middle of the randomized averages, which span about $-3.3$ to $3.0.$ (e) p-value $= 856/1000 = 0.856$; fail to reject $H_0$ — no evidence that home-listed and away-listed sides differ in average open-play shot count.
+
+**8.** (a) $(-2.17, 1.72).$ (b) $-0.19 \pm 1.96 \times 1.04 \rightarrow (-2.22, 1.84)$ (the seeded code's output, computed without intermediate rounding). (c) We are 95% confident that, in the process generating matches like these, the home-listed side averages between about 2.2 fewer and 1.8 more open-play shots per match than the away-listed side — same interpretation for both intervals. (d) No — both intervals contain 0.
+
+**10.** (a) $H_0: \mu_{diff} = 0,$ $H_A: \mu_{diff} \neq 0,$ where $diff = \text{home} - \text{away}$ per match. (b) Met — 64 pairs with differences roughly symmetric ($-24$ to 19) and no extreme outliers; matches treated as independent pairs. (c) $SE = 8.31/\sqrt{64} = 1.04,$ $T = -0.18,$ $df = 63,$ p-value $= 0.86$; fail to reject $H_0$ — no convincing evidence of a difference. (d) Type II — the labels could carry a real difference that the test missed. (e) Yes — having failed to reject $\mu_{diff} = 0,$ the interval would include 0.
+
+**12.** (a) $t^{\star}_{63} = 2.00$; $-0.19 \pm 2.00 \times 1.04 \rightarrow (-2.27, 1.89)$ shots. (b) We are 95% confident that home-listed sides average between 2.27 fewer and 1.89 more open-play shots per match than away-listed sides. (c) No — the interval contains 0.
+
+**14.** (a) Not possible — the magnitudes must remain $\{4, 11, 2, 0, 1\}$; this set repeats 1 and 2 and lacks the 4 and the 0. (b) Possible — the observed differences themselves. (c) Not possible — nine values instead of five. (d) Possible. (e) Possible.
+
+**16.** (a) Yes — paired: each player is measured on both surfaces, so the analysis must use the 10 within-player differences. (b) $H_0: \mu_{diff} = 0,$ $H_A: \mu_{diff} \neq 0,$ where $diff = \text{grass} - \text{turf}.$ (c) Met — the 10 differences (0 to 135 m, no gaps) show no clear outliers, and players are treated as independent of each other. (d) $SE = 39.0/\sqrt{10} = 12.33,$ $T = 4.12,$ $df = 9,$ p-value $= 0.003.$ (e) Reject $H_0$ — recorded high-intensity distance is discernibly higher on grass. (f) If surface truly made no difference, a mean within-player difference at least as extreme as 50.8 m would occur in about 0.3% of samples like this. (g) Type I — in truth the surface may make no difference.
+
+**18.** $SE = 6.3/\sqrt{50} = 0.89,$ $t^{\star}_{49} = 2.68$; $11.7 \pm 2.68 \times 0.89 \rightarrow (9.3, 14.1)$ cm.

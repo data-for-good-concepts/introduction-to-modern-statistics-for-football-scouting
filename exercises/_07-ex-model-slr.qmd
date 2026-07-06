@@ -1,0 +1,737 @@
+1.  **Visualizing residuals.** The scatterplots shown below each have a superimposed regression line.
+    Both are constructed scouting scenarios, built by the seeded code shown.[^_07-ex-model-slr-1]
+    If we were to construct a residual plot (residuals versus $x$) for each, describe in words what those plots would look like.
+
+    ```r
+    set.seed(706)
+    loan_pool <- tibble(
+      minutes      = seq(30, 3000, by = 30),
+      ft_passes    = 0.05 * minutes + 5 + rnorm(100, mean = 0, sd = 20),
+      value        = seq(0.5, 50, by = 0.5),
+      asking_price = 1.2 * value + 2 +
+        rnorm(100, mean = 0, sd = sort(0.9 * value, decreasing = TRUE))
+    )
+
+    p_1 <- ggplot(loan_pool, aes(x = minutes, y = ft_passes)) +
+      geom_point(size = 2, alpha = 0.8) +
+      geom_smooth(method = "lm", se = FALSE) +
+      labs(x = "League minutes played", y = "Final-third passes", title = "(a)")
+
+    p_2 <- ggplot(loan_pool, aes(x = value, y = asking_price)) +
+      geom_point(size = 2, alpha = 0.8) +
+      geom_smooth(method = "lm", se = FALSE) +
+      labs(x = "Market value (million euros)", y = "Asking price (million euros)", title = "(b)")
+
+    p_1 + p_2
+    ```
+
+    Panel (a) shows final-third passes rising steadily with league minutes, with points spread evenly around the line along the whole range.
+    Panel (b) shows asking prices rising with market value, but the points swing wildly around the line at the cheap end of the market and hug it tightly for the most valuable players.
+
+2.  **Trends in residuals.** Shown below are two plots of residuals remaining after fitting a linear model to two different sets of constructed data.[^_07-ex-model-slr-2]
+    For each plot, describe important features and determine if a linear model would be appropriate for these data.
+    Explain your reasoning.
+
+    ```r
+    set.seed(707)
+    fee_fit <- tibble(
+      x     = 1:300,
+      y_fan = 4 * x + 5 + rnorm(300, mean = 0, sd = sort(1.3 * x)),
+      y_log = log(x) + rnorm(300, mean = 0, sd = 0.5)
+    )
+
+    m_fan <- lm(y_fan ~ x, data = fee_fit)
+    m_log <- lm(y_log ~ x, data = fee_fit)
+
+    p_1 <- tibble(fitted = fitted(m_fan), residual = resid(m_fan)) |>
+      ggplot(aes(x = fitted, y = residual)) +
+      geom_point(size = 2, alpha = 0.8) +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      labs(x = "Predicted transfer fee (thousand euros)", y = "Residuals", title = "(a)")
+
+    p_2 <- tibble(fitted = fitted(m_log), residual = resid(m_log)) |>
+      ggplot(aes(x = fitted, y = residual)) +
+      geom_point(size = 2, alpha = 0.8) +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      labs(x = "Predicted technique rating", y = "Residuals", title = "(b)")
+
+    p_1 + p_2
+    ```
+
+    In panel (a) the residuals form a fan: tight around zero on the left, spreading to roughly twice the vertical range on the right.
+    In panel (b) the residuals arch: below zero at both ends of the fitted range and above zero in the middle.
+
+3.  **Identify relationships, I.** Priya Rao pulled six variable pairs from the club's databases and, to keep the focus on shape, hid the axis labels.
+    For each of the six plots, identify the strength of the relationship (e.g., weak, moderate, or strong) in the data and whether fitting a linear model would be reasonable.[^_07-ex-model-slr-3]
+
+    ```r
+    set.seed(708)
+    panels_1 <- tibble(
+      x = seq(0, 6, by = 0.05),
+      a = (x - 3)^2 - 4 + rnorm(length(x), mean = 0, sd = 1),
+      b = 3 * x + 10 + rnorm(length(x), mean = 0, sd = 2),
+      c = 3 * x + 10 + rnorm(length(x), mean = 0, sd = 20)
+    )
+    panels_2 <- tibble(
+      x = seq(-8, -2, by = 0.05),
+      d = -1 * (x + 5)^2 + 1 + rnorm(length(x), mean = 0, sd = 2),
+      e = -5 * x + 3 + rnorm(length(x), mean = 0, sd = 2),
+      f = rnorm(length(x), mean = 0, sd = 10)
+    )
+    # Plot each column against x with hidden axis text, labeling the
+    # panels (a) through (f).
+    ```
+
+    Panel (a) is a clear U-shape; panel (b) is a tight rising band; panel (c) rises but with heavy scatter; panel (d) is a clear arch (rising then falling); panel (e) is a tight falling band; panel (f) is a formless cloud.
+
+4.  **Identify relationships, II.** For each of the six plots — another of Priya's hidden-axis training exhibits — identify the strength of the relationship (e.g., weak, moderate, or strong) in the data and whether fitting a linear model would be reasonable.[^_07-ex-model-slr-4]
+
+    ```r
+    set.seed(709)
+    panels_3 <- tibble(
+      x = seq(-3, 4, by = 0.05),
+      a = -0.5 * x^3 + x^2 + x + rnorm(length(x), mean = 0, sd = 2),
+      b = 2 * x^4 + -0.5 * x^3 + x^2 + x + rnorm(length(x), mean = 0, sd = 30),
+      c = 3 * x + rnorm(length(x), mean = 0, sd = 2),
+      d = 3 * x + rnorm(length(x), mean = 0, sd = 20),
+      e = -3 * x + rnorm(length(x), mean = 0, sd = 10),
+      f = -3 * x + rnorm(length(x), mean = 0, sd = 5)
+    )
+    # Plot each column against x with hidden axis text, labeling the
+    # panels (a) through (f).
+    ```
+
+    Panel (a) is an S-shaped curve falling at the right; panel (b) is a steep-sided valley (flat in the middle, shooting up at both ends, higher on the right); panel (c) is a tight rising band; panel (d) rises faintly through heavy scatter; panel (e) falls through heavy scatter; panel (f) is a moderately tight falling band.
+
+5.  **Trial days and the final grade.** The two scatterplots below show the relationship between the final academy grade and two trial-day assessments (an autumn technical test and a spring technical test) recorded for 233 trialists in Jonas Beck's academy intake archive.
+    This is a constructed scenario, built by the seeded code below.[^_07-ex-model-slr-5]
+
+    ```r
+    set.seed(710)
+    academy233 <- tibble(
+      final_grade  = pmin(100, pmax(40, rnorm(233, mean = 70, sd = 10))),
+      autumn_grade = pmin(100, 100 - 0.014 * (100 - final_grade)^2 + rnorm(233, mean = 0, sd = 8)),
+      spring_grade = pmin(100, pmax(35, final_grade + rnorm(233, mean = 0, sd = 5)))
+    )
+
+    p_1 <- ggplot(academy233, aes(x = autumn_grade, y = final_grade)) +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Autumn test grade", y = "Final academy grade")
+
+    p_2 <- ggplot(academy233, aes(x = spring_grade, y = final_grade)) +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Spring test grade", y = "Final academy grade")
+
+    p_1 + p_2
+    ```
+
+    Both panels show rising clouds.
+    The spring-test panel is visibly tighter around a straight line, while the autumn-test panel is more diffuse and bends slightly at the lower grades.
+
+    a.  Based on these graphs, which of the two trial-day tests has the strongest correlation with the final academy grade?
+        Explain.
+
+    b.  Can you think of a reason why the correlation between the test you chose in part (a) and the final grade is higher?
+
+6.  **Matches attended and what they buy.** Priya assembled a constructed registry of 175 regional scouts.
+    For each scout it records the number of matches attended live last season, an evaluation-accuracy score (0–100 agreement with the club's expert panel), and total scouting travel (in thousands of km).
+    The scatterplot on the left shows the accuracy score plotted against matches attended; the scatterplot on the right shows travel distance plotted against matches attended.[^_07-ex-model-slr-6]
+
+    ```r
+    set.seed(711)
+    scout_reg <- tibble(
+      matches_live = round(runif(175, 15, 120)),
+      accuracy     = 30 + 12 * log(matches_live) + rnorm(175, mean = 0, sd = 4),
+      travel_km    = 0.14 * matches_live + rnorm(175, mean = 0, sd = 1.5)
+    )
+
+    p_1 <- ggplot(scout_reg, aes(x = matches_live, y = accuracy)) +
+      geom_point(alpha = 0.8) +
+      labs(x = "Matches attended live", y = "Evaluation accuracy score")
+
+    p_2 <- ggplot(scout_reg, aes(x = matches_live, y = travel_km)) +
+      geom_point(alpha = 0.8) +
+      labs(x = "Matches attended live", y = "Scouting travel (thousand km)")
+
+    p_1 + p_2
+    ```
+
+    The left panel climbs steeply among scouts attending few matches and then levels off — the gains flatten past roughly 60 matches.
+    The right panel is a tight, straight, rising band.
+
+    a.  Describe the relationship between matches attended and evaluation accuracy.
+
+    b.  Describe the relationship between matches attended and scouting travel.
+
+    c.  Which plot shows a stronger correlation?
+        Explain your reasoning.
+
+    d.  Travel distances were originally recorded in kilometers.
+        How would the plots above and the correlation values change if the travel variable were converted to miles?
+
+7.  **Match the correlation, I.** Match each correlation to the corresponding scatterplot from Priya's hidden-axis gallery.[^_07-ex-model-slr-7]
+
+    ```r
+    set.seed(712)
+    corr_panels <- tibble(
+      x  = runif(75, 0, 10),
+      y1 = 0.05 * x + rnorm(75, mean = 0, sd = 2.5),
+      y2 = 1.5 * x + rnorm(75, mean = 0, sd = 1.8),
+      y3 = 0.8 * x + rnorm(75, mean = 0, sd = 4.6),
+      y4 = -1.2 * x + rnorm(75, mean = 0, sd = 3.5)
+    )
+    # Plot y1 through y4 against x with hidden axis text, labeling the
+    # panels (1) through (4).
+    ```
+
+    Panel (1) is a formless cloud with the faintest upward drift; panel (2) is a tight rising band; panel (3) rises through substantial scatter; panel (4) falls through moderate scatter.
+
+    a.  $r = -0.73$
+
+    b.  $r = 0.41$
+
+    c.  $r = 0.13$
+
+    d.  $r = 0.92$
+
+8.  **Match the correlation, II.** Match each correlation to the corresponding scatterplot from the same gallery.[^_07-ex-model-slr-8]
+
+    ```r
+    set.seed(713)
+    corr_panels_2 <- tibble(
+      x  = runif(75, 0, 10),
+      y5 = -0.8 * x + rnorm(75, mean = 0, sd = 4.7),
+      y6 = 0.85 * x + rnorm(75, mean = 0, sd = 4.4),
+      y7 = -1.5 * x + rnorm(75, mean = 0, sd = 2.7),
+      y8 = 0.01 * x + rnorm(75, mean = 0, sd = 3)
+    )
+    # Plot y5 through y8 against x with hidden axis text, labeling the
+    # panels (1) through (4).
+    ```
+
+    Panel (1) falls through heavy scatter; panel (2) rises through moderate scatter; panel (3) is a fairly tight falling band; panel (4) is a formless cloud.
+
+    a.  $r = 0.65$
+
+    b.  $r = -0.35$
+
+    c.  $r = 0.03$
+
+    d.  $r = -0.89$
+
+9.  **Combine measurements, correlation.** Northbridge's medical screening database records body measurements for 507 U17 regional trialists assessed by the club's physiologists at the academy's screening days.
+    The scatterplot below shows the relationship between height and shoulder girth (circumference of shoulders measured over deltoid muscles), both measured in centimeters.
+    This is a constructed scenario, built by the seeded code below.[^_07-ex-model-slr-9]
+
+    ```r
+    set.seed(714)
+    combine507 <- tibble(
+      shoulder_girth = round(rnorm(507, mean = 107, sd = 10), 1),
+      height         = round(171 + 0.61 * (shoulder_girth - 107) + rnorm(507, mean = 0, sd = 7), 1)
+    )
+
+    ggplot(combine507, aes(x = shoulder_girth, y = height)) +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Shoulder girth (cm)", y = "Height (cm)")
+    ```
+
+    The cloud rises from the lower left to the upper right with moderate scatter around a straight-line trend.
+
+    a.  Describe the relationship between shoulder girth and height.
+
+    b.  How would the relationship change if shoulder girth was measured in inches while the units of height remained in centimeters?
+
+10. **Compare correlations.** Lena and Viktor, two analysts on Priya's staff, are both collecting data on each regional scout's number of away trips last season and the total distance travelled on those trips.
+    Lena records distance in kilometers and Viktor in miles.
+    How will their correlation coefficients compare?
+
+11. **The autumn scouting loop, correlation.** Every October, Emil Sørensen drives and trains his way around a loop of 15 legs between European cities, watching one target per city.
+    For each leg of this itinerary Priya logged the distance (in km) and the door-to-door travel time (in minutes, including connections and matchday traffic).
+    This is a constructed scenario, built by the seeded code below; the scatterplot shows travel time against distance.[^_07-ex-model-slr-10]
+
+    ```r
+    set.seed(715)
+    autumn_loop <- tibble(
+      leg_km  = round(runif(15, 25, 350)),
+      leg_min = round(pmax(30, 35 + 0.75 * leg_km + rnorm(15, mean = 0, sd = 60)))
+    )
+
+    ggplot(autumn_loop, aes(x = leg_km, y = leg_min)) +
+      geom_point(size = 2) +
+      labs(x = "Distance (km)", y = "Travel time (minutes)")
+    ```
+
+    The 15 legs form a rising cloud: longer legs take longer, with a healthy spread of quick and slow legs around the trend.
+
+    a.  Describe the relationship between distance and travel time.
+
+    b.  How would the relationship change if travel time was instead measured in hours, and distance was instead measured in miles?
+
+    c.  The correlation between travel time (in minutes) and distance (in km) is $r = 0.874$.
+        What is the correlation between travel time (in hours) and distance (in miles)?
+
+12. **Cold-month returns, correlation.** Jonas Beck suspects that academy players signed in cold months take longer to reach match sharpness, when training moves indoors and pitches freeze.
+    For each of twelve monthly signing cohorts, he computed the average pitch-side temperature in the cohort's first month (in degrees Celsius, C) and the cohort's average number of days to reach match sharpness.
+    This is a constructed scenario, built by the seeded code below.[^_07-ex-model-slr-11]
+
+    ```r
+    set.seed(716)
+    return_months <- tibble(
+      month_temp     = seq(2, 24, by = 2),
+      sharpness_days = round(34 - 0.7 * month_temp + rnorm(12, mean = 0, sd = 2.5))
+    )
+    return_months$sharpness_days[6] <- 36
+
+    ggplot(return_months, aes(x = month_temp, y = sharpness_days)) +
+      geom_point(size = 2) +
+      labs(x = "Temperature (C)", y = "Average days to match sharpness")
+    ```
+
+    The twelve points drift downward from the cold cohorts (around 30 days) to the warm cohorts (as low as 16 days), with one striking exception: the cohort at 12 C sits at 36 days, well above every other point.
+
+    a.  Describe the relationship between temperature and days to match sharpness.
+
+    b.  How would the relationship change if temperature was measured in degrees Fahrenheit (F) and time to sharpness was measured in weeks?
+
+    c.  The correlation between temperature in C and time in days is $r = -0.72$.
+        If we converted the temperature to F and the time to weeks, what would the correlation be?
+
+13. **Distance covered, first and second half.** What would be the correlation between the first-half and second-half running distances of Northbridge's midfielders if every midfielder always covered
+
+    a.  3 km more in the first half than in the second half?
+
+    b.  2 km less in the first half than in the second half?
+
+    c.  half as much in the second half as in the first half?
+
+14. **Licenses and salaries.** What would be the correlation between the annual salaries of coaches with and without a UEFA Pro licence at a club if, for a certain type of coaching role, someone with the licence always made
+
+    a.  €5,000 more than those without the licence?
+
+    b.  25% more than those without the licence?
+
+    c.  15% less than those without the licence?
+
+15. **Units of regression.** Consider a regression predicting a striker's season goal tally (goals) from average shot distance (m) for a sample of strikers in the club's target list.
+    What are the units of the correlation coefficient, the intercept, and the slope?
+
+16. **Which is higher?** Determine if (I) or (II) is higher or if they are equal: "*For a regression line, the uncertainty associated with the slope estimate,* $b_1$*, is higher when (I) there is a lot of scatter around the regression line or (II) there is very little scatter around the regression line.*" Explain your reasoning.
+
+17. **Over-under, I.** Suppose we fit a regression line to predict the number of days a new signing's registration takes to clear based on how many leagues the player has crossed.
+    For a particular signing, we predict the clearance to take 4.6 days.
+    The signing's residual is $-0.6$ days.
+    Did we over or under estimate the clearance time?
+    Explain your reasoning.
+
+18. **Over-under, II.** Suppose we fit a regression line to predict the number of soft-tissue injuries per 1,000 academy training hours from the number of high-intensity sessions in a month.
+    For a particular month, we predict the incidence to be 1.5 per 1,000 hours, and the residual for this month is 0.5.
+    Did we over or under estimate the incidence of soft-tissue injuries?
+    Explain your reasoning.
+
+19. **Shot counts and chance quality.** The scatterplot below shows the relationship between the number of shots a team took in a match and the total chance quality (xG) it accumulated, across the 127 team-matches of the 2022 Men's World Cup.
+    Since basic media feeds publish only shot counts, we might be interested in predicting a team's accumulated chance quality based on its shot count.[^_07-ex-model-slr-12]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    team_match <- wc2022_shots |>
+      group_by(match_id, team) |>
+      summarize(
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        goals = sum(goal),
+        prop_under_pressure = mean(under_pressure),
+        prop_set_piece = mean(play_pattern %in%
+          c("From Corner", "From Free Kick", "From Throw In")),
+        .groups = "drop"
+      )
+
+    m <- lm(total_xg ~ n_shots, data = team_match)
+
+    p_1 <- ggplot(team_match, aes(x = n_shots, y = total_xg)) +
+      geom_smooth(method = "lm", se = FALSE, color = "darkgray") +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Shots in the match", y = "Total chance quality (xG)")
+
+    p_2 <- tibble(fitted = fitted(m), residual = resid(m)) |>
+      ggplot(aes(x = fitted, y = residual)) +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Predicted total xG", y = "Residuals")
+
+    p_1 + p_2
+    ```
+
+    The scatterplot rises from the lower left to the upper right around the fitted line; in the residual plot, the points hug the dashed zero line at low predicted values and spread much more widely at high predicted values.
+
+    a.  Describe the relationship between shot count and accumulated chance quality for these team-matches.
+
+    b.  In this scenario, what are the predictor and outcome variables?
+
+    c.  Why might we want to fit a regression line to these data?
+
+    d.  What does the residuals vs. predicted plot tell us about the variability in prediction errors based on this model for team-matches with lower vs. higher predicted chance quality?
+
+20. **Shot counts and goals.** The scatterplot below shows the relationship between the number of shots a team took in a match and the goals it scored, for the same 127 World Cup team-matches as in the previous exercise (the `team_match` data, rebuilt with the same code).
+    Since basic media feeds publish only shot counts, we might be interested in predicting a team's goals based on its shot count.[^_07-ex-model-slr-13]
+
+    ```r
+    m <- lm(goals ~ n_shots, data = team_match)
+
+    p_1 <- ggplot(team_match, aes(x = n_shots, y = goals)) +
+      geom_smooth(method = "lm", se = FALSE, color = "darkgray") +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Shots in the match", y = "Goals scored")
+
+    p_2 <- tibble(fitted = fitted(m), residual = resid(m)) |>
+      ggplot(aes(x = fitted, y = residual)) +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      geom_point(size = 2, alpha = 0.8) +
+      labs(x = "Predicted goals", y = "Residuals")
+
+    p_1 + p_2
+    ```
+
+    The scatterplot shows goal counts in integer bands rising only loosely with shot count; the residual plot spreads visibly wider at higher predicted values, and the residuals fall along slanted integer bands.
+
+    a.  Describe the relationship between shot count and goals scored for these team-matches.
+
+    b.  In this scenario, what are the predictor and outcome variables?
+
+    c.  Why might we want to fit a regression line to these data?
+
+    d.  What does the residuals vs. predicted plot tell us about the variability in prediction errors based on this model for team-matches with lower vs. higher predicted goals?
+
+21. **The autumn scouting loop, regression.** Exercise 11 introduced Emil's constructed 15-leg scouting itinerary, with the distance of each leg (in km) and its door-to-door travel time (in minutes).
+    The mean travel time is 190 minutes, with a standard deviation of 117 minutes.
+    The mean distance is 199 km, with a standard deviation of 88 km.
+    The correlation between travel time and distance is 0.874.[^_07-ex-model-slr-14]
+
+    a.  Write the equation of the regression line for predicting travel time.
+
+    b.  Interpret the slope and the intercept in this context.
+
+    c.  Calculate $R^2$ of the regression line for predicting travel time from distance travelled on the loop, and interpret $R^2$ in the context of the application.
+
+    d.  Next October, Emil adds a 210 km leg to reach a target's cup fixture.
+        Use the model to estimate the time this leg will take.
+
+    e.  The new 210 km leg actually takes 185 minutes.
+        Calculate the residual and explain the meaning of this residual value.
+
+    f.  Marta asks whether the model could budget the time for a proposed 900 km trip to a winter tournament.
+        Would it be appropriate to use this linear model to predict the travel time for that trip?
+
+22. **Combine measurements, regression.** Exercise 9 introduced the constructed medical-screening data on 507 U17 regional trialists, with height and shoulder girth both measured in centimeters.
+    The mean shoulder girth is 107.6 cm with a standard deviation of 10.0 cm.
+    The mean height is 172.1 cm with a standard deviation of 8.7 cm.
+    The correlation between height and shoulder girth is 0.66.[^_07-ex-model-slr-15]
+
+    a.  Write the equation of the regression line for predicting height.
+
+    b.  Interpret the slope and the intercept in this context.
+
+    c.  Calculate $R^2$ of the regression line for predicting height from shoulder girth, and interpret it in the context of the application.
+
+    d.  A trialist arriving next week has a shoulder girth of 100 cm.
+        Predict the height of this trialist using the model.
+
+    e.  The trialist from part (d) is 160 cm tall.
+        Calculate the residual, and explain what this residual means.
+
+    f.  A nine-year-old at the academy open day has a shoulder girth of 56 cm.
+        Would it be appropriate to use this linear model to predict the height of this child?
+
+23. **Headers and conversion.** The following scatterplot shows the relationship between the proportion of a team's shots taken with the head (`prop_headers`) and the proportion of its shots converted into goals (`conversion`) for the 32 teams at the 2022 Men's World Cup — the `team_profile` data.
+    The regression output for the model predicting `conversion` from `prop_headers` is also provided.[^_07-ex-model-slr-16]
+
+    ```r
+    team_profile <- wc2022_shots |>
+      group_by(team) |>
+      summarize(
+        n_shots         = n(),
+        goals           = sum(goal),
+        total_xg        = sum(statsbomb_xg),
+        conversion      = mean(goal),
+        mean_xg         = mean(statsbomb_xg),
+        prop_headers    = mean(body_part == "Head"),
+        prop_first_time = mean(first_time),
+        prop_pressure   = mean(under_pressure),
+        prop_corner     = mean(play_pattern == "From Corner"),
+        prop_open_play  = mean(play_pattern == "Regular Play")
+      )
+
+    ggplot(team_profile, aes(x = prop_headers, y = conversion)) +
+      geom_point(alpha = 0.8) +
+      labs(x = "Proportion of shots that were headers", y = "Conversion")
+
+    fit_headers <- lm(conversion ~ prop_headers, data = team_profile)
+    tidy(fit_headers)
+    #> # A tibble: 2 × 5
+    #>   term         estimate std.error statistic   p.value
+    #>   <chr>           <dbl>     <dbl>     <dbl>     <dbl>
+    #> 1 (Intercept)     0.177    0.0369      4.78 0.0000429
+    #> 2 prop_headers   -0.324    0.199      -1.63 0.113
+    ```
+
+    The 32 points drift downward: teams whose shot diet contains more headers tend to convert a smaller share of their shots.
+
+    a.  Write out the linear model.
+
+    b.  Interpret the intercept.
+
+    c.  Interpret the slope.
+
+    d.  The $R^2$ of this model is 8.1%.
+        Interpret this value.
+
+    e.  Calculate the correlation coefficient.
+
+24. **Chance quality and goals at the Women's Euro.** The following regression output is for predicting the goals a team scored in a match (`goals`) from its accumulated chance quality (`total_xg`), estimated using the 62 team-matches of the 2025 Women's Euro.[^_07-ex-model-slr-17]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro_team_match <- weuro2025_shots |>
+      group_by(match_id, team) |>
+      summarize(
+        n_shots  = n(),
+        total_xg = sum(statsbomb_xg),
+        goals    = sum(goal),
+        .groups  = "drop"
+      )
+
+    fit_weuro <- lm(goals ~ total_xg, data = weuro_team_match)
+    tidy(fit_weuro)
+    #> # A tibble: 2 × 5
+    #>   term        estimate std.error statistic  p.value
+    #>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)    0.423    0.208       2.03 4.63e- 2
+    #> 2 total_xg       0.785    0.0777     10.1  1.43e-14
+    ```
+
+    A scatterplot of these 62 team-matches shows goal counts rising with accumulated chance quality around the fitted line.
+
+    a.  Write out the linear model.
+
+    b.  Interpret the intercept.
+
+    c.  Interpret the slope.
+
+    d.  The $R^2$ of this model is 63%.
+        Interpret $R^2$.
+
+    e.  Calculate the correlation coefficient.
+
+25. **Outliers, I.** Identify the outliers in the scatterplots shown below, and determine what type of outliers they are.
+    Explain your reasoning.
+    The three panels are constructed training exhibits, built by the seeded code shown, with hidden axis text.[^_07-ex-model-slr-18]
+
+    ```r
+    set.seed(717)
+    age_profiles <- tibble(
+      x = seq(1, 50, by = 1),
+      y = -2 * x + 20 + rnorm(50, mean = 0, sd = 10),
+      x_shift = c(x[1:49], 200),
+      y_inline = c(y[1:49], -370),
+      y_bump = c(y[1:25], y[26] + 100, y[27:50])
+    )
+    # Panel (a): y against x_shift.  Panel (b): y_inline against x_shift.
+    # Panel (c): y_bump against x.  Each with its least squares line.
+    ```
+
+    Panel (a) shows a falling cloud on the left with one point far to the right sitting level with the lower edge of the cloud; the fitted line is much flatter than the cloud's trend.
+    Panel (b) shows the same falling cloud with the far-right point lying close to the downward extension of the trend; the fitted line tracks the cloud.
+    Panel (c) shows a falling cloud with one mid-range point floating high above the rest; the fitted line is barely disturbed.
+
+26. **Outliers, II.** Identify the outliers in the scatterplots shown below and determine what type of outliers they are.
+    Explain your reasoning.
+    The three panels are constructed training exhibits, built by the seeded code shown, with hidden axis text.[^_07-ex-model-slr-19]
+
+    ```r
+    set.seed(718)
+    form_profiles <- tibble(
+      x = seq(1, 50, by = 1),
+      y = 3 * x + 3 + rnorm(50, mean = 0, sd = 10),
+      x_shift = c(x[1:49], -50),
+      y_drop = c(y[1:49], -300),
+      y_bump = c(y[1:25], y[26] + 100, y[27:50])
+    )
+    # Panel (a): y against x_shift.  Panel (b): y_drop against x_shift.
+    # Panel (c): y_bump against x.  Each with its least squares line.
+    ```
+
+    Panel (a) shows a rising cloud on the right with one point far to the left sitting high, above the top of the cloud; the fitted line is visibly flatter than the cloud's trend.
+    Panel (b) shows the same rising cloud with the far-left point sitting very low, below the trend's extension; the fitted line is visibly steeper than the cloud's trend.
+    Panel (c) shows a rising cloud with one mid-range point floating high above the rest; the fitted line is barely disturbed.
+
+27. **Spain's seven, outliers.** The scatterplot below shows goals scored against accumulated chance quality for the 127 team-matches of the 2022 Men's World Cup, with Spain's 7-goal group-stage win over Costa Rica (2.76 xG, 7 goals) circled.
+    Accumulated chance quality across all team-matches runs from 0.10 to 5.89, with a mean of 1.48.[^_07-ex-model-slr-20]
+
+    ```r
+    ggplot(team_match, aes(x = total_xg, y = goals)) +
+      geom_point(alpha = 0.7, size = 2) +
+      geom_smooth(method = "lm", se = FALSE) +
+      labs(x = "Total chance quality (xG)", y = "Goals scored") +
+      geom_point(
+        data = team_match |> filter(team == "Spain", goals == 7),
+        color = "red", size = 5, shape = "circle open", stroke = 2
+      )
+    ```
+
+    a.  Describe the relationship between accumulated chance quality and goals scored.
+
+    b.  What type of an outlier is Spain's 7-goal team-match?
+        In particular: does it have high leverage, and is it an influential point?
+
+28. **Cold-month returns, outliers.** Exercise 12 introduced Jonas Beck's constructed cohort data on temperature and days to match sharpness.
+    The plot reveals a potential outlying cohort: at an average temperature of 12 C, the cohort took 36 days to reach sharpness, well above the downward trend of the other eleven cohorts.
+    Does this point have high leverage?
+    Is it an influential point?[^_07-ex-model-slr-21]
+
+29. **True / False.** Determine if the following statements are true or false.
+    If false, explain why.
+
+    a.  A correlation coefficient of $-0.90$ between age and asking price indicates a stronger linear relationship than a correlation of 0.5 between minutes played and chances created.
+
+    b.  Correlation is a measure of the association between any two variables.
+
+30. **Thirty-one strikers.** The scatterplots below show the relationship between height, goals scored last season, and market value for 31 strikers on Emil's long list.
+    This is a constructed scenario, built by the seeded code below.[^_07-ex-model-slr-22]
+
+    ```r
+    set.seed(719)
+    strikers31 <- tibble(
+      goals_last = round(runif(31, 2, 28)),
+      height     = round(rnorm(31, mean = 181, sd = 6)),
+      value      = round(pmax(0.5, 1 + 0.045 * goals_last^1.6 + 0.25 * (height - 181) +
+                                rnorm(31, mean = 0, sd = 1.6)), 1)
+    )
+
+    p_1 <- ggplot(strikers31, aes(x = height, y = value)) +
+      geom_point() +
+      labs(x = "Height (cm)", y = "Market value (million euros)")
+
+    p_2 <- ggplot(strikers31, aes(x = goals_last, y = value)) +
+      geom_point() +
+      labs(x = "Goals last season", y = "Market value (million euros)")
+
+    p_1 + p_2
+    ```
+
+    The left panel shows market value rising only loosely with height, with heavy scatter.
+    The right panel shows market value climbing steadily with last season's goals — a much tighter band that steepens slightly at the top end.
+
+    a.  Describe the relationship between market value and height for these strikers.
+
+    b.  Describe the relationship between market value and goals scored last season.
+
+    c.  Suppose you have the height and last season's goal tally for another striker on the long list.
+        Which of these variables would be preferable to use to predict the striker's market value using a simple linear regression model?
+        Explain your reasoning.
+
+31. **Match the correlation, III.** Match each correlation to the corresponding scatterplot from Priya's hidden-axis gallery.[^_07-ex-model-slr-23]
+
+    ```r
+    set.seed(720)
+    x <- round(runif(100, min = 1, max = 100))
+    trialist_panels <- tibble(
+      x  = x,
+      y1 = 2 * x + 30 + rnorm(100, mean = 0, sd = 60),
+      y2 = -1 * x^3 + x^2 + rnorm(100, mean = 0, sd = 20000),
+      y3 = x + rnorm(100, mean = 0, sd = 8),
+      y4 = 50 + rnorm(100, mean = 0, sd = 2)
+    )
+    # Plot y1 through y4 against x with hidden axis text, labeling the
+    # panels (1) through (4).
+    ```
+
+    Panel (1) rises through moderate scatter; panel (2) bends steeply downward at the right; panel (3) is a very tight rising band; panel (4) is a flat, narrow band with no trend.
+
+    a.  $r = 0.80$
+
+    b.  $r = -0.04$
+
+    c.  $r = -0.92$
+
+    d.  $r = 0.97$
+
+32. **Video scouting and trial rates.** The scatterplot below shows, for twelve of Emil's scouting regions, the percentage of assessments conducted from video only (`video_share`) and the percentage of that region's recommendations that reached the trial stage (`trial_rate`).
+    The average video share is 43.5% with a standard deviation of 23.5%, and the average trial rate is 32.7% with a standard deviation of 9.3%.
+    This is a constructed scenario, built by the seeded code below.[^_07-ex-model-slr-24]
+
+    ```r
+    set.seed(721)
+    regions12 <- tibble(
+      video_share = round(runif(12, 15, 85)),
+      trial_rate  = round(52 - 0.45 * video_share + rnorm(12, mean = 0, sd = 6), 1)
+    )
+
+    ggplot(regions12, aes(x = video_share, y = trial_rate)) +
+      geom_point(size = 2) +
+      labs(
+        x = "Percentage of assessments from video only",
+        y = "Percentage of recommendations reaching trial"
+      )
+    ```
+
+    The twelve regions drift downward: regions that assess mostly from video see fewer of their recommendations reach the trial stage.
+
+    a.  If the $R^2$ for the least-squares regression line for these data is 66%, what is the correlation between `video_share` and `trial_rate`?
+
+    b.  Calculate the slope and intercept for the least-squares regression line for these data.
+
+    c.  Interpret the intercept of the least-squares regression line in the context of the application.
+
+    d.  Interpret the slope of the least-squares regression line in the context of the application.
+
+    e.  What would the value of the residual be for a region where 40% of assessments are video-only and 40% of recommendations reach trial?
+        Interpret the meaning of this residual in the context of the application.
+
+[^_07-ex-model-slr-1]: The `loan_pool` data are a constructed scouting scenario, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-2]: The `fee_fit` data are a constructed scouting scenario, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-3]: The `panels_1` and `panels_2` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-4]: The `panels_3` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-5]: The `academy233` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real trialists were graded.
+
+[^_07-ex-model-slr-6]: The `scout_reg` data are a constructed scouting scenario, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-7]: The `corr_panels` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-8]: The `corr_panels_2` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-9]: The `combine507` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real trialists were measured.
+
+[^_07-ex-model-slr-10]: The `autumn_loop` data are a constructed scouting scenario, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-11]: The `return_months` data are a constructed scouting scenario, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-12]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_07-ex-model-slr-13]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_07-ex-model-slr-14]: The `autumn_loop` data are the constructed scenario from Exercise 11, generated by the seeded code shown there.
+
+[^_07-ex-model-slr-15]: The `combine507` data are the constructed scenario from Exercise 9, generated by the seeded code shown there.
+
+[^_07-ex-model-slr-16]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_07-ex-model-slr-17]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_07-ex-model-slr-18]: The `age_profiles` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-19]: The `form_profiles` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-20]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data); `team_match` is rebuilt with the code from Exercise 19.
+
+[^_07-ex-model-slr-21]: The `return_months` data are the constructed scenario from Exercise 12, generated by the seeded code shown there.
+
+[^_07-ex-model-slr-22]: The `strikers31` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real players were valued.
+
+[^_07-ex-model-slr-23]: The `trialist_panels` data are constructed, generated entirely by the seeded code shown.
+
+[^_07-ex-model-slr-24]: The `regions12` data are a constructed scouting scenario, generated entirely by the seeded code shown.

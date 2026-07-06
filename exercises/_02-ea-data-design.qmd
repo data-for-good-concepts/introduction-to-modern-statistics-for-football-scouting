@@ -1,0 +1,29 @@
+**2.** Sample mean: 6.25 matches per week; claimed population mean: 5.5.
+
+**4.** (a) Population: academy scholars aged 8 to 15; sample: the 160 scholars in the study. (b) Not generalizable — the 160 scholars are not a random sample; the instruction–honesty comparison is experimental and supports a causal conclusion, but the age and sex relationships are observed, not assigned, and do not.
+
+**6.** (a) Population: academy scholars; sample: the 129 scholars at the one academy. (b) Not generalizable (non-random sample from a single academy); observational — squad status was self-identified, not assigned — so no causal conclusion.
+
+**8.** (a) Population parameter. (b) Sample statistic. (c) Observation. (d) Variable.
+
+**10.** (a) Observational study (survey). (b) Stratified sampling: strata = the four year groups (U16, U17, U19, U21); randomly sample an equal number of players from each.
+
+**12.** (a) Observational study. (b) No; observational, so no causal conclusion. (c) Answers vary; key: amount of sleep and energy-drink (caffeine) consumption — both change with stress and plausibly affect cramps.
+
+**14.** Discussion; key: the published directory undercovers (out-of-date, opt-outs); the licence database covers every accredited scout, avoiding undercoverage bias.
+
+**16.** (a) No; participation in the monitoring scheme was voluntary and loads were not assigned — observational, so only an association can be claimed. (b) Not justified; the study shows only an association (direction could run either way): scholars with behavioral issues or persistent fouling were twice as likely to have shown sleep-disorder symptoms.
+
+**18.** Biased — it overestimates the true average: a randomly chosen player is more likely to belong to a large training group, so large groups are oversampled.
+
+**20.** (a) Experiment; the drink treatments were assigned to the players. (b) Explanatory: treatment group (placebo, 1g, 3g, 3g plus additives); response: duration (and severity) of soreness. (c) Yes; the bottles were identical in appearance and packaging. (d) Not fully; the assessing physiotherapists were blinded but the staff handing out the bottles were not. (e) No; non-adherence is a compliance issue, not a confounder — randomization spreads adherence tendencies across the groups, though non-adherence dilutes the estimated effect.
+
+**22.** Answers vary; key: randomly assign scholars to the three audio conditions, identical clips, then compare retention-test scores.
+
+**24.** (a) Randomized (blocked) experiment. (b) Treatment: two guided recovery-yoga sessions per week; control: instructed not to take up yoga. (c) Yes; age group (18-23, 24-29, 30-35). (d) No. (e) Causal: yes (randomized experiment); generalizable: yes (stratified random sample of the league's registered professionals), subject to compliance. (f) Answers vary; key: instructing the controls not to take up yoga raises ethical and compliance concerns.
+
+**26.** (a) Simple random sampling; pro: unbiased and representative in expectation; con: no guarantee every distinct league type is covered, and the sample is logistically scattered. (b) Stratified sampling; pro: every league represented, and internally more homogeneous strata improve precision; con: 10 per league ignores league sizes (requires weighting) and costs more. (c) Cluster sampling; pro: cheap and logistically simple; con: the leagues are distinct and unique — heterogeneous between clusters — so 3 leagues may badly misrepresent the market. (d) Multistage sampling; pro: cost-effective with broader coverage than (c); con: still risks missing distinctive league types and requires weighting. (e) Convenience sampling; pro: cheapest; con: badly biased — prospects near the training complex are not representative of the market.
+
+**28.** (a) Explanatory: mean chance quality per shot; response: conversion rate. (b) Positive, roughly linear, moderately strong ($r = 0.673$); unusual: Belgium, Canada, and Denmark each converted only 0.0286 (1 goal from 35 shots) despite mid-range chance quality, sitting well below the trend. (c) No; observational data — association does not establish causation.
+
+**30.** (a) Observational study. (b) Screen time (primary), plus sex, age, and the guardian's education, ethnicity, psychological distress, and employment. (c) The psychological well-being score. (d) Yes; the three registries are nationally representative, so the results generalize to academy-registered 12-to-15-year-olds in those three countries. (e) No; observational, so no causal conclusions.

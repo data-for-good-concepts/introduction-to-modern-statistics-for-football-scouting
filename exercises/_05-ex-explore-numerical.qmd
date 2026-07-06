@@ -1,0 +1,541 @@
+1.  **Chance creation and goals.** Data were collected on all 1,494 shots of the 2022 Men's World Cup and aggregated to one row per team: the total chance quality (xG) each of the 32 teams accumulated across the tournament, and the total number of goals it scored.
+    The code below draws a scatterplot of goals scored versus total xG.[^_05-ex-explore-numerical-1]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    team_season <- wc2022_shots |>
+      group_by(team) |>
+      summarize(total_xg = sum(statsbomb_xg), goals = sum(goal))
+
+    ggplot(team_season, aes(x = total_xg, y = goals)) +
+      geom_point(alpha = 0.8) +
+      labs(x = "Total xG accumulated", y = "Goals scored")
+    ```
+
+    The 32 points rise steadily from the bottom-left corner (Costa Rica, with about 1.2 xG and 2 goals) to the top-right (Argentina, with about 21.0 xG and 23 goals), staying fairly close to a straight-line trend throughout; a handful of teams sit visibly below the trend, most notably Brazil, who accumulated 13.6 xG but scored only 10 goals.
+
+    a.  What type of an association is apparent between total xG accumulated and goals scored?
+
+    b.  What type of an association would you expect to see if the axes of the plot were reversed, i.e., if we plotted total xG accumulated versus goals scored?
+
+    c.  Are total xG and goals scored independent?
+        Explain your reasoning.
+
+2.  **Associations.** Priya Rao keeps a set of constructed scatterplots for training Northbridge's junior analysts; each panel plots a fabricated performance metric against a fabricated workload variable $x.$
+    The seeded code below builds all four panels.[^_05-ex-explore-numerical-2]
+    Indicate which of the plots show (a) a positive association, (b) a negative association, or (c) no association.
+    Also determine if the positive and negative associations are linear or nonlinear.
+    Each part may refer to more than one plot.
+
+    ```r
+    set.seed(505)
+    x <- seq(0, 10, 0.1)
+
+    training_panels <- tibble(
+      x = x,
+      `(1)` = 4 * x + rnorm(length(x), sd = 6),
+      `(2)` = rnorm(length(x), mean = 20, sd = 12),
+      `(3)` = x^2 + rnorm(length(x), sd = 4),
+      `(4)` = -3 * x + rnorm(length(x), sd = 5)
+    ) |>
+      pivot_longer(-x, names_to = "panel", values_to = "y")
+
+    ggplot(training_panels, aes(x = x, y = y)) +
+      geom_point(alpha = 0.5) +
+      facet_wrap(~panel, nrow = 1, scales = "free_y") +
+      labs(x = NULL, y = NULL)
+    ```
+
+    In panel (1) the points climb steadily from left to right inside a broad straight band; in panel (2) the points form a diffuse cloud with no visible drift in either direction; in panel (3) the points are nearly flat at the left edge and then climb ever more steeply toward the right; in panel (4) the points fall steadily from left to right inside a straight band.
+
+3.  **Filling the video archive.** Northbridge's historical video archive holds exactly 10,000 matches awaiting tagging.
+    A small crew of taggers starts work; as they go, each experienced tagger trains new recruits, so the crew grows over time — but there are only 10,000 matches to tag, and the untagged matches become harder to find as coverage nears completion.
+    Sketch a plot representing the relationship between the cumulative number of matches tagged and time.
+
+4.  **Matchday edge.** A scout's report on a player's temperament often comes down to arousal: a player who feels no competitive edge before kickoff — a meaningless friendly, nothing at stake — tends to produce a flat performance.
+    However, very high levels of pre-match anxiety, as in an overwhelming cup final, can also degrade a player's performance.
+    Sketch a plot to represent the relationship between pre-match arousal and match performance.
+
+5.  **Late trialist.** At a Northbridge trial day, 25 trialists sat the club's technical entry test (scored out of 100 points): 24 of them took the test on the day, and 1 trialist, delayed by travel, took it the following morning.
+    Jonas Beck graded the first batch of 24 tests and found an average score of 74 points with a standard deviation of 8.9 points.
+    The trialist who tested the following morning scored 64 points.
+
+    a.  Does the late trialist's score increase or decrease the average score?
+
+    b.  What is the new average?
+
+    c.  Does the late trialist's score increase or decrease the standard deviation of the scores?
+
+6.  **Shot volume across a tournament.** How is shooting workload distributed across the players of a tournament?
+    The code below aggregates the 2022 Men's World Cup shot data to one row per player — 432 players attempted at least one shot — and draws a relative frequency histogram of the shot counts.[^_05-ex-explore-numerical-3]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    player_shots_wc <- wc2022_shots |>
+      group_by(player, team) |>
+      summarize(shots = n(), .groups = "drop")
+
+    ggplot(player_shots_wc, aes(x = shots)) +
+      geom_histogram(aes(y = after_stat(count / sum(count))), binwidth = 1) +
+      labs(x = "Shots attempted in the tournament", y = "Proportion of players")
+    ```
+
+    The tallest bar is the first one: the players with exactly 1 shot make up about 0.34 of the sample.
+    The bars then shrink steadily — about 0.20 of players took 2 shots, 0.14 took 3, 0.08 took 4, 0.06 took 5 — and the distribution trails off into a long, thin right tail, ending with two isolated bars far to the right at 32 shots (Kylian Mbappé) and 34 shots (Lionel Messi).
+
+    a.  Estimate $Q_1,$ the median, and $Q_3$ from the histogram.
+
+    b.  Would you expect the mean of this dataset to be smaller or larger than the median?
+        Explain your reasoning.
+
+7.  **Raising the average.** Emil Sørensen's network of regional scouts attends an average of 35 live matches per scout per season, which is lower than the figure boasted by rival clubs' networks.
+    Marta Vidal presses Emil to raise the average, but sending scouts to more matches would blow the travel budget.
+    Instead, Emil decides he should cut 10 scouts from the network in such a way as to raise the average number of live matches reported per scout.
+    In order to achieve this goal, should he cut the scouts who attend the most matches, the fewest matches, or those who attend about the average number of matches?
+
+8.  **Medians and IQRs.** Priya hands a junior analyst pairs of small constructed datasets — each is the number of chances created by a prospect across five logged matches.
+    For each part, compare distributions A and B based on their medians and IQRs.
+    You do not need to calculate these statistics; simply state how the medians and IQRs compare.
+    Make sure to explain your reasoning.
+    *Hint:* It may be useful to sketch dot plots of the distributions.
+
+    a.  **A:** 3, 5, 6, 7, 9; **B:** 3, 5, 6, 7, 20
+
+    b.  **A:** 3, 5, 6, 7, 9; **B:** 3, 5, 7, 8, 9
+
+    c.  **A:** 1, 2, 3, 4, 5; **B:** 6, 7, 8, 9, 10
+
+    d.  **A:** 0, 10, 50, 60, 100; **B:** 0, 100, 500, 600, 1000
+
+9.  **Means and SDs.** The next training sheet in Priya's pile works the same way, but for the mean and standard deviation; some of the constructed values are negative, as they would be for a metric like a player's plus-minus goal difference while on the pitch.
+    For each part, compare distributions A and B based on their means and standard deviations.
+    You do not need to calculate these statistics; simply state how the means and the standard deviations compare.
+    Make sure to explain your reasoning.
+    *Hint:* It may be useful to sketch dot plots of the distributions.
+
+    a.  **A:** 3, 5, 5, 5, 8, 11, 11, 11, 13; **B:** 3, 5, 5, 5, 8, 11, 11, 11, 20
+
+    b.  **A:** -20, 0, 0, 0, 15, 25, 30, 30; **B:** -40, 0, 0, 0, 15, 25, 30, 30
+
+    c.  **A:** 0, 2, 4, 6, 8, 10; **B:** 20, 22, 24, 26, 28, 30
+
+    d.  **A:** 100, 200, 300, 400, 500; **B:** 0, 50, 300, 550, 600
+
+10. **Histograms and box plots.** For another training exercise, Priya fabricates three performance variables for 1,000 imaginary players: `metric_a` mimics top sprint speeds (in km/h), `metric_b` mimics the minute-of-the-half at which a shot is taken, and `metric_c` mimics kilometers of high-speed running per match.
+    The seeded code below builds the data and draws a histogram and a box plot of each variable.[^_05-ex-explore-numerical-4]
+    Describe (in words) the distribution in each histogram, and match the histograms, labeled (a), (b), and (c), to the box plots, labeled (1), (2), and (3).
+
+    ```r
+    set.seed(506)
+    training_metrics <- tibble(
+      metric_a = rnorm(1000, mean = 33, sd = 1.5),
+      metric_b = runif(1000, min = 0, max = 45),
+      metric_c = rgamma(1000, shape = 3, rate = 2)
+    )
+
+    p_hist <- training_metrics |>
+      pivot_longer(everything(), names_to = "metric", values_to = "x") |>
+      mutate(label = case_when(
+        metric == "metric_a" ~ "(a)",
+        metric == "metric_b" ~ "(b)",
+        metric == "metric_c" ~ "(c)"
+      )) |>
+      ggplot(aes(x = x)) +
+      geom_histogram(bins = 10) +
+      facet_wrap(~label, scales = "free") +
+      labs(x = NULL, y = NULL)
+
+    p_box <- training_metrics |>
+      pivot_longer(everything(), names_to = "metric", values_to = "x") |>
+      mutate(label = case_when(
+        metric == "metric_a" ~ "(2)",
+        metric == "metric_b" ~ "(3)",
+        metric == "metric_c" ~ "(1)"
+      )) |>
+      ggplot(aes(y = x)) +
+      geom_boxplot(outlier.alpha = 0.8) +
+      facet_wrap(~label, scales = "free") +
+      labs(x = NULL, y = NULL)
+
+    p_hist / p_box
+    ```
+
+    Histogram (a) is a symmetric bell running from about 28 to 38, peaked at 33.
+    Histogram (b) is flat: its bars are all of roughly equal height across the range 0 to 45.
+    Histogram (c) peaks just above 1 and trails off in a long right tail reaching past 5.5.
+    Box plot (1) has its box from about 0.9 to 1.9 with the median near 1.4, and a string of dots above the upper whisker stretching to about 5.8, with none below.
+    Box plot (2) has a narrow box from about 32.0 to 34.1 with the median at 33.1, short whiskers, and a few dots beyond the whiskers on both sides.
+    Box plot (3) has a wide box from about 11.6 to 33.5 with the median near 22.5, long whiskers reaching almost to 0 and 45, and no dots beyond them.
+
+11. **Shots per team-match.** How many shots does a team typically produce in a World Cup match?
+    The code below rebuilds the `team_match` data — one row per (match, team) aggregate of the 2022 Men's World Cup shots, exactly as constructed in @sec-dotplots — and draws a relative frequency histogram of the number of shots per team-match.[^_05-ex-explore-numerical-5]
+    Recall that the data have 127 rows rather than 128: Costa Rica registered no shots at all in one of their matches, so that team-match has no row.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    team_match <- wc2022_shots |>
+      group_by(match_id, team) |>
+      summarize(
+        n_shots = n(),
+        total_xg = sum(statsbomb_xg),
+        goals = sum(goal),
+        prop_under_pressure = mean(under_pressure),
+        prop_set_piece = mean(play_pattern %in%
+          c("From Corner", "From Free Kick", "From Throw In")),
+        .groups = "drop"
+      )
+
+    ggplot(team_match, aes(x = n_shots)) +
+      geom_histogram(aes(y = after_stat(count / sum(count))),
+                     breaks = seq(0, 32, 2)) +
+      labs(x = "Shots in a single team-match", y = "Proportion")
+    ```
+
+    The bars rise from a single team-match in the 0--2 bin (height 0.008) through heights of about 0.05, 0.10, and 0.14 to a peak of about 0.17 over the 8--10 bin, then fall away through 0.15, 0.13, 0.08, and 0.05; after a near-empty 18--20 bin, a modest secondary shelf over 20 to 24 shots (heights around 0.04--0.05) trails into a low 24--26 bar (height 0.016), and a lone bar sits far right in the 30--32 bin.
+
+    a.  Estimate the median number of shots per team-match from the histogram.
+
+    b.  Would you expect the mean of this sample to be higher or lower than the median?
+        Explain your reasoning.
+
+    c.  Estimate $Q_1,$ $Q_3,$ and the IQR for the distribution.
+
+    d.  Would any of the team-matches in this sample be considered to have an unusually low or unusually high shot count?
+        Explain your reasoning.
+
+12. **Pass completion at the academy.** Jonas Beck's staff logged the pass-completion percentage of 400 academy trialists across a standardized possession drill.
+    This is a constructed scenario, built by the seeded code below, which also draws the histogram.[^_05-ex-explore-numerical-6]
+    Estimate the median for the 400 observations shown in the histogram, and note whether you expect the mean to be higher or lower than the median.
+
+    ```r
+    set.seed(507)
+    pass_comp <- tibble(completion = 100 * rbeta(400, 12, 3))
+
+    ggplot(pass_comp, aes(x = completion)) +
+      geom_histogram(binwidth = 5, boundary = 0) +
+      labs(x = "Pass completion (%)", y = "Count")
+    ```
+
+    The bars climb steadily from a thin left tail — a couple of trialists near 45%, a handful in the 50s, then 17, 37, 46, and 71 trialists in the bins from 60 up to 80 — to a peak of 86 trialists in the 80--85% bin, before dropping to 73, 49, and finally just 7 trialists above 95%.
+
+13. **Tagging turnaround.** Northbridge's video platform logs how many hours each match takes to come back fully tagged.
+    Auto-tagged matches cluster around 5 hours, matches routed to manual taggers cluster around 12 hours, and a small number of problem files drag on much longer.
+    The seeded code below constructs a batch of 625 turnaround times and draws a histogram and a box plot of the same data.[^_05-ex-explore-numerical-7]
+    Compare the two plots.
+    What characteristics of the distribution are apparent in the histogram and not in the box plot?
+    What characteristics are apparent in the box plot but not in the histogram?
+
+    ```r
+    set.seed(508)
+    turnaround <- tibble(hours = c(rnorm(300, mean = 5, sd = 1),
+                                   rnorm(300, mean = 12, sd = 1),
+                                   runif(25, min = 13, max = 28)))
+
+    p_hist <- ggplot(turnaround, aes(x = hours)) +
+      geom_histogram(binwidth = 2.5, boundary = 0) +
+      labs(x = "Turnaround (hours)", y = NULL)
+
+    p_box <- ggplot(turnaround, aes(y = hours)) +
+      geom_boxplot(outlier.alpha = 0.5) +
+      labs(x = NULL, y = "Turnaround (hours)")
+
+    p_hist + p_box
+    ```
+
+    The histogram shows two tall peaks — 168 matches in the 5--7.5 bin and 202 in the 10--12.5 bin — separated by a deep valley (only 9 matches between 7.5 and 10), with a thin right tail running out past 27 hours.
+    The box plot shows a box from about 5.2 to 12.2 with the median line at 10.3, a lower whisker to about 2.1, an upper whisker to 22.5, and a dozen individual dots between about 22.9 and 27.5.
+
+14. **Shots per player.** Northbridge's analytics platform reports that at the 2025 Women's Euro, half of the 215 players who attempted a shot took 3 or fewer shots, and that the average shot count per player was 4.25.
+    What do these findings suggest about the shape of the distribution of shots per player?[^_05-ex-explore-numerical-8]
+
+15. **Distributions and appropriate statistics, I.** For each of the following, state whether you expect the distribution to be symmetric, right skewed, or left skewed.
+    Also specify whether the mean or median would best represent a typical observation in the data, and whether the variability of observations would be best represented using the standard deviation or IQR.
+    Explain your reasoning.
+
+    a.  Number of goals scored per player across a tournament.
+
+    b.  Distance a regional scout travels to reach an assigned match, i.e., the number of kilometers between home and the ground.
+
+    c.  Heights of adult male professional footballers.
+
+    d.  Age at which professional footballers retire.
+
+    e.  Scores on an easy technical drill at a trial day.
+
+16. **Distributions and appropriate statistics, II.** For each of the following, state whether you expect the distribution to be symmetric, right skewed, or left skewed.
+    Also specify whether the mean or median would best represent a typical observation in the data, and whether the variability of observations would be best represented using the standard deviation or IQR.
+    Explain your reasoning.
+
+    a.  Transfer fees in a market where 25% of the deals close below €350,000, 50% close below €450,000, 75% close below €1,000,000, and there are a meaningful number of deals above €6,000,000.
+
+    b.  Transfer fees in a market where 25% of the deals close below €300,000, 50% close below €600,000, 75% close below €900,000, and very few deals exceed €1,200,000.
+
+    c.  Number of senior international caps held by the trialists at an academy open day.
+        Assume that most trialists have never been capped, and only a few have collected many caps.
+
+    d.  Annual salaries of the players at a top-division club where a few star signings earn much higher salaries than all the other squad members.
+
+    e.  Days to return from a standard hamstring strain in the club's medical records, where 25% of players return within 38 days, 50% within 39 days, 75% within 40 days, and a handful of setback cases stretch out to 90 days.
+
+17. **Video hours.** Academy players at Northbridge were asked how many hours of match video they watch per week, including opposition analysis clips.
+    This sample yielded an average of 8.28 hours, with a standard deviation of 7.18 hours.
+    Is the distribution of number of hours academy players watch match video weekly symmetric?
+    If not, what shape would you expect this distribution to have?
+    Explain your reasoning.
+
+18. **Entry-test scores.** The average on Northbridge's technical entry test (scored out of 100 points) was 85, with a standard deviation of 15.
+    Is the distribution of the scores on this test symmetric?
+    If not, what shape would you expect this distribution to have?
+    Explain your reasoning.
+
+19. **Midrange.** Priya considers summarizing the chance quality of a striker's shots with the *midrange* of the xG values, where the midrange of a distribution is defined as the average of the maximum and the minimum of that distribution.
+    Is this statistic robust to outliers and extreme skew — say, to the presence of a single penalty at 0.78 xG among a season of ordinary chances?
+    Explain your reasoning.
+
+20. **Shooting under pressure.** The histograms drawn by the code below show the distribution of chance quality (xG) for the 2022 Men's World Cup shots taken under defensive pressure and for those taken unpressured.
+    Summary statistics for the two distributions are also computed.
+    Compare the two distributions.[^_05-ex-explore-numerical-9]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    shots_by_pressure <- wc2022_shots |>
+      mutate(pressure = if_else(under_pressure,
+                                "Under pressure", "Not under pressure"))
+
+    ggplot(shots_by_pressure, aes(x = statsbomb_xg)) +
+      geom_histogram(binwidth = 0.05, boundary = 0) +
+      facet_wrap(~pressure, ncol = 1, scales = "free_y") +
+      labs(x = "Chance quality (xG)", y = "Count")
+
+    shots_by_pressure |>
+      group_by(pressure) |>
+      summarize(mean_xg = mean(statsbomb_xg), sd_xg = sd(statsbomb_xg), n = n())
+    #> # A tibble: 2 × 4
+    #>   pressure           mean_xg  sd_xg     n
+    #>   <chr>                <dbl>  <dbl> <int>
+    #> 1 Not under pressure  0.131  0.196   1256
+    #> 2 Under pressure      0.0961 0.0949   238
+    ```
+
+    Both histograms are unimodal with tall bars at the low end — in each group roughly 70% of shots carry less than 0.10 xG — and both trail off to the right.
+    The unpressured panel, however, has a much longer tail: 94 of its shots exceed 0.5 xG, including a distinct isolated spike near 0.78 (the tournament's 64 penalties, every one of them taken unpressured) and a maximum of 0.90.
+    The pressured panel's tail ends far sooner — only 2 pressured shots exceed 0.5 xG, and the largest is 0.64.
+
+21. **Trial-day scores.** The technical entry test scores of twenty Northbridge trialists, arranged in ascending order, are as follows: 57, 66, 69, 71, 72, 73, 74, 77, 78, 78, 79, 79, 81, 81, 82, 83, 83, 88, 89, 94.
+    Suppose trialists who score above the 75th percentile on the test are invited back for a second trial.
+    How many trialists will be invited back?
+
+22. **Wages at Northbridge.** The first histogram drawn by the code below shows the distribution of the weekly wages (in euros) of the 40 players on Northbridge's books — the squad of a mid-table club, with most players between roughly €25,000 and €45,000 a week.
+    In the January window, Marta Vidal sanctions two marquee signings on weekly wages of €95,000 and €110,000; the second histogram shows the new wage distribution.
+    This is a constructed scenario, built by the seeded code, which also computes summary statistics for both versions of the wage bill.[^_05-ex-explore-numerical-10]
+
+    ```r
+    set.seed(509)
+    wages_before <- rnorm(40, mean = 34000, sd = 5000)
+    wages_after  <- c(wages_before, 95000, 110000)
+
+    wages <- tibble(
+      period = rep(c("Before", "After"), times = c(40, 42)),
+      wage   = c(wages_before, wages_after)
+    ) |>
+      mutate(period = factor(period, levels = c("Before", "After")))
+
+    ggplot(wages, aes(x = wage)) +
+      geom_histogram(binwidth = 2500) +
+      facet_wrap(~period, ncol = 1, scales = "free_x") +
+      labs(x = "Weekly wage (EUR)", y = "Count")
+
+    wages |>
+      group_by(period) |>
+      summarize(
+        n = n(),
+        min = min(wage),
+        q1 = quantile(wage, 0.25),
+        median = median(wage),
+        q3 = quantile(wage, 0.75),
+        mean = mean(wage),
+        max = max(wage),
+        sd = sd(wage)
+      )
+    #> # A tibble: 2 × 9
+    #>   period     n    min     q1 median     q3   mean     max     sd
+    #>   <fct>  <int>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>   <dbl>  <dbl>
+    #> 1 Before    40 23864. 30671. 33352. 36366. 33196.  43816.  5168.
+    #> 2 After     42 23864. 30804. 33711. 36930. 36496. 110000  15852.
+    ```
+
+    The "Before" histogram is a roughly symmetric cluster running from about €23,900 to €43,800; the "After" histogram shows the same cluster squeezed toward the left edge of a stretched axis, with two isolated bars far to the right at €95,000 and €110,000.
+
+    a.  Would the mean or the median best represent what we might think of as a typical weekly wage for the 42 players at the club after the signings?
+        What does this say about the robustness of the two measures?
+
+    b.  Would the standard deviation or the IQR best represent the amount of variability in the wages of the 42 players?
+        What does this say about the robustness of the two measures?
+
+23. **A new statistic.** The statistic $\frac{\bar{x}}{median}$ can be used as a measure of skewness.
+    Suppose we have a distribution where all observations are greater than 0, $x_i > 0$ — transfer fees, for example.
+    What is the expected shape of the distribution under the following conditions?
+    Explain your reasoning.
+
+    a.  $\frac{\bar{x}}{median} = 1$
+
+    b.  $\frac{\bar{x}}{median} < 1$
+
+    c.  $\frac{\bar{x}}{median} > 1$
+
+24. **Pitch-zone chance quality.** In @sec-explore-numerical we met Priya's constructed pitch-zone grid: the attacking half divided into five distance bands from goal (band 1 nearest the goal) crossed with six channels across the pitch, with a constructed average chance quality for each zone.
+    The code below rebuilds the grid with exactly the chapter's seed, then draws a histogram of the 30 zone values alongside the intensity map.[^_05-ex-explore-numerical-11]
+
+    ```r
+    set.seed(501)
+    pitch_zones <- expand_grid(band = 1:5, channel = 1:6) |>
+      mutate(
+        centrality = 1 - abs(channel - 3.5) / 5,
+        mean_xg = round(0.04 + 0.30 * centrality / band + rnorm(n(), 0, 0.012), 3)
+      )
+
+    p_hist <- ggplot(pitch_zones, aes(x = mean_xg)) +
+      geom_histogram(binwidth = 0.05, boundary = 0) +
+      labs(x = "Zone mean xG", y = "Count")
+
+    p_map <- ggplot(pitch_zones, aes(x = channel, y = band, fill = mean_xg)) +
+      geom_tile() +
+      scale_fill_viridis_c() +
+      scale_y_reverse() +
+      labs(x = "Channel (across the pitch)",
+           y = "Distance band (1 = nearest goal)", fill = "Mean xG")
+
+    p_hist + p_map
+    ```
+
+    In the histogram, 10 of the 30 zones fall between 0.05 and 0.10 mean xG and another 12 between 0.10 and 0.15; the counts then drop to 4, 1, and 1 in the next three bins, with 2 zones out beyond 0.30.
+    In the map, the brightest tiles sit in band 1's central channels (peaking at 0.315 in band 1, channel 3), colors fade steadily with each band away from goal, and within every band the central channels are brighter than the wide ones; the darkest tiles are the wide zones of band 5 (as low as 0.066).
+
+    a.  Describe the numerical distribution of the 30 zone values and comment on whether a log transformation may be advisable for these data.
+
+    b.  Describe the spatial distribution of chance quality using the map.
+
+25. **Where the shots come from.** Priya extends the pitch-zone pilot: this time each zone of the same 5-band-by-6-channel grid gets a constructed *count* of shots taken from it over a season, built by the seeded code below.
+    The code draws a histogram of the 30 zone counts, a histogram of their base-10 logarithms, and the intensity map.[^_05-ex-explore-numerical-12]
+
+    ```r
+    set.seed(510)
+    zone_shots <- expand_grid(band = 1:5, channel = 1:6) |>
+      mutate(
+        centrality = 1 - abs(channel - 3.5) / 5,
+        expected = 4 + 150 * exp(-1.1 * (band - 1)) * (0.15 + 0.85 * centrality^2),
+        shots = rpois(n(), expected)
+      )
+
+    p_hist <- ggplot(zone_shots, aes(x = shots)) +
+      geom_histogram(binwidth = 10, boundary = 0) +
+      labs(x = "Shots from zone", y = "Count")
+
+    p_hist_log <- ggplot(zone_shots, aes(x = log10(shots))) +
+      geom_histogram(binwidth = 0.25, boundary = 0) +
+      labs(x = expression(log[10] * "(Shots from zone)"), y = "Count")
+
+    p_map <- ggplot(zone_shots, aes(x = channel, y = band, fill = shots)) +
+      geom_tile() +
+      scale_fill_viridis_c() +
+      scale_y_reverse() +
+      labs(x = "Channel (across the pitch)",
+           y = "Distance band (1 = nearest goal)", fill = "Shots")
+
+    p_hist + p_hist_log + p_map
+    ```
+
+    In the first histogram, 15 of the 30 zones land in the lowest bin (10 shots or fewer), the bar heights collapse immediately afterward, and a scattering of single zones stretches the axis all the way out to the busiest zone's 126 shots.
+    In the log histogram, the same 30 zones spread far more evenly between $\log_{10}$ values of about 0.5 and 2.1, with no bin holding more than 9 zones.
+    In the map, the two central tiles of band 1 blaze brightest (126 and 112 shots), brightness drains rapidly with each band away from goal — the five bands total 557, 204, 87, 38, and 36 shots — and nearly everything beyond band 2 is uniformly dark.
+
+    a.  Describe the numerical distribution of the zone shot counts and comment on why we might want to use log-transformed values in analyzing or modeling these data.
+
+    b.  What features of the distribution of shots across zones are apparent in the map but not in the histogram?
+        What features are apparent in the histogram but not the map?
+
+    c.  Is one visualization more appropriate or helpful than the other?
+        Explain your reasoning.
+
+26. **The academy time trial.** Every pre-season since 1990, Northbridge has recorded the winning time of its 5-kilometre time trial separately for the senior squad and for the under-18s.
+    This is a constructed club archive, built by the seeded code below, which draws a histogram and a box plot of all 72 winning times combined.[^_05-ex-explore-numerical-13]
+
+    ```r
+    set.seed(511)
+    time_trial <- expand_grid(squad = c("Senior", "U18"), year = 1990:2025) |>
+      mutate(
+        base = if_else(squad == "Senior", 15.9, 18.1),
+        minutes = base - 1.6 * (1 - exp(-(year - 1990) / 12)) + rnorm(n(), 0, 0.2)
+      )
+
+    p_hist <- ggplot(time_trial, aes(x = minutes)) +
+      geom_histogram(binwidth = 0.25, boundary = 14) +
+      labs(x = "Winning time (minutes)", y = "Count")
+
+    p_box <- ggplot(time_trial, aes(x = minutes)) +
+      geom_boxplot(outlier.alpha = 0.8) +
+      labs(x = "Winning time (minutes)") +
+      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+
+    p_hist / p_box
+    ```
+
+    The histogram shows two clearly separated clusters — one between about 14.1 and 15.9 minutes and one between about 16.3 and 18.1 — with an empty stretch of axis between them.
+    The box plot of the combined data shows a single box from about 14.8 to 16.9 with the median line at 16.1, whiskers reaching 14.1 and 18.1, and no outlying dots.
+
+    a.  What features of the distribution are apparent in the histogram and not the box plot?
+        What features are apparent in the box plot but not in the histogram?
+
+    b.  What may be the reason for the bimodal distribution?
+        Explain.
+
+    c.  The code below draws side-by-side box plots of the winning times by squad.
+        The senior box runs from about 14.5 to 15.1 with its median at 14.8; the U18 box runs from about 16.7 to 17.2 with its median at 16.9 and two dots above its upper whisker near 17.9 and 18.1.
+        Compare the distribution of winning times for the two squads based on this plot.
+
+        ```r
+        ggplot(time_trial, aes(x = minutes, y = squad, color = squad)) +
+          geom_boxplot(outlier.alpha = 0.8, show.legend = FALSE) +
+          labs(x = "Winning time (minutes)", y = NULL)
+        ```
+
+    d.  The time series plot drawn below is another way to look at these data.
+        In it, both squads' winning times fall steeply through the 1990s and 2000s and then flatten out — the senior winning time drifts from around 15.6 minutes in the early years to around 14.3 in recent seasons, the U18 time from around 17.8 to around 16.6 — with the roughly two-minute gap between the squads persisting throughout.
+        Describe what is visible in this plot but not in the others.
+
+        ```r
+        ggplot(time_trial, aes(x = year, y = minutes,
+                               color = squad, shape = squad)) +
+          geom_point(size = 2) +
+          labs(x = "Year", y = "Winning time (minutes)")
+        ```
+
+[^_05-ex-explore-numerical-1]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data). The totals include penalty shoot-outs, per the book's penalty convention: 8 of Argentina's 23 goals and about 7.1 of their 21.0 xG come from period-5 kicks.
+
+[^_05-ex-explore-numerical-2]: The training panels are a constructed scouting scenario, generated entirely by the seeded code shown; no real player data were used.
+
+[^_05-ex-explore-numerical-3]: The per-player shot counts are aggregated from `data/derived/wc2022_shots.csv` (StatsBomb open data) by the code shown.
+
+[^_05-ex-explore-numerical-4]: The `training_metrics` data are a constructed training exercise, generated entirely by the seeded code shown; no real players were measured.
+
+[^_05-ex-explore-numerical-5]: The `team_match` data are aggregated from `data/derived/wc2022_shots.csv` (StatsBomb open data) by the code shown, which matches the construction in @sec-dotplots.
+
+[^_05-ex-explore-numerical-6]: The `pass_comp` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real trialists were assessed.
+
+[^_05-ex-explore-numerical-7]: The `turnaround` data are a constructed club-operations scenario, generated entirely by the seeded code shown.
+
+[^_05-ex-explore-numerical-8]: The quoted figures are computed from `data/derived/weuro2025_shots.csv` (StatsBomb open data), aggregated to one row per player as in @sec-transforming-data.
+
+[^_05-ex-explore-numerical-9]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_05-ex-explore-numerical-10]: The `wages` data are a constructed scouting scenario, generated entirely by the seeded code shown; they are not the wages of any real club.
+
+[^_05-ex-explore-numerical-11]: The `pitch_zones` grid is the constructed scenario from @sec-explore-numerical, rebuilt by the identical seeded code; it is not real tracking data.
+
+[^_05-ex-explore-numerical-12]: The `zone_shots` data are a constructed scouting scenario, generated entirely by the seeded code shown; they are not real shot locations.
+
+[^_05-ex-explore-numerical-13]: The `time_trial` data are a constructed club archive, generated entirely by the seeded code shown; no real time trials were recorded.

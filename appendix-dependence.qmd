@@ -1,0 +1,160 @@
+# When observations remember each other {#sec-appendix-dependence}
+
+You have met this problem five times; here is its name.
+In @sec-principles-experimental-design it was called **pseudoreplication**: fifty academy players assessed at ten sessions each do not make 500 observations, because the repeated assessments of a given player are not independent of each other.
+In @sec-one-prop-norm it was the cluster-sample caveat: shots logged from a cluster sample of matches (@sec-samp-methods) are not independent, and the suitable methods were declared "beyond the scope of even most second or third courses in statistics."
+In @sec-tech-cond-linmod it was the fourth panel of the residual gallery: sixty consecutive days of one player's GPS training load, residuals snaking above and below the line because the observations remember each other.
+In the chapter 24 exercise solutions (@sec-exercise-solutions-24) it was the quiet note that 62 team-match rows come in pairs — two teams per match, and opponents' performances in the same match are not fully independent of one another.
+And in @sec-chp26-review it was the book's closing confession: shots nest within matches, matches within teams — structure our independence conditions politely ignored.
+The name for all five is **dependence** — in the time-ordered case, *autocorrelation*; in the nested case, *clustering* — and this appendix does the one thing the five warnings never did: it shows you, with real numbers, exactly how much it costs to ignore.
+
+## Sixty days that remember each other {#sec-appendix-dep-ar1}
+
+Rigor first.
+The gallery panel in @sec-tech-cond-linmod described a training load that "drifts like a random walk: today's load is yesterday's plus a nudge."
+A pure random walk keeps *all* of yesterday — it wanders without a home value, so "the player's long-run mean load" does not even exist as a target.
+To study estimation we pull the memory back below one: a series that keeps *most* of yesterday but is always tugged back toward a home value.
+
+::: {.callout-important}
+A sequence of measurements $y_1, y_2, \dots, y_n$ taken in time order is a **first-order autoregressive process**, written **AR(1)**, if each day's value is built from the day before by
+
+$$
+y_t = \mu + \phi \, (y_{t-1} - \mu) + \varepsilon_t
+$$
+
+The **autocorrelation** of such a series is the correlation between the measurement on one day and the measurement on the next; for an AR(1) process it equals $\phi.$
+When $|\phi| < 1$ the series is **stationary**: it fluctuates around the long-run mean $\mu$ forever, so $\mu$ exists and can be estimated.
+When $\phi = 1$ the series is the random walk of @sec-tech-cond-linmod's gallery, and there is no long-run mean to estimate.
+:::
+
+Take the equation one piece at a time, because two pieces of notation are new.
+The subscript $t$ indexes *time*: $y_t$ is the measurement on day $t,$ and $y_{t-1}$ is the measurement the day before.
+You have subscripted observations since @sec-explore-numerical — but $x_i$'s subscript only labeled *which* case, and nothing changed if you shuffled the labels.
+Here the order is the point: day 7 follows day 6, and the model says so.
+The Greek letter $\phi$ ("phi") is the **memory coefficient**: the fraction of yesterday's deviation from the long-run mean $\mu$ (recall $\mu$ from @sec-explore-numerical) that survives into today.
+And $\varepsilon_t$ is the day's fresh nudge — the same population error term $\varepsilon$ you met in @sec-tech-cond-linmod, drawn independently each day with mean 0 and standard deviation $\sigma.$
+
+Now the constructed scenario, seeded and visible as always.
+A Northbridge midfielder's daily training load arrives from the sports-science desk as a single figure in arbitrary units (AU).
+We build him a 60-day block with a long-run mean of $\mu = 600$ AU, a memory coefficient of $\phi = 0.8$ — strong but stationary, in the neighborhood of the $0.85$ day-to-day correlation the @sec-tech-cond-linmod panel showed — and daily nudges with $\sigma = 60$ AU.
+One algebraic fact makes the code below honest: a stationary AR(1) series fluctuates around $\mu$ with long-run standard deviation $\sigma/\sqrt{1-\phi^2} = 60/\sqrt{1-0.64} = 60/0.6 = 100$ AU, so we draw day 1 from that long-run distribution rather than letting the first morning be artificially special.
+
+```r
+simulate_player <- function(n_days = 60, mu = 600, phi = 0.8, sigma = 60) {
+  load <- numeric(n_days)
+  load[1] <- mu + rnorm(1, 0, sigma / sqrt(1 - phi^2))
+  for (t in 2:n_days) {
+    load[t] <- mu + phi * (load[t - 1] - mu) + rnorm(1, 0, sigma)
+  }
+  load
+}
+
+set.seed(9001)
+load_60 <- simulate_player()
+
+round(c(mean = mean(load_60), sd = sd(load_60),
+        day_to_day_cor = cor(load_60[-1], load_60[-60])), 4)
+#>           mean             sd day_to_day_cor
+#>       604.1461       107.6054         0.8253
+```
+
+The series behaves as designed: it averages $604.1$ AU against a true $\mu$ of 600, its standard deviation of $107.6$ AU sits near the theoretical 100, and the correlation between each day and the next is $0.8253$ — each day carries about four-fifths of the day before.
+These are sixty numbers from one body, and they remember each other.
+
+## The naive standard error {#sec-appendix-dep-naive}
+
+Suppose the club's analyst — not yet a reader of this appendix — wants to report the player's 60-day mean load with its uncertainty.
+Recall from @sec-one-mean-math that the standard error of a sample mean is $SE = s/\sqrt{n}.$
+Sixty observations, standard deviation in hand:
+
+```r
+naive_se <- sd(load_60) / sqrt(60)
+round(naive_se, 4)
+#> [1] 13.8918
+```
+
+So the analyst reports $\bar{x} = 604.1$ AU with a standard error of $13.9$ AU, and — following the recipe of @sec-se — an approximate 95% interval of $604.1 \pm 1.96 \times 13.9,$ or roughly $(576.9,\ 631.4)$ AU.
+It looks impeccable.
+Every symbol is used correctly.
+And it is wrong, because $s/\sqrt{n}$ was derived under a condition this data violates in its very construction: that the $n$ observations are independent.
+
+## One thousand parallel players {#sec-appendix-dep-replicates}
+
+The standard error of $\bar{x}$ has a definition that does not care about our formulas: it is the standard deviation of $\bar{x}$ across independent replications of the whole study.
+Simulation lets us buy what reality never sells — the replications themselves.
+We generate 1,000 *independent* players, each with their own 60-day AR(1) block from the same process, and look at how much their 60-day means actually vary.
+
+```r
+set.seed(9002)
+mean_60 <- replicate(1000, mean(simulate_player()))
+
+true_sd <- sd(mean_60)
+round(c(true_sd = true_sd, naive_se = naive_se,
+        ratio = true_sd / naive_se), 4)
+#>  true_sd naive_se    ratio
+#>  38.0533  13.8918   2.7393
+```
+
+The 60-day means of genuinely independent replicate players spread with a standard deviation of $38.1$ AU.
+The naive formula said $13.9.$
+The truth is $2.74$ times larger than the report.
+
+Turn that ratio into an interval and the damage is plain: the honest 95% interval is $604.1 \pm 1.96 \times 38.1,$ roughly $(529.6,\ 678.7)$ AU — while the analyst shipped $(576.9,\ 631.4).$
+An interval built 2.7 times too narrow does not cover the truth 95% of the time; it fails far more often than its label admits, while looking exactly as authoritative on the page.
+
+Why does the formula fail?
+Because $s/\sqrt{60}$ prices the data as sixty independent pieces of evidence, and correlated days are not.
+Each new day mostly repeats what yesterday already told you, so sixty remembered days carry the information of far fewer independent ones.
+The ratio tells us how many.
+Since the standard error of a mean shrinks with $\sqrt{n},$ an error inflated by a factor of $2.74$ means the *effective* sample size is smaller by that factor squared:
+
+```r
+round(60 / (true_sd / naive_se)^2, 1)
+#> [1] 8
+```
+
+Sixty correlated days carried the information of roughly **eight independent days**.[^dep-neff]
+The analyst's $n = 60$ was a headcount, not an evidence count — the same exaggeration @sec-principles-experimental-design called pseudoreplication when it was 50 players masquerading as 500 assessments.
+
+[^dep-neff]: The seeded estimate; the algebra agrees. For a long AR(1) series the effective sample size tends to $n \times (1-\phi)/(1+\phi) = 60 \times 0.2/1.8 \approx 6.7,$ and the exact finite-length value for these settings is about 7 — either way, nowhere near 60.
+
+::: {.callout-tip title="Check your understanding"}
+The naive standard error used $n = 60.$
+Would the analyst's report have been *more* honest or *less* honest if the player's memory coefficient had been $\phi = 0.95$ instead of $0.8$?
+And in which direction does the error push every p-value computed from such data?
+
+------------------------------------------------------------------------
+
+Less honest.
+A larger $\phi$ means each day repeats more of the day before, so the same 60 rows carry even less independent information — at $\phi = 0.95$ the long-run effective sample size is about $60 \times 0.05/1.95 \approx 1.5$ days' worth — and the naive $s/\sqrt{60}$ understates the truth by an even larger factor.
+The direction of the damage is always the same: standard errors too small, intervals too narrow, and test statistics too large, so p-values come out too eager — the analysis declares differences statistically discernible on evidence that does not exist.
+:::
+
+That is the whole indictment, and it is the exact failure this book's independence conditions were guarding against every time they appeared: on remembered data, naive standard errors are too small, intervals are too narrow, and p-values are too eager.
+The GPS panel of @sec-tech-cond-linmod was not a stylistic warning about ugly residual plots; it was this appendix's arithmetic, waiting.
+
+## What the remedies are called {#sec-appendix-dep-remedies}
+
+Three families of remedy exist, in ascending order of machinery.
+
+**Aggregate to plausibly independent units.**
+Collapse the dependent rows into one number per unit that *can* be treated as independent, and analyze those.
+This is the one remedy you already own — and the book itself used the dodge repeatedly without ceremony: shots were aggregated into `team_match` totals before the regressions of @sec-model-slr and @sec-inf-model-slr, and @sec-inference-paired-means folded each team's pressured and unpressured shots into a single within-team difference precisely so that the 22 differences, one per team, could stand as the independent observations.
+Aggregation spends data to buy validity: our midfielder's 60 days collapse to one honest mean per block, and you need more players, not more days, to shrink the uncertainty.
+
+**Cluster-robust standard errors.**
+Keep the row-level model, but repair the variance estimate by letting observations within the same cluster (player, match, team) be arbitrarily correlated when computing the standard errors.
+The coefficients stay; the false precision goes.
+
+**Multilevel (hierarchical, mixed) models.**
+Put the structure into the model itself: a level for the player, a level for the match, so that each source of variation is estimated rather than ignored — this is the "player as a level" phrasing you will meet immediately in the literature, and the machinery behind @sec-chp26-review's parting sentence about shots nesting within matches and matches within teams.
+The reading path for all three families — Gelman and Hill first — is laid out in @sec-appendix-further.
+
+One closing paragraph, analyst to analyst.
+A club's data almost always remembers itself: the same player wears the vest every morning, the same eleven take the shots, the two teams in every match share its weather, its referee, and its scoreline.
+You are not yet equipped to fit multilevel models — this book never pretended otherwise — but you are fully equipped, today, for the honest move: aggregate to units you can defend as independent, state that choice in the frame sentence right next to your pens-in-or-out declaration, and price the cost in sample size openly.
+An interval on eight honest observations is worth more to Marta Vidal than an interval on sixty remembered ones, because the first one means what it says.
+
+------------------------------------------------------------------------
+
+This appendix is original to this adaptation, licensed CC BY-SA 4.0. Match data: StatsBomb open data.

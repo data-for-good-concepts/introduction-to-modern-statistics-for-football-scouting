@@ -1,0 +1,9 @@
+**2.** (a) False — both dossiers gain the same amount in *log odds* ($0.0270$ each), but the resulting probability increases differ because the dossiers start from different baselines and the logistic transformation is nonlinear. (b) True. (c) False — logistic regression requires independent observations; rebounds are shots whose existence and circumstances depend on other shots in the data. (d) False — model selection for logistic regression typically uses AIC (or p-values), not adjusted $R^2.$
+
+**4.** (a) Scoring rises steadily and steeply with chance quality: conversion climbs monotonically from 0.026 in the lowest band to 0.683 in the highest. (b) Intercept $-2.95$: the log odds of a goal for a shot with chance quality 0; slope $5.67$: each unit increase in `statsbomb_xg` raises the log odds of scoring by 5.67, an estimate with a tiny p-value ($8.7 \times 10^{-49}$). (c) $\log_e\left( \frac{\hat{p}}{1 - \hat{p}} \right) = -2.9524 + 5.6742 \times \texttt{statsbomb\_xg}.$ (d) Yes — the vendor's number is strongly and discernibly associated with scoring, so it is a justified key input.
+
+**6.** (a) $\hat{p}_{0.05} = 0.065,$ $\hat{p}_{0.10} = 0.084,$ $\hat{p}_{0.15} = 0.109.$ (b) Answers vary; key: points trace the logit curve's lower-left rise. (c) Answers vary; key: xG is model output; rebounds break independence.
+
+**8.** (a) $\log_e\left( \frac{\hat{p}}{1 - \hat{p}} \right) = -2.5032 + 0.8734 \times \texttt{video\_attached} + 0.5277 \times \texttt{nationality}_{\texttt{domestic}} - 0.2919 \times \texttt{agent\_flag}_{\texttt{agent}} - 0.3174 \times \texttt{injury\_note}.$ (b) Log odds $= -2.5032 + 0.8734 - 0.2919 = -1.9217,$ so $\hat{p} = 0.128.$ (c) Answers vary; key: false negatives lose prospects; weigh assessment costs.
+
+**10.** Answers vary; key: match criterion to costs of each error.

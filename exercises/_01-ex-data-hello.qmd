@@ -1,0 +1,589 @@
+1.  **Knockout matches at the World Cup.** The data frame below contains information on the 16 knockout-stage matches of the 2022 Men's World Cup, from the Round of 16 through the Final.
+    Scores are goals after any extra time; matches still level at that point are recorded as a `draw`, even if a penalty shoot-out followed.
+    How many observations and how many variables does this data frame have?[^_01-ex-data-hello-1]
+
+    ```r
+    wc2022_matches <- read_csv("data/derived/wc2022_matches.csv")
+
+    knockout_matches <- wc2022_matches |>
+      filter(stage != "Group Stage") |>
+      arrange(match_date) |>
+      select(match_date, stage, home_team, away_team, home_score, away_score, result)
+
+    knockout_matches
+    #> # A tibble: 16 × 7
+    #>    match_date stage           home_team   away_team home_score away_score result
+    #>    <date>     <chr>           <chr>       <chr>          <dbl>      <dbl> <chr>
+    #>  1 2022-12-03 Round of 16     Argentina   Australia          2          1 home
+    #>  2 2022-12-03 Round of 16     Netherlands United S…          3          1 home
+    #>  3 2022-12-04 Round of 16     England     Senegal            3          0 home
+    #>  4 2022-12-04 Round of 16     France      Poland             3          1 home
+    #>  5 2022-12-05 Round of 16     Japan       Croatia            1          1 draw
+    #>  6 2022-12-05 Round of 16     Brazil      South Ko…          4          1 home
+    #>  7 2022-12-06 Round of 16     Portugal    Switzerl…          6          1 home
+    #>  8 2022-12-06 Round of 16     Morocco     Spain              0          0 draw
+    #>  9 2022-12-09 Quarter-finals  Netherlands Argentina          2          2 draw
+    #> 10 2022-12-09 Quarter-finals  Croatia     Brazil             1          1 draw
+    #> 11 2022-12-10 Quarter-finals  Morocco     Portugal           1          0 home
+    #> 12 2022-12-10 Quarter-finals  England     France             1          2 away
+    #> 13 2022-12-13 Semi-finals     Argentina   Croatia            3          0 home
+    #> 14 2022-12-14 Semi-finals     France      Morocco            2          0 home
+    #> 15 2022-12-17 3rd Place Final Croatia     Morocco            2          1 home
+    #> 16 2022-12-18 Final           Argentina   France             3          3 draw
+    ```
+
+2.  **Shots at the Women's Euro.** The data frame below contains information on every shot recorded at the 2025 Women's Euro, with a selection of the recorded characteristics kept for display.
+    How many observations and how many variables does this data frame have?[^_01-ex-data-hello-2]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro2025_shots |>
+      select(player, team, minute, play_pattern, statsbomb_xg, outcome, goal)
+    #> # A tibble: 913 × 7
+    #>    player                   team  minute play_pattern statsbomb_xg outcome goal
+    #>    <chr>                    <chr>  <dbl> <chr>               <dbl> <chr>   <lgl>
+    #>  1 Alexandra Jóhannsdóttir  Icel…      0 From Throw …       0.0131 Off T   FALSE
+    #>  2 Katla Tryggvadóttir      Icel…      5 Regular Play       0.249  Saved   FALSE
+    #>  3 Sveindís Jane Jónsdóttir Icel…      5 From Counter       0.130  Blocked FALSE
+    #>  4 Alexandra Jóhannsdóttir  Icel…      5 From Corner        0.0346 Saved … FALSE
+    #>  5 Sveindís Jane Jónsdóttir Icel…      5 From Corner        0.477  Goal    TRUE
+    #>  6 Signe Gaupset            Norw…     13 Regular Play       0.0463 Blocked FALSE
+    #>  7 Signe Gaupset            Norw…     14 From Corner        0.0570 Goal    TRUE
+    #>  8 Elisabeth Terland        Norw…     22 From Throw …       0.0365 Blocked FALSE
+    #>  9 Elisabeth Terland        Norw…     23 Regular Play       0.105  Saved   FALSE
+    #> 10 Frida Maanum             Norw…     25 Regular Play       0.0321 Off T   FALSE
+    #> # ℹ 903 more rows
+    ```
+
+3.  **Training load and soft-tissue injury, study components.** Club medical researchers collected data to examine the relationship between training load and soft-tissue injuries in academy players.
+    During the study, load levels were measured by the GPS vests players wear in every session.
+    Specifically, total distance covered was recorded in kilometers, high-speed running distance in meters, the number of sprint efforts as a count, and the acute-to-chronic workload ratio as a unitless index.
+    Injury records were collected on 8,472 player-weeks across four seasons at Northbridge and its partner academies, and each player's load exposure during the preceding four weeks was calculated for each week.
+    The analysis suggested that increased high-speed running distance and, to a lesser degree, elevated acute-to-chronic workload ratios may be associated with the occurrence of soft-tissue injuries.
+
+    a.  Identify the main research question of the study.
+
+    b.  Who are the subjects in this study, and how many are included?
+
+    c.  What are the variables in the study?
+        Identify each variable as numerical or categorical.
+        If numerical, state whether the variable is discrete or continuous.
+        If categorical, state whether the variable is ordinal.
+
+4.  **Honesty in the academy, study components.** Researchers working with Jonas Beck's academy staff studied the relationship between honesty, age, and self-control by running an exercise with 160 academy players between the ages of 8 and 15.
+    Participants reported their age, sex, and whether they were an only child or not.
+    The researchers asked each player to toss a fair two-colored training marker (one side white, one side black) in private and to record the side that landed up on a paper sheet, and said they would only reward players who report white -- with extra minutes in Friday's small-sided games.
+
+    a.  Identify the main research question of the study.
+
+    b.  Who are the subjects in this study, and how many are included?
+
+    c.  The study's findings can be summarized as follows: *"Half the players were explicitly told not to cheat and the others were not given any explicit instructions. In the no instruction group the probability of cheating was found to be uniform across groups based on the player's characteristics. In the group that was explicitly told to not cheat, girls were less likely to cheat, and while the rate of cheating did not vary by age for boys, it decreased with age for girls."* How many variables were recorded for each subject in the study in order to conclude these findings?
+        State the variables and their types.
+
+5.  **Gamified tactics course, study components.** Gamification is the application of game-design elements and game principles in non-game contexts.
+    In player development, gamification is often implemented as competitive app-based activities for learning tactical concepts.
+    Researchers investigating the effects of gamification on learning conducted a study where they split the academy players enrolled in the club's tactics course into four groups: (1) no video-review exercises and no gamification, (2) video-review exercises but no gamification, (3) gamification but no video-review exercises, and (4) gamification and video-review exercises.
+    Players in all groups also attended classroom sessions.
+    Players in the course came from two programs: Outfield Development (279 players) and Goalkeeping (86 players).
+    After their assigned learning experience, each player took a final evaluation comprised of 30 multiple choice questions and their score was measured as the number of questions they answered correctly.
+    The researchers considered players' gender, year in the academy (first through fourth year), and program.
+    Other variables considered were familiarity with video-analysis software and use of football video games, both of which were measured on a scale of 1 (beginner) to 5 (proficient).
+    The study found that gamification had a positive effect on learning compared to traditional instruction involving classroom sessions and video-review exercises.
+    They also found that the effect was larger for female players and for players in the Outfield Development program.
+
+    a.  Identify the main research question of the study.
+
+    b.  Who were the subjects in this study, and how many were included?
+
+    c.  What are the variables in the study?
+        Identify each variable as numerical or categorical.
+        If numerical, state whether the variable is discrete or continuous.
+        If categorical, state whether the variable is ordinal.
+
+6.  **Snack takers, study components.** In a study of the relationship between perceived status and unethical behavior, 129 trialists at a Northbridge residential trial camp were asked to identify themselves as having low or high standing by comparing themselves to peers with the most (least) senior appearances, most (least) social-media following, and most (least) prestigious previous club.
+    They were also presented with a jar of individually wrapped recovery snacks and informed that the snacks were for the under-12 group training nearby, but that they could take some if they wanted.
+    After completing some unrelated drills, participants reported the number of snacks they had taken.
+
+    a.  Identify the main research question of the study.
+
+    b.  Who were the subjects in this study, and how many were included?
+
+    c.  The study found that trialists who identified as high-standing took more snacks than others.
+        How many variables were recorded for each subject in the study in order to conclude these findings?
+        State the variables and their types.
+
+7.  **Hamstring tightness and dry needling.** Recurring hamstring tightness is a persistent complaint in heavy fixture periods, and some players ask the medical staff for dry needling to treat it.
+    To determine whether dry needling relieves the tightness, medical staff at Northbridge and two partner clubs ran a randomized controlled study where 89 players who reported recurring hamstring tightness were randomly assigned to one of two groups: treatment or control.
+    Forty-three (43) players in the treatment group received dry needling specifically targeted at the affected muscle group.
+    Forty-six (46) players in the control group received sham needling (needle insertion at non-therapeutic sites).
+    Twenty-four (24) hours after their session, players were asked if they were symptom free.
+    This is a constructed scenario, built by the code below; the results are summarized in the contingency table.[^_01-ex-data-hello-3]
+
+    ```r
+    needle89 <- tibble(
+      group = c(rep("dry needling", 43), rep("sham needling", 46)),
+      symptom_free = c(rep("yes", 10), rep("no", 33),
+                       rep("yes", 2), rep("no", 44))
+    )
+
+    needle89 |>
+      count(group, symptom_free) |>
+      pivot_wider(names_from = symptom_free, values_from = n)
+    #> # A tibble: 2 × 3
+    #>   group            no   yes
+    #>   <chr>         <int> <int>
+    #> 1 dry needling     33    10
+    #> 2 sham needling    44     2
+    ```
+
+    |               | yes | no  | Total |
+    |:--------------|----:|----:|------:|
+    | dry needling  |  10 |  33 |    43 |
+    | sham needling |   2 |  44 |    46 |
+    | Total         |  12 |  77 |    89 |
+
+    a.  What percent of players in the treatment group were symptom free 24 hours after receiving dry needling?
+
+    b.  What percent were symptom free in the control group?
+
+    c.  In which group did a higher percent of players become symptom free 24 hours after the session?
+
+    d.  Your findings so far might suggest that dry needling is an effective treatment for hamstring tightness for all players who suffer from it.
+        However this is not the only possible conclusion.
+        What is one other possible explanation for the observed difference between the percentages of players that are symptom free 24 hours after the session in the two groups?
+
+    e.  What are the explanatory and response variables in this study?
+
+8.  **Muscle soreness and structured recovery.** Club researchers studying the effect of a structured recovery program for acute post-match muscle soreness compared to standard symptomatic care randomly assigned 166 players reporting acute soreness during a congested fixture period to one of two groups: treatment or control.
+    Study participants received either a 10-day structured recovery program (daily physio-led cold-water immersion, compression, and mobility sessions) or standard care similar in daily contact time.
+    The standard care consisted of symptomatic treatments such as rest, ice, and over-the-counter anti-inflammatories as needed.
+    At the end of the 10-day period, players were asked if they experienced improvement in symptoms.
+    This is a constructed scenario, built by the code below, which also summarizes the distribution of responses.[^_01-ex-data-hello-4]
+
+    ```r
+    soreness166 <- tibble(
+      group = c(rep("structured recovery", 85), rep("standard care", 81)),
+      improvement = c(rep("yes", 66), rep("no", 19),
+                      rep("yes", 65), rep("no", 16))
+    )
+
+    soreness166 |>
+      count(group, improvement) |>
+      pivot_wider(names_from = improvement, values_from = n)
+    #> # A tibble: 2 × 3
+    #>   group                  no   yes
+    #>   <chr>               <int> <int>
+    #> 1 standard care          16    65
+    #> 2 structured recovery    19    66
+    ```
+
+    a.  What percent of players in the treatment group experienced improvement in symptoms?
+
+    b.  What percent experienced improvement in symptoms in the control group?
+
+    c.  In which group did a higher percentage of players experience improvement in symptoms?
+
+    d.  Your findings so far might suggest a real difference in the effectiveness of the structured program and standard care for improving symptoms of muscle soreness.
+        However this is not the only possible conclusion.
+        What is one other possible explanation for the observed difference between the percentages of players who experienced improvement in symptoms?
+
+    e.  What are the explanatory and response variables in this study?
+
+9.  **Late-arrival fines, study components.** Priya Rao tested the deterrence hypothesis, which predicts that the introduction of a penalty will reduce the occurrence of the behavior subject to the fine, with the condition that the fine leaves everything else unchanged, by instituting a fine for arriving late to training.
+    For this study, she worked with 10 volunteer academy age-group squads, at Northbridge and its partner academies, that did not originally fine players for late arrival.
+    She randomly selected 6 of these squads and instituted a monetary fine (of a considerable amount) for arriving late to training and then removed it.
+    In the remaining 4 squads no fine was introduced.
+    The study period was divided into four: before the fine (weeks 1--4), the first 4 weeks with the fine (weeks 5--8), the last 8 weeks with the fine (weeks 9--16), and the after-fine period (weeks 17--20).
+    Throughout the study, the number of players who arrived late was recorded each week for each squad.
+    The study found that the number of late arrivals increased discernibly when the fine was introduced, and no reduction occurred after the fine was removed.
+    This is a constructed scenario, generated by the seeded code below.[^_01-ex-data-hello-5]
+
+    ```r
+    set.seed(105)
+    fine_squads <- sample(1:10, 6)
+
+    late_fines <- crossing(squad = 1:10, week = 1:20) |>
+      mutate(
+        group = if_else(squad %in% fine_squads, "fine", "control"),
+        study_period = case_when(
+          week <= 4  ~ "before fine",
+          week <= 8  ~ "first 4 weeks with fine",
+          week <= 16 ~ "last 8 weeks with fine",
+          .default   = "after fine"
+        ),
+        late_arrivals = rpois(200, lambda = if_else(group == "fine" & week > 4, 3.6, 2))
+      ) |>
+      select(squad, week, group, late_arrivals, study_period)
+
+    late_fines
+    #> # A tibble: 200 × 5
+    #>    squad  week group late_arrivals study_period
+    #>    <int> <int> <chr>         <int> <chr>
+    #>  1     1     1 fine              3 before fine
+    #>  2     1     2 fine              2 before fine
+    #>  3     1     3 fine              0 before fine
+    #>  4     1     4 fine              2 before fine
+    #>  5     1     5 fine              6 first 4 weeks with fine
+    #>  6     1     6 fine              4 first 4 weeks with fine
+    #>  7     1     7 fine              6 first 4 weeks with fine
+    #>  8     1     8 fine              2 first 4 weeks with fine
+    #>  9     1     9 fine              5 last 8 weeks with fine
+    #> 10     1    10 fine              4 last 8 weeks with fine
+    #> # ℹ 190 more rows
+    ```
+
+    a.  Is this an observational study or an experiment?
+        Explain your reasoning.
+
+    b.  What are the cases in this study and how many are included?
+
+    c.  What is the response variable in the study and what type of variable is it?
+
+    d.  What are the explanatory variables in the study and what types of variables are they?
+
+10. **Efficacy of an injury-prevention warm-up, study components.** Results of a season-long trial across Northbridge's partner academies show that a neuromuscular injury-prevention warm-up demonstrated a striking protective effect on 12-to-15-year-old academy players.
+    In this trial, 2,260 players were randomly assigned to two groups: one group of 1,131 players performed the new warm-up before every session and the other 1,129 continued with the standard warm-up.
+    While 18 serious knee injuries were observed in the standard warm-up group, none were observed in the new warm-up group.
+    This is a constructed scenario, built by the code below.[^_01-ex-data-hello-6]
+
+    ```r
+    warmup_trial <- tibble(
+      group = c(rep("new warm-up", 1131), rep("standard warm-up", 1129)),
+      knee_injury = c(rep("no injury", 1131),
+                      rep("serious injury", 18), rep("no injury", 1111))
+    )
+
+    warmup_trial |>
+      count(group, knee_injury) |>
+      pivot_wider(names_from = knee_injury, values_from = n, values_fill = 0)
+    #> # A tibble: 2 × 3
+    #>   group            `no injury` `serious injury`
+    #>   <chr>                  <int>            <int>
+    #> 1 new warm-up             1131                0
+    #> 2 standard warm-up        1111               18
+    ```
+
+    a.  Is this an observational study or an experiment?
+        Explain your reasoning.
+
+    b.  What are the cases in this study and how many are included?
+
+    c.  What is the response variable in the study and what type of variable is it?
+
+    d.  What are the explanatory variables in the study and what types of variables are they?
+
+11. **Trial-camp measurements.** Data were collected on 344 trialists attending Northbridge's three regional trial camps (Eastfield, Millbrook, and Southgate).
+    In addition to which camp each trialist attended, the data contain information on the trialist's position group (*Defender*, *Midfielder*, or *Forward*), their 30-meter sprint time (measured in seconds), their countermovement jump height and standing height (measured in centimeters), their body mass (measured in kilograms), and their dominant foot (left or right).
+
+    a.  How many cases were included in the data?
+    b.  How many numerical variables are included in the data? Indicate what they are, and if they are continuous or discrete.
+    c.  How many categorical variables are included in the data, and what are they? List the corresponding levels (categories) for each.
+
+12. **Away-travel habits of Northbridge supporters.** A survey was conducted to study the away-travel habits of 1,691 Northbridge season-ticket holders.
+    Below is a data frame displaying a portion of the data collected in this survey.
+    An `NA` indicates that a question did not apply to a given respondent: supporters who do not travel to away matches were not asked how many away matches they attend.
+    No such survey was actually run -- the data are a constructed scenario, generated by the seeded code below.[^_01-ex-data-hello-7]
+
+    ```r
+    set.seed(106)
+    fan_survey <- tibble(
+      sex = sample(c("Female", "Male"), 1691, replace = TRUE),
+      age = sample(16:85, 1691, replace = TRUE),
+      ticket_tier = sample(c("Bronze", "Silver", "Gold"), 1691,
+                           replace = TRUE, prob = c(0.5, 0.3, 0.2)),
+      income_band = sample(c("Under €20K", "€20K-40K", "€40K-60K", "Over €60K"),
+                           1691, replace = TRUE, prob = c(0.3, 0.35, 0.2, 0.15)),
+      away_travel = sample(c("Yes", "No"), 1691, replace = TRUE, prob = c(0.35, 0.65)),
+      league_aways = if_else(away_travel == "Yes", rpois(1691, 6), NA_integer_),
+      cup_aways = if_else(away_travel == "Yes", rpois(1691, 2), NA_integer_)
+    )
+
+    fan_survey
+    #> # A tibble: 1,691 × 7
+    #>    sex      age ticket_tier income_band away_travel league_aways cup_aways
+    #>    <chr>  <int> <chr>       <chr>       <chr>              <int>     <int>
+    #>  1 Female    73 Silver      €20K-40K    No                    NA        NA
+    #>  2 Male      80 Bronze      €40K-60K    No                    NA        NA
+    #>  3 Male      82 Silver      €20K-40K    No                    NA        NA
+    #>  4 Male      78 Gold        €20K-40K    Yes                    6         5
+    #>  5 Male      85 Gold        €20K-40K    Yes                    9         1
+    #>  6 Male      51 Gold        €20K-40K    Yes                    7         3
+    #>  7 Female    69 Bronze      Under €20K  No                    NA        NA
+    #>  8 Male      18 Bronze      €40K-60K    No                    NA        NA
+    #>  9 Male      48 Bronze      €40K-60K    No                    NA        NA
+    #> 10 Female    82 Bronze      €20K-40K    No                    NA        NA
+    #> # ℹ 1,681 more rows
+    ```
+
+    a.  What does each row of the data frame represent?
+
+    b.  How many participants were included in the survey?
+
+    c.  Indicate whether each variable is numerical or categorical.
+        If numerical, identify as continuous or discrete.
+        If categorical, indicate if the variable is ordinal.
+
+13. **Every shot at the World Cup.** The visualization built by the code below shows the chance quality of all 1,494 shots at the 2022 Men's World Cup across the match minutes in which they were taken.
+    This visualization was constructed based on a dataset where each observation is a shot.[^_01-ex-data-hello-8]
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    ggplot(wc2022_shots, aes(x = minute, y = statsbomb_xg, color = play_pattern)) +
+      geom_point(alpha = 0.3, size = 0.8) +
+      facet_grid(under_pressure ~ first_time, labeller = label_both) +
+      labs(
+        x = "Match minute", y = "Chance quality (statsbomb_xg)",
+        color = "Play pattern"
+      )
+    ```
+
+    The figure contains four panels, splitting the shots by whether the shooter was under pressure (rows) and whether the shot was struck first time (columns), with points colored by play pattern.
+    Every panel shows a dense band of low-quality chances -- about 87% of all shots carry a chance quality below 0.25 -- with rarer high-quality chances scattered above, spread across the full sweep of match minutes from 0 to 127.
+    A thin horizontal stripe of penalties, all at a chance quality of exactly 0.7835, appears only in the not-under-pressure, not-first-time panel, which is also by far the busiest panel, holding 825 of the 1,494 shots; the under-pressure, first-time panel is the sparsest, with 37.
+
+    a.  List the variables you believe were necessary to create this visualization.
+
+    b.  Indicate whether each variable is numerical or categorical.
+        If numerical, identify as continuous or discrete.
+        If categorical, indicate if the variable is ordinal.
+
+14. **Shot patterns of three contenders.** The visualization built by the code below shows how Argentina, France, and Morocco generated their shots across their seven matches each at the 2022 Men's World Cup.
+    Specifically, for a given match, it displays the percentage of the team's shots in that match arising from each family of play patterns, grouped by how the possession started: open play, counter, possessions starting from a restart (a corner, free kick, throw-in, goal kick, keeper distribution, or kick-off — labeled `set piece / restart` in the code), and other.
+    Note that `play_pattern` records the start of the possession, not the action that created the shot: a chance twenty passes after a throw-in still counts toward the restart family.
+    This visualization was constructed based on a dataset where each observation is a team/match pair.[^_01-ex-data-hello-9]
+
+    ```r
+    wc2022_shots |>
+      filter(team %in% c("Argentina", "France", "Morocco")) |>
+      mutate(family = case_when(
+        play_pattern == "Regular Play" ~ "open play",
+        play_pattern == "From Counter" ~ "counter",
+        play_pattern == "Other"        ~ "other",
+        .default = "set piece / restart"
+      )) |>
+      group_by(team) |>
+      arrange(match_date) |>
+      mutate(match_number = dense_rank(match_date)) |>
+      count(team, match_number, family) |>
+      group_by(team, match_number) |>
+      mutate(percent_of_shots = n / sum(n)) |>
+      ggplot(aes(x = match_number, y = percent_of_shots, color = team)) +
+      geom_point(alpha = 0.5) +
+      geom_line() +
+      facet_wrap(~family) +
+      labs(x = "Match number", y = "% of the team's shots", color = "Team")
+    ```
+
+    The figure shows one panel per play-pattern family, with a colored line per team tracking that family's share of the team's shots across its seven matches.
+    The lines swing sharply from match to match, and in most of the 21 team-matches the family of possessions starting from a restart accounts for the largest share of the team's shots.
+
+    a.  List the variables used in creating this visualization.
+
+    b.  Indicate whether each variable is numerical or categorical.
+        If numerical, identify as continuous or discrete.
+        If categorical, indicate if the variable is ordinal.
+
+15. **Goals by matchday.** The visualization built by the code below shows the number of goals scored on each matchday of the 2022 Men's World Cup and the 2025 Women's Euro, with matchdays numbered from each tournament's first day of play.[^_01-ex-data-hello-10]
+
+    ```r
+    wc2022_matches    <- read_csv("data/derived/wc2022_matches.csv")
+    weuro2025_matches <- read_csv("data/derived/weuro2025_matches.csv")
+
+    bind_rows(wc2022_matches, weuro2025_matches) |>
+      group_by(competition) |>
+      arrange(match_date, .by_group = TRUE) |>
+      mutate(matchday = dense_rank(match_date)) |>
+      group_by(competition, matchday) |>
+      summarize(goals = sum(home_score + away_score)) |>
+      ggplot(aes(x = matchday, y = goals, group = competition,
+                 color = competition, linetype = competition)) +
+      geom_line() +
+      geom_point() +
+      labs(
+        title = "Goals scored on each matchday",
+        x = "Matchday", y = "Number of goals",
+        color = "Competition", linetype = "Competition"
+      )
+    ```
+
+    The World Cup line runs across 23 matchdays and the Women's Euro line across 19.
+    Both peak at 14 goals in a single day (matchday 9 and matchday 12, respectively), and both drop to quieter days late in the tournament, when only one knockout match is played at a time.
+
+    a.  List the variables you believe were necessary to create this visualization.
+
+    b.  Indicate whether each variable is numerical or categorical.
+        If numerical, identify as continuous or discrete.
+        If categorical, indicate if the variable is ordinal.
+
+16. **Shot outcomes by stage.** The visualization built by the code below shows the distribution of shot outcomes at the 2022 Men's World Cup and the 2025 Women's Euro based on the tournament stage the shot was taken in.
+    In the dataset, each observation is a shot.[^_01-ex-data-hello-11]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    bind_rows(wc2022_shots, weuro2025_shots) |>
+      mutate(
+        stage = fct_relevel(stage, "Group Stage", "Round of 16", "Quarter-finals",
+                            "Semi-finals", "3rd Place Final", "Final"),
+        outcome = fct_relevel(outcome, "Goal", "Saved", "Saved to Post",
+                              "Saved Off Target", "Post", "Blocked", "Off T", "Wayward")
+      ) |>
+      ggplot(aes(x = stage, fill = outcome)) +
+      geom_bar(position = "fill") +
+      facet_wrap(~competition, ncol = 1) +
+      labs(x = "Tournament stage", y = "Proportion", fill = "Shot outcome")
+    ```
+
+    The figure shows one standardized stacked bar per tournament stage, with one panel per competition; the Women's Euro had no Round of 16 and no 3rd Place Final, so those slots are empty in its panel.
+    In every stage of both competitions the *Blocked*, *Off T*, and *Saved* segments take up most of each bar, and the *Goal* segment is thinnest in the semi-finals of both competitions.
+
+    a.  List the variables you believe were necessary to create this visualization.
+
+    b.  Indicate whether each variable is numerical or categorical.
+        If numerical, identify as continuous or discrete.
+        If categorical, indicate if the variable is ordinal.
+
+17. **Scouting summary table.** Ahead of a recruitment meeting, Priya Rao circulates a summary of how teams of interest created and finished their chances at the 2022 Men's World Cup.
+    The following is an excerpt from that summary table, created from the shot-level tournament data for two teams the club tracked closely; a shot is *on target* if its outcome was a goal or a save.
+    Shots with body part `Other` (4 shots for these two teams) are excluded.[^_01-ex-data-hello-12]
+
+    ```r
+    wc2022_shots |>
+      filter(team %in% c("Argentina", "Morocco"), body_part != "Other") |>
+      mutate(on_target = outcome %in% c("Goal", "Saved", "Saved to Post", "Saved Off Target")) |>
+      group_by(team, body_part) |>
+      summarize(
+        shots = n(),
+        on_target_rate = round(mean(on_target), 3),
+        conversion = round(mean(goal), 3)
+      )
+    #> # A tibble: 6 × 5
+    #> # Groups:   team [2]
+    #>   team      body_part  shots on_target_rate conversion
+    #>   <chr>     <chr>      <int>          <dbl>      <dbl>
+    #> 1 Argentina Head          10          0.3        0
+    #> 2 Argentina Left Foot     47          0.574      0.213
+    #> 3 Argentina Right Foot    51          0.471      0.255
+    #> 4 Morocco   Head          11          0.273      0.182
+    #> 5 Morocco   Left Foot     22          0.318      0.091
+    #> 6 Morocco   Right Foot    31          0.355      0.129
+    ```
+
+    The table is an all-shots view: Argentina's footed rows include their penalty and shoot-out kicks (12 scored from 14), which lift the footed conversion rates well above their open-play levels — a frame choice worth flagging, as @sec-data-applications will teach.
+
+    a.  What variables were recorded on each individual shot in order to create the summary table above?
+
+    b.  State whether each variable is numerical or categorical.
+        If numerical, state whether it is continuous or discrete.
+        If categorical, state whether it is ordinal or not.
+
+    c.  Suppose we wanted to evaluate whether conversion rates are different for shots taken with different body parts.
+        In this analysis, which variable would be the response variable and which variable would be the explanatory variable?
+
+18. **Shots by body part across two tournaments.** The following summary table shows the number of shots at the 2022 Men's World Cup and the 2025 Women's Euro by the body part used and the outcome of the shot (goal or no goal).
+    Shots with body part `Other` (13 at the World Cup, 4 at the Women's Euro) are excluded.[^_01-ex-data-hello-13]
+
+    ```r
+    bind_rows(wc2022_shots, weuro2025_shots) |>
+      filter(body_part != "Other") |>
+      mutate(result = if_else(goal, "goal", "no goal")) |>
+      count(competition, body_part, result) |>
+      pivot_wider(names_from = c(competition, result), values_from = n)
+    #> # A tibble: 3 × 5
+    #>   body_part  wc2022_goal `wc2022_no goal` weuro2025_goal `weuro2025_no goal`
+    #>   <chr>            <int>            <int>          <int>               <int>
+    #> 1 Head                28              224             17                 134
+    #> 2 Left Foot           62              387             30                 226
+    #> 3 Right Foot         102              678             76                 426
+    ```
+
+    |            | WC 2022: goal | WC 2022: no goal | WEuro 2025: goal | WEuro 2025: no goal |
+    |:-----------|--------------:|-----------------:|-----------------:|--------------------:|
+    | Head       |            28 |              224 |               17 |                 134 |
+    | Left Foot  |            62 |              387 |               30 |                 226 |
+    | Right Foot |           102 |              678 |               76 |                 426 |
+
+    a.  What variables were collected on each shot in order to create the summary table above?
+
+    b.  State whether each variable is numerical or categorical.
+        If numerical, state whether it is continuous or discrete.
+        If categorical, state whether it is ordinal or not.
+
+    c.  Suppose we wanted to study how the conversion rate of shots varies between body parts and across the two competitions.
+        In this analysis, which variable would be the response variable and which variables would be the explanatory variables?
+
+19. **Positions in the shot diet.** Both tournament datasets record the position of the player taking each shot.
+    The visualization built by the code below plots, for each position, the proportion of all 2022 Men's World Cup shots taken from that position versus the proportion of all 2025 Women's Euro shots taken from the same position.
+    The 19 positions with at least 10 shots in each competition are displayed.
+    The diagonal line on the plot is the $x = y$ line; if a position appeared on this line, it would account for exactly the same share of the shot diet in both competitions.[^_01-ex-data-hello-14]
+
+    ```r
+    wc_props <- wc2022_shots |>
+      count(position, name = "wc_n") |>
+      mutate(wc2022_prop = wc_n / sum(wc_n))
+
+    weuro_props <- weuro2025_shots |>
+      count(position, name = "we_n") |>
+      mutate(weuro2025_prop = we_n / sum(we_n))
+
+    inner_join(wc_props, weuro_props, by = "position") |>
+      filter(wc_n >= 10, we_n >= 10) |>
+      ggplot(aes(x = wc2022_prop, y = weuro2025_prop)) +
+      geom_abline(intercept = 0, slope = 1, color = "gray") +
+      geom_point() +
+      geom_text(aes(label = position), vjust = -0.6, size = 3) +
+      labs(
+        x = "Proportion of 2022 World Cup shots",
+        y = "Proportion of 2025 Women's Euro shots"
+      )
+    ```
+
+    In the figure, Center Forward sits alone in the far upper right, at roughly (0.157, 0.157), almost exactly on the diagonal, with Left Wing next furthest out and just below the line.
+    Three central-midfield positions -- Right Center Midfield (0.035, 0.068), Left Center Midfield (0.031, 0.061), and Center Defensive Midfield (0.016, 0.037) -- float clearly above the line, while Right Wing (0.103, 0.083) and the Left and Right Defensive Midfield roles sit clearly below it.
+    The remaining points hug the diagonal, sweeping up and to the right together.
+
+    a.  Are these data collected as part of an experiment or an observational study?
+
+    b.  Which position accounts for the largest share of shots in each competition?
+
+    c.  Which positions account for a clearly larger share of the shot diet at the Women's Euro than at the World Cup?
+
+    d.  Is the relationship between the two variables positive or negative?
+        What does this mean in context of the data?
+
+20. **Pressure in the shoot-out.** In a study evaluating the relationship between acute stress and penalty-kick performance, half of Northbridge's academy players are randomly assigned to take their kicks in a simulated hostile environment -- recorded crowd noise at full volume through the stadium loudspeakers, cameras on the goal, and first-team staff watching from the touchline -- and the other half take their kicks on a quiet training pitch at no or baseline stress.
+
+    a.  What type of study is this?
+
+    b.  Can this study be used to conclude a causal relationship between increased stress and penalty-kick performance?
+
+[^_01-ex-data-hello-1]: The 2022 World Cup match data used in this exercise are in `data/derived/wc2022_matches.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-3]: The `needle89` data are a constructed scouting-adjacent scenario, generated entirely by the code shown; no real players were needled.
+
+[^_01-ex-data-hello-4]: The `soreness166` data are a constructed scenario, generated entirely by the code shown; no real players were treated.
+
+[^_01-ex-data-hello-5]: The `late_fines` data are a constructed scenario, generated entirely by the seeded code shown; no real academy squads were fined.
+
+[^_01-ex-data-hello-6]: The `warmup_trial` data are a constructed scenario, generated entirely by the code shown; no real players were injured.
+
+[^_01-ex-data-hello-7]: The `fan_survey` data are a constructed scenario, generated entirely by the seeded code shown; no real supporters were surveyed.
+
+[^_01-ex-data-hello-8]: The 2022 World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-9]: The 2022 World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-10]: The match data used in this exercise are in `data/derived/wc2022_matches.csv` and `data/derived/weuro2025_matches.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-11]: The shot data used in this exercise are in `data/derived/wc2022_shots.csv` and `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-12]: The 2022 World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-13]: The shot data used in this exercise are in `data/derived/wc2022_shots.csv` and `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_01-ex-data-hello-14]: The shot data used in this exercise are in `data/derived/wc2022_shots.csv` and `data/derived/weuro2025_shots.csv` (StatsBomb open data).

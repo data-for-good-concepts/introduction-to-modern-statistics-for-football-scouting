@@ -1,0 +1,421 @@
+1.  **True / False.** Determine which of the following statements are true and false.
+    For each statement that is false, explain why it is false.
+
+    a.  In logistic regression we fit a line to model the relationship between the predictor(s) — say, the attributes listed on a prospect dossier — and the binary outcome, e.g., shortlisted or not shortlisted.
+
+    b.  In logistic regression, we expect the residuals to be evenly scattered on either side of zero, just like with linear regression.
+
+    c.  In logistic regression, the outcome variable is binary (e.g., goal or no goal), but the predictor variable(s) can be either binary or continuous.
+
+2.  **Logistic regression fact checking.** Determine which of the following statements are true and false.
+    For each statement that is false, explain why it is false.
+
+    a.  Suppose two audit dossiers are scored by the reduced model of @sec-model-logistic, which estimated a coefficient of $0.0270$ for `years_senior`.
+        Dossier 1 lists 6 seasons of senior football, dossier 2 lists 4 seasons, and the two dossiers are identical on every other attribute.
+        Suppose we realized the seasons were mistranscribed for these two dossiers, and dossier 1 should actually list $7$ seasons (instead of 6) and dossier 2 should actually list $5$ seasons (instead of 4).
+        Then the predicted probability of a shortlist from the logistic regression model would increase the same amount for each dossier after we correct these variables.
+
+    b.  When using a logistic regression model, it is impossible for the model to predict a probability that is negative or a probability that is greater than 1.
+
+    c.  Because logistic regression predicts probabilities of outcomes, observations used to build a logistic regression model need not be independent — for example, a goal model would be unaffected by some shots in the data being rebounds of other shots in the data.
+
+    d.  When fitting logistic regression, we typically complete model selection using adjusted $R^2$.
+
+3.  **Predicting goals, comparing models.** In @sec-chp9-observational we modelled the probability that a shot at the 2022 Men's World Cup becomes a goal, using the circumstances of each of the tournament's 1,494 shots.
+    Recall the caution given there: nobody randomly assigns defenders, techniques, or body parts to shots, so these are observational data, and every model in this exercise describes association in one tournament — not causation.[^_09-ex-model-logistic-1]
+    The code below rebuilds the modelling data exactly as in the chapter, then counts each shot's body part and (collapsed) technique, splitting each count by outcome.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc_shots_model <- wc2022_shots |>
+      mutate(
+        technique_grp = if_else(
+          technique %in% c("Normal", "Half Volley", "Volley"),
+          technique,
+          "Other"
+        ),
+        technique_grp = relevel(factor(technique_grp), ref = "Normal"),
+        body_part = relevel(factor(body_part), ref = "Right Foot")
+      )
+
+    wc_shots_model |>
+      count(body_part, goal) |>
+      pivot_wider(names_from = goal, values_from = n)
+    #> # A tibble: 4 × 3
+    #>   body_part  `FALSE` `TRUE`
+    #>   <fct>        <int>  <int>
+    #> 1 Right Foot     678    102
+    #> 2 Head           224     28
+    #> 3 Left Foot      387     62
+    #> 4 Other           10      3
+
+    wc_shots_model |>
+      count(technique_grp, goal) |>
+      pivot_wider(names_from = goal, values_from = n)
+    #> # A tibble: 4 × 3
+    #>   technique_grp `FALSE` `TRUE`
+    #>   <fct>           <int>  <int>
+    #> 1 Normal            998    153
+    #> 2 Half Volley       190     22
+    #> 3 Other              33      6
+    #> 4 Volley             78     14
+    ```
+
+    We use logistic regression to model whether each shot is scored.
+    The full model from the chapter and a reduced model with `technique_grp` removed are summarized below.
+
+    ```r
+    goal_full <- glm(
+      goal ~ body_part + technique_grp + under_pressure + one_on_one +
+        first_time,
+      data = wc_shots_model, family = binomial
+    )
+    tidy(goal_full)
+    #> # A tibble: 10 × 5
+    #>    term                     estimate std.error statistic  p.value
+    #>    <chr>                       <dbl>     <dbl>     <dbl>    <dbl>
+    #>  1 (Intercept)               -2.01       0.138  -14.6    3.44e-48
+    #>  2 body_partHead             -0.0177     0.260   -0.0679 9.46e- 1
+    #>  3 body_partLeft Foot         0.115      0.175    0.661  5.09e- 1
+    #>  4 body_partOther             0.557      0.682    0.817  4.14e- 1
+    #>  5 technique_grpHalf Volley  -0.486      0.256   -1.90   5.71e- 2
+    #>  6 technique_grpOther        -0.0115     0.463   -0.0248 9.80e- 1
+    #>  7 technique_grpVolley       -0.0959     0.324   -0.296  7.67e- 1
+    #>  8 under_pressureTRUE        -0.271      0.252   -1.07   2.83e- 1
+    #>  9 one_on_oneTRUE             0.680      0.298    2.28   2.24e- 2
+    #> 10 first_timeTRUE             0.410      0.189    2.17   2.97e- 2
+
+    goal_red <- glm(
+      goal ~ body_part + under_pressure + one_on_one + first_time,
+      data = wc_shots_model, family = binomial
+    )
+    tidy(goal_red)
+    #> # A tibble: 7 × 5
+    #>   term               estimate std.error statistic  p.value
+    #>   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
+    #> 1 (Intercept)         -2.05       0.137  -15.0    1.29e-50
+    #> 2 body_partHead        0.0232     0.258    0.0900 9.28e- 1
+    #> 3 body_partLeft Foot   0.0996     0.174    0.572  5.67e- 1
+    #> 4 body_partOther       0.616      0.680    0.905  3.65e- 1
+    #> 5 under_pressureTRUE  -0.274      0.252   -1.09   2.78e- 1
+    #> 6 one_on_oneTRUE       0.640      0.294    2.18   2.93e- 2
+    #> 7 first_timeTRUE       0.308      0.173    1.78   7.51e- 2
+    ```
+
+    a.  Examine the two count tables above.
+        Are there any categories of the predictors that are likely to have a very large influence on the logistic regression model, the way a single extreme outlier can dominate a linear regression fit?
+
+    b.  Two models are provided above for predicting whether a shot is scored.
+        (In @sec-inf-model-logistic we will cover a method for deciding between the models based on p-values.) The first model includes `technique_grp` and the second model does not.
+        Explain why the remaining estimates (model coefficients) change between the two models — compare, in particular, the estimate for `first_time`.
+
+4.  **Chance quality and model building.** Every shot map stapled to a dossier at Northbridge's triage desk is annotated with the vendor's chance-quality number, `statsbomb_xg`.
+    Before the desk leans on those annotations, Priya Rao asks a basic question of the data: does the vendor's number actually predict scoring?
+    The code below groups the 1,494 shots of the 2022 Men's World Cup into six chance-quality bands and records how often the shots in each band were scored.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc2022_shots |>
+      mutate(xg_band = cut(statsbomb_xg,
+                           breaks = c(0, 0.05, 0.10, 0.20, 0.40, 0.60, 1),
+                           labels = c("0-0.05", "0.05-0.10", "0.10-0.20",
+                                      "0.20-0.40", "0.40-0.60", "0.60-1"),
+                           include.lowest = TRUE)) |>
+      group_by(xg_band) |>
+      summarize(shots = n(), goals = sum(goal), prop_goal = round(mean(goal), 3))
+    #> # A tibble: 6 × 4
+    #>   xg_band   shots goals prop_goal
+    #>   <fct>     <int> <int>     <dbl>
+    #> 1 0-0.05      684    18     0.026
+    #> 2 0.05-0.10   371    27     0.073
+    #> 3 0.10-0.20   193    36     0.187
+    #> 4 0.20-0.40   123    32     0.26
+    #> 5 0.40-0.60    41    26     0.634
+    #> 6 0.60-1       82    56     0.683
+    ```
+
+    A logistic regression model was then fit to the individual shots, where `goal` is coded 1 for a scored shot and 0 otherwise:
+
+    ```r
+    xg_fit <- glm(goal ~ statsbomb_xg, data = wc2022_shots, family = binomial)
+    tidy(xg_fit)
+    #> # A tibble: 2 × 5
+    #>   term         estimate std.error statistic   p.value
+    #>   <chr>           <dbl>     <dbl>     <dbl>     <dbl>
+    #> 1 (Intercept)     -2.95     0.121     -24.4 2.53e-131
+    #> 2 statsbomb_xg     5.67     0.387      14.7 8.70e- 49
+
+    round(coef(xg_fit), 4)
+    #>  (Intercept) statsbomb_xg
+    #>      -2.9524       5.6742
+    ```
+
+    a.  Each row of the banded table summarizes shots of similar chance quality.
+        Examine these data and describe what you observe with respect to the relationship between chance quality and scoring.
+
+    b.  A logistic regression model was fit to the shot-level data, with the regression output given above.
+        Describe the key components of the output in words.
+
+    c.  Write out the logistic model using the point estimates of the model parameters.
+
+    d.  Based on the model, do you think Priya is justified in treating the vendor's chance-quality number as a key input when reading a dossier's shot maps?
+        Explain.
+
+5.  **Predicting goals, prediction.** A logistic regression model was proposed in Exercise 3 for estimating the probability that a shot at the 2022 Men's World Cup is scored: the reduced model `goal_red`, whose predictors are the shot's body part, whether the shooter was under defensive pressure, whether the shot was a one-on-one, and whether it was struck first time.
+    The outcome variable takes value 1 if the shot was scored and 0 otherwise.
+    For the probability calculation below, we will want the model's coefficients at higher precision than the tidy table displays:
+
+    ```r
+    round(coef(goal_red), 4)
+    #>        (Intercept)      body_partHead body_partLeft Foot     body_partOther
+    #>            -2.0456             0.0232             0.0996             0.6156
+    #> under_pressureTRUE     one_on_oneTRUE     first_timeTRUE
+    #>            -0.2736             0.6399             0.3083
+    ```
+
+    a.  Write out the form of the model.
+        Also identify which of the variables are positively associated with the outcome of a shot being scored, when controlling for the other variables.
+
+    b.  An agent's highlight clip shows their client collecting a through ball one-on-one with the goalkeeper and sweeping the shot in first time with his left foot, while a recovering centre-back presses him.
+        According to the model, what is the estimated probability that a World Cup shot with this profile — left-footed, under pressure, a one-on-one, struck first time — is scored?
+        How confident are you in the model's accuracy for this probability calculation?
+
+6.  **Chance quality and prediction.** Exercise 4 asked whether the vendor's chance-quality number predicts scoring at the 2022 Men's World Cup.
+    The code below plots the observed proportion of shots scored in each chance-quality band from that exercise, placing each point at the midpoint of its band; the resulting six points climb from $0.026$ in the lowest band to $0.683$ in the highest.
+
+    ```r
+    band_props <- wc2022_shots |>
+      mutate(xg_band = cut(statsbomb_xg,
+                           breaks = c(0, 0.05, 0.10, 0.20, 0.40, 0.60, 1),
+                           include.lowest = TRUE)) |>
+      group_by(xg_band) |>
+      summarize(prop_goal = mean(goal)) |>
+      mutate(xg_mid = c(0.025, 0.075, 0.15, 0.30, 0.50, 0.80))
+
+    ggplot(band_props, aes(x = xg_mid, y = prop_goal)) +
+      geom_point(size = 2) +
+      labs(
+        x = "Chance quality (statsbomb_xg)",
+        y = "Proportion of shots scored"
+      ) +
+      lims(x = c(0, 1), y = c(0, 1))
+    ```
+
+    a.  The logistic model fit to the shot-level data may be written as
+
+        $$\log_e\left( \frac{\hat{p}}{1 - \hat{p}} \right) = -2.9524 + 5.6742 \times \texttt{statsbomb\_xg}$$
+
+        where $\hat{p}$ is the model-estimated probability that the shot is scored.
+        Use the model to calculate the probability of a goal for shots with chance-quality values 0.05, 0.10, and 0.15.
+        The model-estimated probabilities for several additional chance-quality values are provided below, where subscripts indicate the value of `statsbomb_xg`:
+
+        $$
+        \begin{aligned}
+            &\hat{p}_{0.20} = 0.140
+                && \hat{p}_{0.30} = 0.223
+                && \hat{p}_{0.40} = 0.336
+                && \hat{p}_{0.50} = 0.471 \\
+            &\hat{p}_{0.60} = 0.611
+                && \hat{p}_{0.70} = 0.735
+                && \hat{p}_{0.78} = 0.814
+                && \hat{p}_{0.90} = 0.896
+        \end{aligned}
+        $$
+
+    b.  Add the model-estimated probabilities from part (a) on the plot, then connect these dots using a smooth curve to represent the model-estimated probabilities.
+        Where on the plot do you recognize the logit curve of @sec-modelingTheProbabilityOfAnEvent?
+
+    c.  Describe any concerns you may have regarding applying logistic regression in this application, and note any assumptions that are required to accept the model's validity.
+        Consider, in particular, what kind of number `statsbomb_xg` itself is, and whether the 1,494 shots can be treated as independent observations.
+
+7.  **Shortlisting at the triage desk, model selection.** The dossier audit of @sec-model-logistic works on the same principles as the spam filters that guard your inbox: using characteristics of an individual dossier, we fit a probability that the triage desk shortlists it.
+    Suppose Priya's audit had randomized one additional cue: whether a portrait photo was clipped to the dossier, decided by a fair coin for every profile.
+    By construction, the hidden decision process ignores the photo entirely — the cue never enters the `log_odds` line.
+    The seeded code below rebuilds `audit_study` exactly as in the chapter and appends this inert cue.[^_09-ex-model-logistic-2]
+
+    ```r
+    set.seed(901)
+    n_dossiers <- 4800
+
+    audit_study <- tibble(
+      league_tier    = sample(c("first", "second"), n_dossiers, replace = TRUE),
+      youth_caps     = rbinom(n_dossiers, 1, 0.35),
+      years_senior   = sample(2:12, n_dossiers, replace = TRUE),
+      award          = rbinom(n_dossiers, 1, 0.06),
+      injury_note    = rbinom(n_dossiers, 1, 0.10),
+      video_attached = rbinom(n_dossiers, 1, 0.50),
+      nationality    = sample(c("foreign", "domestic"), n_dossiers, replace = TRUE),
+      agent_flag     = sample(c("network", "agent"), n_dossiers, replace = TRUE)
+    ) |>
+      mutate(
+        nationality = factor(nationality, levels = c("foreign", "domestic")),
+        agent_flag  = factor(agent_flag, levels = c("network", "agent")),
+        league_tier = factor(league_tier, levels = c("first", "second")),
+        log_odds    = -2.55 + 0.85 * video_attached +
+          0.45 * (nationality == "domestic") -
+          0.25 * (agent_flag == "agent") -
+          0.45 * (league_tier == "second") +
+          0.02 * years_senior +
+          0.75 * award -
+          0.30 * injury_note,
+        shortlisted = rbinom(n_dossiers, 1, exp(log_odds) / (1 + exp(log_odds)))
+      ) |>
+      select(-log_odds)
+
+    set.seed(902)
+    audit_cues <- audit_study |>
+      mutate(photo_attached = rbinom(n_dossiers, 1, 0.5))
+    ```
+
+    We fit the full model with all nine cues:
+
+    ```r
+    audit_cue_full <- glm(
+      shortlisted ~ league_tier + youth_caps + years_senior + award +
+        injury_note + video_attached + nationality + agent_flag +
+        photo_attached,
+      data = audit_cues, family = binomial
+    )
+    tidy(audit_cue_full)
+    #> # A tibble: 10 × 5
+    #>    term                estimate std.error statistic  p.value
+    #>    <chr>                  <dbl>     <dbl>     <dbl>    <dbl>
+    #>  1 (Intercept)          -2.46      0.153    -16.1   3.50e-58
+    #>  2 league_tiersecond    -0.466     0.0885    -5.26  1.42e- 7
+    #>  3 youth_caps           -0.0952    0.0925    -1.03  3.03e- 1
+    #>  4 years_senior          0.0271    0.0139     1.95  5.08e- 2
+    #>  5 award                 0.655     0.159      4.11  3.88e- 5
+    #>  6 injury_note          -0.337     0.155     -2.18  2.94e- 2
+    #>  7 video_attached        0.888     0.0917     9.67  3.87e-22
+    #>  8 nationalitydomestic   0.531     0.0883     6.02  1.77e- 9
+    #>  9 agent_flagagent      -0.321     0.0877    -3.67  2.46e- 4
+    #> 10 photo_attached       -0.0748    0.0873    -0.857 3.92e- 1
+
+    AIC(audit_cue_full)
+    #> [1] 3581.034
+    ```
+
+    We remove each cue one by one, refit the model, and record the updated AIC.
+    For example, dropping the photo cue gives:
+
+    ```r
+    AIC(update(audit_cue_full, . ~ . - photo_attached))
+    #> [1] 3579.769
+    ```
+
+    a.  For variable selection, we fit the full model, which includes all cues, and then we also fit each model where we've dropped exactly one of the cues.
+        In each of these reduced models, the AIC value for the model is reported below.
+        Based on these results, which cue, if any, should we drop as part of model selection?
+        Explain.
+
+        -   None dropped: 3581.0
+        -   Drop `league_tier`: 3607.2
+        -   Drop `youth_caps`: 3580.1
+        -   Drop `years_senior`: 3582.9
+        -   Drop `award`: 3594.4
+        -   Drop `injury_note`: 3584.1
+        -   Drop `video_attached`: 3678.8
+        -   Drop `nationality`: 3616.0
+        -   Drop `agent_flag`: 3592.6
+        -   Drop `photo_attached`: 3579.8
+
+    b.  Consider the subsequent model selection stage (where the cue from part (a) has been removed, and we are considering removal of a second cue).
+        Here again we've computed the AIC for each leave-one-cue-out model.
+        Based on the results, which cue, if any, should we drop as part of model selection?
+        Explain.
+
+        -   None dropped: 3579.8
+        -   Drop `league_tier`: 3605.7
+        -   Drop `youth_caps`: 3578.8
+        -   Drop `years_senior`: 3581.5
+        -   Drop `award`: 3592.9
+        -   Drop `injury_note`: 3582.8
+        -   Drop `video_attached`: 3677.5
+        -   Drop `nationality`: 3614.6
+        -   Drop `agent_flag`: 3591.3
+
+    c.  Consider one more step in the process.
+        Here again we've computed the AIC for each leave-one-cue-out model.
+        Based on the results, which cue, if any, should we drop as part of model selection?
+        Explain.
+
+        -   None dropped: 3578.8
+        -   Drop `league_tier`: 3605.0
+        -   Drop `years_senior`: 3580.6
+        -   Drop `award`: 3592.1
+        -   Drop `injury_note`: 3581.8
+        -   Drop `video_attached`: 3676.3
+        -   Drop `nationality`: 3613.9
+        -   Drop `agent_flag`: 3590.5
+
+8.  **Shortlisting at the triage desk, prediction.** Recall running a logistic regression to audit the shortlisting decisions of Northbridge's dossier triage desk.
+    In this exercise, we've taken a small set of the randomized cues and fit a logistic model to the 4,800 audit dossiers with the following output:
+
+    ```r
+    triage_fit <- glm(
+      shortlisted ~ video_attached + nationality + agent_flag + injury_note,
+      data = audit_study, family = binomial
+    )
+    tidy(triage_fit)
+    #> # A tibble: 5 × 5
+    #>   term                estimate std.error statistic   p.value
+    #>   <chr>                  <dbl>     <dbl>     <dbl>     <dbl>
+    #> 1 (Intercept)           -2.50     0.0991    -25.2  1.16e-140
+    #> 2 video_attached         0.873    0.0912      9.58 1.02e- 21
+    #> 3 nationalitydomestic    0.528    0.0878      6.01 1.82e-  9
+    #> 4 agent_flagagent       -0.292    0.0870     -3.36 7.88e-  4
+    #> 5 injury_note           -0.317    0.154      -2.06 3.91e-  2
+
+    round(coef(triage_fit), 4)
+    #>         (Intercept)      video_attached nationalitydomestic     agent_flagagent
+    #>             -2.5032              0.8734              0.5277             -0.2919
+    #>         injury_note
+    #>             -0.3174
+    ```
+
+    a.  Write down the model using the coefficients from the model fit.
+
+    b.  Suppose an audit dossier has a highlight clip attached, lists a foreign nationality, arrived through an agent, and carries no injury note — that is, $\texttt{video\_attached} = 1$, $\texttt{nationality}_{\texttt{domestic}} = 0$, $\texttt{agent\_flag}_{\texttt{agent}} = 1$, and $\texttt{injury\_note} = 0$.
+        What is the predicted probability that the triage desk shortlists this dossier?
+
+    c.  Put yourself in the shoes of the analyst proposing to automate the triage desk with this model.
+        How low must the predicted probability of a shortlist be before you think it would be reasonable to file a dossier away unread (a pile nobody at the club is likely to revisit)?
+        What tradeoffs might you consider?
+        Any ideas about how you might make the triage system even better from the perspective of the prospects being judged — or of Marta Vidal, who pays for every follow-up assessment?
+
+9.  **Predicting goals, model selection via AIC.** A logistic regression model was proposed in Exercise 3 for classifying shots at the 2022 Men's World Cup into goals and non-goals.
+    The outcome variable takes value 1 if the shot was scored and 0 otherwise, and the candidate predictors are the shot's body part, its (collapsed) technique, and the indicators for defensive pressure, one-on-ones, and first-time strikes.
+
+    We consider three nested candidate models, fit to the same 1,494 shots of `wc_shots_model`: the full model from the chapter, the reduced model of Exercise 3, and a minimal model that keeps only the three logical indicators.
+    Their AIC values are computed below:
+
+    ```r
+    goal_m1 <- glm(goal ~ body_part + technique_grp + under_pressure +
+                     one_on_one + first_time,
+                   data = wc_shots_model, family = binomial)
+    goal_m2 <- glm(goal ~ body_part + under_pressure + one_on_one + first_time,
+                   data = wc_shots_model, family = binomial)
+    goal_m3 <- glm(goal ~ under_pressure + one_on_one + first_time,
+                   data = wc_shots_model, family = binomial)
+
+    round(c(AIC(goal_m1), AIC(goal_m2), AIC(goal_m3)), 2)
+    #> [1] 1163.62 1161.55 1156.56
+    ```
+
+    a.  Using the AIC metric, which of the three models would be best to report?
+
+    b.  If, for example, the AIC is virtually equivalent for two models that have differing numbers of variables, which model would be preferred: the model with more variables or the model with fewer variables?
+        Explain.
+
+10. **Model selection.** An important aspect of building a logistic regression model is figuring out which variables to include in the model.
+    In @sec-model-logistic we covered using AIC to choose between variable subsets.
+    In @sec-inf-model-logistic we will cover using something called p-values to choose between variable subsets.
+    Alternatively, you might hope that the triage model gave the smallest number of false positives (dossiers shortlisted only to waste a follow-up assessment on a player the club would never sign), the smallest number of false negatives (genuine prospects filed away and lost to a rival), or the highest overall accuracy.
+    If different criteria produce outcomes of *different variable subsets* for the final model, how might you decide which model to put forward?
+    (Hint: There is no single correct answer to this question.)
+
+[^_09-ex-model-logistic-1]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data). These are observational data: the models describe association, not causation.
+
+[^_09-ex-model-logistic-2]: The `audit_study` data are the constructed scouting scenario of @sec-model-logistic, generated entirely by the seeded code shown (seed 901); the inert `photo_attached` cue is appended with seed 902. No real triage desk was audited.

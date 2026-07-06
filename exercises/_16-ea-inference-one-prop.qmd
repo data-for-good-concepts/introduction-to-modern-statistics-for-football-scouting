@@ -1,0 +1,29 @@
+**2.** Two errors: hypotheses must be written about the population proportion $p,$ not $\hat{p},$ and the null value must be the report's claim, not the sample's 0.24. Correct: $H_0: p = 0.25,$ $H_A: p \neq 0.25.$
+
+**4.** (a) $H_0: p = 0.488,$ $H_A: p > 0.488,$ where $p$ is the benchmark rate for the agency's placements. (b) Answers vary; key: draw 30 placements at $p = 0.488$; p-value = share $\geq 0.60.$ (c) p-value $= 149/1000 = 0.149 > 0.05$; fail to reject $H_0$ — no strong evidence the agency beats the league rate. (d) Answers vary; key: failing to reject is not proof of falsehood.
+
+**6.** (a) $H_0: p = 0.55,$ $H_A: p > 0.55,$ where $p$ is the proportion of all voting members who would approve. (b) p-value $< 0.001$ (0 of 1,000 draws reached 0.653); reject $H_0$ — convincing evidence the ballot would pass.
+
+**8.** (a) $SE = \sqrt{0.55 \times 0.45/1207} = 0.0143.$ (b) $\approx 0.014.$ (c) Yes, nearly identical. (d) No — conditions are met and the two approaches agree, so neither is strongly preferred.
+
+**10.** (a) 1,000 simulated sample proportions from draws of size 617 under $p = 0.5.$ (b) No — only 17 of the 1,000 draws were as large as 0.549; it sits in the far right tail. (c) $H_0: p = 0.5,$ $H_A: p \neq 0.5,$ where $p$ is the proportion of licensed intermediaries who support the regulations. (d) p-value $= 2 \times 17/1000 = 0.034 < 0.05$; reject $H_0$ — with the point estimate above 0.5, the data support the pundit's majority claim.
+
+**12.** Answers vary; key: the distribution of $\hat{p}$ across repeated random samples of the same size; center 0.1; spread shrinks; shape approaches normal.
+
+**14.** (a) True. (b) False ($40 \times 0.23 = 9.2 < 10$; the $n \geq 30$ rule is for means). (c) False ($Z = 1.47$). (d) True ($Z = 2.08$).
+
+**16.** (a) True ($12 \times 0.25 = 3 < 10$). (b) True ($0.25n \geq 10 \Rightarrow n \geq 40$). (c) False ($Z = -0.82$). (d) False ($Z = -1.41$). (e) False — tripling $n$ multiplies the SE by $1/\sqrt{3} \approx 0.58,$ a reduction of about 42%, not one-third.
+
+**18.** (a) $ME = 1.96\sqrt{0.66 \times 0.34/1018} = 0.029 \approx 3\%$ — verified. (b) No — the 95% CI $(0.631, 0.689)$ contains $2/3 = 0.667.$
+
+**20.** (a) The proportion of all registered youth coaches who favor mandatory heading limits; point estimate 0.57. (b) Met — random sample, and $3731 \times 0.57 = 2127$ and $3731 \times 0.43 = 1604$ are both at least 10. (c) $SE = 0.0081$; 95% CI $(0.554, 0.586).$ (d) Wider. (e) Narrower.
+
+**22.** (a) Sample statistic. (b) $SE = 0.0124$; 95% CI $(0.576, 0.624)$ — we are 95% confident that 57.6% to 62.4% of club members think recruitment should prioritize domestic players. (c) Yes — random sample, and 938 successes and 625 failures are both at least 10. (d) Yes — the interval lies entirely above 0.5.
+
+**24.** (a) $H_0: p = 0.5,$ $H_A: p \neq 0.5$; $SE = 0.0275,$ $Z = -0.73,$ p-value $= 0.47$; fail to reject $H_0$ — the data do not support the columnist's minority claim. (b) Yes — since $p = 0.5$ was not rejected, the interval would include 0.5.
+
+**26.** (a) $SE = 0.0050$; 90% CI $(0.112, 0.128)$ — we are 90% confident that 11.2% to 12.8% of accredited members think AI tools will replace live scouting entirely within a decade. (b) $n \geq (1.65/0.005)^2 \times 0.12 \times 0.88 \approx 11{,}500.$
+
+**28.** $H_0: p = 0.08,$ $H_A: p \neq 0.08$; $\hat{p} = 21/194 = 0.108,$ $SE = 0.0195,$ $Z = 1.45,$ p-value $= 0.147$; fail to reject $H_0$ — no evidence the 8% value is inaccurate.
+
+**30.** $\hat{p} = 142/603 = 0.235,$ $SE = 0.0173$; 95% CI $(0.202, 0.269).$

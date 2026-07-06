@@ -1,0 +1,29 @@
+**2.** (a) Parameter: $p_{new} - p_{std},$ the true difference in flag proportions — unknown. Statistic: $\hat{p}_{new} - \hat{p}_{std} = 89/292 - 106/147 = 0.305 - 0.721 = -0.416$ — known. (b) $SE \approx 0.05.$ (c) $H_0: p_{new} - p_{std} = 0,$ $H_A: p_{new} - p_{std} < 0$; p-value $< 0.001$ (none of the 1,000 shuffled differences came near $-0.416$); reject $H_0$ — the new protocol lowers the flag rate, and the claim is causal because protocols were randomized.
+
+**4.** (a) $SE \approx 0.044.$ (b) $-0.416 \pm 1.96 \times 0.044 \rightarrow (-0.502, -0.330).$ (c) $(-0.500, -0.333)$ — we are 95% confident the new protocol's flag proportion is 33 to 50 percentage points lower than the standard warm-up's.
+
+**6.** (a) The standard errors are roughly the same ($\approx 0.008$ each), but the centers are not: method A (randomization) is centered at 0, method B (bootstrap) at the observed $-0.50.$ (b) Answers vary; key: are coach and analyst support proportions different? (c) Answers vary; key: how large is the coach$-$analyst support difference?
+
+**8.** (a) Mean 0.01, SD $= \sqrt{0.01 \times 0.99/1000} = 0.0031.$ (b) Mean 0.06, SD $= \sqrt{0.06 \times 0.94/1000} = 0.0075.$ (c) Mean $0.06 - 0.01 = 0.05,$ SD $= \sqrt{0.0031^2 + 0.0075^2} = 0.0081$ — in repeated samples the Capital-minus-Northern gap averages 5 percentage points with a standard deviation of about 0.8 points. (d) $SD_{\hat{p}_C - \hat{p}_N} = \sqrt{SD_{\hat{p}_N}^2 + SD_{\hat{p}_C}^2}.$
+
+**10.** $\hat{p}_A - \hat{p}_B = 0.080 - 0.088 = -0.008,$ $SE = 0.0048$; 95% CI $(-0.0175, 0.0015)$ — we are 95% confident League A's rate of academy-graduate appearances is between 1.75 percentage points lower and 0.15 points higher than League B's; the interval includes 0.
+
+**12.** (a) $\hat{p}_{pool} = 1337/16236 = 0.082,$ $SE = 0.0048,$ $Z = -1.68,$ p-value $= 0.093 > 0.05$; fail to reject $H_0: p_A = p_B$ — no convincing evidence the rates differ; the SE is pooled because $H_0$ asserts one common proportion, whereas the CI assumes no such equality and uses each sample's own proportion. (b) Type II.
+
+**14.** The success-failure condition fails — only 4 retained players in the control group ($< 10$) — so $\hat{p}_D - \hat{p}_C$ is not approximately normal; a normal-based interval could badly under-cover (skewed, discrete sampling distribution) and mislead about plausible values.
+
+**16.** (a) False. (b) True. (c) True. (d) True. (e) False — it can be calculated: $(0.12, 0.18).$
+
+**18.** (a) Type I — in truth the "don't know" proportions may be the same for qualified and unqualified scouts. (b) Type II — a real pressure gap in conversion may exist at the Women's Euro but went undetected.
+
+**20.** No — the same players were asked twice, so the two sets of responses are paired, not independent samples, and this chapter's two-proportion methods do not apply (the season-long sessions also leave no comparison group).
+
+**22.** (a) Two-way table:
+
+|             | ID error | no error |  Total |
+|:------------|---------:|---------:|-------:|
+| established |      717 |   47,057 | 47,774 |
+| challenger  |      146 |    5,709 |  5,855 |
+| Total       |      863 |   52,766 | 53,629 |
+
+(b) $H_0: p_{est} = p_{chal},$ $H_A: p_{est} \neq p_{chal}.$ (c) Answers vary; key: discernible yes; whether 1 point matters is judgment.

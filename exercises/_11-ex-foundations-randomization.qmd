@@ -1,0 +1,282 @@
+1.  **Identify the parameter, I.** For each of the following situations, state whether the parameter of interest is a mean or a proportion.
+    It may be helpful to examine whether individual responses are numerical or categorical.
+
+    a.  In a survey, 100 regional scouts working for clubs across the league are asked how many matches per month they attend in person.
+
+    b.  In a survey, 100 regional scouts are asked: "What percentage of your scouting time is spent watching video rather than attending matches live?"
+
+    c.  In a survey, 100 regional scouts are asked whether they cited xG figures in their most recent prospect report.
+
+    d.  In a survey, 100 regional scouts are asked what percentage of their annual travel budget is spent on trips outside the country.
+
+    e.  In a sample of 100 recent Northbridge academy graduates, it is found that 85 percent expect to sign a professional contract within one year of leaving the academy.
+
+2.  **Identify the parameter, II.** For each of the following situations, state whether the parameter of interest is a mean or a proportion.
+
+    a.  A club survey shows that 64% of Northbridge season-ticket holders personally worry a great deal about the size of the summer transfer budget.
+
+    b.  An internal report states that the number of video-scouting reports filed has shown a 17% increase within a two year period while the number of live-scouting reports decreased by 6.4% during this time period.
+
+    c.  In a survey, academy and first-team scouts are asked whether they use a GPS-based tracking app on matchdays.
+
+    d.  In a survey, scouts who file reports on tablets are asked whether they use a video-tagging platform.
+
+    e.  In a survey, scouts who use a video-tagging platform are asked how many times they used it over the last year.
+
+3.  **Hypotheses.** For each of the research statements below, note whether it represents a null hypothesis claim or an alternative hypothesis claim.
+
+    a.  The number of hours that academy players spend in video-analysis sessions predicts their future scores on the club's tactical-awareness assessment.
+
+    b.  Left-footed wingers on average record the same top sprint speed as right-footed wingers.
+
+    c.  For a particular striker, the probability of scoring from a one-on-one is larger than 0.2 (i.e., better than the tournament baseline).
+
+    d.  The mean distance from goal of shots in top-flight football has changed over the last twenty seasons.
+
+    e.  The risk of soft-tissue injury is equal for players on the new recovery protocol compared with players on the standard program.
+
+    f.  Caffeine gum taken before extra time affects mean sprint distance.
+
+    g.  The probability of a defensive error is the same whether a defender is playing their first match after long-haul international travel or not.
+
+4.  **True null hypothesis.** Unbeknownst to Priya Rao, let's say that the null hypothesis is actually true for one of Northbridge's randomized report-format experiments: the format has no effect at all.
+    She plans to run the randomization test anyway.
+
+    a.  If the level of discernibility she chooses (i.e., the cutoff for her p-value) is 0.05, how likely is it that she will mistakenly reject the null hypothesis?
+
+    b.  If the level of discernibility she chooses (i.e., the cutoff for her p-value) is 0.01, how likely is it that she will mistakenly reject the null hypothesis?
+
+    c.  If the level of discernibility she chooses (i.e., the cutoff for her p-value) is 0.10, how likely is it that she will mistakenly reject the null hypothesis?
+
+5.  **Identify hypotheses, I.** Write the null and alternative hypotheses in words and then symbols for each of the following situations.
+
+    a.  An agent's brochure markets a winger as "the creator who never rests", claiming he lays on 8 chances per match.
+        Emil Sørensen pulls a random sample of 25 of the winger's matches from the event logs.
+        Do these data provide convincing evidence that the winger creates fewer than 8 chances per match on average?
+
+    b.  Emil worries about the effect of a major international tournament on his network's output.
+        He estimates that on a regular working day a regional scout spends on average 15 minutes of work time on non-scouting browsing.
+        He also collects data on how much work time scouts spend on such non-scouting activities during the World Cup group stage.
+        He wants to determine if these data provide convincing evidence that scout productivity decreases during the group stage.
+
+6.  **Identify hypotheses, II.** Write the null and alternative hypotheses in words and using symbols for each of the following situations.
+
+    a.  Since 2023, Northbridge has required every prospect report to include an xG appendix.
+        Prior to the requirement, the average report ran to 1,100 words.
+        After the requirement came in, Priya Rao collected a random sample of reports and recorded their lengths.
+        Do these data provide convincing evidence of a difference in the average length of the club's reports?
+
+    b.  Based on the performance of trialists who took Northbridge's technical entry test (scored out of 100 points) between July 1, 2004 and June 30, 2007, the average score was calculated to be 74.
+        In 2021 the average score was slightly higher.
+        Do these data provide convincing evidence that the average technical entry test score has changed since 2021?
+
+7.  **Shooting under pressure at the Women's Euro.** In @sec-chp11-observational we asked whether shots taken under defensive pressure convert at a lower rate, using the 2022 Men's World Cup.
+    The scouts' argument does not end there: does the pattern hold at the 2025 Women's Euro?
+    Nobody assigns defenders to shots at random, so this is an observational question about the 913 shots of that tournament.
+    The data are summarized in the contingency table below.[^_11-ex-foundations-randomization-1]
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro2025_shots |>
+      mutate(
+        pressure = if_else(under_pressure, "pressured", "not pressured"),
+        result   = if_else(goal, "goal", "no goal")
+      ) |>
+      count(pressure, result) |>
+      pivot_wider(names_from = result, values_from = n)
+    #> # A tibble: 2 × 3
+    #>   pressure       goal `no goal`
+    #>   <chr>         <int>     <int>
+    #> 1 not pressured    90       498
+    #> 2 pressured        33       292
+    ```
+
+    |               | goal | no goal | Total |
+    |:--------------|-----:|--------:|------:|
+    | pressured     |   33 |     292 |   325 |
+    | not pressured |   90 |     498 |   588 |
+    | Total         |  123 |     790 |   913 |
+
+    a.  Determine if each of the following statements is true or false.
+        If false, explain why.
+        *Be careful:* The reasoning may be wrong even if the statement's conclusion is correct.
+        In such cases, the statement should be considered false.
+
+        i.  Since more goals were scored from unpressured shots (90 vs. 33), we can conclude that the conversion rate for unpressured shots is higher.
+
+        ii. The data suggest that pressured shots are less likely to be converted since the conversion rate was (33 / 325 = 0.102) 10.2% for shots under pressure, while it was (90 / 588 = 0.153) 15.3% for shots not under pressure.
+
+        iii. The fact that the conversion rate is lower for the pressured group proves that defensive pressure causes shots to be missed.
+
+        iv. Based on the information provided so far, we cannot tell if the difference between the conversion rates is due to a relationship between the two variables or due to chance.
+
+    b.  What proportion of all 913 shots were converted into goals?
+
+    c.  If being under pressure and scoring were independent, how many of the 325 pressured shots would we expect to have been goals?
+
+    d.  We can investigate the relationship between pressure and outcome in these data using a randomization technique.
+        While in reality we would carry out the simulations required for randomization using statistical software, suppose we actually simulate using index cards.
+        In order to simulate from the independence model, which states that the outcomes were independent of pressure, we write *goal* or *no goal* on a card for each shot, shuffle all the cards together, then deal them into two groups of size 325 and 588.
+        We repeat this simulation 100 times and each time record the difference between the proportions of cards that say *goal* in the pressured and unpressured groups (pressured $-$ not pressured).
+        The seeded code below runs this simulation; the resulting histogram of the 100 differences is centered at 0, with nearly all of the differences falling between $-0.05$ and $+0.05.$
+
+        ```r
+        set.seed(1104)
+        pressure_null_weuro <- weuro2025_shots |>
+          mutate(
+            pressure = if_else(under_pressure, "pressured", "not pressured"),
+            result   = if_else(goal, "goal", "no goal")
+          ) |>
+          specify(result ~ pressure, success = "goal") |>
+          hypothesize(null = "independence") |>
+          generate(reps = 100, type = "permute") |>
+          calculate(stat = "diff in props",
+                    order = c("pressured", "not pressured"))
+
+        ggplot(pressure_null_weuro, aes(x = stat)) +
+          geom_histogram(binwidth = 0.01) +
+          labs(
+            y = "Count",
+            x = "Difference in randomized conversion rates\n(pressured - not pressured)",
+            title = "100 differences in randomized proportions"
+          )
+        ```
+
+        i.  What are the claims being tested?
+
+        ii. Compared to the rate calculated in part (b), which would provide more support for the alternative hypothesis, a *higher* or *lower* conversion rate among the 325 pressured shots?
+
+        iii. In these 100 simulations, only 2 of the shuffled differences were at least as far below zero as the observed difference of $33/325 - 90/588 = -0.052.$
+            What do the simulation results suggest about the relationship between defensive pressure and conversion at the 2025 Women's Euro?
+            Can the club conclude that pressure *causes* the lower conversion rate?
+
+    e.  Per the book's penalty convention, one question remains before the result goes anywhere near a scouting report: which shots are in the frame?
+        The 913 shots include the Euro's 51 penalty kicks — 37 of them shoot-out kicks from period 5 — and, as the code below verifies, not one of them was taken under pressure.
+        Rerun the test of part (d) on open-play shots only, stating the filter `shot_type == "Open Play"`.
+
+        ```r
+        weuro2025_shots |>
+          filter(shot_type == "Penalty") |>
+          summarize(
+            kicks = n(),
+            shootout = sum(period == 5),
+            pressured = sum(under_pressure),
+            conversion = mean(goal)
+          )
+        #> # A tibble: 1 × 4
+        #>   kicks shootout pressured conversion
+        #>   <int>    <int>     <int>      <dbl>
+        #> 1    51       37         0      0.549
+
+        weuro2025_shots |>
+          filter(shot_type == "Open Play") |>
+          group_by(under_pressure) |>
+          summarize(shots = n(), goals = sum(goal), conversion = mean(goal))
+        #> # A tibble: 2 × 4
+        #>   under_pressure shots goals conversion
+        #>   <lgl>          <int> <int>      <dbl>
+        #> 1 FALSE            526    62      0.118
+        #> 2 TRUE             325    33      0.102
+
+        set.seed(1108)
+        pressure_null_weuro_open <- weuro2025_shots |>
+          filter(shot_type == "Open Play") |>
+          mutate(
+            pressure = if_else(under_pressure, "pressured", "not pressured"),
+            result   = if_else(goal, "goal", "no goal")
+          ) |>
+          specify(result ~ pressure, success = "goal") |>
+          hypothesize(null = "independence") |>
+          generate(reps = 100, type = "permute") |>
+          calculate(stat = "diff in props",
+                    order = c("pressured", "not pressured"))
+        ```
+
+        In these 100 simulations, 20 of the shuffled differences were at least as far below zero as the new observed difference of $33/325 - 62/526 = -0.016.$
+
+        i.  Which of the two conversion rates from part (d) changed after the filter, which did not, and why?
+
+        ii. What happens to the strength of the evidence against the independence model, and what should the club's report now say about defensive pressure at the 2025 Women's Euro?
+
+8.  **Academy development program.** Over several seasons, Northbridge's academy staff flagged 103 players as at risk of being released.
+    Places on Jonas Beck's individualized development program were limited, so some flagged players entered the program and some did not — the program was *not* randomly assigned.
+    The variable `program` indicates which group each player was in; players in the development group entered the program and those in the control group did not.
+    Of the 34 players in the control group, 30 were eventually released.
+    Of the 69 players in the development group, 45 were released.
+    Another variable, `days_tracked`, records how many days each player remained in the academy pathway after being flagged.
+    This is a constructed scenario, built by the seeded code below.[^_11-ex-foundations-randomization-2]
+
+    ```r
+    set.seed(1105)
+    academy103 <- tibble(
+      program = factor(c(rep("control", 34), rep("development", 69)),
+                       levels = c("development", "control")),
+      status  = factor(c(rep("released", 30), rep("retained", 4),
+                         rep("released", 45), rep("retained", 24)),
+                       levels = c("released", "retained"))
+    ) |>
+      mutate(days_tracked = round(if_else(program == "development",
+                                          rgamma(103, shape = 1.4, scale = 320),
+                                          rgamma(103, shape = 1.1, scale = 80))))
+
+    p_bar <- ggplot(academy103, aes(x = program, fill = status)) +
+      geom_bar(position = "fill") +
+      labs(x = NULL, y = NULL, fill = "Outcome")
+
+    p_box <- ggplot(academy103, aes(x = program, y = days_tracked)) +
+      geom_boxplot() +
+      labs(x = NULL, y = "Days in academy pathway")
+
+    p_bar + p_box
+    ```
+
+    The stacked bar plot shows the proportion released in each group, with a visibly larger released share in the control group than in the development group.
+    The box plots show that players in the development group typically remained in the pathway far longer (median around 406 days, with values stretching past 1,400) than players in the control group (median around 60 days, maximum around 344).
+
+    a.  Does the stacked bar plot indicate that being retained is independent of whether the player entered the development program?
+        Explain your reasoning.
+
+    b.  What do the box plots suggest about the efficacy of the development program?
+
+    c.  What proportions of players in the development and control groups were released?
+
+    d.  One approach for investigating whether the program is discernibly effective is randomization testing.
+
+        i.  What are the claims being tested?
+
+        ii. The paragraph below describes the set up for a randomization test, if we were to do it without using statistical software.
+            Fill in the blanks with a number or phrase.
+
+        > We write *retained* on $\rule{1.25cm}{0.5pt}$ cards representing players who were still in the pathway at the end of the study, and *released* on $\rule{1.25cm}{0.5pt}$ cards representing players who were not.
+        > Then, we shuffle these cards and split them into two groups: one group of size $\rule{1.25cm}{0.5pt}$ representing the development program, and another group of size $\rule{1.25cm}{0.5pt}$ representing control.
+        > We calculate the difference between the proportion of *released* cards in the development and control groups (development $-$ control) and record this value.
+        > We repeat this 100 times to build a distribution centered at $\rule{1.25cm}{0.5pt}$.
+        > Lastly, we calculate the proportion of simulations where the simulated differences in proportions are $\rule{1.25cm}{0.5pt}$.
+        > If this proportion is low, we conclude that it is unlikely to have observed such an outcome by chance and that the null hypothesis should be rejected in favor of the alternative.
+
+        iii. The seeded code below runs the randomization; the histogram of the 100 simulated differences is centered at 0 and ranges from about $-0.23$ to $+0.25,$ and only 1 of the 100 shuffles produced a difference at least as far below zero as the observed $45/69 - 30/34 = -0.230.$
+            What do the simulation results suggest about the effectiveness of the development program?
+            Bearing in mind how players ended up on the program, how strong a conclusion is the club entitled to?
+
+        ```r
+        set.seed(1106)
+        academy103_null <- academy103 |>
+          specify(status ~ program, success = "released") |>
+          hypothesize(null = "independence") |>
+          generate(reps = 100, type = "permute") |>
+          calculate(stat = "diff in props",
+                    order = c("development", "control"))
+
+        ggplot(academy103_null, aes(x = stat)) +
+          geom_histogram(binwidth = 0.05) +
+          labs(
+            y = "Count",
+            x = "Difference in randomized proportions of released\n(development - control)",
+            title = "100 differences in randomized proportions"
+          )
+        ```
+
+[^_11-ex-foundations-randomization-1]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_11-ex-foundations-randomization-2]: The `academy103` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real academy players were tracked.

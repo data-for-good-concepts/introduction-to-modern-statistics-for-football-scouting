@@ -1,0 +1,490 @@
+1.  **Fill in the blank.** When doing an ANOVA, you observe large differences in means between groups.
+    Within the ANOVA framework, this would most likely be interpreted as evidence strongly favoring the \_\_\_\_\_\_\_\_\_\_\_\_\_ hypothesis.
+
+2.  **Which test?** Marta Vidal would like to know whether trainee scouts assigned to Northbridge's four regional academies — North, South, East, and West — spend the same amount of time, on average, watching a prospect live before filing a first report.
+    What type of test should we use?
+    Explain your reasoning.
+
+3.  **Play patterns and chance quality at the Women's Euro, randomize once.** Different shots arise from different phases of play — established possession, throw-ins, corners, free kicks, counters, and so on — and Emil Sørensen's scouts argue constantly about whether some phases inherently produce better chances.
+    One question relates to whether the average chance quality (xG) of a shot differs depending on the play pattern from which it arose, using the 913 shots of the 2025 Women's Euro.[^_22-ex-inference-many-means-1]
+    Per the book's penalty convention, the frame is stated first: the `Other` bucket — 54 shots, made up of the tournament's 51 penalty kicks (all at xG 0.7835) plus 3 open-play-tagged shots — is excluded with the stated filter `play_pattern != "Other"`, exactly as in the corresponding test of @sec-chp18-real-table, leaving $913 - 54 = 859$ shots across eight play patterns.
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro2025_shots |>
+      filter(play_pattern == "Other") |>
+      count(shot_type, goal)
+    #> # A tibble: 4 × 3
+    #>   shot_type goal      n
+    #>   <chr>     <lgl> <int>
+    #> 1 Open Play FALSE     1
+    #> 2 Open Play TRUE      2
+    #> 3 Penalty   FALSE    23
+    #> 4 Penalty   TRUE     28
+
+    we_pattern <- weuro2025_shots |>
+      filter(play_pattern != "Other") |>
+      mutate(play_pattern = factor(play_pattern,
+        levels = c("Regular Play", "From Throw In", "From Corner", "From Free Kick",
+                   "From Counter", "From Goal Kick", "From Keeper", "From Kick Off")))
+
+    we_pattern |>
+      group_by(play_pattern) |>
+      summarize(n = n(), mean = mean(statsbomb_xg), sd = sd(statsbomb_xg))
+    #> # A tibble: 8 × 4
+    #>   play_pattern       n   mean     sd
+    #>   <fct>          <int>  <dbl>  <dbl>
+    #> 1 Regular Play     310 0.0998 0.115
+    #> 2 From Throw In    177 0.104  0.119
+    #> 3 From Corner      160 0.0840 0.0847
+    #> 4 From Free Kick   104 0.0845 0.102
+    #> 5 From Counter      41 0.0905 0.106
+    #> 6 From Goal Kick    35 0.142  0.183
+    #> 7 From Keeper       22 0.0617 0.0315
+    #> 8 From Kick Off     10 0.0894 0.0737
+    ```
+
+    Consider the following two sets of side-by-side box plots: one represents the original data, and the second represents data where the play pattern has been randomly reassigned to the xG values (a single seeded permutation).
+
+    ```r
+    p_orig <- ggplot(we_pattern, aes(y = play_pattern, x = statsbomb_xg)) +
+      geom_boxplot() +
+      labs(
+        y = "Play pattern",
+        x = "Chance quality (xG)",
+        title = "Original play patterns"
+      )
+
+    set.seed(2206)
+    we_pattern_rand <- we_pattern |>
+      specify(statsbomb_xg ~ play_pattern) |>
+      hypothesize(null = "independence") |>
+      generate(1, type = "permute")
+
+    we_pattern_rand |>
+      group_by(play_pattern) |>
+      summarize(n = n(), mean = mean(statsbomb_xg))
+    #> # A tibble: 8 × 3
+    #>   play_pattern       n   mean
+    #>   <fct>          <int>  <dbl>
+    #> 1 Regular Play     310 0.0923
+    #> 2 From Throw In    177 0.0949
+    #> 3 From Corner      160 0.0983
+    #> 4 From Free Kick   104 0.112
+    #> 5 From Counter      41 0.114
+    #> 6 From Goal Kick    35 0.0718
+    #> 7 From Keeper       22 0.0793
+    #> 8 From Kick Off     10 0.0757
+
+    p_rand <- ggplot(we_pattern_rand, aes(y = play_pattern, x = statsbomb_xg)) +
+      geom_boxplot() +
+      labs(
+        y = "Play pattern",
+        x = "Chance quality (xG)",
+        title = "Play pattern randomized to xG"
+      )
+    ```
+
+    a.  Consider the average chance quality for each play pattern.
+        Is the set of group means for the original data: more variable, less variable, or about the same as for the randomized data?
+        Describe what you see in the summaries.
+
+    b.  Consider the standard deviation of the xG values within each play pattern.
+        Is the within-pattern standard deviation for the original data: bigger, smaller, or about the same as for the randomized data?
+
+    c.  Recall that the F statistic's numerator measures how much the groups vary (MSG), with the denominator measuring how much the within-group values vary (MSE).
+        Which of the two datasets would have a larger F statistic, the original data or the randomized data?
+        Explain.
+
+4.  **Play patterns and chance quality at the Women's Euro, randomization test.** Using the same 859 shots of the previous exercise (penalties excluded via the stated `Other` filter, as described there), the play pattern was randomly reassigned to the xG values 1,000 times, and the randomization $F$ statistic was computed for each permutation.[^_22-ex-inference-many-means-1]
+    Conduct a hypothesis test to evaluate if there is a difference, in the population of shots this tournament represents, between the average chance quality across the eight play patterns.
+    Make sure to state your hypotheses clearly and interpret your results in the context of the data.
+    Keep in mind what kind of data these are: nobody assigned play patterns to shots at random.
+
+    ```r
+    we_F_obs <- we_pattern |>
+      specify(statsbomb_xg ~ play_pattern) |>
+      calculate(stat = "F") |>
+      pull()
+
+    we_F_obs
+    #> [1] 1.77402
+
+    set.seed(2207)
+    we_pattern_null <- we_pattern |>
+      specify(statsbomb_xg ~ play_pattern) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "F")
+
+    we_pattern_null |>
+      summarize(n_extreme = sum(stat >= we_F_obs), p_value = mean(stat >= we_F_obs))
+    #> # A tibble: 1 × 2
+    #>   n_extreme p_value
+    #>       <int>   <dbl>
+    #> 1        91   0.091
+
+    ggplot(we_pattern_null, aes(x = stat)) +
+      geom_histogram(binwidth = 0.2) +
+      geom_vline(xintercept = we_F_obs, color = "red", linewidth = 1) +
+      labs(
+        x = "F statistic for randomized xG values",
+        y = "Count",
+        title = "1,000 randomized F statistics"
+      )
+    ```
+
+    The histogram of the 1,000 randomized $F$ statistics is right-skewed, ranging from about 0.09 to 3.8, with the observed statistic of 1.77 marked by the red line; 91 of the 1,000 randomized statistics were at least as large as the observed one.
+
+5.  **Finishing programmes and assessment scores, many groups.** A constructed Northbridge experiment was conducted to measure and compare the effectiveness of various finishing-drill programmes on academy strikers.
+    Jonas Beck randomly allocated 71 newly enrolled strikers into six groups, and each group trained under a different programme for eight weeks before sitting the academy's standardized finishing assessment (scored out of 100).
+    The echo of the six-arm finishing trial in the exercises of @sec-chp20-exercises is deliberate: this second cohort was enrolled with the same arm sizes as that trial so the two seasons could be compared, with the programmes renamed and the grading rescaled to a 100-point assessment that season.
+    The dataset is built by the seeded code below; sample statistics and the ANOVA output follow.[^_22-ex-inference-many-means-2]
+
+    ```r
+    set.seed(2208)
+    drill71 <- tibble(
+      programme = factor(rep(c("Standard", "Volume", "Angles", "Pressure", "Two-touch", "Composite"),
+                             times = c(12, 10, 12, 11, 14, 12)),
+                         levels = c("Standard", "Volume", "Angles", "Pressure", "Two-touch", "Composite")),
+      score = c(rnorm(12, 68, 8), rnorm(10, 45, 8), rnorm(12, 52, 8),
+                rnorm(11, 63, 8), rnorm(14, 50, 8), rnorm(12, 70, 8)) |>
+        round(1)
+    )
+
+    drill71 |>
+      group_by(programme) |>
+      summarize(mean = mean(score), sd = sd(score), n = n())
+    #> # A tibble: 6 × 4
+    #>   programme  mean    sd     n
+    #>   <fct>     <dbl> <dbl> <int>
+    #> 1 Standard   67.0  5.71    12
+    #> 2 Volume     47.8  7.87    10
+    #> 3 Angles     52.1  8.57    12
+    #> 4 Pressure   65.2  8.86    11
+    #> 5 Two-touch  46.8 10.9     14
+    #> 6 Composite  66.8  7.06    12
+
+    ggplot(drill71, aes(x = programme, y = score)) +
+      geom_boxplot() +
+      labs(x = NULL, y = "Finishing assessment score")
+    ```
+
+    Using the ANOVA output below, conduct a hypothesis test to determine if these data provide convincing evidence that the average assessment score varies across some (or all) programme groups.
+    Make sure to check relevant conditions.
+    The side-by-side box plots of the six groups are each reasonably symmetric, with a single mild outlier in the Volume group.
+
+    ```r
+    lm(score ~ programme, data = drill71) |>
+      anova()
+    #> Analysis of Variance Table
+    #>
+    #> Response: score
+    #>           Df Sum Sq Mean Sq F value    Pr(>F)
+    #> programme  5 5650.1 1130.01  15.968 3.071e-10 ***
+    #> Residuals 65 4599.9   70.77
+    ```
+
+6.  **Teaching the grading rubric.** Emil Sørensen compared five different formats for teaching Northbridge's prospect-grading rubric to newly hired scouts: the traditional classroom seminar, a self-paced written manual, the manual plus seminar, an interactive video course, and the video course plus seminar.
+    45 trainee scouts were randomly assigned, 9 to each format.
+    After completing the course, the trainees took a 1-hour certification exam.
+
+    a.  What are the hypotheses for evaluating if the average certification scores are different for the different teaching formats?
+
+    b.  What are the degrees of freedom associated with the $F$-test for evaluating these hypotheses?
+
+    c.  Suppose the p-value for this test is 0.0168.
+        What is the conclusion?
+
+7.  **Match sharpness and training volume.** GPS vests log every player's high-intensity output.
+    In a constructed scenario mirroring a large federation cohort study (the same registry introduced in the training-volume exercise of @sec-chp18-exercises), analysts used the youth registry's GPS database to ask whether a player's weekly minutes of high-intensity match work differ across levels of weekly *organized training* volume.
+    The table below gives summary statistics of weekly high-intensity match minutes for the 50,739 registered players, based on hours of organized training per week; the response is always greater than 0.
+
+    |      | Under 2 | 2--6 | 7--13 | 14--21 | 22 or more |
+    |:-----|--------:|-----:|------:|-------:|-----------:|
+    | Mean |    18.7 | 19.6 |  19.3 |   18.9 |       17.5 |
+    | SD   |    21.1 | 25.5 |  22.5 |   22.0 |       22.0 |
+    | n    |  12,215 | 6,617 | 17,234 | 12,290 |     2,383 |
+
+    a.  Write the hypotheses for evaluating if the average weekly high-intensity match minutes vary among the different training-volume levels.
+
+    b.  Check conditions and describe any assumptions you must make to proceed with the test.
+
+    c.  Below is the output associated with this test.
+        What is the conclusion of the test?
+
+    |           | Df     | Sum Sq     | Mean Sq | F value | Pr(>F) |
+    |:----------|-------:|-----------:|--------:|--------:|-------:|
+    | volume    |      4 |     10,508 |   2,627 |     5.2 | 0.0003 |
+    | Residuals | 50,734 | 25,564,819 |     504 |         |        |
+    | Total     | 50,738 | 25,575,327 |         |         |        |
+
+8.  **Report quality across sub-networks.** Emil Sørensen's 48 regional scouts are organized into eight sub-networks, each led by a different senior scout.
+    In a constructed end-of-season audit, 197 prospect reports filed across the sub-networks were re-scored for quality by a blinded panel; Emil would like to test if report quality differs by sub-network.
+    The summary table below shows the average audit score for each sub-network as well as the standard deviation of scores and the number of reports audited from each.
+
+    |      | Net 1 | Net 2 | Net 3 | Net 4 | Net 5 | Net 6 | Net 7 | Net 8 |
+    |:-----|------:|------:|------:|------:|------:|------:|------:|------:|
+    | Mean | 92.94 | 91.11 | 91.80 | 92.45 | 89.30 | 88.30 | 90.12 | 93.35 |
+    | SD   |  4.21 |  5.58 |  3.43 |  5.92 |  9.32 |  7.27 |  6.93 |  4.57 |
+    | n    |    33 |    19 |    10 |    29 |    33 |    10 |    32 |    31 |
+
+    The ANOVA output below can be used to test for differences between the average audit scores from the different sub-networks.
+
+    |            | Df  | Sum Sq   | Mean Sq | F value | Pr(>F) |
+    |:-----------|----:|---------:|--------:|--------:|-------:|
+    | network    |   7 |   525.01 |   75.00 |    1.87 | 0.0767 |
+    | Residuals  | 189 | 7,584.11 |   40.13 |         |        |
+    | Total      | 196 | 8,109.12 |         |         |        |
+
+    Conduct a hypothesis test to determine if these data provide convincing evidence that the average audit score varies across some (or all) sub-networks.
+    Check conditions and describe any assumptions you must make to proceed with the test.
+
+9.  **Chance quality by position group at the Women's Euro.** @sec-mathANOVA found that average open-play chance quality varies by position group at the 2022 Men's World Cup.
+    Does the pattern replicate at the 2025 Women's Euro?
+    The code below applies the position-group mapping of @sec-explore-categorical to the Euro's open-play shots (the same stated frame as the chapter's case study; the Euro's two goalkeeper shots were both penalties, so the open-play filter leaves no `GK` rows) and fits the ANOVA.[^_22-ex-inference-many-means-3]
+    The density ridges show the distributions of xG for the three groups, each strongly right-skewed.
+
+    ```r
+    library(ggridges)
+
+    weuro_pos_open <- weuro2025_shots |>
+      filter(shot_type == "Open Play") |>
+      mutate(
+        pos_group = case_when(
+          position == "Goalkeeper" ~ "GK",
+          grepl("Back", position) ~ "DF",
+          grepl("Midfield", position) ~ "MF",
+          .default = "FW"
+        ),
+        pos_group = factor(pos_group, levels = c("FW", "MF", "DF"))
+      )
+
+    weuro_pos_open |>
+      count(pos_group)
+    #> # A tibble: 3 × 2
+    #>   pos_group     n
+    #>   <fct>     <int>
+    #> 1 FW          402
+    #> 2 MF          308
+    #> 3 DF          141
+
+    ggplot(weuro_pos_open, aes(x = statsbomb_xg, y = pos_group,
+                               color = pos_group, fill = pos_group)) +
+      geom_density_ridges(alpha = 0.5, show.legend = FALSE) +
+      labs(x = "Chance quality (xG)", y = "Position group")
+
+    lm(statsbomb_xg ~ pos_group, data = weuro_pos_open) |>
+      anova()
+    #> Analysis of Variance Table
+    #>
+    #> Response: statsbomb_xg
+    #>            Df  Sum Sq  Mean Sq F value    Pr(>F)
+    #> pos_group   2  0.4007 0.200370  16.406 1.022e-07 ***
+    #> Residuals 848 10.3568 0.012213
+    ```
+
+    a.  Write the hypotheses for testing for a difference between average open-play chance quality across position groups.
+
+    b.  What is the conclusion of the hypothesis test, and what may the club claim about position groups and chance quality at this tournament?
+
+    c.  How many shots enter the analysis, i.e., what is the sample size?
+        (Recover it from the ANOVA table's degrees of freedom, then confirm against the group counts.)
+
+10. **Play patterns and chance quality at the World Cup.** The play-pattern question of Exercises 3 and 4 can be asked of the 2022 Men's World Cup as well.
+    Applying the same stated filter — the `Other` bucket here holds 68 shots: all 64 penalty kicks (43 scored) plus 4 open-play-tagged shots, exactly the composition documented in @sec-chp18-real-table — leaves $1494 - 68 = 1426$ shots across the eight play patterns.[^_22-ex-inference-many-means-4]
+    Below are the distributions of chance quality by play pattern and relevant summary statistics, followed by the ANOVA output.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc2022_shots |>
+      filter(play_pattern == "Other") |>
+      count(shot_type, goal)
+    #> # A tibble: 3 × 3
+    #>   shot_type goal      n
+    #>   <chr>     <lgl> <int>
+    #> 1 Open Play FALSE     4
+    #> 2 Penalty   FALSE    21
+    #> 3 Penalty   TRUE     43
+
+    wc_pattern_xg <- wc2022_shots |>
+      filter(play_pattern != "Other") |>
+      mutate(play_pattern = factor(play_pattern,
+        levels = c("Regular Play", "From Throw In", "From Free Kick", "From Corner",
+                   "From Goal Kick", "From Counter", "From Keeper", "From Kick Off")))
+
+    ggplot(wc_pattern_xg, aes(y = play_pattern, x = statsbomb_xg)) +
+      geom_boxplot() +
+      labs(y = NULL, x = "Chance quality (xG)")
+
+    wc_pattern_xg |>
+      group_by(play_pattern) |>
+      summarize(n = n(), mean = mean(statsbomb_xg), sd = sd(statsbomb_xg))
+    #> # A tibble: 8 × 4
+    #>   play_pattern       n   mean     sd
+    #>   <fct>          <int>  <dbl>  <dbl>
+    #> 1 Regular Play     446 0.0976 0.128
+    #> 2 From Throw In    298 0.0852 0.101
+    #> 3 From Free Kick   285 0.0812 0.106
+    #> 4 From Corner      223 0.102  0.137
+    #> 5 From Goal Kick    80 0.120  0.151
+    #> 6 From Counter      56 0.159  0.157
+    #> 7 From Keeper       21 0.106  0.0913
+    #> 8 From Kick Off     17 0.0946 0.126
+    ```
+
+    a.  Write hypotheses for evaluating whether the average chance quality varies across the eight play patterns.
+
+    b.  Check conditions and describe any assumptions you must make to proceed with the test.
+
+    c.  Below is the output associated with this test.
+        What is the conclusion of the test?
+        Note how the verdict compares with the Women's Euro test of Exercise 4 — and which play pattern tops the World Cup table (counters, at 0.159) — before your scouts declare a universal law of football.
+
+    ```r
+    lm(statsbomb_xg ~ play_pattern, data = wc_pattern_xg) |>
+      anova()
+    #> Analysis of Variance Table
+    #>
+    #> Response: statsbomb_xg
+    #>                Df  Sum Sq  Mean Sq F value    Pr(>F)
+    #> play_pattern    7  0.3795 0.054208  3.6109 0.0007292 ***
+    #> Residuals    1418 21.2877 0.015012
+    ```
+
+11. **True / False: ANOVA, I.** Determine if the following statements are true or false in ANOVA, and explain your reasoning for statements you identify as false.
+
+    a.  As the number of groups increases, the modified discernibility level for pairwise tests increases as well.
+
+    b.  As the total sample size increases, the degrees of freedom for the residuals increases as well.
+
+    c.  The constant variance condition can be somewhat relaxed when the sample sizes are relatively consistent across groups.
+
+    d.  The independence assumption can be relaxed when the total sample size is large.
+
+12. **True / False: ANOVA, II.** Determine if the following statements are true or false, and explain your reasoning for statements you identify as false.
+
+    If the null hypothesis that the means of four groups are all the same is rejected using ANOVA at a 5% discernibility level, then...
+
+    a.  we can then conclude that all the means are different from one another.
+
+    b.  the standardized variability between groups is higher than the standardized variability within groups.
+
+    c.  the pairwise analysis will identify at least one pair of means that are discernibly different.
+
+    d.  the appropriate $\alpha$ to be used in pairwise comparisons is 0.05 / 4 = 0.0125 since there are four groups.
+
+13. **Matching observed data with randomized F statistics.** Northbridge trialled prospects at its four regional academies, and each trialist sat the same technical battery.
+    Consider the following two constructed datasets, built by the seeded code below: in both, the response variable is the battery `score` and the explanatory variable is the `region` (North, South, East, West), with 25 trialists per region and the *same* designed differences between the region means — but Dataset A was built with a within-region standard deviation of 5, and Dataset B with a within-region standard deviation of 20.[^_22-ex-inference-many-means-5]
+
+    ```r
+    set.seed(2209)
+    region_A <- tibble(
+      region = rep(c("North", "South", "East", "West"), each = 25),
+      score = c(rnorm(25, 60, 5), rnorm(25, 55, 5), rnorm(25, 58, 5), rnorm(25, 52, 5))
+    )
+
+    region_B <- tibble(
+      region = rep(c("North", "South", "East", "West"), each = 25),
+      score = c(rnorm(25, 60, 20), rnorm(25, 55, 20), rnorm(25, 58, 20), rnorm(25, 52, 20))
+    )
+
+    F_A <- region_A |>
+      specify(score ~ region) |>
+      calculate(stat = "F") |>
+      pull()
+
+    F_B <- region_B |>
+      specify(score ~ region) |>
+      calculate(stat = "F") |>
+      pull()
+
+    c(F_A = F_A, F_B = F_B)
+    #>        F_A        F_B
+    #> 11.0098825  0.6454668
+
+    rand_A <- region_A |>
+      specify(score ~ region) |>
+      hypothesize(null = "independence") |>
+      generate(1000, type = "permute") |>
+      calculate(stat = "F")
+
+    rand_B <- region_B |>
+      specify(score ~ region) |>
+      hypothesize(null = "independence") |>
+      generate(1000, type = "permute") |>
+      calculate(stat = "F")
+    ```
+
+    The randomizations (randomly assigning region to the score, calculating a randomization F statistic) were done 1,000 times for each of Dataset A and B.
+    In Dataset A's box plots the four regional groups are tight and their centers clearly separated; in Dataset B's box plots the four groups overlap almost completely.
+    The two randomization histograms look nearly identical to each other: right-skewed, running from about 0 to 5, with most values below 2.
+    On the *left* histogram, the red line marking the observed F statistic for the original (unrandomized) data falls at 0.65, well inside the bulk of the distribution (560 of the 1,000 randomized statistics exceed it).
+    On the *right* histogram, the red line falls at 11.01, far beyond the largest of the 1,000 randomized statistics.
+
+    a.  Does the randomization distribution on the left correspond to Dataset A or B?
+        Explain.
+
+    b.  Does the randomization distribution on the right correspond to Dataset A or B?
+        Explain.
+
+14. **Video-review hours by scouting experience.** Northbridge's league-wide scouting survey (a constructed scenario built by the seeded code below) asked 905 accredited scouts how many hours per week they spend reviewing video, and recorded each scout's years of experience in five bands.[^_22-ex-inference-many-means-6]
+    The density ridges show the distribution of weekly video-review hours by experience band; the ANOVA output for comparing average hours across the bands is also provided.
+
+    ```r
+    set.seed(2210)
+    video_hours <- tibble(
+      experience = factor(rep(c("Under 2 years", "2-5 years", "6-10 years",
+                                "11-20 years", "Over 20 years"),
+                              times = c(210, 340, 220, 90, 45)),
+                          levels = c("Under 2 years", "2-5 years", "6-10 years",
+                                     "11-20 years", "Over 20 years")),
+      hours = c(rnorm(210, 9.5, 4.5), rnorm(340, 10.2, 4.5), rnorm(220, 11.0, 5.0),
+                rnorm(90, 12.1, 5.0), rnorm(45, 12.6, 5.5))
+    ) |>
+      mutate(hours = pmax(round(hours, 1), 0))
+
+    video_hours |>
+      group_by(experience) |>
+      summarize(mean = mean(hours), sd = sd(hours), n = n())
+    #> # A tibble: 5 × 4
+    #>   experience     mean    sd     n
+    #>   <fct>         <dbl> <dbl> <int>
+    #> 1 Under 2 years  9.38  4.64   210
+    #> 2 2-5 years     10.3   4.65   340
+    #> 3 6-10 years    11.3   5.16   220
+    #> 4 11-20 years   12.4   5.61    90
+    #> 5 Over 20 years 11.4   5.45    45
+
+    ggplot(video_hours, aes(x = hours, y = experience,
+                            color = experience, fill = experience)) +
+      geom_density_ridges(alpha = 0.5, show.legend = FALSE) +
+      labs(x = "Weekly video-review hours", y = NULL)
+
+    lm(hours ~ experience, data = video_hours) |>
+      anova()
+    #> Analysis of Variance Table
+    #>
+    #> Response: hours
+    #>             Df Sum Sq Mean Sq F value    Pr(>F)
+    #> experience   4    778 194.503  8.0403 2.272e-06 ***
+    #> Residuals  900  21772  24.191
+    ```
+
+    a.  Write the hypotheses for testing for a difference between the average weekly video-review hours across experience bands.
+
+    b.  What is the conclusion of the hypothesis test?
+
+[^_22-ex-inference-many-means-1]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_22-ex-inference-many-means-2]: The `drill71` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real academy strikers were assessed.
+
+[^_22-ex-inference-many-means-3]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data); the position-group mapping is the one defined once in @sec-explore-categorical and reused throughout the book.
+
+[^_22-ex-inference-many-means-4]: The 2022 Men's World Cup shot data used in this exercise are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_22-ex-inference-many-means-5]: The `region_A` and `region_B` data are constructed illustrations, generated entirely by the seeded code shown, so that the two datasets share the same designed group differences and differ only in within-group variability.
+
+[^_22-ex-inference-many-means-6]: The `video_hours` data are a constructed scouting scenario, generated entirely by the seeded code shown; no real survey of scouts was conducted.

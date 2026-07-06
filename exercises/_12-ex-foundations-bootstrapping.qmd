@@ -1,0 +1,334 @@
+1.  **Headed chances.** Let's say that you want to estimate the probability that a headed chance at this level of football is scored.
+    Marta Vidal has asked for a defensible figure before the club weighs a bid for a target man whose game is built on winning crosses.
+    You pull every shot taken with the head at the 2022 Men's World Cup[^_12-ex-foundations-bootstrapping-1] and find that 28 of the 252 headed shots were scored.
+    Recall from @sec-case-study-med-consult that for a question about the *process* — how headed chances convert at this level, at the next tournament, for Northbridge — these 252 shots are a sample, and the long-run conversion rate of headed chances is unknown.
+    You decide to create a bootstrap interval from the original sample of 252 shots.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    headed_shots <- wc2022_shots |> filter(body_part == "Head")
+
+    headed_shots |>
+      summarize(shots = n(), goals = sum(goal), conversion = mean(goal))
+    #> # A tibble: 1 × 3
+    #>   shots goals conversion
+    #>   <int> <int>      <dbl>
+    #> 1   252    28      0.111
+
+    set.seed(1205)
+    headed_boot <- headed_shots |>
+      mutate(result = if_else(goal, "goal", "no goal")) |>
+      specify(response = result, success = "goal") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "prop")
+
+    round(quantile(headed_boot$stat, c(0.025, 0.05, 0.95, 0.975)), 3)
+    #>  2.5%    5%   95% 97.5%
+    #> 0.075 0.083 0.143 0.151
+
+    ggplot(headed_boot, aes(x = stat)) +
+      geom_histogram(binwidth = 1 / 252) +
+      labs(
+        x = "Bootstrapped proportion of headed shots scored",
+        y = "Count",
+        title = "1,000 bootstrapped proportions"
+      )
+    ```
+
+    The histogram of the 1,000 bootstrapped proportions is roughly bell-shaped and centered at the observed proportion (the mean of the 1,000 values is 0.111), with the bootstrapped proportions stepping in increments of $1/252$ and ranging from about $0.056$ to $0.171.$
+    Four of its percentiles are printed above.
+
+    a.  Describe in words the relevant statistic and parameter for this problem.
+        If you know the numerical value for either one, provide it.
+        If you don't know the numerical value, explain why the value is unknown.
+
+    b.  What notation is used to describe, respectively, the statistic and the parameter?
+
+    c.  If using software to bootstrap the original dataset, what is the statistic calculated on each bootstrap sample?
+
+    d.  When creating a bootstrap sampling distribution (histogram) of the bootstrapped sample proportions, where should the center of the histogram lie?
+
+    e.  The code above printed four percentiles of the 1,000 bootstrapped sample proportions.
+        Using the appropriate pair, construct a 90% confidence interval for the probability that a headed chance is scored.
+
+    f.  Interpret the confidence interval in the context of the data.
+
+2.  **Right-footed shots at the Women's Euro.** Scouting reports habitually flag a prospect's weaker foot, so Priya Rao wants a tournament baseline: what proportion of shots at this level arrive on the right foot?
+    At the 2025 Women's Euro, 502 of the 913 shots — a proportion of $502/913 = 0.55$ — were taken with the right foot.[^_12-ex-foundations-bootstrapping-2]
+    However, this value is based on a single tournament's worth of shots, so it may not be a perfect estimate for the population parameter of interest on its own.
+    The seeded code below bootstraps the sample 1,000 times.
+
+    ```r
+    weuro2025_shots <- read_csv("data/derived/weuro2025_shots.csv")
+
+    weuro2025_shots |>
+      mutate(part = if_else(body_part == "Right Foot", "right foot", "other")) |>
+      count(part)
+    #> # A tibble: 2 × 2
+    #>   part           n
+    #>   <chr>      <int>
+    #> 1 other        411
+    #> 2 right foot   502
+
+    set.seed(1206)
+    rightfoot_boot <- weuro2025_shots |>
+      mutate(part = if_else(body_part == "Right Foot", "right foot", "other")) |>
+      specify(response = part, success = "right foot") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "prop")
+
+    round(quantile(rightfoot_boot$stat, c(0.01, 0.04, 0.96, 0.99)), 3)
+    #>    1%    4%   96%   99%
+    #> 0.514 0.521 0.581 0.587
+
+    ggplot(rightfoot_boot, aes(x = stat)) +
+      geom_histogram(bins = 40) +
+      labs(
+        x = "Bootstrapped proportion of right-footed shots",
+        y = "Count",
+        title = "1,000 bootstrapped proportions"
+      )
+    ```
+
+    The histogram of the 1,000 bootstrapped proportions is roughly bell-shaped and centered at the observed $0.55,$ ranging from about $0.505$ to $0.602$; four of its percentiles are printed above.
+    Using the distribution of 1,000 bootstrapped proportions, approximate a 92% confidence interval for the true proportion of shots at this level that are taken with the right foot, and interpret the interval in the context of the problem.
+
+3.  **Open-play shots, bootstrapping.** Emil Sørensen, briefing the network before the season, wants a defensible figure for how many chances arise from settled open play — as opposed to set pieces, throw-ins, counters, and the game's other patterns — since it shapes how much of a scout's attention should go to a prospect's set-piece behavior.
+    At the 2022 Men's World Cup, 446 of the 1,494 shots — a proportion of $446/1494 = 0.299$ — arose from the `Regular Play` pattern.
+    However, this value is based on a single tournament, so it may not be a perfect estimate for the population parameter of interest on its own.
+    The seeded code below bootstraps the tournament's 1,494 shots 1,000 times.
+
+    ```r
+    wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+
+    wc2022_shots |>
+      mutate(pattern = if_else(play_pattern == "Regular Play",
+                               "regular play", "other")) |>
+      count(pattern)
+    #> # A tibble: 2 × 2
+    #>   pattern          n
+    #>   <chr>        <int>
+    #> 1 other         1048
+    #> 2 regular play   446
+
+    set.seed(1207)
+    openplay_boot <- wc2022_shots |>
+      mutate(pattern = if_else(play_pattern == "Regular Play",
+                               "regular play", "other")) |>
+      specify(response = pattern, success = "regular play") |>
+      generate(reps = 1000, type = "bootstrap") |>
+      calculate(stat = "prop")
+
+    round(quantile(openplay_boot$stat, c(0.01, 0.05, 0.95, 0.99)), 3)
+    #>    1%    5%   95%   99%
+    #> 0.270 0.279 0.318 0.327
+
+    ggplot(openplay_boot, aes(x = stat)) +
+      geom_histogram(bins = 40) +
+      labs(
+        x = "Bootstrapped proportion of regular-play shots",
+        y = "Count",
+        title = "1,000 bootstrapped proportions"
+      )
+    ```
+
+    The histogram of the 1,000 bootstrapped proportions is roughly bell-shaped and centered at the observed $0.299,$ ranging from about $0.262$ to $0.333$ — a narrow distribution, as we should expect with 1,494 observations behind each resample; four of its percentiles are printed above.
+    Using the distribution of 1,000 bootstrapped proportions, approximate a 98% confidence interval for the true proportion of shots at this level that arise from regular open play, and interpret the interval in the context of the problem.
+
+4.  **Bootstrap distributions of** $\hat{p}$**, I.** Northbridge ran trial weeks at four partner academies, labelled A through D.
+    Each cohort contained $n = 23$ trialists, and the coaching panel returned a "sign" or "pass" verdict on each — the seven-trialist bag of @sec-foundations-bootstrapping, scaled up.[^_12-ex-foundations-bootstrapping-3]
+    The four cohorts' observed proportions of "sign" verdicts were, in no particular order:
+    $$\hat{p} = 0.13 \ \ \hat{p} = 0.22 \ \ \hat{p} = 0.30 \ \ \hat{p} = 0.43.$$
+    The seeded code below constructs the four cohorts — note that it *shuffles* which cohort receives which rate, so the assignment cannot be read off the construction; you must reason from the bootstrap summaries.
+    It then bootstraps each cohort's sample 1,000 times and summarizes each of the four bootstrap distributions: `lower_95` and `upper_95` are the 2.5th and 97.5th percentiles of its 1,000 $\hat{p}_{boot}$ values (the middle 95%), and `min` and `max` give its full range.
+    Each distribution is unimodal and centered at its cohort's observed proportion, its values stepping in increments of $1/23$; the distribution nearest zero shows a mild right skew, since a proportion cannot fall below $0.$
+
+    ```r
+    set.seed(1247)
+    p_hats <- sample(c(0.13, 0.22, 0.30, 0.43))  # shuffled to cohorts A-D
+
+    make_cohort <- function(p) {
+      n_sign <- round(23 * p)
+      tibble(verdict = sample(c(rep("sign", n_sign),
+                                rep("pass", 23 - n_sign))))
+    }
+
+    cohort_a <- make_cohort(p_hats[1])
+    cohort_b <- make_cohort(p_hats[2])
+    cohort_c <- make_cohort(p_hats[3])
+    cohort_d <- make_cohort(p_hats[4])
+
+    boot_cohort <- function(cohort) {
+      set.seed(1208)
+      cohort |>
+        specify(response = verdict, success = "sign") |>
+        generate(reps = 1000, type = "bootstrap") |>
+        calculate(stat = "prop")
+    }
+
+    bind_rows(
+      A = boot_cohort(cohort_a),
+      B = boot_cohort(cohort_b),
+      C = boot_cohort(cohort_c),
+      D = boot_cohort(cohort_d),
+      .id = "cohort"
+    ) |>
+      group_by(cohort) |>
+      summarize(
+        lower_95 = quantile(stat, 0.025),
+        upper_95 = quantile(stat, 0.975),
+        min = min(stat),
+        max = max(stat)
+      )
+    #> # A tibble: 4 × 5
+    #>   cohort lower_95 upper_95   min   max
+    #>   <chr>     <dbl>    <dbl> <dbl> <dbl>
+    #> 1 A        0         0.262 0     0.348
+    #> 2 B        0.217     0.652 0.130 0.739
+    #> 3 C        0.130     0.479 0     0.652
+    #> 4 D        0.0870    0.391 0     0.478
+    ```
+
+    Treating the summary table as your only view of the four distributions — imagine you were handed the four histograms without the underlying counts — match each bootstrap distribution with the cohort's observed proportion of "sign" verdicts.
+
+5.  **Bootstrap distributions of** $\hat{p}$**, II.** Consider again the four trial cohorts of the previous exercise, each with $n = 23$ verdicts, along with the summaries of their four bootstrap distributions (1,000 bootstrapped proportions each).
+    Consider each of the following values for the true population proportion $p$ of "sign" verdicts among trialists of this kind.
+    For each parameter value, list the cohorts which could plausibly have been sampled from a population with that proportion of success.
+    (Hint: there may be more than one cohort for each parameter value.)
+
+    a.  $p = 0.05$
+
+    b.  $p = 0.25$
+
+    c.  $p = 0.45$
+
+    d.  $p = 0.55$
+
+    e.  $p = 0.75$
+
+6.  **Bootstrap distributions of** $\hat{p}$**, III.** Four of Emil's regional scouts — again labelled A through D — each tagged a sample of shots from the league they cover, recording whether each shot was a first-time effort.[^_12-ex-foundations-bootstrapping-4]
+    Each scout found that exactly 40% of the shots in their sample were first-time efforts $(\hat{p} = 0.40),$ but the sample sizes differed: scout A tagged $n = 10$ shots, scout B $n = 100,$ scout C $n = 500,$ and scout D $n = 1000.$
+    Each sample was bootstrapped 1,000 times with the seeded code below, which summarizes the four bootstrap distributions as in the previous exercises; each is roughly bell-shaped and centered at $0.40.$
+
+    ```r
+    tag_a <- tibble(shot = c(rep("first-time",   4), rep("other",   6)))
+    tag_b <- tibble(shot = c(rep("first-time",  40), rep("other",  60)))
+    tag_c <- tibble(shot = c(rep("first-time", 200), rep("other", 300)))
+    tag_d <- tibble(shot = c(rep("first-time", 400), rep("other", 600)))
+
+    boot_tags <- function(tagged) {
+      set.seed(1209)
+      tagged |>
+        specify(response = shot, success = "first-time") |>
+        generate(reps = 1000, type = "bootstrap") |>
+        calculate(stat = "prop")
+    }
+
+    bind_rows(
+      A = boot_tags(tag_a),
+      B = boot_tags(tag_b),
+      C = boot_tags(tag_c),
+      D = boot_tags(tag_d),
+      .id = "scout"
+    ) |>
+      group_by(scout) |>
+      summarize(
+        lower_95 = quantile(stat, 0.025),
+        upper_95 = quantile(stat, 0.975),
+        min = min(stat),
+        max = max(stat)
+      )
+    #> # A tibble: 4 × 5
+    #>   scout lower_95 upper_95   min   max
+    #>   <chr>    <dbl>    <dbl> <dbl> <dbl>
+    #> 1 A        0.1      0.7   0     0.9
+    #> 2 B        0.3      0.5   0.27  0.58
+    #> 3 C        0.354    0.438 0.332 0.474
+    #> 4 D        0.37     0.431 0.354 0.449
+    ```
+
+    Consider each of the following values for the true population proportion $p$ of first-time shots in a league.
+    For each parameter value, list the samples which could plausibly have come from a league with that proportion.
+    (Hint: there may be more than one sample for each parameter value.)
+
+    a.  $p = 0.05$
+
+    b.  $p = 0.25$
+
+    c.  $p = 0.45$
+
+    d.  $p = 0.55$
+
+    e.  $p = 0.75$
+
+7.  **Video scouting uptake.** The league's scouting association surveyed its accredited scouts about how they work, and 54% to 64% of scouts reported that the majority of their prospect evaluations are now done from video rather than from the stands (95% confidence interval).[^_12-ex-foundations-bootstrapping-5]
+    Answer the following questions based on this interval.
+
+    a.  A trade magazine runs the headline "Most scouts now work primarily from video."
+        Is this claim supported by the confidence interval?
+        Explain your reasoning.
+
+    b.  A video-platform vendor, pitching Marta Vidal for a contract, claims that 70% of accredited scouts work primarily from video.
+        Is this claim supported by the confidence interval?
+        Explain your reasoning.
+
+    c.  Without actually calculating the interval, determine if the vendor's claim from part (b) would be supported based on a 90% confidence interval.
+
+8.  **Waiting on a data pack.** When Marta Vidal requests a prospect's automated data pack — the machine-generated bundle of event data, xG profile, and tagged video that the analysis pipeline compiles before any scout writes a word — the pipeline's runtime is a running sore point.
+    Priya Rao audited a sample of recent requests and computed a 95% confidence interval for the mean generation time per prospect, from request to delivered pack, of (128 minutes, 147 minutes).[^_12-ex-foundations-bootstrapping-6]
+    Answer the following questions based on this interval.
+
+    a.  Emil Sørensen, arguing that the pipeline needs investment, claims that the average generation time exceeds 3 hours.
+        Is this claim supported by the confidence interval?
+        Explain your reasoning.
+
+    b.  Marta claims the average generation time is 2.2 hours.
+        Is this claim supported by the confidence interval?
+        Explain your reasoning.
+
+    c.  Without actually calculating the interval, determine if Marta's claim from part (b) would be supported based on a 99% confidence interval.
+
+------------------------------------------------------------------------
+
+S1. **Simulation workshop: does the interval keep its promise?** *A supplemental exercise, outside the IMS numbering: this time you build the simulation instead of reading one.*
+Every "95% confident" in this chapter is a claim about the *procedure*: intervals built this way should capture the true parameter in about 95% of the samples we might have drawn.
+For once that claim is checkable, by the census trick of this chapter's "watching the principle hold" box: the 2022 Men's World Cup is a fully logged population of 1,494 shots whose true conversion rate is known exactly, $p = 195/1494 = 0.1305.$
+The seeded code below draws 500 samples of $n = 63$ shots — England's file size from the case study — builds a 95% percentile bootstrap interval from each sample (500 bootstrap resamples per interval), and records whether each interval captured $p.$
+
+```r
+wc2022_shots <- read_csv("data/derived/wc2022_shots.csv")
+goals <- wc2022_shots$goal
+p_true <- 195 / 1494
+
+set.seed(1211)
+captured <- replicate(500, {
+  s <- sample(goals, 63)
+  boot_p <- replicate(500, mean(sample(s, 63, replace = TRUE)))
+  quantile(boot_p, 0.025) <= p_true & p_true <= quantile(boot_p, 0.975)
+})
+
+mean(captured)
+#> [1] 0.918
+```
+
+a.  Before looking at the output: if the intervals kept their promise exactly, in about how many of the 500 samples should the interval capture the true conversion rate?
+
+b.  The run above captures $p$ in 459 of the 500 samples, a capture rate of $0.918.$
+    Is the shortfall an accident of this particular seed, or something systematic?
+    Rerun the audit with two or three other seeds before you answer.
+
+c.  Whatever you concluded in part (b), explain *why* a percentile interval built on 63 shots might fall short of its advertised coverage, and what a scout should do about the label when a file this small crosses their desk.
+    (Hint: with 63 shots and a conversion rate near $0.13,$ a typical sample contains around 8 goals — count how many distinct values $\hat{p}_{boot}$ can then take. @sec-one-prop-null-boot will meet the same headcount problem from the mathematical side.)
+
+[^_12-ex-foundations-bootstrapping-1]: The 2022 Men's World Cup shot data used in this exercise and in Exercise 3 are in `data/derived/wc2022_shots.csv` (StatsBomb open data).
+
+[^_12-ex-foundations-bootstrapping-2]: The 2025 Women's Euro shot data used in this exercise are in `data/derived/weuro2025_shots.csv` (StatsBomb open data).
+
+[^_12-ex-foundations-bootstrapping-3]: The four trial cohorts are a constructed scouting scenario, built entirely by the seeded code shown; no real trialists were assessed.
+
+[^_12-ex-foundations-bootstrapping-4]: The four tagged samples are a constructed scouting scenario, built entirely by the seeded code shown; the shot counts are not real league data.
+
+[^_12-ex-foundations-bootstrapping-5]: The survey and its interval are a constructed scenario; no such league-wide survey exists.
+
+[^_12-ex-foundations-bootstrapping-6]: The data-pack audit and its interval are a constructed scenario, used here as a premise for reasoning about a confidence interval for a mean.

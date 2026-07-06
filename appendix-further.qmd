@@ -1,0 +1,102 @@
+# Where to go next {#sec-appendix-further}
+
+This book has been honest about its ceiling.
+Every time a standard error arrived from software with the derivation waved off, every time a phrase like "beyond the scope of this text" closed a door, an IOU was written.
+That honesty is worth little if the IOUs can never be redeemed — a marked ceiling with no staircase is just a low room.
+This appendix is the staircase.
+It is not a bibliography in the ceremonial sense; it is an annotated ledger: for each debt the book incurred, the place where it is paid in full.
+Every title named here is a standard, widely available text — the kind you can hand to a librarian or a search engine and get exactly one answer.
+
+## Where the proofs live
+
+Four families of results were handed to you on trust.
+Here is where each is earned.
+
+**Mathematical statistics — the received standard errors and the $t$, $\chi^2$, and $F$ families.**
+You received $SE(\hat{p}) = \sqrt{p(1-p)/n}$ as a fact in @sec-one-prop-norm, $SE = s/\sqrt{n}$ and the $t$-distribution's shape in @sec-one-mean-math, the expected-count and degrees-of-freedom arithmetic of $\chi^2$ in @sec-mathchisq, the $F$ ratio of MSG to MSE in @sec-mathANOVA, and the standard error of a slope in @sec-mathslope; @sec-inf-model-mlr opened by admitting outright that the derivations — mathematical and randomization alike — were beyond this book.
+The text that pays all of these debts at once is Casella and Berger, *Statistical Inference*: the standard first-year graduate treatment, where sampling distributions are derived rather than announced, and where you will finally watch $s/\sqrt{n}$ fall out of a theorem instead of a formula box.
+It demands real calculus and patience.
+A gentler on-ramp covering the same territory at advanced-undergraduate pace is DeGroot and Schervish, *Probability and Statistics* — start there if Casella and Berger's first chapter feels like a wall rather than a staircase.
+
+**Likelihood and the theory behind the `glm()` output.**
+@sec-modelingTheProbabilityOfAnEvent conceded that the choice of the logit rests on the theory of generalized linear models, and @sec-inf-log-reg-soft read Wald statistics off the software's `summary()` the way a scout reads a vendor's xG — trusting, provisionally, a number built by someone else.
+The trust is redeemed by maximum likelihood theory.
+Agresti, *Categorical Data Analysis*, is the standard reference for everything this book did in @sec-model-logistic and @sec-inf-model-logistic — logistic regression, contingency tables, the $\chi^2$ machinery of @sec-inference-tables — with the likelihood derivations shown; his *An Introduction to Categorical Data Analysis* covers the same ground at the level of this book plus one course.
+For the brave: McCullagh and Nelder, *Generalized Linear Models*, the source text that unified the linear models of @sec-inf-model-slr and the logistic models of @sec-inf-model-logistic into one framework.
+
+**Resampling — why the bootstrap works.**
+@sec-foundations-bootstrapping taught the bootstrap by demonstration: resample, watch the distribution, read off the percentiles.
+Why the procedure is *valid* — and when it is not — was deferred, and @sec-boot1mean deferred specifically the question of which data structures suit percentile intervals versus SE intervals.
+Efron and Tibshirani, *An Introduction to the Bootstrap*, is the canonical treatment by the method's inventor and remains readable; Davison and Hinkley, *Bootstrap Methods and Their Application*, is the fuller modern reference, including the diagnostics for the cases where the marble-bag logic quietly fails.
+
+**The probability layer under everything.**
+The Central Limit Theorem was stated in @sec-CLTsection and then leaned on for fourteen chapters; it was never proved, because the proof lives in calculus-based probability.
+Blitzstein and Hwang, *Introduction to Probability*, is the modern standard — rigorous, generous with intuition, and free of the cookbook flavor.
+Any calculus-based probability text will do the job; the point is that random variables, expectation ($E[\cdot],$ which you met informally in @sec-inf-model-mlr), and convergence theorems form a floor this book stood on without showing you the joists.
+
+## When observations remember each other — what the cure is called
+
+Half a dozen times this book flagged the same danger and declined to name the cure: pseudoreplication in @sec-principles-experimental-design, the cluster-of-matches caveat in @sec-one-prop-norm ("beyond the scope of even most second or third courses"), the snaking GPS residuals of @sec-tech-cond-linmod, and the closing admission of @sec-chp26-review that shots nest within matches and matches within teams — structure our independence conditions politely ignored.
+The cure has names.
+**Multilevel models** (also called hierarchical or mixed models) put the nesting *into* the model — player as a level, match as a level — so the standard errors are computed from the number of independent units rather than the inflated count of dependent rows; **cluster-robust standard errors** repair the variance estimate after the fact instead.
+The entry point is Gelman and Hill, *Data Analysis Using Regression and Multilevel/Hierarchical Models*: it starts from exactly the regression this book ends with and builds upward, in R, with the authors' characteristic insistence on checking models against data.
+Before you open it, work through @sec-appendix-dependence, this book's companion appendix, where a sixty-day training-load simulation shows you — with real numbers — how far wrong the naive $s/\sqrt{n}$ goes when observations remember each other.
+
+## The frame, in the wider literature
+
+The book's penalty convention — every affected result shown pens-in *and* pens-out, the contrast itself the lesson (@sec-chp11-pens-out, and the closing doctrine of @sec-inf-model-applications) — taught you that the analyst chooses what quantity the study is about before any test is run, and that the choice can move a verdict further than the football does.
+The wider literature has a word for the quantity you choose: the **estimand**.
+Once you have the word, a whole vocabulary unlocks: *marginal* versus *conditional* effects (the all-shots average versus the effect within a play pattern), *restriction* versus *adjustment* (filtering the penalties out versus modeling them in — the two moves this book kept showing as a pair), and the causal-inference pairing of ATE and ATT, the average treatment effect in everyone versus in the treated.
+The entry point is Hernán and Robins, *Causal Inference: What If* — freely available online from the authors, and the natural next step for a reader who felt the force of this book's refrain that observational data supports association, not causation, and wants to know precisely what *would* license more.
+
+## Same move, other fields
+
+Much of what you practiced under football names is standard methodology elsewhere.
+The table below is a Rosetta stone: when you meet the right-hand column in another literature, you already know the move.
+
+| This book's move | Where you met it | What the wider literature calls it |
+|:---|:---|:---|
+| The dossier audit — identical dossiers, one randomized label | @sec-caseStudySexDiscrimination, @sec-model-logistic | Correspondence / résumé audit studies (labor economics) |
+| The frame decision — pens-in vs pens-out, and saying which | @sec-chp11-pens-out, @sec-inf-model-applications | Sample selection and composition effects (econometrics) |
+| Taking the model abroad | @sec-chp26-external | Out-of-sample testing (forecasting, machine learning) |
+| Calibration buckets — do the probabilities mean what they say? | @sec-chp26-external | Probability calibration (machine learning) |
+| Data snooping — letting the league table nominate the test | @sec-randANOVA | Multiple comparisons; the garden of forking paths (Andrew Gelman's phrase) |
+| An effect large enough to matter, not merely discernible | @sec-pow | The smallest worthwhile change (sports science) |
+
+: The book's signature moves and their names in other fields. {#tbl-rosetta-stone}
+
+The last row runs in both directions: sports science's "smallest worthwhile change" is that field's hard-won version of this book's distinction between statistical discernibility and practical importance — a difference can be statistically discernible and still smaller than anything a coach would change a session over, and a well-run performance department fixes the worthwhile threshold *before* looking, exactly as @sec-randANOVA fixed its hypotheses.
+
+## For the working analyst
+
+Five topics sit just past this book's last page and directly on a club analyst's desk.
+
+**Multiple comparisons.**
+@sec-randANOVA showed you the disease — snooping turned a 5% error rate into 78% in our seeded true-null worlds — and @sec-chp22-review filed it among the chapter's hard lessons.
+The oldest correction is Bonferroni's, and it fits in one sentence: divide your discernibility level by the number of pre-registered looks, so ten planned tests at an overall $\alpha = 0.05$ each need a p-value below $0.005$ before you call anything discernible.
+It is conservative and blunt, which is precisely why it is hard to argue with in a recruitment meeting.
+
+**Power and sample-size planning.**
+@sec-pow made the case that a power analysis belongs *before* the study; the working versions of that computation — how many players, how many matches, to detect an effect you would act on — are covered in any of the mathematical-statistics texts above, and the conventions for what counts as a small, medium, or large effect trace to Cohen, *Statistical Power Analysis for the Behavioral Sciences*.
+An underpowered trial is not neutral: it spends a season to produce "inconclusive."
+
+**Survival analysis.**
+Injury data ask a question none of this book's tools answer cleanly: not *whether* but *how long until* — days to return from a hamstring strain, with players still unrecovered when the season ends (the data are *censored*, in the field's vocabulary).
+That is survival analysis.
+Kleinbaum and Klein, *Survival Analysis: A Self-Learning Text*, is the standard gentle introduction, and the sports-medicine literature applies these methods routinely to time-to-injury and return-to-play problems.
+
+**Tracking data.**
+This book worked from events — shots, with their tags.
+Modern clubs also hold coordinates: every player, many times per second.
+Coordinate-level methods — pitch control, spatial value models — live in the sports-analytics research literature rather than in any settled textbook, and evaluating them will call on everything this appendix points to at once: probability for the models, resampling for the uncertainty, multilevel structure for players nested in teams nested in matches.
+
+**And the dependence appendix.**
+If you read only one thing beyond this page, make it @sec-appendix-dependence.
+A club analyst's data almost always remembers itself, and the difference between an honest interval and a fiction is the subject of those four pages.
+
+None of these books needs to be read cover to cover.
+The professor's advice is the scout's: know what question you are asking, then go to the chapter that answers it — and check the author's frame sentence as ruthlessly as you have learned to check your own.
+
+------------------------------------------------------------------------
+
+This appendix is original to this adaptation, licensed CC BY-SA 4.0. Match data: StatsBomb open data.

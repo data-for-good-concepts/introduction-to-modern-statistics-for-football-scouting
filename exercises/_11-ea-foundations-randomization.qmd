@@ -1,0 +1,7 @@
+**2.** (a) Proportion. (b) Neither — these are percent changes in counts of reports, not a mean or proportion of individual responses. (c) Proportion. (d) Proportion. (e) Mean.
+
+**4.** (a) 0.05. (b) 0.01. (c) 0.10.
+
+**6.** (a) $H_0: \mu = 1{,}100$ (the average report length has not changed since the xG-appendix requirement); $H_A: \mu \neq 1{,}100$ (the average report length has changed). (b) $H_0: \mu = 74$ (the average technical entry test score has not changed); $H_A: \mu \neq 74$ (the average technical entry test score has changed).
+
+**8.** (a) No — the released share is visibly higher in the control group (88% vs 65%), so the plot suggests retention is *not* independent of the program. (b) Development-group players remained in the pathway far longer (median $\approx 406$ days vs $\approx 60$), consistent with the program prolonging academy careers — though the groups were not randomly formed. (c) Development: $45/69 = 0.652$; control: $30/34 = 0.882.$ (d) (i) $H_0$: the program and being released are independent — the difference in release rates is due to chance; $H_A$: they are not independent — the program is associated with a lower release rate. (ii) Blanks in order: 28; 75; 69; 34; 0; at least as far below zero as the observed difference of $-0.23$ (i.e., $\leq -0.23$). (iii) p-value $= 1/100 = 0.01$: reject the independence model — the development group's release rate is discernibly lower — but because places on the program were not randomly assigned, the club may claim only an association, not that the program *caused* better outcomes.
