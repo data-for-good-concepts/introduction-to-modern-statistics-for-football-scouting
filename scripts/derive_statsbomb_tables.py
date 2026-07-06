@@ -1,9 +1,11 @@
 """Derive small analysis-ready CSVs from StatsBomb open event data.
 
-Downloads per-match event files (cached in the scratchpad, ~500MB transient),
-extracts shot events, and writes compact CSVs into data/derived/ that the
-book's R examples and the tutor's exercises read. Raw event JSON never enters
-the repo.
+Source: https://github.com/statsbomb/open-data (CC BY-NC-SA 4.0, StatsBomb).
+
+Downloads match lists and per-match event files (cached in the scratchpad,
+~500MB transient), extracts shot events, and writes compact CSVs into
+data/derived/ that the book's R examples and the tutor's exercises read.
+Raw StatsBomb JSON never enters this repo.
 
 Usage: python3 scripts/derive_statsbomb_tables.py <cache_dir>
 """
@@ -16,10 +18,10 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-RAW_BASE = "https://raw.githubusercontent.com/statsbomb/open-data/master/data/events"
+RAW_BASE = "https://raw.githubusercontent.com/statsbomb/open-data/master/data"
 COMPETITIONS = {
-    "wc2022": REPO / "data/statsbomb/wc2022_matches.json",
-    "weuro2025": REPO / "data/statsbomb/weuro2025_matches.json",
+    "wc2022": (43, 106),      # FIFA World Cup, 2022
+    "weuro2025": (53, 315),   # UEFA Women's Euro, 2025
 }
 
 SHOT_FIELDS = [
@@ -30,10 +32,19 @@ SHOT_FIELDS = [
 ]
 
 
+def fetch_matches(competition_id: int, season_id: int, cache_dir: Path) -> list[dict]:
+    cached = cache_dir / f"matches-{competition_id}-{season_id}.json"
+    if not cached.exists():
+        urllib.request.urlretrieve(
+            f"{RAW_BASE}/matches/{competition_id}/{season_id}.json", cached
+        )
+    return json.loads(cached.read_text())
+
+
 def fetch_events(match_id: int, cache_dir: Path) -> list[dict]:
     cached = cache_dir / f"{match_id}.json"
     if not cached.exists():
-        urllib.request.urlretrieve(f"{RAW_BASE}/{match_id}.json", cached)
+        urllib.request.urlretrieve(f"{RAW_BASE}/events/{match_id}.json", cached)
     return json.loads(cached.read_text())
 
 
@@ -102,8 +113,8 @@ def main() -> None:
     cache_dir = Path(sys.argv[1])
     cache_dir.mkdir(parents=True, exist_ok=True)
     out_dir = REPO / "data/derived"
-    for comp, matches_path in COMPETITIONS.items():
-        matches = json.loads(matches_path.read_text())
+    for comp, (competition_id, season_id) in COMPETITIONS.items():
+        matches = fetch_matches(competition_id, season_id, cache_dir)
         with ThreadPoolExecutor(max_workers=8) as pool:
             per_match = list(pool.map(lambda m: shots_for_match(comp, m, cache_dir), matches))
         shots = [r for rows in per_match for r in rows]
