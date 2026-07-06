@@ -7,7 +7,6 @@ book:
   author: "Adapted from Çetinkaya-Rundel & Hardin's IMS for the recruitment analyst"
   chapters:
     - index.qmd
-    # Parts and chapters mirror IMS exactly.
     - part: "Introduction to data"
       chapters:
         - data-hello.qmd
