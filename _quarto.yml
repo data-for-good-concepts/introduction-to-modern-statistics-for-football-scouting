@@ -9,50 +9,50 @@ book:
     - index.qmd
     - part: "Introduction to data"
       chapters:
-        - data-hello.qmd
-        - data-design.qmd
-        - data-applications.qmd
+        - 01-data-hello.qmd
+        - 02-data-design.qmd
+        - 03-data-applications.qmd
     - part: "Exploratory data analysis"
       chapters:
-        - explore-categorical.qmd
-        - explore-numerical.qmd
-        - explore-applications.qmd
+        - 04-explore-categorical.qmd
+        - 05-explore-numerical.qmd
+        - 06-explore-applications.qmd
     - part: "Regression modeling"
       chapters:
-        - model-slr.qmd
-        - model-mlr.qmd
-        - model-logistic.qmd
-        - model-applications.qmd
+        - 07-model-slr.qmd
+        - 08-model-mlr.qmd
+        - 09-model-logistic.qmd
+        - 10-model-applications.qmd
     - part: "Foundations of inference"
       chapters:
-        - foundations-randomization.qmd
-        - foundations-bootstrapping.qmd
-        - foundations-mathematical.qmd
-        - foundations-errors.qmd
-        - foundations-applications.qmd
+        - 11-foundations-randomization.qmd
+        - 12-foundations-bootstrapping.qmd
+        - 13-foundations-mathematical.qmd
+        - 14-foundations-errors.qmd
+        - 15-foundations-applications.qmd
     - part: "Statistical inference"
       chapters:
-        - inference-one-prop.qmd
-        - inference-two-props.qmd
-        - inference-tables.qmd
-        - inference-one-mean.qmd
-        - inference-two-means.qmd
-        - inference-paired-means.qmd
-        - inference-many-means.qmd
-        - inference-applications.qmd
+        - 16-inference-one-prop.qmd
+        - 17-inference-two-props.qmd
+        - 18-inference-tables.qmd
+        - 19-inference-one-mean.qmd
+        - 20-inference-two-means.qmd
+        - 21-inference-paired-means.qmd
+        - 22-inference-many-means.qmd
+        - 23-inference-applications.qmd
     - part: "Inferential modeling"
       chapters:
-        - inf-model-slr.qmd
-        - inf-model-mlr.qmd
-        - inf-model-logistic.qmd
-        - inf-model-applications.qmd
+        - 24-inf-model-slr.qmd
+        - 25-inf-model-mlr.qmd
+        - 26-inf-model-logistic.qmd
+        - 27-inf-model-applications.qmd
   appendices:
-    - appendix-setup.qmd
-    - exercise-solutions.qmd
-    - appendix-even-answers.qmd
-    - appendix-reference.qmd
-    - appendix-further.qmd
-    - appendix-dependence.qmd
+    - A1-appendix-setup.qmd
+    - A2-exercise-solutions.qmd
+    - A3-appendix-even-answers.qmd
+    - A4-appendix-reference.qmd
+    - A5-appendix-further.qmd
+    - A6-appendix-dependence.qmd
 
 format:
   html:
