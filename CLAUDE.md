@@ -27,6 +27,13 @@ Pre-rendered PNGs in `figures/`, named `<slug>-<k>.png` (pre-rename slug, e.g. `
 - IMS-inherited anchors (`sec-case-study-stents-strokes`, camelCase strays, ...) are deliberate crossref bridges back to IMS — do not rename or "clean up".
 - Cast: Marta Vidal (sporting director), Emil Sørensen (head scout, 48-scout network), Priya Rao (analyst), Jonas Beck (academy director). Dataset names are minted once and registered in map §1.2 — check it before naming anything new.
 
+## One continuous story
+
+The book is a single narrative, not 27 isolated example sets: storylines are designed to build on each other across chapters. The one-on-one pricing thread runs from ch 8's model through ch 16's agent pitch to ch 27's capstone; the dossier48 nationality audit (ch 11's flagship) is replicated in ch 17; the GPS load/vendor arc spans chs 21 and 24 and appendix A6; and headline results recur *verbatim* downstream — ch 11's p = 0.084/0.385 pair and ch 20's T = 4.27/0.37 pair are quoted in later chapters and in A4's penalty ledger. Two consequences:
+
+- Before editing any example, grep its dataset name and its key numbers across the whole repo — recurring results ripple, and a change at the source desynchronizes every quotation.
+- When adding content, prefer extending an existing storyline over minting an unconnected scenario — check the chapter's spec and AS BUILT entry in map §2 for what it inherits and what it hands forward, and §1.1 for the cast and org chart.
+
 ## Exercises
 
 Triplets in `exercises/`: `_NN-ex-*` (questions), `_NN-sa-*` (odd worked solutions → A2), `_NN-ea-*` (even bare answers → A3). Even answers stay **bare** deliberately — they double as tutor mastery-check material. IMS exercise numbering is preserved; book-original additions are labeled "S1" outside the numbering.
