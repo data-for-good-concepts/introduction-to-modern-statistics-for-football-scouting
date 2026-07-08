@@ -69,8 +69,12 @@ The chapters introduce each of these properly the first time it is needed, and t
 ## Get the book's materials {#sec-appendix-materials}
 
 The data ship in the book's companion repository — a single folder you download once and keep.
+The companion repository is the book's own source repository:
 
-<!-- TODO: insert repository URL when published -->
+<https://github.com/data-for-good-concepts/introduction-to-modern-statistics-for-football-scouting>
+
+Two routes to it, identical in result: on that page, *Code > Download ZIP*, then unzip the folder somewhere permanent (feel free to rename it to something shorter); or, if you use git, clone the URL.
+The repository also contains the book's full text — the `data/` folder inside is all the chapters ever read.
 
 Inside it, the only path the chapters ever read from is `data/derived/`, which holds the four CSV files that power every real-data example:
 
