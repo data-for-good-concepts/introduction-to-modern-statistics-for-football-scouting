@@ -33,6 +33,15 @@ Triplets in `exercises/`: `_NN-ex-*` (questions), `_NN-sa-*` (odd worked solutio
 
 **Trap:** "programme" in the `_04-*` and `_22-*` exercise files is a *data value* with padding-sensitive baked output — do not correct the spelling.
 
+## Adding new content
+
+Book-original additions beyond the IMS mirror are allowed — precedent: ch 21's panel-review CYUs, ch 25's external-validation subsection, the S1 exercises, appendices A1–A6 — but only if registered. When you add content: record an AS BUILT note in the chapter's `translation-map.md` §2 entry (seeds used *and* skipped, realized numbers, figure indices added, the deviation and why); register any new dataset in map §1.2 before minting a name. Before claiming a seed, grep the whole repo — some spec'd seeds were reserved but never used (e.g. 502 in ch 5), and skipped seeds must be recorded, not silently reused.
+
+## Environment caveats
+
+- There is no lockfile yet; R 4.6.1 plus the package list above is the reference environment. The byte-identical figure check assumes the same machine and library versions — on a different platform, fall back to diffing the `#>` lines (the real ground truth) and comparing figures visually.
+- The IMS source text the contract cites (`data/ims/<name>.qmd`) is **not** part of this repository — it lives in the upstream [openintro/ims](https://github.com/OpenIntroStat/ims) repo (CC BY-SA). Fidelity checks against IMS need that checkout separately.
+
 ## Build & verify
 
 - `quarto render --to html` from the repo root; it must finish with zero warnings and zero unresolved crossrefs. (PDF is untested.)
