@@ -515,10 +515,10 @@
     c.  Suppose we wanted to study how the conversion rate of shots varies between body parts and across the two competitions.
         In this analysis, which variable would be the response variable and which variables would be the explanatory variables?
 
-19. **Positions in the shot diet.** Both tournament datasets record the position of the player taking each shot.
+19. **Positions in the shot profile.** Both tournament datasets record the position of the player taking each shot.
     The visualization built by the code below plots, for each position, the proportion of all 2022 Men's World Cup shots taken from that position versus the proportion of all 2025 Women's Euro shots taken from the same position.
     The 19 positions with at least 10 shots in each competition are displayed.
-    The diagonal line on the plot is the $x = y$ line; if a position appeared on this line, it would account for exactly the same share of the shot diet in both competitions.[^_01-ex-data-hello-14]
+    The diagonal line on the plot is the $x = y$ line; if a position appeared on this line, it would account for exactly the same share of the shot profile in both competitions.[^_01-ex-data-hello-14]
 
     ```r
     wc_props <- wc2022_shots |>
@@ -549,7 +549,7 @@
 
     b.  Which position accounts for the largest share of shots in each competition?
 
-    c.  Which positions account for a clearly larger share of the shot diet at the Women's Euro than at the World Cup?
+    c.  Which positions account for a clearly larger share of the shot profile at the Women's Euro than at the World Cup?
 
     d.  Is the relationship between the two variables positive or negative?
         What does this mean in context of the data?
