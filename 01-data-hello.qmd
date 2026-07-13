@@ -511,7 +511,7 @@ Because there is a downward trend in the headers plot -- teams with more of thei
 A **positive association** is shown in the relationship between `total_xg` and `goals`, where teams that create more total chance quality tend to score more goals.
 
 If two variables are not associated, then they are said to be **independent**.
-Independence is a property of the underlying population or process, not of any one plot: two variables are independent if knowing the value of one tells you nothing about the distribution of the other.
+Independence is a property of the underlying population or process, not something you can read off a single plot: two variables are independent if knowing the value of one tells you nothing about the distribution of the other.
 
 ::: {.callout-important title="Associated or independent, not both"}
 At the population level, a pair of variables are either related in some way (associated) or not (independent).
