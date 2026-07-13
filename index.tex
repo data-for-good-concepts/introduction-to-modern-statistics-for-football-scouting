@@ -1098,7 +1098,7 @@ be computed directly:
 Header shares run from under a tenth of a team's shots (0.091) to nearly
 a third (0.312), and conversion rates from around 3\% (0.029) up to 27\%
 (0.271). The cloud drifts downward from left to right: teams whose shot
-diet contains more headers tend, loosely, to convert at lower rates. The
+profile contains more headers tend, loosely, to convert at lower rates. The
 drift is genuine but loose -- the points scatter widely around it, and
 individual teams cut against it. Morocco, highlighted, sits near the
 middle of the cloud: 16.7\% of its 66 shots were headers, and it
@@ -2257,7 +2257,7 @@ Appendix~\ref{sec-exercise-solutions-01}.
     variables would be the explanatory variables?
   \end{enumerate}
 \item
-  \textbf{Positions in the shot diet.} Both tournament datasets record
+  \textbf{Positions in the shot profile.} Both tournament datasets record
   the position of the player taking each shot. The visualization built
   by the code below plots, for each position, the proportion of all 2022
   Men's World Cup shots taken from that position versus the proportion
@@ -2265,7 +2265,7 @@ Appendix~\ref{sec-exercise-solutions-01}.
   positions with at least 10 shots in each competition are displayed.
   The diagonal line on the plot is the \(x = y\) line; if a position
   appeared on this line, it would account for exactly the same share of
-  the shot diet in both competitions.\footnote{The shot data used in
+  the shot profile in both competitions.\footnote{The shot data used in
     this exercise are in \texttt{data/derived/wc2022\_shots.csv} and
     \texttt{data/derived/weuro2025\_shots.csv} (StatsBomb open data).}
 
@@ -2311,7 +2311,7 @@ Appendix~\ref{sec-exercise-solutions-01}.
     Which position accounts for the largest share of shots in each
     competition?
   \item
-    Which positions account for a clearly larger share of the shot diet
+    Which positions account for a clearly larger share of the shot profile
     at the Women's Euro than at the World Cup?
   \item
     Is the relationship between the two variables positive or negative?
@@ -14413,7 +14413,7 @@ Appendix~\ref{sec-exercise-solutions-07}.
 \end{Highlighting}
 \end{Shaded}
 
-  The 32 points drift downward: teams whose shot diet contains more
+  The 32 points drift downward: teams whose shot profile contains more
   headers tend to convert a smaller share of their shots.
 
   \begin{enumerate}
@@ -36031,7 +36031,7 @@ confidence level indicates that there was not a need for a high level of
 confidence, such as 95\% or 99\%; a lower confidence level has higher
 potential for error, but it also produces a narrower interval. Even so,
 be honest about what this interval says: it stretches from
-``metronomically identical chances'' to ``wildly mixed shot diet'' ---
+``metronomically identical chances'' to ``wildly mixed shot profile'' ---
 with five shots, the data cannot tell Emil which player he is looking
 at.
 
@@ -36702,7 +36702,7 @@ shot (a benchmark we recompute in code at the end of this chapter) ---
 and note that the open-play benchmark is the frame-consistent one, since
 Australia's sample contains no penalties. The \emph{entire interval}
 sits below that benchmark: even the most generous end of the plausible
-range is a sub-average shot diet. So yes --- the run to the knockouts
+range is a sub-average shot profile. So yes --- the run to the knockouts
 was real, but the chance quality underneath it is discernibly thin, and
 any valuation of Australia's attackers should start from that fact. Two
 cautions before this reaches a dossier: the data are observational (a
@@ -53882,7 +53882,7 @@ shots and \(143/913 \approx 0.157\) of Women's Euro shots, almost
 identical shares. (c) The central-midfield roles: Right Center Midfield
 (0.068 at the Women's Euro vs.~0.035 at the World Cup), Left Center
 Midfield (0.061 vs.~0.031), and Center Defensive Midfield (0.037
-vs.~0.016). (d) Positive; as a position's share of the shot diet in one
+vs.~0.016). (d) Positive; as a position's share of the shot profile in one
 competition increases, its share in the other competition tends to
 increase as well. The correlation confirms it --- appending
 \texttt{summarize(r\ =\ cor(wc2022\_prop,\ weuro2025\_prop))} to the
@@ -54399,7 +54399,7 @@ average --- equivalently, a team taking \emph{all} of its shots as
 headers would be predicted to convert 0.324 less than a team taking
 none, a reminder that the slope is measured per whole unit of the share.
 As always with observational tournament data, this is an association,
-not a causal claim about changing a team's shot diet. (d) The share of a
+not a causal claim about changing a team's shot profile. (d) The share of a
 team's shots that are headers explains 8.1\% of the variability in
 conversion rates between the 32 teams. (e) The slope is negative, so the
 correlation is the negative square root: \(r = -\sqrt{0.081} = -0.285.\)

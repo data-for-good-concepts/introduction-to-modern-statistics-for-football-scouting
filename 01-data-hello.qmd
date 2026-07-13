@@ -444,7 +444,7 @@ team_profile |>
 ```
 
 Header shares run from under a tenth of a team's shots (0.091) to nearly a third (0.312), and conversion rates from around 3% (0.029) up to 27% (0.271).
-The cloud drifts downward from left to right: teams whose shot diet contains more headers tend, loosely, to convert at lower rates.
+The cloud drifts downward from left to right: teams whose shot profile contains more headers tend, loosely, to convert at lower rates.
 The drift is genuine but loose -- the points scatter widely around it, and individual teams cut against it.
 Morocco, highlighted, sits near the middle of the cloud: 16.7% of its 66 shots were headers, and it converted 13.6% of its shots.
 We might brainstorm as to why the downward tendency exists -- headed chances are typically contested, at awkward angles, from crosses -- and investigate each idea to determine which are the most reasonable explanations.

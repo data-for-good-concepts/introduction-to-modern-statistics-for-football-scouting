@@ -156,7 +156,7 @@ Here is every term the book uses without stopping to define it — in plain word
 
 **Gilt-edged chance.** Scouting vernacular for an outstanding opportunity — the kind a striker is expected to score. Vague by design, which is why the book prefers a number (xG) to the phrase.
 
-**Shot diet.** The mix of shots a team or player habitually takes — headers versus feet, close versus distant, open play versus set pieces. Two strikers with equal shot counts can have utterly different shot diets, and therefore utterly different conversion rates.
+**Shot profile.** The mix of shots a team or player habitually takes — headers versus feet, close versus distant, open play versus set pieces. Two strikers with equal shot counts can have utterly different shot profiles, and therefore utterly different conversion rates.
 
 **Target forward.** A striker whose role is to receive long or crossed balls and finish close-range chances — typically few shots, high conversion: a walking confounder for naive comparisons.
 

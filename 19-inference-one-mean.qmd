@@ -307,7 +307,7 @@ round(quantile(scout5_sds$stat, c(0.05, 0.95)), 4)
 The middle 90% of the bootstrapped standard deviations is given by the 5th percentile (0.0090) and the 95th percentile (0.2490).
 That is, we are 90% confident that the true standard deviation of this player's open-play chance quality is between 0.0090 and 0.2490 xG.
 A 90% confidence level indicates that there was not a need for a high level of confidence, such as 95% or 99%; a lower confidence level has higher potential for error, but it also produces a narrower interval.
-Even so, be honest about what this interval says: it stretches from "metronomically identical chances" to "wildly mixed shot diet" — with five shots, the data cannot tell Emil which player he is looking at.
+Even so, be honest about what this interval says: it stretches from "metronomically identical chances" to "wildly mixed shot profile" — with five shots, the data cannot tell Emil which player he is looking at.
 :::
 
 ### Bootstrapping is not a solution to small sample sizes!
@@ -719,7 +719,7 @@ $$
 
 We are 95% confident that the true mean chance quality of the shots this Australia side generates is between 0.037 and 0.084 xG per shot.
 For scale, the tournament's 1,382 open-play shots averaged 0.0983 xG per shot (a benchmark we recompute in code at the end of this chapter) — and note that the open-play benchmark is the frame-consistent one, since Australia's sample contains no penalties.
-The *entire interval* sits below that benchmark: even the most generous end of the plausible range is a sub-average shot diet.
+The *entire interval* sits below that benchmark: even the most generous end of the plausible range is a sub-average shot profile.
 So yes — the run to the knockouts was real, but the chance quality underneath it is discernibly thin, and any valuation of Australia's attackers should start from that fact.
 Two cautions before this reaches a dossier: the data are observational (a deep defensive block *chooses* low-volume, often low-quality shooting, so this describes the team's output, not any player's ceiling), and 26 shots is a small sample — which is exactly why we report the interval and not just the 0.0607.
 :::

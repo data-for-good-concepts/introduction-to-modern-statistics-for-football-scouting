@@ -474,7 +474,7 @@
     #> 2 prop_headers   -0.324    0.199      -1.63 0.113
     ```
 
-    The 32 points drift downward: teams whose shot diet contains more headers tend to convert a smaller share of their shots.
+    The 32 points drift downward: teams whose shot profile contains more headers tend to convert a smaller share of their shots.
 
     a.  Write out the linear model.
 
