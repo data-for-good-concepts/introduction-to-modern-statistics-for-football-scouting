@@ -23,7 +23,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -33,11 +33,11 @@ jobs:
       - name: Render book to HTML
         run: quarto render --to html
 
+      # One-time setup: Pages must be enabled by a repo admin under
+      # Settings -> Pages -> Source: "GitHub Actions". The workflow token
+      # cannot create the Pages site itself (requires admin permissions).
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          # Creates the Pages site (source: GitHub Actions) on first run.
-          enablement: true
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
